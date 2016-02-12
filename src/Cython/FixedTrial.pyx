@@ -26,7 +26,7 @@ ctypedef np.float64_t DTYPE_t
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.cdivision(True)
-cdef trial_data(int nsim, int n_arm, int n_stage, np.ndarray[DTYPE_t, ndim = 1] te_list, np.ndarray[DTYPE_t, ndim = 3] ps_array):
+cdef trial_data(int nsim, int n_arm, int n_stage, np.ndarray[DTYPE_t, ndim = 1] te_list, np.ndarray[DTYPE_t, ndim = 2] ps_array):
     
     cdef Py_ssize_t i, j, k
     cdef np.ndarray[DTYPE_t, ndim = 3] trial_array = np.empty([n_arm, n_stage, nsim])
