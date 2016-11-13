@@ -15,7 +15,7 @@ The motivation of this project is the huge amount of time spent on our simulatio
 The GUI is developed using PyQt 5.6
 The application is written in Python 3.4 and Cython 0.24.1
 
-#### Dependencies 
+#### Dependencies:
 
 Python modules:
 
