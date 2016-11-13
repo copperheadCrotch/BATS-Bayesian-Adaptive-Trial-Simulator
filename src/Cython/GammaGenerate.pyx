@@ -1,30 +1,44 @@
 import cython
 cimport cython
 
-import numpy as np
-cimport numpy as np
+from cython_gsl cimport *
 
-from libc.stdlib cimport malloc, free
+import sys
 
-DTYPE = np.float64
-ctypedef np.float64_t DTYPE_t
-
+# Function to generate gamma random variable
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.cdivision(True)
-cdef dict generate_gamma_table(int n):
+cdef RandomVaribleGamma(int seed, int max_tps, int gamma_nsim,  float [:, :, ::1] gamma_vect):
 
     cdef Py_ssize_t m, p, q
-    cdef int nsim = 50000
-    cdef np.ndarray[DTYPE_t, ndim = 1] gamma_view = np.empty(nsim)
-	
-    cdef float*** gamma_vect
-    gamma_vect = <float ***> malloc(2*sizeof(float**))
-    for m in range(0, 2):
-        gamma_vect[m] = <float **>malloc(n*sizeof(float*))
-        for p in range(0, n):
-            gamma_vect[m][p] = <float *>malloc(nsim*sizeof(float))
-            gamma_view = np.random.gamma(p+1,size=nsim)
-            for q in xrange(0, nsim):
-                gamma_vect[m][p][q] = gamma_view[q]
-				
+    cdef int total_index = 2
+    cdef gsl_rng *gamma_r = gsl_rng_alloc(gsl_rng_mt19937) 
+    cdef float progress = float(max_tps * total_index) / 10
+    
+    # Set seed
+    gsl_rng_set(gamma_r, seed) 
+    # Generate gamma random variables 
+    # Set seed for gamma random variable generation 
+    sys.stdout.write("Generating gamma random variables...")
+        
+    for m in range(0, total_index):
+        
+        for p in range(0, max_tps):
+        
+            if p % progress < 1 and p >= progress:
+            
+                sys.stdout.write("%d percent of values calculated..." %((p + max_tps * m)/ progress * 10))
+            
+            for q in xrange(0, gamma_nsim):
+            
+                gamma_vect[m, p, q] = gsl_ran_gamma(gamma_r, p + 1, 1)
+    
+    gsl_rng_free(gamma_r)
+    
+    return
+
+
+def RVGamma(seed, max_tps, gamma_nsim, gamma_vect):
+    
+    RandomVaribleGamma(seed, max_tps, gamma_nsim, gamma_vect)

@@ -1,349 +1,228 @@
+# Cython module
 import cython
 cimport cython
 
-import numpy as np
-cimport numpy as np
-
-from cython.parallel cimport prange
+# Import cython_gsl module
 from cython_gsl cimport *
+# Import malloc, free
 from libc.stdlib cimport malloc, free
 
-# import other packages
+# Import C functions
+from CriticalValueCal cimport CriticalValueCal
+
+# Import other packages
+import numpy as np
+cimport numpy as np
 import sys
+import time
 import pandas as pd
-import GSLCriticalValue as CriticalValue
+import FixedTrialData as TrialData
+import AllocFinder as AllocFinder
+import GammaGenerate as GammaGenerate
+import InterimAnalysis as InterimAnalysis
+import PredictiveProbability as PredictiveProbability
 
 DTYPE = np.float64
 ctypedef np.float64_t DTYPE_t
 
+
+# Check trial progress
+# Return futile, efficacy
+# If predictive probability is required, calculate it
+# Nsim: number of simulations
+# Seed: simulation seed
+# N_arm: number of arms
+# N_stage: number of stages
+# Ps_array: patients assignment
+# Fut, eff: futility and efficacy boundary
+# Clin_sig: clinical significance
+# Sim_dataset: simulated dataset
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.cdivision(True)
-cdef float Trialcheck(float v1, float v2, float v3, float v4, float cval) nogil:
-    cdef float trt, null
-    trt = (v1/(v1 + v2)) - cval
-    null = v3/(v3 + v4)
-    return 1 if trt > null else 0
-
-# simulate trial data
-# nsim: number of simulations
-# n_arm: number of arms
-# n_stage: number of stages
-# te_list: treatment effects for each group:, [p0, p1, p2... pn]
-# ps_array: patients at each group at each stage
-@cython.boundscheck(False)
-@cython.wraparound(False)
-@cython.cdivision(True)
-cdef trial_data(int nsim, int n_arm, int n_stage, np.ndarray[DTYPE_t, ndim = 1] te_list, int [:,::1] ps_array):
+cdef TrialProgress(str pathdir, list effColHeader, list patColHeader, int nsim, int seed, int nArm, int nStage, double [::1] te_list, 
+                   int [::1] ns_list, float alloc, float eff, float fut, float clinSig, 
+                   int predict = 0, int predNum = 0, float predSuccess = 0, float predClinSig = 0, int searchMethod = 0, int loadCVL = 0, 
+                   str CVLfile = ""):
     
-    cdef Py_ssize_t i, j, k
-    cdef int [:, :, ::1]trial_array = np.empty([n_arm, n_stage, nsim], dtype=int)
-    cdef int [:, :, ::1]final_data = np.empty([n_arm, n_stage, nsim], dtype=int)
+    # Index
+    cdef Py_ssize_t m, p, q, i, j, k, l, copy_i, copy_j, copy_k
+    cdef int best_treatment, best_control
+    cdef int gamma_nsim = 50000, total_index = 2
+    # Variable for beta random variable generation
+    cdef int max_tps, treatment_add, control_add
+    # Patients at each arm, cumulative
+    cdef int [:, ::1] ps_array = np.empty((nArm, nStage), dtype = int)
     
-    # simulate the data
-    for i in range(0, n_arm):
-        for j in range(0, n_stage):
-            for k in xrange(0, nsim):
-                trial_array[i, j, k] = np.random.binomial(ps_array[i, j], te_list[i], 1)
-    # cumulative for the stage
-    final_data = np.cumsum(trial_array, axis=1)
-    del trial_array
-    return final_data
-
-
-# check trial progress
-# return futile, efficacy
-# if predictive probability is required, calculate it
-# nsim: number of simulations
-# n_arm: number of arms
-# n_stage: number of stages
-# ps_array: patients assignment
-# ful, eff: fultility and efficacy boundary
-# clin_sig: clinical significance
-# sim_dataset: simulated dataset
-@cython.boundscheck(False)
-@cython.wraparound(False)
-@cython.cdivision(True)
-cdef trial_progress(int nsim, int seed, int n_arm, int n_stage, int[:, ::1] ps_array, float alloc, float ful, float eff, 
-                    float clin_sig, int[:, :, ::1] sim_dataset, int pred_flag, int pred_num = 20, float pred_success = 0):
+    for i in range(0, len(ns_list)):
+            
+        best_treatment, best_control = AllocFinder.BestPatientAllocation(nArm, alloc, ns_list[i])       
+        ps_array[0 : (nArm - 1), i] = best_treatment
+        ps_array[(nArm - 1), i] = best_control
     
-    cdef Py_ssize_t m, p, q, i, j, k, l, success1, success2, fail1, fail2, index0 = 0, index1 = 1, total_index = 2, gamma_nsim = 50000
-    cdef float gamma1, gamma2, gamma3, gamma4, sum
-    cdef int total1, total2
-    cdef dict interim_dict = {}
-    cdef int [::1] total_ps = np.sum(ps_array, axis=1)
-    # patients at each arm
     cdef int [:, ::1] tps_array = np.cumsum(ps_array, axis=1)
-    cdef DTYPE_t [:, :, ::1] interim_crit = np.empty((n_arm-1, n_stage, nsim))
-    cdef gsl_rng *point = gsl_rng_alloc(gsl_rng_mt19937)
+    # Patients at each stage at each arm
+    sys.stdout.write("\nPatients of each arm at each stage:")
+    df_ps_array = pd.DataFrame(np.transpose(ps_array), index= patColHeader, columns= effColHeader)
+    sys.stdout.write(df_ps_array)
+    # Possible maximum number of patients
+    # Add_tps: added new patients allocated to treatment
     
-    cdef int max_tps = max(total_ps) + 1
-    cdef float ***gamma_vect
-    gamma_vect = <float ***> malloc(2*sizeof(float **))
-    for m in range(0, 2):
-        gamma_vect[m] = <float **>malloc(max_tps*sizeof(float *))
-        for p in xrange(0, max_tps):
-            gamma_vect[m][p] = <float *>malloc(gamma_nsim*sizeof(float))
-            for q in xrange(0, gamma_nsim):
-                gamma_vect[m][p][q] = gsl_ran_gamma(point, p+1, 1)
-    """            
-    cdef float *gamma_arr = <float *>malloc(total_index * max_tps * gamma_nsim * sizeof(float))
-    cdef float[:, :, ::1] gamma_vect = <float[:total_index, :max_tps, :gamma_nsim]>gamma_arr
-    for m in range(0, total_index):
-        for p in prange(0, max_tps, nogil=True):
-            for q in range(0, gamma_nsim):
-                gamma_vect[m, p, q] = gsl_ran_gamma(point, p+1, 1)
-    """
-    sys.stdout.write("Simulate interim characteristics...")
-    for j in range(0, n_stage):    
-        for i in range(0, n_arm-1):
-            for k in xrange(0, nsim):
-                # treatment
-                success1 = sim_dataset[i, j, k]
-                fail1 = tps_array[i, j] - success1
-                # control
-                success2 = sim_dataset[n_arm-1, j, k]
-                fail2 = tps_array[n_arm-1, j] - success2  
-                if interim_dict.has_key((success1, success2, fail1, fail2)):
-                    interim_crit[i, j, k] = interim_dict[(success1, success2, fail1, fail2)]
-                else:
-                    sum = 0
-                    for l in prange(0, gamma_nsim, nogil=True):
-                        """
-                        sum += CriticalValue.check(gamma_vect[index0][success1][l], gamma_vect[index1][fail1][l],
-                                                    gamma_vect[index1][success2][l], gamma_vect[index0][fail2][l], clin_sig)
-                        
-                        gamma1 = gamma_vect[index0, success1, l]
-                        gamma2 = gamma_vect[index1, fail1, l]
-                        gamma3 = gamma_vect[index0, success2, l]
-                        gamma4 = gamma_vect[index1, fail2, l]
-                        """
-                        gamma1 = gamma_vect[index0][success1][l]
-                        gamma2 = gamma_vect[index1][fail1][l]
-                        gamma3 = gamma_vect[index0][success2][l]
-                        gamma4 = gamma_vect[index1][fail2][l]
-                        sum += Trialcheck(gamma1, gamma2, gamma3, gamma4, clin_sig)
-                    interim_dict[(success1, success2, fail1, fail2)] = sum/gamma_nsim
-                    interim_crit[i, j, k] = interim_dict[(success1, success2, fail1, fail2)]
-         
-        interim_dict.clear()
-    
-    for m in range(0, 2):
-        for p in range(0, max_tps):
-            free(gamma_vect[m][p])
-        free(gamma_vect[m]) 
-    free(gamma_vect)
-    #free(gamma_vect)
-    # free(gamma_arr)
-    # free the pointer
-    gsl_rng_free(point)
-    
-    sys.stdout.write("Calculate futility and efficacy...")
-    """
-    cdef np.ndarray[np.uint8_t, ndim = 3] futile = interim_crit < ful
-    cdef np.ndarray[np.uint8_t, ndim = 3] efficacy = interim_crit > eff
-    cdef np.ndarray[np.uint8_t, ndim = 3] each_stop = np.logical_or(ful, eff)
-    cdef np.ndarray[np.uint8_t, ndim = 2] stop = np.all(each_stop, axis=0)
-    """
-    interim_crit_array = np.asarray(interim_crit, dtype=np.float64)
-    # print interim_crit_array
-    futile = interim_crit_array < ful
-    efficacy = interim_crit_array > eff
-    each_stop = np.logical_or(futile, efficacy)
-    stop = np.all(each_stop, axis=0)
-    
-    del interim_dict, interim_crit
-                
-    cdef Py_ssize_t ci, cj, ck, cl, cm, cp, cq
-    cdef int beta_index1, beta_index2, beta_index3, beta_index4
-    # obs_succ_control, trt: observed data
-    # pred_trt_add, control_add: patients added
-    # pred_trt, pred_control: pred_data + observed_data
-    cdef int pred_succ, obs_succ_control, obs_succ_trt, index_trt, index_control 
-    # new patients added
-    cdef int pred_trt_add = np.rint(pred_num*1/(alloc + n_arm - 1))
-    cdef int pred_control_add = pred_num - (n_arm-1)*pred_trt_add
-    # total patients 
-    cdef int pred_trt = pred_trt_add + total_ps[0]
-    cdef int pred_control = pred_control_add + total_ps[n_arm - 1]
-    # total index
-    cdef dict pred_control_dict = {}
-    cdef dict pred_trt_dict = {}
-    cdef dict pred_total_dict = {}
-    # create memoryview
-    # cdef int [:, ::1] sim_success = sim_dataset[:, n_stage-1, :]
-    cdef int *sim_success_pointer = <int *>malloc(n_arm * nsim * sizeof(int))
-    cdef int [:, ::1] sim_success = <int[:n_arm, :nsim]> sim_success_pointer
-    sim_success = sim_dataset[:, n_stage-1, :]
-    cdef float *prob_control_pointer = <float *>malloc((pred_control_add+1) * nsim * sizeof(float*))
-    cdef float[:, ::1] prob_control = <float[:(pred_control_add+1), :nsim]> prob_control_pointer
-
-    cdef float *prob_trt_pointer = <float *>malloc((pred_trt_add+1) * sizeof(float))
-    cdef float [::1] prob_trt = <float[:(pred_trt_add+1)]> prob_trt_pointer
-
-    cdef float *cpower_array_pointer = <float *>malloc((n_arm-1) * nsim * sizeof(float*))
-    cdef float [:, ::1]cpower_array = <float[:(n_arm-1), :nsim]> cpower_array_pointer
-
-    #conditional array observations
-    cdef float [::1] cpower_obs
-    
-    # cdef np.ndarray [dtype=float, ndim = 1] con_power = np.empty(n_arm-1)
-    # calculate posterior predictive probability
-    if pred_flag == 1:
-        sys.stdout.write("Calculate posterior predictive probability...") 
-        critical_dataset = CriticalValue.output(seed, pred_trt, pred_control, clin_sig, ".")        
-        critical_dataset["success"] = critical_dataset["critical"] > pred_success
-        sys.stdout.write("Retrieve the dataset...")
-        # for control arm
-        for cl in xrange(0, pred_control_add + 1):
-            for ck in xrange(0, nsim):
-                obs_succ_control = sim_success[n_arm-1, ck]
-                if pred_control_dict.has_key(obs_succ_control):
-                    prob_control[cl, ck] = pred_control_dict[obs_succ_control]
-                else:
-                    pred_succ = cl + obs_succ_control
-                    beta_index1 = 1 + pred_succ
-                    beta_index2 = 1 + pred_control - pred_succ
-                    beta_index3 = 1 + obs_succ_control
-                    beta_index4 = 1 + total_ps[n_arm-1] - obs_succ_control
-                    prob_control[cl, ck] = gsl_sf_choose(pred_control_add, cl)*gsl_sf_beta(beta_index1, beta_index2)/gsl_sf_beta(beta_index3, beta_index4)
-                    pred_control_dict[obs_succ_control] = prob_control[cl, ck]
-            pred_control_dict.clear()
-        del pred_control_dict    
-        sys.stdout.write("Generate beta-binomial variables...")  
-        # for treatment arm
-        for ci in range(0, n_arm-1):
-            for cj in xrange(0, nsim):
-                obs_succ_control = sim_success[n_arm-1, cj]
-                obs_succ_trt = sim_success[ci, cj]
-                if pred_trt_dict.has_key(obs_succ_trt):
-                    prob_trt = pred_trt_dict[obs_succ_trt]
-                else:
-                    # simulated success for the added patients
-                    for cm in prange(0, pred_trt_add+1, nogil=True):
-                        pred_succ = cm + obs_succ_trt
-                        beta_index1 = 1 + pred_succ
-                        beta_index2 = 1 + pred_trt - pred_succ
-                        beta_index3 = 1 + obs_succ_trt
-                        beta_index4 = 1 + total_ps[ci] - obs_succ_trt
-                        prob_trt[cm] = gsl_sf_choose(pred_trt_add, cm)*gsl_sf_beta(beta_index1, beta_index2)/gsl_sf_beta(beta_index3, beta_index4)
-                    pred_trt_dict[obs_succ_trt] = prob_trt
-                if pred_total_dict.has_key((obs_succ_control, obs_succ_trt)):
-                    cpower_array[ci, cj] = pred_total_dict[(obs_succ_control, obs_succ_trt)]
-                else:
-                    index_trt = obs_succ_trt + pred_trt_add
-                    index_control = obs_succ_control + pred_control_add
-                    crit_mat = critical_dataset.loc[(slice(obs_succ_trt, index_trt), slice(obs_succ_control, index_control)),:]["success"]
-                    cpower_obs = np.repeat(prob_trt, pred_control_add + 1)*np.tile(prob_control[:, cj], pred_trt_add + 1)
-                    cpower_array[ci, cj] = np.sum(cpower_obs*crit_mat)
-                    pred_total_dict[(obs_succ_control, obs_succ_trt)] = cpower_array[ci, cj]
+    if predict == 1:
         
-        del critical_dataset, pred_trt_dict, pred_total_dict 
+        treatment_add, control_add = AllocFinder.BestPatientAllocation(nArm, alloc, predNum)
+        patnum_string = "Number of patient:\t" + str(treatment_add) + "\t" + str(control_add)    
+        sys.stdout.write("\nThe best added patients assignment: ")    
+        sys.stdout.write("\tTreatment:                       \tControl:")       
+        sys.stdout.write(patnum_string)
+        max_tps = max(treatment_add, control_add) + max(tps_array[:, nStage - 1]) +  1
     
-        con_power = np.sum(cpower_array, axis=1)/nsim*100   
-        free(prob_control_pointer)     
-        free(prob_trt_pointer)
-        free(cpower_array_pointer)
-        free(sim_success_pointer)
-    # this could optimization
-    sys.stdout.write("Summarize results...")
+    else: 
+        
+        treatment_add = 1
+        control_add = 1
+        max_tps = max(tps_array[:, nStage - 1]) + 1
     
-    # calculate conditional futile, efficacy, and stop for each time
-    """
-    cdef np.ndarray[DTYPE_t, ndim = 3] con_futile = np.cumsum(futile, axis=1, dtype=bool)
-    cdef np.ndarray[DTYPE_t, ndim = 3] con_efficacy = np.cumsum(efficacy, axis=1, dtype=bool)
-    """
-    con_futile = np.cumsum(futile, axis=1, dtype=bool)
-    con_efficacy = np.cumsum(efficacy, axis=1, dtype=bool)
-    cdef np.ndarray[DTYPE_t, ndim = 2] con_futile_mean = np.sum(con_futile, axis=2, dtype=np.float64)/nsim*100
-    cdef np.ndarray[DTYPE_t, ndim = 2] con_efficacy_mean = np.sum(con_efficacy, axis=2, dtype=np.float64)/nsim*100
-    cdef np.ndarray[DTYPE_t, ndim = 2] con_continuous_mean = 100 - con_efficacy_mean - con_futile_mean
-    cdef np.ndarray[DTYPE_t, ndim = 1] stop_mean = np.sum(stop, axis=1, dtype=np.float64)/nsim*100
+    # Simulated dataset  
+    cdef int *sim_dataset_pointer = <int *>malloc(nArm * nStage * nsim * sizeof(int))
+    cdef int [:, :, ::1] sim_dataset = <int[:nArm, :nStage, :nsim]> sim_dataset_pointer
+    # Gamma array pointer
+    cdef float *gamma_array = <float *>malloc(total_index * max_tps * gamma_nsim * sizeof(float))
+    cdef float[:, :, ::1] gamma_vect = <float[:total_index, :max_tps, :gamma_nsim]> gamma_array
     
-    sys.stdout.write("Output results...")
-    del con_futile, con_efficacy, cpower_obs, sim_success
-    return con_futile_mean, con_efficacy_mean, con_continuous_mean, stop_mean, con_power
-
-# trial simulation(nseed, nsim, out_dir, te_list, clinical_sig, futile_cut, efficacy_cut,
+    # Generate Trial data
+    TrialData.FixedTrialData(nsim, seed, nArm, nStage, te_list, ps_array, sim_dataset, pathdir, effColHeader)
+    # Generate Gamma RandomVariable
+    GammaGenerate.RVGamma(seed, max_tps, gamma_nsim, gamma_vect)
+    # Interim Analysis
+    con_futile_mean, con_efficacy_mean, futile_mean, efficacy_mean = InterimAnalysis.InterimCheck(nsim, nArm, 
+                                 nStage, eff, fut, clinSig, sim_dataset, tps_array, 
+                                 gamma_nsim, gamma_vect, pathdir, effColHeader, patColHeader)
+   
+    
+    if predict != 1:
+        
+        free(gamma_array)
+    
+    # For predictive probability
+    cdef double *cpower_array_pointer = <double *>malloc((nArm - 1) * nsim * sizeof(double))
+    cdef double [:, ::1] cpower_array = <double[:(nArm - 1), :nsim]> cpower_array_pointer
+    cdef np.ndarray[double, ndim = 1] con_power = np.empty((nArm - 1), dtype=np.float64)
+    # cdef np.ndarray [dtype=float, ndim = 1] con_power = np.empty(n_arm-1)
+    # Calculate posterior predictive probability
+    if predict == 1:
+        
+        sys.stdout.write("Calculate posterior predictive probability...") 
+        predictflag = PredictiveProbability.PredictiveProbability(nsim, nArm, nStage, predSuccess, predClinSig,  searchMethod, loadCVL, 
+                                CVLfile, treatment_add, control_add, sim_dataset, tps_array, gamma_nsim, gamma_vect, cpower_array,
+                                pathdir, effColHeader, patColHeader)
+        free(gamma_array)
+        if predictflag != 1:
+            
+            return 1
+            
+        sys.stdout.write("Generate results...")        
+        con_sim_mean_copy = np.around(np.mean(sim_dataset[0:(nArm - 1), :, :], axis = 2).reshape((nArm - 1) * nStage, 1), 2)
+        con_futile_mean_copy = con_futile_mean.reshape((nArm - 1) * nStage, 1)
+        con_efficacy_mean_copy = con_efficacy_mean.reshape((nArm - 1)* nStage, 1)
+        con_continuous_mean = 100 - con_futile_mean - con_efficacy_mean
+        con_continuous_mean_copy = con_continuous_mean.reshape((nArm - 1)* nStage, 1)
+        futile_mean_copy = futile_mean.reshape((nArm - 1) * nStage, 1)
+        efficacy_mean_copy = efficacy_mean.reshape((nArm - 1) * nStage, 1)
+        continuous_mean = 100 - futile_mean - efficacy_mean
+        continuous_mean_copy = continuous_mean.reshape((nArm - 1) * nStage, 1)
+        con_power_empty = np.empty(((nArm - 1), (nStage - 1)))
+        con_power_empty[:] = np.NaN
+        con_power = np.sum(cpower_array, axis = 1)/nsim * 100
+        con_power_copy = np.concatenate((con_power_empty, con_power.reshape((nArm - 1), 1)), axis = 1).reshape((nArm - 1) * nStage, 1)
+        final_copy = np.concatenate((con_sim_mean_copy, con_futile_mean_copy, con_efficacy_mean_copy, 
+                                     con_continuous_mean_copy, futile_mean_copy, efficacy_mean_copy, 
+                                     continuous_mean_copy, con_power_copy), axis = 1)
+        final_copy = np.around(final_copy, decimals = 2)
+        final_df_index = [range(1, nArm), range(1, nStage + 1)]
+        resultHeader = ["Average Success", "Conditional Futility(%)", "Conditional Efficacy(%)", "Conditional Continuous(%)", 
+                        "Unconditional Futility(%)", "Unconditional Efficacy(%)", "Unconditional Continuous(%)", 
+                        "Predictive Probability(%)"]
+        final_df = pd.DataFrame(final_copy, index=pd.MultiIndex.from_product(final_df_index, names=["Treatment Arm", "Stage"]), columns=resultHeader).sort_index()
+        final_df.to_csv(pathdir + "FinalResult.csv")
+        
+        del con_power_empty, con_power_copy
+     
+    else: 
+        
+        sys.stdout.write("Generate results...")
+        con_sim_mean_copy = np.around(np.mean(sim_dataset[0:(nArm - 1), :, :], axis = 2).reshape((nArm - 1) * nStage, 1), 2)
+        con_futile_mean_copy = con_futile_mean.reshape((nArm - 1) * nStage, 1)
+        con_efficacy_mean_copy = con_efficacy_mean.reshape((nArm - 1) * nStage, 1)
+        con_continuous_mean = 100 - con_futile_mean - con_efficacy_mean
+        con_continuous_mean_copy = con_continuous_mean.reshape((nArm - 1)* nStage, 1)
+        futile_mean_copy = futile_mean.reshape((nArm - 1) * nStage, 1)
+        efficacy_mean_copy = efficacy_mean.reshape((nArm - 1) * nStage, 1)
+        continuous_mean = 100 - futile_mean - efficacy_mean
+        continuous_mean_copy = continuous_mean.reshape((nArm - 1) * nStage, 1)
+        final_copy = np.concatenate((con_sim_mean_copy, con_futile_mean_copy, con_efficacy_mean_copy, con_continuous_mean_copy, 
+                                     futile_mean_copy, efficacy_mean_copy, continuous_mean_copy), axis = 1)
+        final_copy = np.around(final_copy, decimals = 2)
+        final_df_index = [range(1, nArm), range(1, nStage + 1)]
+        resultHeader = ["Average Success", "Conditional Futility(%)", "Conditional Efficacy(%)", "Conditional Continuous(%)", 
+                        "Unconditional Futility(%)", "Unconditional Efficacy(%)", "Unconditional Continuous(%)"]
+        final_df = pd.DataFrame(final_copy, index=pd.MultiIndex.from_product(final_df_index, names=["Treatment Arm", "Stage"]), columns=resultHeader).sort_index()
+        final_df.to_csv(pathdir + "FinalResult.csv")  
+    
+    del sim_dataset, con_sim_mean_copy, con_futile_mean, con_futile_mean_copy, con_efficacy_mean, con_efficacy_mean_copy, con_continuous_mean, con_continuous_mean_copy, futile_mean, futile_mean_copy, efficacy_mean, efficacy_mean_copy, continuous_mean, continuous_mean_copy, final_copy, con_power
+    free(sim_dataset_pointer)
+    free(cpower_array_pointer)
+           
+    return 0
+# Trial simulation(nseed, nsim, out_dir, te_list, clinical_sig, futile_cut, efficacy_cut,
 #                                     alloc, ps_array, efficacy_bound, n_group, n_stage)
-# initialize the trial simulation here
-# include trial data generation, trial progress simulation and predictive probability calculation
-# alloc for this version is not used
+# Initialize the trial simulation here
+# Include trial data generation, trial progress simulation and predictive probability calculation
 
 
-def trial_simulation(nsim, seed, n_arm, n_stage, te_list, ps_array, alloc, add_flag, ful, eff, clin_sig, pred_flag, *args):
+def TrialSimulation(pathdir, effColHeader, patColHeader, nsim, seed, nArm, nStage, te_list, ns_list, alloc, eff, fut, clinSig, predict, predNum, predSuccess, predClinSig, searchMethod, loadCVL, CVLfile):
+    
 
-    if seed != -1:
-        np.random.seed(seed)
-    if pred_flag == 1:
-        pred_num = args[0][0]
-        pred_success = args[0][1]
-        if len(args) == 4:
-            load_file_flag = args[0][3]
-            CVLfile = args[0][2]
-        else:
-            load_file_flag = args[0][2]
-        if load_file_flag == 1:
-            CVLfile_type = CVLfile.rsplit(".",1)[1]
-            sys.stdout.write("read critical value look up table...")
-            if CVLfile_type == "p":
-                critical_dataset = pd.read_pickle(CVLfile)
-            elif CVLfile_type == "csv":
-                critical_dataset = pd.read_csv(CVLfile)
-        """
-        elif load_file_flag == -1:
-            sys.stdout.write("Generate the critical value look up table...")
-            critical_dataset = CVL.output(seed, num1, num2, clin_sig, CVLfile)
-        else:
-            sys.stdout.write("Generate the critical value look up table...")
-            critical_dataset = CVL.output(seed, num1, num2, clin_sig, ".")
-        """
+    finish_flag = 0 
+    if seed == 0:
+        
+        seed = np.random.randint(1, 12345, size=1)  
+        
+    if predict != 1:
+        
+        predNum = 0
+        predSuccess = 0
+        predClinSig = 0
+        searchMethod = 0
+        loadCVL = 0
+        CVLfile = ""
+        
+    te_list = np.array(te_list)
+    ns_list = np.array(ns_list, dtype = int)
+      
+    start_time = time.time()  
+    # inpathdir = bytes(pathdir, "utf-8")
+    # inCVLfile = bytes(CVLfile, "utf-8") 
+    # Get futility, efficacy, stop for each arm and stop totally
+    if predict == 1:
+        
+        finish_flag = TrialProgress(pathdir, effColHeader, patColHeader, nsim, seed, nArm, nStage, te_list, ns_list, alloc, eff, fut, 
+                                                               clinSig, predict, predNum, predSuccess, predClinSig, searchMethod, loadCVL, 
+                                                               CVLfile)
+    
+        
     else:
-        pred_num = 20
-        pred_success = 0
-    # cumulative sum of patients by stage
-    #  cum_ps = np.cumsum(ps_array, axis=1)
-    
-    """
-    # get the maximum possible to generate the gamma random variables 
-    max_n = max(total_ps) + predict
-    gamma_vect = gammag.generate_gamma(int(max_n), 100000)
-    print "Generate the critical value look-up table...\n"
-    critical_dataset = cvl.output(100000, total_ps[0]+predict, total_ps[1]+predict, out_dir)
-    """
-    # generate the trial outcomes
-    sys.stdout.write("Generate the trial dataset...")
-    sim_dataset = trial_data(nsim, n_arm, n_stage, te_list, ps_array)
-    
-    # get futility, efficacy, stop for each arm and stop totally
-    sys.stdout.write("Calculate the futility and efficacy...")
-    
-    futile, efficacy, continuous, stop, cpower = trial_progress(nsim, seed, n_arm, n_stage, ps_array, alloc, ful, eff, clin_sig,
-                                                       sim_dataset, pred_flag, pred_num, pred_success)
-    
+        
 
-    print futile, cpower
-    """
-    # calculate conditional futile, efficacy, and stop for each time
-    con_futile = np.cumsum(futile, axis=1, dtype=bool)
-    con_efficacy = np.cumsum(efficacy, axis=1, dtype=bool)
-    # each_stop = futile*-1 + efficacy
-    obs0 = sim_dataset[0, 2, :]
-    obsa = sim_dataset[1:, 2, :]
+        finish_flag = TrialProgress(pathdir, effColHeader, patColHeader, nsim, seed, nArm, nStage, te_list, ns_list, alloc, eff, fut, 
+                                                               clinSig, predict, predNum, predSuccess, predClinSig, searchMethod, loadCVL, 
+                                                               CVLfile)
 
-    crit_975 = critical_dataset["critical"] > efficacy_bound
-    new_crit_975 = critcreate(crit_975, total_ps)
-    if predict != 0:
-        print "Calculate posterior predictive probability...\n"
-        cp_mean = cpower(nsim, n_group, obs0, obsa, new_crit_975, total_ps, predict)
-    output_dict = {}
-    name_stage = ["stageI", "stageII", "stageIII"]
-    columns = ["P0", "P1", "P2", "P3", "F1", "F2", "F3", "E1", "E2", "E3", "C1", "C2", "C3", "CP1", "CP2", "CP3"]
-    for i in range(n_stage):
-        group_mean = (np.sum(sim_dataset[:, i, :], axis=1, dtype=np.float64)/nsim)/cum_ps[:, i]*100
-        output_dict[name_stage[i]] = np.concatenate([group_mean, con_futile_mean, con_efficacy_mean, con_continuous,
-                                                     cp_mean])
-    df = pd.DataFrame(output_dict).transpose()
-    del gamma_vect
-    """
-    return
+    import gc
+    gc.collect()
+    
+    finish_time = np.around(time.time() - start_time, 3)
+    sys.stdout.write("Time used: %s secs"%str(finish_time))
+        
+    return finish_flag
+
