@@ -1,5 +1,5 @@
 ## What's BATS 
- ![alt tag](https://github.com/ContaTP/BATS-Bayesian-Adaptive-Trial-Simulator/blob/master/example/bcts.png)
+ ![alt tag](https://github.com/ContaTP/BATS-Bayesian-Adaptive-Trial-Simulator/blob/master/example/bcts.png =100x)
 
 A python application for mainly conducting simulations for Bayesian Multi-Arm Multi-Stage clinical trial design. But in future, we aim to develop BATS into a quick and user-friendly trial simulator for all kinds of Bayesian clinical trial design.
 
