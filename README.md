@@ -1,3 +1,6 @@
+Bayesian Adaptive Trial Simulator
+=================================
+
 ## What's BATS 
 <img src="https://github.com/ContaTP/BATS-Bayesian-Adaptive-Trial-Simulator/blob/master/example/bcts.png" width="100" height="100" //>
 
@@ -14,19 +17,15 @@ The application is written in Python 3.4 and Cython 0.24.1
 
 Required modules:
 
-Numpy
-
-Pandas
-
-Matplotlib
-
-Cython
-
-CythonGSL
++ Numpy
++ Pandas
++ Matplotlib
++ Cython
++ CythonGSL
 
 Required 3rd-party:
-
-GSL
++GSL
 
 
 ## License
+BATS is released under the GPLv3
