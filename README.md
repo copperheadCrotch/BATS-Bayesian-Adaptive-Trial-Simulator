@@ -1,14 +1,16 @@
-## BayesianMAMS ##
-A python application for MAMS clinical trial simulation under Bayesian scheme
+## BATS ##
 
-The GUI is developed using PyQt 4.4
-The computation module is written in Cython 0.23 & Python 2.7
+A python application for mainly conducting simulations for Bayesian Multi-Arm Multi-Stage clinical trial design. But in future, we aim to develop BATS into a quick and user-friendly trial simulator for all kinds of Bayesian clinical trial design.
+The motivation of this project is the huge amount of time spent on our simulation for a Bayesian design.
 
+The GUI is developed using PyQt 5.6
+The application is written in Python 3.4 and Cython 0.24.1
+Required modules:
+Numpy
+Pandas
+Matplotlib
+Cython
+CythonGSL
 
-Road Map
-
-
-1. Deal with NA in the DataFrame
-
-
-2. Incorporate GR plot library
+Required 3rd-party:
+GSL
