@@ -107,7 +107,7 @@ cdef Bisection(float[:, :, ::1] gamma_vect, int nsim, int n1, int n2, float pred
             elif crit_arr == predSuccess:
                
                 min_n = min_n + 1
-                bisect_stop == 0
+                bisect_stop = 0
         
         critical_array[i] = min_n
 
