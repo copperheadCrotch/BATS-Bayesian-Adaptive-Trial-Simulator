@@ -73,7 +73,8 @@ cdef Bisection(float[:, :, ::1] gamma_vect, int nsim, int n1, int n2, float pred
         
         bisect_stop = 1
         # Exact verification
-        while bisect_stop:
+        # If min_n is already 0, escape that.
+        while bisect_stop and min_n > 0:
             
             crit_sum = 0
             for k in xrange(0, nsim):
