@@ -137,7 +137,7 @@ cdef FixedInterimCheck(int nsim, int nArm, int nStage, float eff, float fut, flo
     con_eff_df = pd.DataFrame(con_eff_dataset_copy, index=pd.MultiIndex.from_product(sim_df_index, names=["# of Simulation", "Stage"]), columns=effColHeader[0:(nArm - 1)]).sort_index()
     con_fut_df = pd.DataFrame(con_fut_dataset_copy, index=pd.MultiIndex.from_product(sim_df_index, names=["# of Simulation", "Stage"]), columns=effColHeader[0:(nArm - 1)]).sort_index()
     # Output file
-    interim_df.to_csv(pathdir + "Interim Analysis/Critical Value.csv")
+    interim_df.to_csv(pathdir + "Interim Analysis/Interim Probability.csv")
     eff_df.to_csv(pathdir + "Interim Analysis/Unconditional Efficacy Data.csv")
     fut_df.to_csv(pathdir + "Interim Analysis/Unconditional Futile Data.csv")
     # stop_df.to_csv(pathdir + "Interim Analysisset/stop data.csv")
@@ -158,7 +158,6 @@ cdef FixedInterimCheck(int nsim, int nArm, int nStage, float eff, float fut, flo
         r, g, b = color_list[color_i]
         color_list[color_i] = (r/255., g/255., b/255.)   
     
-    """
     sys.stdout.write("Output summary plot for critical value...")
     # Plot for critical value histogram
     for m in range(0, nArm - 1):
@@ -172,11 +171,11 @@ cdef FixedInterimCheck(int nsim, int nArm, int nStage, float eff, float fut, flo
             ax.tick_params(axis='both', which='minor', labelsize=15)             
             plt.title("Treatment Arm %d at Stage %d"%((m + 1), (p + 1)), fontsize = 15)         
             plt.xticks(np.arange(0, 1, 0.2))
-            plt.xlabel("Critical Value", fontsize = 15)
+            plt.xlabel("Probability", fontsize = 15)
             plt.ylabel("Frequency", fontsize = 15)
             filename = "Treatment Arm " + str(m + 1) + " at Stage " + str(p + 1)
             plt.tight_layout()
-            plt.savefig(pathdir + "Critical Value/" + filename + ".png")
+            plt.savefig(pathdir + "Interim Analysis/" + filename + ".png")
             plt.clf()
             plt.close()
             
@@ -185,11 +184,11 @@ cdef FixedInterimCheck(int nsim, int nArm, int nStage, float eff, float fut, flo
     ax.hist(interim_crit[0, 0, :], normed = False, color = random.choice(color_list))   
     plt.xticks(rotation = "vertical")
     plt.tight_layout()
-    plt.savefig(pathdir + "Critical Value/ui.png")
+    plt.savefig(pathdir + "Interim Analysis/ui.png")
     plt.clf()
     plt.close()
     
-    
+    """
     sys.stdout.write("Output summary plot for futility boundary...")    
     for m in range(0, nArm - 1):
             
