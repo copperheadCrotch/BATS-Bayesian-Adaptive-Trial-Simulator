@@ -117,8 +117,10 @@ cdef FixedInterimCheck(int nsim, int nArm, int nStage, float eff, float fut, flo
         
     del interim_dict
     
-    sys.stdout.write("Output Interim Analysis Data...")
-    os.makedirs(pathdir + "Interim Analysis")
+    if not os.path.isdir(pathdir + "Interim Analysis"):
+        
+        os.makedirs(pathdir + "Interim Analysis")
+
     interim_dataset_copy = np.transpose(np.asarray(interim_crit), (2, 1, 0)).reshape((nsim * nStage), (nArm - 1))
     eff_dataset_copy = np.transpose(np.asarray(efficacy), (2, 1, 0)).reshape((nsim * nStage), (nArm - 1))
     fut_dataset_copy = np.transpose(np.asarray(futile), (2, 1, 0)).reshape((nsim * nStage), (nArm - 1))
