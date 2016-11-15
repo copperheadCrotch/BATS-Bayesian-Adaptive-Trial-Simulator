@@ -96,7 +96,12 @@ cdef Bisection(float[:, :, ::1] gamma_vect, int nsim, int n1, int n2, float pred
                     
             elif crit_arr < predSuccess:
                 
-                if o_n == 1:
+                # If min_n is already 0, stop
+                if min_n == 0:
+                    
+                    bisect_stop = 0
+                    
+                elif o_n == 1:
                 
                     min_n = min_n - 1
                     bisect_stop = 0
