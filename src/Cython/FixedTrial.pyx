@@ -52,7 +52,7 @@ cdef TrialProgress(str pathdir, list effColHeader, list patColHeader, int nsim, 
     # Variable for beta random variable generation
     cdef int max_tps, treatment_add, control_add
     # Patients at each arm, cumulative
-    cdef int [:, ::1] ps_array = np.empty((nArm, nStage), dtype = int)
+    cdef int [:, ::1] ps_array = np.empty((nArm, nStage), dtype = np.intc)
     
     for i in range(0, len(ns_list)):
             
@@ -198,7 +198,7 @@ def TrialSimulation(pathdir, effColHeader, patColHeader, nsim, seed, nArm, nStag
         CVLfile = ""
         
     te_list = np.array(te_list)
-    ns_list = np.array(ns_list, dtype = int)
+    ns_list = np.array(ns_list, dtype = np.intc)
       
     start_time = time.time()  
     # inpathdir = bytes(pathdir, "utf-8")
