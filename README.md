@@ -9,7 +9,10 @@ A python application for mainly conducting simulations for Bayesian Multi-Arm Mu
 
 
 The motivation of this project is the huge amount of time spent on our simulation for a Bayesian design.
+## Installation
+Windows:
 
+Linux:
 ## Development of BATS
 
 The GUI is developed using PyQt 5.6
