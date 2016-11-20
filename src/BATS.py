@@ -957,7 +957,7 @@ class MainContentWindow(QtWidgets.QWidget, Ui_MainContentWindow):
                 single_main_table.horizontalScrollBar().setVisible(False)
                 single_main_table.verticalScrollBar().setVisible(False)
                 single_main_table.setFocusPolicy(QtCore.Qt.NoFocus)
-                single_main_table.setStyleSheet("QTableWidget{border: none; background:transparent; outline:none; gridline-color: #ffffff;} QTableWidget QTableCornerButton::section{background:transparent;} QHeaderView:Section{background:transparent; border:none; padding: 0 5px 5px 5px;} QTableWidget::item{border:none; color:#66cc6e; font-size: 12pt; font-family:'Segoe UI Light'; text-align:center;} QLineEdit{border: none; }")
+                single_main_table.setStyleSheet("QTableWidget{border: none; background:transparent; outline:none; gridline-color: #ffffff;} QTableWidget QTableCornerButton::section{background:#f7fafc; border: none;}  QHeaderView:Section{background:transparent; border:none; padding: 0 5px 5px 5px;} QTableWidget::item{border:none; color:#66cc6e; font-size: 12pt; font-family:'Segoe UI Light'; text-align:center;} QLineEdit{border: none; }")
                 single_main_table.setRowCount(n_index0)
                 single_main_table.setColumnCount(n_index1)
                 single_main_table.setHorizontalHeaderLabels(index_name[1])
