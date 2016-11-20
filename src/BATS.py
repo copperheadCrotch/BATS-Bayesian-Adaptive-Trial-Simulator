@@ -2855,7 +2855,7 @@ if __name__ == '__main__':
       sys.stdout.write("The application is not supported in this system")
       pass
     
-    app = QtWidgets.QApplication(sys.argv)
+    app = QtWidgets.QApplication(['Bayesian Adaptive Trial Simulator'])
     app_icon = QtGui.QIcon()
     app_icon.addFile(":/resources/bcts.png", QtCore.QSize(16,16))
     app_icon.addFile(":/resources/bcts.png", QtCore.QSize(24,24))
