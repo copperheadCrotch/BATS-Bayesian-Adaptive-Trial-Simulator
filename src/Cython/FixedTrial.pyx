@@ -60,7 +60,7 @@ cdef TrialProgress(str pathdir, list effColHeader, list patColHeader, int nsim, 
         ps_array[0 : (nArm - 1), i] = best_treatment
         ps_array[(nArm - 1), i] = best_control
     
-    cdef int [:, ::1] tps_array = np.cumsum(ps_array, axis=1)
+    cdef int [:, ::1] tps_array = np.cumsum(ps_array, axis=1, dtype = np.intc)
     # Patients at each stage at each arm
     sys.stdout.write("\nPatients of each arm at each stage:")
     df_ps_array = pd.DataFrame(np.transpose(ps_array), index= patColHeader, columns= effColHeader)
