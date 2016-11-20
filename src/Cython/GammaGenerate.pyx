@@ -9,6 +9,8 @@ import sys
 @cython.boundscheck(False)
 @cython.wraparound(False)
 @cython.cdivision(True)
+
+""" Cython module to generate multiple gamma random variables"""
 cdef RandomVaribleGamma(int seed, int max_tps, int gamma_nsim,  float [:, :, ::1] gamma_vect):
 
     cdef Py_ssize_t m, p, q
