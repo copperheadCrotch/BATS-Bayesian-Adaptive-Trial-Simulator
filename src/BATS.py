@@ -2840,8 +2840,15 @@ if __name__ == '__main__':
 
     # Set id
     import ctypes
-    appid = u'dcu.bats.0.1' # arbitrary string
-    ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(appid)
+    appid = u'bats.1.0' # arbitrary string
+    
+    try:
+
+       ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(appid)
+    
+    except:
+
+       pass
     
     app = QtWidgets.QApplication(sys.argv)
     app_icon = QtGui.QIcon()
