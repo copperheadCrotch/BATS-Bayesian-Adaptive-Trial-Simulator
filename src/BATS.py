@@ -2842,13 +2842,18 @@ if __name__ == '__main__':
     import ctypes
     appid = u'bats.1.0' # arbitrary string
     
-    try:
+    if sys.platform == 'win32':
 
        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(appid)
     
-    except:
+    elif sys.platform == 'linux2':
 
        pass
+    
+    else:
+      
+      sys.stdout.write("The application is not supported in this system")
+      pass
     
     app = QtWidgets.QApplication(sys.argv)
     app_icon = QtGui.QIcon()
