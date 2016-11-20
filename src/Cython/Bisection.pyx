@@ -60,6 +60,7 @@ cdef OutputBisection(float[:, :, ::1] gamma_vect, int nsim, int n1, int n2, floa
                 min_n = mid_n
         
         sys.stdout.write("Done for %d" %i)        
+        bisect_stop = 1
         # Exact verification
         while bisect_stop:
             
@@ -83,7 +84,11 @@ cdef OutputBisection(float[:, :, ::1] gamma_vect, int nsim, int n1, int n2, floa
                     
             elif crit_arr < predSuccess:
                 
-                if o_n == 1:
+                if min_n = 0:
+                    
+                    bisect_stop = 0
+                
+                elif o_n == 1:
                 
                     min_n = min_n - 1
                     bisect_stop = 0
