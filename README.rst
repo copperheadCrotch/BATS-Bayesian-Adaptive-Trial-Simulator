@@ -1,8 +1,8 @@
 BATS - Bayesian Adaptive Trial Simulator
 =========================
 
-  .. image:: https://github.com/ContaTP/BATS-Bayesian-Adaptive-Trial-Simulator/blob/master/BATS/resources/bcts.png
-      :width: 50pt
+.. image:: https://github.com/ContaTP/BATS-Bayesian-Adaptive-Trial-Simulator/blob/master/BATS/resources/bcts.png
+    :width: 50pt
 
 Bayesian Adaptive Trial Simulator (BATS) is a Qt-based software used to perform simulation for Bayeisan Multi-arm Multi-stage design.
 
