@@ -17,16 +17,16 @@ Dependencies:
 * Pandas
 * Matplotlib
 * Cython
-* `cythonGSL <https://github.com/twiecki/CythonGSL>`_.
-* PyQt5 (https://www.riverbankcomputing.com/software/pyqt/download5)
+* `cythonGSL <https://github.com/twiecki/CythonGSL>`_
+* `PyQt5 <https://www.riverbankcomputing.com/software/pyqt/download5>`_
 
 Other dependencies:
 
-The module requires GNU Scientific Library (GSL, ` <https://www.gnu.org/software/gsl/>`) to be installed on user's operating system, because it use the GSL module to draw random variables and calculate choose functions.
+The module requires GNU Scientific Library (`GSL <https://www.gnu.org/software/gsl/>`_) to be installed on user's operating system, because it use the GSL module to draw random variables and calculate choose functions.
 
-* `GSL For Windows Port: (https://code.google.com/archive/p/oscats/downloads)
+* `GSL <https://code.google.com/archive/p/oscats/downloads>`_ For Windows Port:
 
-To install cythonGSL, download the source from `Thomas Wiecki's repository <https://github.com/twiecki/CythonGSL>`, follows the instructions for installation under the page. 
+To install cythonGSL, download the source from `Thomas Wiecki's repository <https://github.com/twiecki/CythonGSL>`_, follows the instructions for installation under the page. 
 
 To install the Python dependencies and GSL under Windows (with Python 3.4 +):
 
@@ -34,7 +34,7 @@ To install the Python dependencies and GSL under Windows (with Python 3.4 +):
 
     $ pip install numpy pandas matplotlib cython PyQt5 
 
-Download GSL from the link above, following the `instructions <http://joonro.github.io/blog/posts/installing-gsl-and-cythongsl-in-windows.html>`, Cython will also require a `C/C++ compiler <https://github.com/cython/cython/wiki/CythonExtensionsOnWindows>` to complie the code into Python module.
+Download GSL from the link above, following the `instructions <http://joonro.github.io/blog/posts/installing-gsl-and-cythongsl-in-windows.html>`_, Cython will also require a `C/C++ compiler <https://github.com/cython/cython/wiki/CythonExtensionsOnWindows>`_ to complie the code into Python module.
 
 To install the Python dependencies and GSL under Linux:
 
