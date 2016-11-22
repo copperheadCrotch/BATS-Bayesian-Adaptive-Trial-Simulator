@@ -67,10 +67,11 @@ Usage
    BATS.__init__()
 
 
-Authors of the code: Zhenning Yu
+See documentation for detailed settings
 
-Contact:yuzhenning.bio@gmail.com
 
 License
 -------
 The software is distributed under GPLv3. See License for details
+
+Contact:yuzhenning.bio@gmail.com
