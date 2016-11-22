@@ -67,11 +67,11 @@ Usage
    BATS.__init__()
 
 
-See documentation for detailed settings
+See `documentation <https://github.com/ContaTP/BATS-Bayesian-Adaptive-Trial-Simulator/blob/master/BATS/documentation/Documentation.pdf>` for detailed settings
 
 
 License
 -------
 The software is distributed under GPLv3. See License for details
 
-Contact:yuzhenning.bio@gmail.com
+Contact: yuzhenning.bio@gmail.com
