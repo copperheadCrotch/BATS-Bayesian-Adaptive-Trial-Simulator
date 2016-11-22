@@ -13,7 +13,7 @@ Installation
 | Source Code         | `BATS-1.0.0a1.tar.gz <https://sourceforge.net/projects/bats/files/BATS-1.0.0a1.tar.gz/download>`_     | 
 +---------------------+-------------------------------------------------------------------------------------------------------+
 
-Users can install BATS through an installer with no dependencies, the msi installer only works in Windows), or through PyPI, which requires Python 3.4 +, several packages and GNU Scientific Library (GSL):
+Users can install BATS through an installer with no dependencies (The msi installer only works in Windows now), or through PyPI, which requires Python 3.4 +, several packages and GNU Scientific Library (GSL):
 
 .. code-block:: bash
 
