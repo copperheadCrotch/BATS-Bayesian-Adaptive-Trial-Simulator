@@ -12,6 +12,7 @@ Installation
 +---------------------+-------------------------------------------------------------------------------------------------------+
 | Source Code         | `BATS-1.0.0a1.tar.gz <https://sourceforge.net/projects/bats/files/BATS-1.0.0a1.tar.gz/download>`_     | 
 +---------------------+-------------------------------------------------------------------------------------------------------+
+``*`` The Windows users are encouraged to use the Windows Installer because the installation is easy.
 
 Users can install BATS through an installer with no dependencies (The msi installer only works in Windows now), or through PyPI, which requires Python 3.4 +, several packages and GNU Scientific Library (GSL):
 
