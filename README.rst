@@ -17,8 +17,8 @@ Dependencies:
 * Pandas
 * Matplotlib
 * Cython
-* `cythonGSL <https://github.com/twiecki/CythonGSL>`
-* `PyQt5 <https://www.riverbankcomputing.com/software/pyqt/download5>`
+* `cythonGSL <https://github.com/twiecki/CythonGSL>`_.
+* PyQt5 (https://www.riverbankcomputing.com/software/pyqt/download5)
 
 Other dependencies:
 
