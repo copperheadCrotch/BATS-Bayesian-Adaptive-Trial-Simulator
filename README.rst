@@ -11,7 +11,7 @@ Users can install BATS through an installer (DL:, only available for Windows now
 
     $ pip install BATS
 
-Dependencies:
+**Dependencies**:
 
 * Numpy
 * Pandas
@@ -20,11 +20,11 @@ Dependencies:
 * `cythonGSL <https://github.com/twiecki/CythonGSL>`_
 * `PyQt5 <https://www.riverbankcomputing.com/software/pyqt/download5>`_
 
-Other dependencies:
+**Other dependencies**:
 
 The module requires GNU Scientific Library (`GSL <https://www.gnu.org/software/gsl/>`_) to be installed on user's operating system, because it use the GSL module to draw random variables and calculate choose functions.
 
-* `GSL <https://code.google.com/archive/p/oscats/downloads>`_ For Windows Port:
+* `GSL <https://code.google.com/archive/p/oscats/downloads>`_ For Windows Port.
 
 To install cythonGSL, download the source from `Thomas Wiecki's repository <https://github.com/twiecki/CythonGSL>`_, follows the instructions for installation under the page. 
 
