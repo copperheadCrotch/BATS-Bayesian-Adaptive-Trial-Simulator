@@ -36,9 +36,10 @@ To install the Python dependencies and GSL under Windows (with Python 3.4 +):
 Download GSL from the link above, following the `instructions <http://joonro.github.io/blog/posts/installing-gsl-and-cythongsl-in-windows.html>`, Cython will also require a `C/C++ compiler <https://github.com/cython/cython/wiki/CythonExtensionsOnWindows>` to complie the code into Python module.
 
 To install the Python dependencies and GSL under Linux:
-.. code-block:: bash
+.. code-block:: shell
 
     $ pip3 install numpy pandas matplotlib cython PyQt5
+    
     $ apt-get install libgsl2
 
 
