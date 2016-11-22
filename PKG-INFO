@@ -1,0 +1,22 @@
+Metadata-Version: 1.1
+Name: BATS-1.0.0
+Version: 1.0.0a1
+Summary: Bayesian Adaptive Trial Simulator (BATS) is a software used to perform simulation for Bayeisan Multi-arm Multi-stage design.
+Home-page: https://github.com/ContaTP/BATS-Bayesian-Adaptive-Trial-Simulator
+Author: Zhenning Yu
+Author-email: yuzhenning.bio@gmail.com
+License: GPLv3
+Keywords: clinical trial, Bayesian
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: Healthcare Industry
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Cython
+Classifier: Topic :: Scientific/Engineering :: Medical Science Apps.
