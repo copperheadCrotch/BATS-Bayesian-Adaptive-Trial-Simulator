@@ -5,7 +5,7 @@ Bayesian Adaptive Trial Simulator (BATS) is a Qt-based software used to perform 
 Installation
 ------------
 
-Users can install BATS through an installer (`Download Link <https://sourceforge.net/projects/bats/files/BATS-1.0.0-win32.msi/download>`_, The msi installer only works in Windows), or through PyPI, which requires Python 3.4 + to better support PyQt5, several packages and GNU Scientific Library (GSL):
+Users can install BATS through an installer (`Download Link <https://sourceforge.net/projects/bats/files/BATS-1.0.0-win32.msi/download>`_, the msi installer only works in Windows), or through PyPI, which requires Python 3.4 + to better support PyQt5, several packages and GNU Scientific Library (GSL):
 
 .. code-block:: bash
 
