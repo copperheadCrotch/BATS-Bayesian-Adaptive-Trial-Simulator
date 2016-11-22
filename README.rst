@@ -6,9 +6,11 @@ Installation
 ------------
 
 +---------------------+-------------------------------------------------------------------------------------------------------+
-| Windows Installer   | (`BATS-1.0.0-win32.msi <https://sourceforge.net/projects/bats/files/BATS-1.0.0-win32.msi/download>`_  | 
+| Downloads           |  URL                                                                                                  |
++---------------------+-------------------------------------------------------------------------------------------------------+
+| Windows Installer   | `BATS-1.0.0-win32.msi <https://sourceforge.net/projects/bats/files/BATS-1.0.0-win32.msi/download>`_   | 
 +=====================+=======================================================================================================+
-| Source Code         | (`BATS-1.0.0a1.tar.gz <https://sourceforge.net/projects/bats/files/BATS-1.0.0a1.tar.gz/download>`_    | 
+| Source Code         | `BATS-1.0.0a1.tar.gz <https://sourceforge.net/projects/bats/files/BATS-1.0.0a1.tar.gz/download>`_     | 
 +---------------------+-------------------------------------------------------------------------------------------------------+
 
 Users can install BATS through an installer with no dependencies, the msi installer only works in Windows), or through PyPI, which requires Python 3.4 +, several packages and GNU Scientific Library (GSL):
