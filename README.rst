@@ -29,6 +29,7 @@ The module requires GNU Scientific Library (GSL, ` <https://www.gnu.org/software
 To install cythonGSL, download the source from `Thomas Wiecki's repository <https://github.com/twiecki/CythonGSL>`, follows the instructions for installation under the page. 
 
 To install the Python dependencies and GSL under Windows (with Python 3.4 +):
+
 .. code-block:: bash
 
     $ pip install numpy pandas matplotlib cython PyQt5 
@@ -36,7 +37,8 @@ To install the Python dependencies and GSL under Windows (with Python 3.4 +):
 Download GSL from the link above, following the `instructions <http://joonro.github.io/blog/posts/installing-gsl-and-cythongsl-in-windows.html>`, Cython will also require a `C/C++ compiler <https://github.com/cython/cython/wiki/CythonExtensionsOnWindows>` to complie the code into Python module.
 
 To install the Python dependencies and GSL under Linux:
-.. code-block:: shell
+
+.. code-block:: bash
 
     $ pip3 install numpy pandas matplotlib cython PyQt5
     
