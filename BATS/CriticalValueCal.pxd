@@ -1,0 +1,1 @@
+cdef float CriticalValueCal(float , float , float , float , float)

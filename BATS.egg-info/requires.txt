@@ -1,0 +1,5 @@
+cython >= 0.24
+numpy
+matplotlib
+pandas
+cythonGSL
