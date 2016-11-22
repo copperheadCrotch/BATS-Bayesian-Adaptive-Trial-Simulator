@@ -24,7 +24,7 @@ Other dependencies:
 
 The module requires GNU Scientific Library (GSL, ` <https://www.gnu.org/software/gsl/>`) to be installed on user's operating system, because it use the GSL module to draw random variables and calculate choose functions.
 
-* `GSL For Windows Port: <https://code.google.com/archive/p/oscats/downloads>`
+* `GSL For Windows Port: (https://code.google.com/archive/p/oscats/downloads)
 
 To install cythonGSL, download the source from `Thomas Wiecki's repository <https://github.com/twiecki/CythonGSL>`, follows the instructions for installation under the page. 
 
