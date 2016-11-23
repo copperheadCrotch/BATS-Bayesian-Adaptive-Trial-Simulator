@@ -926,7 +926,7 @@ typedef npy_double __pyx_t_5numpy_double_t;
  */
 typedef npy_longdouble __pyx_t_5numpy_longdouble_t;
 
-/* "BATS/FixedTrial.pyx":26
+/* "BATS/FixedTrial.pyx":27
  * 
  * DTYPE = np.float64
  * ctypedef np.float64_t DTYPE_t             # <<<<<<<<<<<<<<
@@ -1045,7 +1045,7 @@ typedef npy_clongdouble __pyx_t_5numpy_clongdouble_t;
 typedef npy_cdouble __pyx_t_5numpy_complex_t;
 struct __pyx_opt_args_4BATS_10FixedTrial_TrialProgress;
 
-/* "BATS/FixedTrial.pyx":43
+/* "BATS/FixedTrial.pyx":44
  * @cython.wraparound(False)
  * @cython.cdivision(True)
  * cdef TrialProgress(str pathdir, list effColHeader, list patColHeader, int nsim, int seed, int nArm, int nStage, double [::1] te_list,             # <<<<<<<<<<<<<<
@@ -2246,6 +2246,7 @@ static const char __pyx_k_Average_Success[] = "Average Success";
 static const char __pyx_k_BATS_FixedTrial[] = "BATS.FixedTrial";
 static const char __pyx_k_FinalResult_csv[] = "FinalResult.csv";
 static const char __pyx_k_InterimAnalysis[] = "InterimAnalysis";
+static const char __pyx_k_PredictiveCheck[] = "PredictiveCheck";
 static const char __pyx_k_TrialSimulation[] = "TrialSimulation";
 static const char __pyx_k_allocate_buffer[] = "allocate_buffer";
 static const char __pyx_k_dtype_is_object[] = "dtype_is_object";
@@ -2334,6 +2335,7 @@ static PyObject *__pyx_kp_s_Number_of_patient;
 static PyObject *__pyx_n_b_O;
 static PyObject *__pyx_kp_s_Out_of_bounds_on_buffer_access_a;
 static PyObject *__pyx_kp_s_Patients_of_each_arm_at_each_st;
+static PyObject *__pyx_n_s_PredictiveCheck;
 static PyObject *__pyx_n_s_PredictiveProbability;
 static PyObject *__pyx_kp_s_Predictive_Probability;
 static PyObject *__pyx_n_s_RVGamma;
@@ -2542,7 +2544,7 @@ static PyObject *__pyx_tuple__39;
 static PyObject *__pyx_tuple__40;
 static PyObject *__pyx_codeobj__35;
 
-/* "BATS/FixedTrial.pyx":43
+/* "BATS/FixedTrial.pyx":44
  * @cython.wraparound(False)
  * @cython.cdivision(True)
  * cdef TrialProgress(str pathdir, list effColHeader, list patColHeader, int nsim, int seed, int nArm, int nStage, double [::1] te_list,             # <<<<<<<<<<<<<<
@@ -2670,7 +2672,7 @@ static PyObject *__pyx_f_4BATS_10FixedTrial_TrialProgress(PyObject *__pyx_v_path
   __pyx_pybuffernd_con_power.data = NULL;
   __pyx_pybuffernd_con_power.rcbuffer = &__pyx_pybuffer_con_power;
 
-  /* "BATS/FixedTrial.pyx":51
+  /* "BATS/FixedTrial.pyx":52
  *     cdef Py_ssize_t m, p, q, i, j, k, l, copy_i, copy_j, copy_k
  *     cdef int best_treatment, best_control
  *     cdef int gamma_nsim = 50000, total_index = 2             # <<<<<<<<<<<<<<
@@ -2680,23 +2682,23 @@ static PyObject *__pyx_f_4BATS_10FixedTrial_TrialProgress(PyObject *__pyx_v_path
   __pyx_v_gamma_nsim = 0xC350;
   __pyx_v_total_index = 2;
 
-  /* "BATS/FixedTrial.pyx":55
+  /* "BATS/FixedTrial.pyx":56
  *     cdef int max_tps, treatment_add, control_add
  *     # Patients at each arm, cumulative
  *     cdef int [:, ::1] ps_array = np.empty((nArm, nStage), dtype = np.intc)             # <<<<<<<<<<<<<<
  * 
  *     for i in range(0, len(ns_list)):
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_nArm); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_nArm); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_nStage); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_nStage); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_1);
@@ -2704,64 +2706,64 @@ static PyObject *__pyx_f_4BATS_10FixedTrial_TrialProgress(PyObject *__pyx_v_path
   PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_3);
   __pyx_t_1 = 0;
   __pyx_t_3 = 0;
-  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_4);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_4);
   __pyx_t_4 = 0;
-  __pyx_t_4 = PyDict_New(); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_t_4 = PyDict_New(); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_intc); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_intc); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 55, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_int(__pyx_t_5);
-  if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 55, __pyx_L1_error)
+  if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_ps_array = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "BATS/FixedTrial.pyx":57
+  /* "BATS/FixedTrial.pyx":58
  *     cdef int [:, ::1] ps_array = np.empty((nArm, nStage), dtype = np.intc)
  * 
  *     for i in range(0, len(ns_list)):             # <<<<<<<<<<<<<<
  * 
  *         best_treatment, best_control = AllocFinder.BestPatientAllocation(nArm, alloc, ns_list[i])
  */
-  __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_v_ns_list, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_v_ns_list, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 58, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_7 = PyObject_Length(__pyx_t_5); if (unlikely(__pyx_t_7 == -1)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __pyx_t_7 = PyObject_Length(__pyx_t_5); if (unlikely(__pyx_t_7 == -1)) __PYX_ERR(0, 58, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   for (__pyx_t_8 = 0; __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
     __pyx_v_i = __pyx_t_8;
 
-    /* "BATS/FixedTrial.pyx":59
+    /* "BATS/FixedTrial.pyx":60
  *     for i in range(0, len(ns_list)):
  * 
  *         best_treatment, best_control = AllocFinder.BestPatientAllocation(nArm, alloc, ns_list[i])             # <<<<<<<<<<<<<<
  *         ps_array[0 : (nArm - 1), i] = best_treatment
  *         ps_array[(nArm - 1), i] = best_control
  */
-    __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_AllocFinder); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 59, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_AllocFinder); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 60, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_BestPatientAllocation); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 59, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_BestPatientAllocation); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 60, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_nArm); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 59, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_nArm); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 60, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_alloc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 59, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_v_alloc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 60, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_9 = __pyx_v_i;
-    __pyx_t_1 = __Pyx_PyInt_From_int((*((int *) ( /* dim=0 */ ((char *) (((int *) __pyx_v_ns_list.data) + __pyx_t_9)) )))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 59, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyInt_From_int((*((int *) ( /* dim=0 */ ((char *) (((int *) __pyx_v_ns_list.data) + __pyx_t_9)) )))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_10 = NULL;
     __pyx_t_11 = 0;
@@ -2775,7 +2777,7 @@ static PyObject *__pyx_f_4BATS_10FixedTrial_TrialProgress(PyObject *__pyx_v_path
         __pyx_t_11 = 1;
       }
     }
-    __pyx_t_12 = PyTuple_New(3+__pyx_t_11); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 59, __pyx_L1_error)
+    __pyx_t_12 = PyTuple_New(3+__pyx_t_11); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 60, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
     if (__pyx_t_10) {
       __Pyx_GIVEREF(__pyx_t_10); PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_10); __pyx_t_10 = NULL;
@@ -2789,7 +2791,7 @@ static PyObject *__pyx_f_4BATS_10FixedTrial_TrialProgress(PyObject *__pyx_v_path
     __pyx_t_4 = 0;
     __pyx_t_2 = 0;
     __pyx_t_1 = 0;
-    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_12, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 59, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_12, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 60, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -2803,7 +2805,7 @@ static PyObject *__pyx_f_4BATS_10FixedTrial_TrialProgress(PyObject *__pyx_v_path
       if (unlikely(size != 2)) {
         if (size > 2) __Pyx_RaiseTooManyValuesError(2);
         else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-        __PYX_ERR(0, 59, __pyx_L1_error)
+        __PYX_ERR(0, 60, __pyx_L1_error)
       }
       #if CYTHON_COMPILING_IN_CPYTHON
       if (likely(PyTuple_CheckExact(sequence))) {
@@ -2816,15 +2818,15 @@ static PyObject *__pyx_f_4BATS_10FixedTrial_TrialProgress(PyObject *__pyx_v_path
       __Pyx_INCREF(__pyx_t_3);
       __Pyx_INCREF(__pyx_t_12);
       #else
-      __pyx_t_3 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 59, __pyx_L1_error)
+      __pyx_t_3 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 60, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_12 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 59, __pyx_L1_error)
+      __pyx_t_12 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 60, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
       #endif
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     } else {
       Py_ssize_t index = -1;
-      __pyx_t_1 = PyObject_GetIter(__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 59, __pyx_L1_error)
+      __pyx_t_1 = PyObject_GetIter(__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __pyx_t_13 = Py_TYPE(__pyx_t_1)->tp_iternext;
@@ -2832,7 +2834,7 @@ static PyObject *__pyx_f_4BATS_10FixedTrial_TrialProgress(PyObject *__pyx_v_path
       __Pyx_GOTREF(__pyx_t_3);
       index = 1; __pyx_t_12 = __pyx_t_13(__pyx_t_1); if (unlikely(!__pyx_t_12)) goto __pyx_L5_unpacking_failed;
       __Pyx_GOTREF(__pyx_t_12);
-      if (__Pyx_IternextUnpackEndCheck(__pyx_t_13(__pyx_t_1), 2) < 0) __PYX_ERR(0, 59, __pyx_L1_error)
+      if (__Pyx_IternextUnpackEndCheck(__pyx_t_13(__pyx_t_1), 2) < 0) __PYX_ERR(0, 60, __pyx_L1_error)
       __pyx_t_13 = NULL;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       goto __pyx_L6_unpacking_done;
@@ -2840,17 +2842,17 @@ static PyObject *__pyx_f_4BATS_10FixedTrial_TrialProgress(PyObject *__pyx_v_path
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __pyx_t_13 = NULL;
       if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-      __PYX_ERR(0, 59, __pyx_L1_error)
+      __PYX_ERR(0, 60, __pyx_L1_error)
       __pyx_L6_unpacking_done:;
     }
-    __pyx_t_14 = __Pyx_PyInt_As_int(__pyx_t_3); if (unlikely((__pyx_t_14 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 59, __pyx_L1_error)
+    __pyx_t_14 = __Pyx_PyInt_As_int(__pyx_t_3); if (unlikely((__pyx_t_14 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 60, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_15 = __Pyx_PyInt_As_int(__pyx_t_12); if (unlikely((__pyx_t_15 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 59, __pyx_L1_error)
+    __pyx_t_15 = __Pyx_PyInt_As_int(__pyx_t_12); if (unlikely((__pyx_t_15 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 60, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
     __pyx_v_best_treatment = __pyx_t_14;
     __pyx_v_best_control = __pyx_t_15;
 
-    /* "BATS/FixedTrial.pyx":60
+    /* "BATS/FixedTrial.pyx":61
  * 
  *         best_treatment, best_control = AllocFinder.BestPatientAllocation(nArm, alloc, ns_list[i])
  *         ps_array[0 : (nArm - 1), i] = best_treatment             # <<<<<<<<<<<<<<
@@ -2875,7 +2877,7 @@ static PyObject *__pyx_f_4BATS_10FixedTrial_TrialProgress(PyObject *__pyx_v_path
     0,
     1) < 0))
 {
-    __PYX_ERR(0, 60, __pyx_L1_error)
+    __PYX_ERR(0, 61, __pyx_L1_error)
 }
 
 {
@@ -2886,7 +2888,7 @@ static PyObject *__pyx_f_4BATS_10FixedTrial_TrialProgress(PyObject *__pyx_v_path
         __pyx_tmp_idx += __pyx_tmp_shape;
     if (0 && (__pyx_tmp_idx < 0 || __pyx_tmp_idx >= __pyx_tmp_shape)) {
         PyErr_SetString(PyExc_IndexError, "Index out of bounds (axis 1)");
-        __PYX_ERR(0, 60, __pyx_L1_error)
+        __PYX_ERR(0, 61, __pyx_L1_error)
     }
         __pyx_t_16.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -2907,7 +2909,7 @@ static PyObject *__pyx_f_4BATS_10FixedTrial_TrialProgress(PyObject *__pyx_v_path
     }
     __PYX_XDEC_MEMVIEW(&__pyx_t_16, 1);
 
-    /* "BATS/FixedTrial.pyx":61
+    /* "BATS/FixedTrial.pyx":62
  *         best_treatment, best_control = AllocFinder.BestPatientAllocation(nArm, alloc, ns_list[i])
  *         ps_array[0 : (nArm - 1), i] = best_treatment
  *         ps_array[(nArm - 1), i] = best_control             # <<<<<<<<<<<<<<
@@ -2919,85 +2921,85 @@ static PyObject *__pyx_f_4BATS_10FixedTrial_TrialProgress(PyObject *__pyx_v_path
     *((int *) ( /* dim=1 */ ((char *) (((int *) ( /* dim=0 */ (__pyx_v_ps_array.data + __pyx_t_17 * __pyx_v_ps_array.strides[0]) )) + __pyx_t_18)) )) = __pyx_v_best_control;
   }
 
-  /* "BATS/FixedTrial.pyx":63
+  /* "BATS/FixedTrial.pyx":64
  *         ps_array[(nArm - 1), i] = best_control
  * 
  *     cdef int [:, ::1] tps_array = np.cumsum(ps_array, axis=1, dtype = np.intc)             # <<<<<<<<<<<<<<
  *     # Patients at each stage at each arm
  *     sys.stdout.write("\nPatients of each arm at each stage:")
  */
-  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_cumsum); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_cumsum); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_v_ps_array, 2, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __pyx_t_5 = __pyx_memoryview_fromslice(__pyx_v_ps_array, 2, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_5);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_5);
   __pyx_t_5 = 0;
-  __pyx_t_5 = PyDict_New(); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __pyx_t_5 = PyDict_New(); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_axis, __pyx_int_1) < 0) __PYX_ERR(0, 63, __pyx_L1_error)
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 63, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_axis, __pyx_int_1) < 0) __PYX_ERR(0, 64, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_intc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_intc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_dtype, __pyx_t_2) < 0) __PYX_ERR(0, 63, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_dtype, __pyx_t_2) < 0) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_12, __pyx_t_3, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_12, __pyx_t_3, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_int(__pyx_t_2);
-  if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 63, __pyx_L1_error)
+  if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_tps_array = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "BATS/FixedTrial.pyx":65
+  /* "BATS/FixedTrial.pyx":66
  *     cdef int [:, ::1] tps_array = np.cumsum(ps_array, axis=1, dtype = np.intc)
  *     # Patients at each stage at each arm
  *     sys.stdout.write("\nPatients of each arm at each stage:")             # <<<<<<<<<<<<<<
  *     df_ps_array = pd.DataFrame(np.transpose(ps_array), index= patColHeader, columns= effColHeader)
  *     sys.stdout.write(df_ps_array)
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 65, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 66, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_stdout); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 65, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_stdout); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 66, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 65, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 66, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 65, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 66, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "BATS/FixedTrial.pyx":66
+  /* "BATS/FixedTrial.pyx":67
  *     # Patients at each stage at each arm
  *     sys.stdout.write("\nPatients of each arm at each stage:")
  *     df_ps_array = pd.DataFrame(np.transpose(ps_array), index= patColHeader, columns= effColHeader)             # <<<<<<<<<<<<<<
  *     sys.stdout.write(df_ps_array)
  *     # Possible maximum number of patients
  */
-  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_pd); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 66, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_pd); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 67, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_DataFrame); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 66, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_DataFrame); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 67, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 66, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 67, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_transpose); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 66, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_transpose); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 67, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_v_ps_array, 2, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 66, __pyx_L1_error)
+  __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_v_ps_array, 2, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 67, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_1 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_12))) {
@@ -3010,31 +3012,31 @@ static PyObject *__pyx_f_4BATS_10FixedTrial_TrialProgress(PyObject *__pyx_v_path
     }
   }
   if (!__pyx_t_1) {
-    __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_t_12, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 66, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_t_12, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 67, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_GOTREF(__pyx_t_5);
   } else {
-    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 66, __pyx_L1_error)
+    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 67, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_1); __pyx_t_1 = NULL;
     __Pyx_GIVEREF(__pyx_t_3);
     PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_t_3);
     __pyx_t_3 = 0;
-    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_12, __pyx_t_4, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 66, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_12, __pyx_t_4, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 67, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-  __pyx_t_12 = PyTuple_New(1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 66, __pyx_L1_error)
+  __pyx_t_12 = PyTuple_New(1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 67, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_GIVEREF(__pyx_t_5);
   PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_5);
   __pyx_t_5 = 0;
-  __pyx_t_5 = PyDict_New(); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 66, __pyx_L1_error)
+  __pyx_t_5 = PyDict_New(); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 67, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_index, __pyx_v_patColHeader) < 0) __PYX_ERR(0, 66, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_columns, __pyx_v_effColHeader) < 0) __PYX_ERR(0, 66, __pyx_L1_error)
-  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_12, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 66, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_index, __pyx_v_patColHeader) < 0) __PYX_ERR(0, 67, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_columns, __pyx_v_effColHeader) < 0) __PYX_ERR(0, 67, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_12, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 67, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
@@ -3042,19 +3044,19 @@ static PyObject *__pyx_f_4BATS_10FixedTrial_TrialProgress(PyObject *__pyx_v_path
   __pyx_v_df_ps_array = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "BATS/FixedTrial.pyx":67
+  /* "BATS/FixedTrial.pyx":68
  *     sys.stdout.write("\nPatients of each arm at each stage:")
  *     df_ps_array = pd.DataFrame(np.transpose(ps_array), index= patColHeader, columns= effColHeader)
  *     sys.stdout.write(df_ps_array)             # <<<<<<<<<<<<<<
  *     # Possible maximum number of patients
  *     # Add_tps: added new patients allocated to treatment
  */
-  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 67, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 68, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_stdout); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 67, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_stdout); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 68, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_12, __pyx_n_s_write); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 67, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_12, __pyx_n_s_write); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 68, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
   __pyx_t_12 = NULL;
@@ -3068,23 +3070,23 @@ static PyObject *__pyx_f_4BATS_10FixedTrial_TrialProgress(PyObject *__pyx_v_path
     }
   }
   if (!__pyx_t_12) {
-    __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_v_df_ps_array); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 67, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_v_df_ps_array); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 68, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
   } else {
-    __pyx_t_2 = PyTuple_New(1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 67, __pyx_L1_error)
+    __pyx_t_2 = PyTuple_New(1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 68, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_GIVEREF(__pyx_t_12); PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_12); __pyx_t_12 = NULL;
     __Pyx_INCREF(__pyx_v_df_ps_array);
     __Pyx_GIVEREF(__pyx_v_df_ps_array);
     PyTuple_SET_ITEM(__pyx_t_2, 0+1, __pyx_v_df_ps_array);
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_2, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 67, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_2, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 68, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "BATS/FixedTrial.pyx":71
+  /* "BATS/FixedTrial.pyx":72
  *     # Add_tps: added new patients allocated to treatment
  * 
  *     if predict == 1:             # <<<<<<<<<<<<<<
@@ -3094,23 +3096,23 @@ static PyObject *__pyx_f_4BATS_10FixedTrial_TrialProgress(PyObject *__pyx_v_path
   __pyx_t_19 = ((__pyx_v_predict == 1) != 0);
   if (__pyx_t_19) {
 
-    /* "BATS/FixedTrial.pyx":73
+    /* "BATS/FixedTrial.pyx":74
  *     if predict == 1:
  * 
  *         treatment_add, control_add = AllocFinder.BestPatientAllocation(nArm, alloc, predNum)             # <<<<<<<<<<<<<<
  *         patnum_string = "Number of patient:\t" + str(treatment_add) + "\t" + str(control_add)
  *         sys.stdout.write("\nThe best added patients assignment: ")
  */
-    __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_AllocFinder); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 73, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_AllocFinder); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 74, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_BestPatientAllocation); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 73, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_BestPatientAllocation); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 74, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_nArm); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 73, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_nArm); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 74, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_12 = PyFloat_FromDouble(__pyx_v_alloc); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 73, __pyx_L1_error)
+    __pyx_t_12 = PyFloat_FromDouble(__pyx_v_alloc); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 74, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
-    __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_predNum); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 73, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_predNum); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 74, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_1 = NULL;
     __pyx_t_7 = 0;
@@ -3124,7 +3126,7 @@ static PyObject *__pyx_f_4BATS_10FixedTrial_TrialProgress(PyObject *__pyx_v_path
         __pyx_t_7 = 1;
       }
     }
-    __pyx_t_10 = PyTuple_New(3+__pyx_t_7); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 73, __pyx_L1_error)
+    __pyx_t_10 = PyTuple_New(3+__pyx_t_7); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 74, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     if (__pyx_t_1) {
       __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_1); __pyx_t_1 = NULL;
@@ -3138,7 +3140,7 @@ static PyObject *__pyx_f_4BATS_10FixedTrial_TrialProgress(PyObject *__pyx_v_path
     __pyx_t_5 = 0;
     __pyx_t_12 = 0;
     __pyx_t_3 = 0;
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_10, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 73, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_10, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 74, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -3152,7 +3154,7 @@ static PyObject *__pyx_f_4BATS_10FixedTrial_TrialProgress(PyObject *__pyx_v_path
       if (unlikely(size != 2)) {
         if (size > 2) __Pyx_RaiseTooManyValuesError(2);
         else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-        __PYX_ERR(0, 73, __pyx_L1_error)
+        __PYX_ERR(0, 74, __pyx_L1_error)
       }
       #if CYTHON_COMPILING_IN_CPYTHON
       if (likely(PyTuple_CheckExact(sequence))) {
@@ -3165,15 +3167,15 @@ static PyObject *__pyx_f_4BATS_10FixedTrial_TrialProgress(PyObject *__pyx_v_path
       __Pyx_INCREF(__pyx_t_2);
       __Pyx_INCREF(__pyx_t_10);
       #else
-      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 73, __pyx_L1_error)
+      __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 74, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_10 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 73, __pyx_L1_error)
+      __pyx_t_10 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 74, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_10);
       #endif
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     } else {
       Py_ssize_t index = -1;
-      __pyx_t_3 = PyObject_GetIter(__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 73, __pyx_L1_error)
+      __pyx_t_3 = PyObject_GetIter(__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 74, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __pyx_t_13 = Py_TYPE(__pyx_t_3)->tp_iternext;
@@ -3181,7 +3183,7 @@ static PyObject *__pyx_f_4BATS_10FixedTrial_TrialProgress(PyObject *__pyx_v_path
       __Pyx_GOTREF(__pyx_t_2);
       index = 1; __pyx_t_10 = __pyx_t_13(__pyx_t_3); if (unlikely(!__pyx_t_10)) goto __pyx_L8_unpacking_failed;
       __Pyx_GOTREF(__pyx_t_10);
-      if (__Pyx_IternextUnpackEndCheck(__pyx_t_13(__pyx_t_3), 2) < 0) __PYX_ERR(0, 73, __pyx_L1_error)
+      if (__Pyx_IternextUnpackEndCheck(__pyx_t_13(__pyx_t_3), 2) < 0) __PYX_ERR(0, 74, __pyx_L1_error)
       __pyx_t_13 = NULL;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       goto __pyx_L9_unpacking_done;
@@ -3189,109 +3191,109 @@ static PyObject *__pyx_f_4BATS_10FixedTrial_TrialProgress(PyObject *__pyx_v_path
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __pyx_t_13 = NULL;
       if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-      __PYX_ERR(0, 73, __pyx_L1_error)
+      __PYX_ERR(0, 74, __pyx_L1_error)
       __pyx_L9_unpacking_done:;
     }
-    __pyx_t_15 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_15 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 73, __pyx_L1_error)
+    __pyx_t_15 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_15 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 74, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_14 = __Pyx_PyInt_As_int(__pyx_t_10); if (unlikely((__pyx_t_14 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 73, __pyx_L1_error)
+    __pyx_t_14 = __Pyx_PyInt_As_int(__pyx_t_10); if (unlikely((__pyx_t_14 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 74, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
     __pyx_v_treatment_add = __pyx_t_15;
     __pyx_v_control_add = __pyx_t_14;
 
-    /* "BATS/FixedTrial.pyx":74
+    /* "BATS/FixedTrial.pyx":75
  * 
  *         treatment_add, control_add = AllocFinder.BestPatientAllocation(nArm, alloc, predNum)
  *         patnum_string = "Number of patient:\t" + str(treatment_add) + "\t" + str(control_add)             # <<<<<<<<<<<<<<
  *         sys.stdout.write("\nThe best added patients assignment: ")
  *         sys.stdout.write("\tTreatment:                       \tControl:")
  */
-    __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_treatment_add); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 74, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_treatment_add); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 75, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_10 = PyTuple_New(1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 74, __pyx_L1_error)
+    __pyx_t_10 = PyTuple_New(1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 75, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_GIVEREF(__pyx_t_4);
     PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_4);
     __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_10, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 74, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_10, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 75, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    __pyx_t_10 = PyNumber_Add(__pyx_kp_s_Number_of_patient, __pyx_t_4); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 74, __pyx_L1_error)
+    __pyx_t_10 = PyNumber_Add(__pyx_kp_s_Number_of_patient, __pyx_t_4); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 75, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = PyNumber_Add(__pyx_t_10, __pyx_kp_s__3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 74, __pyx_L1_error)
+    __pyx_t_4 = PyNumber_Add(__pyx_t_10, __pyx_kp_s__3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 75, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    __pyx_t_10 = __Pyx_PyInt_From_int(__pyx_v_control_add); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 74, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyInt_From_int(__pyx_v_control_add); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 75, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
-    __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 74, __pyx_L1_error)
+    __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 75, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_GIVEREF(__pyx_t_10);
     PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_10);
     __pyx_t_10 = 0;
-    __pyx_t_10 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_2, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 74, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_2, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 75, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = PyNumber_Add(__pyx_t_4, __pyx_t_10); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 74, __pyx_L1_error)
+    __pyx_t_2 = PyNumber_Add(__pyx_t_4, __pyx_t_10); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 75, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
     __pyx_v_patnum_string = __pyx_t_2;
     __pyx_t_2 = 0;
 
-    /* "BATS/FixedTrial.pyx":75
+    /* "BATS/FixedTrial.pyx":76
  *         treatment_add, control_add = AllocFinder.BestPatientAllocation(nArm, alloc, predNum)
  *         patnum_string = "Number of patient:\t" + str(treatment_add) + "\t" + str(control_add)
  *         sys.stdout.write("\nThe best added patients assignment: ")             # <<<<<<<<<<<<<<
  *         sys.stdout.write("\tTreatment:                       \tControl:")
  *         sys.stdout.write(patnum_string)
  */
-    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 75, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 76, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_stdout); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 75, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_stdout); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 76, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 75, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 76, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 75, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 76, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
 
-    /* "BATS/FixedTrial.pyx":76
+    /* "BATS/FixedTrial.pyx":77
  *         patnum_string = "Number of patient:\t" + str(treatment_add) + "\t" + str(control_add)
  *         sys.stdout.write("\nThe best added patients assignment: ")
  *         sys.stdout.write("\tTreatment:                       \tControl:")             # <<<<<<<<<<<<<<
  *         sys.stdout.write(patnum_string)
  *         max_tps = max(treatment_add, control_add) + max(tps_array[:, nStage - 1]) +  1
  */
-    __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 76, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 77, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_stdout); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 76, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_stdout); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 77, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_write); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 76, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_write); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 77, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 76, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 77, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "BATS/FixedTrial.pyx":77
+    /* "BATS/FixedTrial.pyx":78
  *         sys.stdout.write("\nThe best added patients assignment: ")
  *         sys.stdout.write("\tTreatment:                       \tControl:")
  *         sys.stdout.write(patnum_string)             # <<<<<<<<<<<<<<
  *         max_tps = max(treatment_add, control_add) + max(tps_array[:, nStage - 1]) +  1
  * 
  */
-    __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 77, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 78, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_stdout); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 77, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_stdout); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 78, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_write); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 77, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_write); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 78, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_4 = NULL;
@@ -3305,23 +3307,23 @@ static PyObject *__pyx_f_4BATS_10FixedTrial_TrialProgress(PyObject *__pyx_v_path
       }
     }
     if (!__pyx_t_4) {
-      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_v_patnum_string); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 77, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_v_patnum_string); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 78, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
     } else {
-      __pyx_t_3 = PyTuple_New(1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 77, __pyx_L1_error)
+      __pyx_t_3 = PyTuple_New(1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 78, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_4); __pyx_t_4 = NULL;
       __Pyx_INCREF(__pyx_v_patnum_string);
       __Pyx_GIVEREF(__pyx_v_patnum_string);
       PyTuple_SET_ITEM(__pyx_t_3, 0+1, __pyx_v_patnum_string);
-      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 77, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 78, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     }
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "BATS/FixedTrial.pyx":78
+    /* "BATS/FixedTrial.pyx":79
  *         sys.stdout.write("\tTreatment:                       \tControl:")
  *         sys.stdout.write(patnum_string)
  *         max_tps = max(treatment_add, control_add) + max(tps_array[:, nStage - 1]) +  1             # <<<<<<<<<<<<<<
@@ -3335,7 +3337,7 @@ static PyObject *__pyx_f_4BATS_10FixedTrial_TrialProgress(PyObject *__pyx_v_path
     } else {
       __pyx_t_20 = __pyx_t_15;
     }
-    __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_t_20); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 78, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_t_20); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 79, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_21.data = __pyx_v_tps_array.data;
     __pyx_t_21.memview = __pyx_v_tps_array.memview;
@@ -3352,34 +3354,34 @@ __pyx_t_21.strides[0] = __pyx_v_tps_array.strides[0];
         __pyx_tmp_idx += __pyx_tmp_shape;
     if (0 && (__pyx_tmp_idx < 0 || __pyx_tmp_idx >= __pyx_tmp_shape)) {
         PyErr_SetString(PyExc_IndexError, "Index out of bounds (axis 1)");
-        __PYX_ERR(0, 78, __pyx_L1_error)
+        __PYX_ERR(0, 79, __pyx_L1_error)
     }
         __pyx_t_21.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
 
-__pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 78, __pyx_L1_error)
+__pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 79, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __PYX_XDEC_MEMVIEW(&__pyx_t_21, 1);
-    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 78, __pyx_L1_error)
+    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 79, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_GIVEREF(__pyx_t_10);
     PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_10);
     __pyx_t_10 = 0;
-    __pyx_t_10 = __Pyx_PyObject_Call(__pyx_builtin_max, __pyx_t_3, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 78, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyObject_Call(__pyx_builtin_max, __pyx_t_3, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 79, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = PyNumber_Add(__pyx_t_2, __pyx_t_10); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 78, __pyx_L1_error)
+    __pyx_t_3 = PyNumber_Add(__pyx_t_2, __pyx_t_10); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 79, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    __pyx_t_10 = __Pyx_PyInt_AddObjC(__pyx_t_3, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 78, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyInt_AddObjC(__pyx_t_3, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 79, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_20 = __Pyx_PyInt_As_int(__pyx_t_10); if (unlikely((__pyx_t_20 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 78, __pyx_L1_error)
+    __pyx_t_20 = __Pyx_PyInt_As_int(__pyx_t_10); if (unlikely((__pyx_t_20 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 79, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
     __pyx_v_max_tps = __pyx_t_20;
 
-    /* "BATS/FixedTrial.pyx":71
+    /* "BATS/FixedTrial.pyx":72
  *     # Add_tps: added new patients allocated to treatment
  * 
  *     if predict == 1:             # <<<<<<<<<<<<<<
@@ -3389,7 +3391,7 @@ __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) _
     goto __pyx_L7;
   }
 
-  /* "BATS/FixedTrial.pyx":82
+  /* "BATS/FixedTrial.pyx":83
  *     else:
  * 
  *         treatment_add = 1             # <<<<<<<<<<<<<<
@@ -3399,7 +3401,7 @@ __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) _
   /*else*/ {
     __pyx_v_treatment_add = 1;
 
-    /* "BATS/FixedTrial.pyx":83
+    /* "BATS/FixedTrial.pyx":84
  * 
  *         treatment_add = 1
  *         control_add = 1             # <<<<<<<<<<<<<<
@@ -3408,7 +3410,7 @@ __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) _
  */
     __pyx_v_control_add = 1;
 
-    /* "BATS/FixedTrial.pyx":84
+    /* "BATS/FixedTrial.pyx":85
  *         treatment_add = 1
  *         control_add = 1
  *         max_tps = max(tps_array[:, nStage - 1]) + 1             # <<<<<<<<<<<<<<
@@ -3430,32 +3432,32 @@ __pyx_t_21.strides[0] = __pyx_v_tps_array.strides[0];
         __pyx_tmp_idx += __pyx_tmp_shape;
     if (0 && (__pyx_tmp_idx < 0 || __pyx_tmp_idx >= __pyx_tmp_shape)) {
         PyErr_SetString(PyExc_IndexError, "Index out of bounds (axis 1)");
-        __PYX_ERR(0, 84, __pyx_L1_error)
+        __PYX_ERR(0, 85, __pyx_L1_error)
     }
         __pyx_t_21.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
 
-__pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 84, __pyx_L1_error)
+__pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 85, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __PYX_XDEC_MEMVIEW(&__pyx_t_21, 1);
-    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 84, __pyx_L1_error)
+    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 85, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_GIVEREF(__pyx_t_10);
     PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_10);
     __pyx_t_10 = 0;
-    __pyx_t_10 = __Pyx_PyObject_Call(__pyx_builtin_max, __pyx_t_3, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 84, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyObject_Call(__pyx_builtin_max, __pyx_t_3, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 85, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyInt_AddObjC(__pyx_t_10, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 84, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyInt_AddObjC(__pyx_t_10, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 85, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    __pyx_t_20 = __Pyx_PyInt_As_int(__pyx_t_3); if (unlikely((__pyx_t_20 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 84, __pyx_L1_error)
+    __pyx_t_20 = __Pyx_PyInt_As_int(__pyx_t_3); if (unlikely((__pyx_t_20 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 85, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_v_max_tps = __pyx_t_20;
   }
   __pyx_L7:;
 
-  /* "BATS/FixedTrial.pyx":87
+  /* "BATS/FixedTrial.pyx":88
  * 
  *     # Simulated dataset
  *     cdef int *sim_dataset_pointer = <int *>malloc(nArm * nStage * nsim * sizeof(int))             # <<<<<<<<<<<<<<
@@ -3464,7 +3466,7 @@ __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) _
  */
   __pyx_v_sim_dataset_pointer = ((int *)malloc((((__pyx_v_nArm * __pyx_v_nStage) * __pyx_v_nsim) * (sizeof(int)))));
 
-  /* "BATS/FixedTrial.pyx":88
+  /* "BATS/FixedTrial.pyx":89
  *     # Simulated dataset
  *     cdef int *sim_dataset_pointer = <int *>malloc(nArm * nStage * nsim * sizeof(int))
  *     cdef int [:, :, ::1] sim_dataset = <int[:nArm, :nStage, :nsim]> sim_dataset_pointer             # <<<<<<<<<<<<<<
@@ -3473,26 +3475,26 @@ __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) _
  */
   if (!__pyx_v_sim_dataset_pointer) {
     PyErr_SetString(PyExc_ValueError,"Cannot create cython.array from NULL pointer");
-    __PYX_ERR(0, 88, __pyx_L1_error)
+    __PYX_ERR(0, 89, __pyx_L1_error)
   }
   __pyx_t_10 = __pyx_format_from_typeinfo(&__Pyx_TypeInfo_int);
   __pyx_t_3 = Py_BuildValue((char*) "("  __PYX_BUILD_PY_SSIZE_T  __PYX_BUILD_PY_SSIZE_T  __PYX_BUILD_PY_SSIZE_T  ")", ((Py_ssize_t)__pyx_v_nArm), ((Py_ssize_t)__pyx_v_nStage), ((Py_ssize_t)__pyx_v_nsim));
-  if (unlikely(!__pyx_t_10 || !__pyx_t_3 || !PyBytes_AsString(__pyx_t_10))) __PYX_ERR(0, 88, __pyx_L1_error)
+  if (unlikely(!__pyx_t_10 || !__pyx_t_3 || !PyBytes_AsString(__pyx_t_10))) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_22 = __pyx_array_new(__pyx_t_3, sizeof(int), PyBytes_AS_STRING(__pyx_t_10), (char *) "c", (char *) __pyx_v_sim_dataset_pointer);
-  if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 88, __pyx_L1_error)
+  if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_22);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
   __pyx_t_23 = __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_int(((PyObject *)__pyx_t_22));
-  if (unlikely(!__pyx_t_23.memview)) __PYX_ERR(0, 88, __pyx_L1_error)
+  if (unlikely(!__pyx_t_23.memview)) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_DECREF(((PyObject *)__pyx_t_22)); __pyx_t_22 = 0;
   __pyx_v_sim_dataset = __pyx_t_23;
   __pyx_t_23.memview = NULL;
   __pyx_t_23.data = NULL;
 
-  /* "BATS/FixedTrial.pyx":90
+  /* "BATS/FixedTrial.pyx":91
  *     cdef int [:, :, ::1] sim_dataset = <int[:nArm, :nStage, :nsim]> sim_dataset_pointer
  *     # Gamma array pointer
  *     cdef float *gamma_array = <float *>malloc(total_index * max_tps * gamma_nsim * sizeof(float))             # <<<<<<<<<<<<<<
@@ -3501,7 +3503,7 @@ __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) _
  */
   __pyx_v_gamma_array = ((float *)malloc((((__pyx_v_total_index * __pyx_v_max_tps) * __pyx_v_gamma_nsim) * (sizeof(float)))));
 
-  /* "BATS/FixedTrial.pyx":91
+  /* "BATS/FixedTrial.pyx":92
  *     # Gamma array pointer
  *     cdef float *gamma_array = <float *>malloc(total_index * max_tps * gamma_nsim * sizeof(float))
  *     cdef float[:, :, ::1] gamma_vect = <float[:total_index, :max_tps, :gamma_nsim]> gamma_array             # <<<<<<<<<<<<<<
@@ -3510,50 +3512,50 @@ __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) _
  */
   if (!__pyx_v_gamma_array) {
     PyErr_SetString(PyExc_ValueError,"Cannot create cython.array from NULL pointer");
-    __PYX_ERR(0, 91, __pyx_L1_error)
+    __PYX_ERR(0, 92, __pyx_L1_error)
   }
   __pyx_t_3 = __pyx_format_from_typeinfo(&__Pyx_TypeInfo_float);
   __pyx_t_10 = Py_BuildValue((char*) "("  __PYX_BUILD_PY_SSIZE_T  __PYX_BUILD_PY_SSIZE_T  __PYX_BUILD_PY_SSIZE_T  ")", ((Py_ssize_t)__pyx_v_total_index), ((Py_ssize_t)__pyx_v_max_tps), ((Py_ssize_t)__pyx_v_gamma_nsim));
-  if (unlikely(!__pyx_t_3 || !__pyx_t_10 || !PyBytes_AsString(__pyx_t_3))) __PYX_ERR(0, 91, __pyx_L1_error)
+  if (unlikely(!__pyx_t_3 || !__pyx_t_10 || !PyBytes_AsString(__pyx_t_3))) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GOTREF(__pyx_t_10);
   __pyx_t_22 = __pyx_array_new(__pyx_t_10, sizeof(float), PyBytes_AS_STRING(__pyx_t_3), (char *) "c", (char *) __pyx_v_gamma_array);
-  if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 91, __pyx_L1_error)
+  if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_22);
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_24 = __Pyx_PyObject_to_MemoryviewSlice_d_d_dc_float(((PyObject *)__pyx_t_22));
-  if (unlikely(!__pyx_t_24.memview)) __PYX_ERR(0, 91, __pyx_L1_error)
+  if (unlikely(!__pyx_t_24.memview)) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_DECREF(((PyObject *)__pyx_t_22)); __pyx_t_22 = 0;
   __pyx_v_gamma_vect = __pyx_t_24;
   __pyx_t_24.memview = NULL;
   __pyx_t_24.data = NULL;
 
-  /* "BATS/FixedTrial.pyx":94
+  /* "BATS/FixedTrial.pyx":95
  * 
  *     # Generate Trial data
  *     TrialData.FixedTrialData(nsim, seed, nArm, nStage, te_list, ps_array, sim_dataset, pathdir, effColHeader)             # <<<<<<<<<<<<<<
  *     # Generate Gamma RandomVariable
  *     GammaGenerate.RVGamma(seed, max_tps, gamma_nsim, gamma_vect)
  */
-  __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_TrialData); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_TrialData); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_FixedTrialData); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_FixedTrialData); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __pyx_t_10 = __Pyx_PyInt_From_int(__pyx_v_nsim); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __pyx_t_10 = __Pyx_PyInt_From_int(__pyx_v_nsim); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
-  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_seed); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_seed); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_12 = __Pyx_PyInt_From_int(__pyx_v_nArm); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyInt_From_int(__pyx_v_nArm); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
-  __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_nStage); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_nStage); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_v_te_list, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_v_te_list, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_25 = __pyx_memoryview_fromslice(__pyx_v_ps_array, 2, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_25)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __pyx_t_25 = __pyx_memoryview_fromslice(__pyx_v_ps_array, 2, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_25)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_25);
-  __pyx_t_26 = __pyx_memoryview_fromslice(__pyx_v_sim_dataset, 3, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_26)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __pyx_t_26 = __pyx_memoryview_fromslice(__pyx_v_sim_dataset, 3, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_26)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_26);
   __pyx_t_27 = NULL;
   __pyx_t_7 = 0;
@@ -3567,7 +3569,7 @@ __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) _
       __pyx_t_7 = 1;
     }
   }
-  __pyx_t_28 = PyTuple_New(9+__pyx_t_7); if (unlikely(!__pyx_t_28)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __pyx_t_28 = PyTuple_New(9+__pyx_t_7); if (unlikely(!__pyx_t_28)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_28);
   if (__pyx_t_27) {
     __Pyx_GIVEREF(__pyx_t_27); PyTuple_SET_ITEM(__pyx_t_28, 0, __pyx_t_27); __pyx_t_27 = NULL;
@@ -3599,31 +3601,31 @@ __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) _
   __pyx_t_1 = 0;
   __pyx_t_25 = 0;
   __pyx_t_26 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_28, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_28, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_28); __pyx_t_28 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "BATS/FixedTrial.pyx":96
+  /* "BATS/FixedTrial.pyx":97
  *     TrialData.FixedTrialData(nsim, seed, nArm, nStage, te_list, ps_array, sim_dataset, pathdir, effColHeader)
  *     # Generate Gamma RandomVariable
  *     GammaGenerate.RVGamma(seed, max_tps, gamma_nsim, gamma_vect)             # <<<<<<<<<<<<<<
  *     # Interim Analysis
  *     con_futile_mean, con_efficacy_mean, futile_mean, efficacy_mean = InterimAnalysis.InterimCheck(nsim, nArm,
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_GammaGenerate); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 96, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_GammaGenerate); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 97, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_28 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_RVGamma); if (unlikely(!__pyx_t_28)) __PYX_ERR(0, 96, __pyx_L1_error)
+  __pyx_t_28 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_RVGamma); if (unlikely(!__pyx_t_28)) __PYX_ERR(0, 97, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_28);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_seed); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 96, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_seed); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 97, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_26 = __Pyx_PyInt_From_int(__pyx_v_max_tps); if (unlikely(!__pyx_t_26)) __PYX_ERR(0, 96, __pyx_L1_error)
+  __pyx_t_26 = __Pyx_PyInt_From_int(__pyx_v_max_tps); if (unlikely(!__pyx_t_26)) __PYX_ERR(0, 97, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_26);
-  __pyx_t_25 = __Pyx_PyInt_From_int(__pyx_v_gamma_nsim); if (unlikely(!__pyx_t_25)) __PYX_ERR(0, 96, __pyx_L1_error)
+  __pyx_t_25 = __Pyx_PyInt_From_int(__pyx_v_gamma_nsim); if (unlikely(!__pyx_t_25)) __PYX_ERR(0, 97, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_25);
-  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_v_gamma_vect, 3, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 96, __pyx_L1_error)
+  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_v_gamma_vect, 3, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 97, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_5 = NULL;
   __pyx_t_7 = 0;
@@ -3637,7 +3639,7 @@ __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) _
       __pyx_t_7 = 1;
     }
   }
-  __pyx_t_12 = PyTuple_New(4+__pyx_t_7); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 96, __pyx_L1_error)
+  __pyx_t_12 = PyTuple_New(4+__pyx_t_7); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 97, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   if (__pyx_t_5) {
     __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -3654,59 +3656,59 @@ __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) _
   __pyx_t_26 = 0;
   __pyx_t_25 = 0;
   __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_28, __pyx_t_12, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 96, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_28, __pyx_t_12, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 97, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
   __Pyx_DECREF(__pyx_t_28); __pyx_t_28 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "BATS/FixedTrial.pyx":98
+  /* "BATS/FixedTrial.pyx":99
  *     GammaGenerate.RVGamma(seed, max_tps, gamma_nsim, gamma_vect)
  *     # Interim Analysis
  *     con_futile_mean, con_efficacy_mean, futile_mean, efficacy_mean = InterimAnalysis.InterimCheck(nsim, nArm,             # <<<<<<<<<<<<<<
  *                                  nStage, eff, fut, clinSig, sim_dataset, tps_array,
  *                                  gamma_nsim, gamma_vect, pathdir, effColHeader, patColHeader)
  */
-  __pyx_t_28 = __Pyx_GetModuleGlobalName(__pyx_n_s_InterimAnalysis); if (unlikely(!__pyx_t_28)) __PYX_ERR(0, 98, __pyx_L1_error)
+  __pyx_t_28 = __Pyx_GetModuleGlobalName(__pyx_n_s_InterimAnalysis); if (unlikely(!__pyx_t_28)) __PYX_ERR(0, 99, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_28);
-  __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_t_28, __pyx_n_s_InterimCheck); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 98, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_t_28, __pyx_n_s_InterimCheck); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 99, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_DECREF(__pyx_t_28); __pyx_t_28 = 0;
-  __pyx_t_28 = __Pyx_PyInt_From_int(__pyx_v_nsim); if (unlikely(!__pyx_t_28)) __PYX_ERR(0, 98, __pyx_L1_error)
+  __pyx_t_28 = __Pyx_PyInt_From_int(__pyx_v_nsim); if (unlikely(!__pyx_t_28)) __PYX_ERR(0, 99, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_28);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_nArm); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 98, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_nArm); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 99, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
 
-  /* "BATS/FixedTrial.pyx":99
+  /* "BATS/FixedTrial.pyx":100
  *     # Interim Analysis
  *     con_futile_mean, con_efficacy_mean, futile_mean, efficacy_mean = InterimAnalysis.InterimCheck(nsim, nArm,
  *                                  nStage, eff, fut, clinSig, sim_dataset, tps_array,             # <<<<<<<<<<<<<<
  *                                  gamma_nsim, gamma_vect, pathdir, effColHeader, patColHeader)
  * 
  */
-  __pyx_t_25 = __Pyx_PyInt_From_int(__pyx_v_nStage); if (unlikely(!__pyx_t_25)) __PYX_ERR(0, 99, __pyx_L1_error)
+  __pyx_t_25 = __Pyx_PyInt_From_int(__pyx_v_nStage); if (unlikely(!__pyx_t_25)) __PYX_ERR(0, 100, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_25);
-  __pyx_t_26 = PyFloat_FromDouble(__pyx_v_eff); if (unlikely(!__pyx_t_26)) __PYX_ERR(0, 99, __pyx_L1_error)
+  __pyx_t_26 = PyFloat_FromDouble(__pyx_v_eff); if (unlikely(!__pyx_t_26)) __PYX_ERR(0, 100, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_26);
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_fut); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 99, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_fut); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 100, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = PyFloat_FromDouble(__pyx_v_clinSig); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 99, __pyx_L1_error)
+  __pyx_t_5 = PyFloat_FromDouble(__pyx_v_clinSig); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 100, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_4 = __pyx_memoryview_fromslice(__pyx_v_sim_dataset, 3, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 99, __pyx_L1_error)
+  __pyx_t_4 = __pyx_memoryview_fromslice(__pyx_v_sim_dataset, 3, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 100, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_v_tps_array, 2, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 99, __pyx_L1_error)
+  __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_v_tps_array, 2, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 100, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
 
-  /* "BATS/FixedTrial.pyx":100
+  /* "BATS/FixedTrial.pyx":101
  *     con_futile_mean, con_efficacy_mean, futile_mean, efficacy_mean = InterimAnalysis.InterimCheck(nsim, nArm,
  *                                  nStage, eff, fut, clinSig, sim_dataset, tps_array,
  *                                  gamma_nsim, gamma_vect, pathdir, effColHeader, patColHeader)             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_27 = __Pyx_PyInt_From_int(__pyx_v_gamma_nsim); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 100, __pyx_L1_error)
+  __pyx_t_27 = __Pyx_PyInt_From_int(__pyx_v_gamma_nsim); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 101, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_27);
-  __pyx_t_29 = __pyx_memoryview_fromslice(__pyx_v_gamma_vect, 3, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 100, __pyx_L1_error)
+  __pyx_t_29 = __pyx_memoryview_fromslice(__pyx_v_gamma_vect, 3, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 101, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_29);
   __pyx_t_30 = NULL;
   __pyx_t_7 = 0;
@@ -3720,7 +3722,7 @@ __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) _
       __pyx_t_7 = 1;
     }
   }
-  __pyx_t_31 = PyTuple_New(13+__pyx_t_7); if (unlikely(!__pyx_t_31)) __PYX_ERR(0, 98, __pyx_L1_error)
+  __pyx_t_31 = PyTuple_New(13+__pyx_t_7); if (unlikely(!__pyx_t_31)) __PYX_ERR(0, 99, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_31);
   if (__pyx_t_30) {
     __Pyx_GIVEREF(__pyx_t_30); PyTuple_SET_ITEM(__pyx_t_31, 0, __pyx_t_30); __pyx_t_30 = NULL;
@@ -3764,7 +3766,7 @@ __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) _
   __pyx_t_10 = 0;
   __pyx_t_27 = 0;
   __pyx_t_29 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_12, __pyx_t_31, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 98, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_12, __pyx_t_31, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 99, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_31); __pyx_t_31 = 0;
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
@@ -3778,7 +3780,7 @@ __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) _
     if (unlikely(size != 4)) {
       if (size > 4) __Pyx_RaiseTooManyValuesError(4);
       else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-      __PYX_ERR(0, 98, __pyx_L1_error)
+      __PYX_ERR(0, 99, __pyx_L1_error)
     }
     #if CYTHON_COMPILING_IN_CPYTHON
     if (likely(PyTuple_CheckExact(sequence))) {
@@ -3801,7 +3803,7 @@ __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) _
       Py_ssize_t i;
       PyObject** temps[4] = {&__pyx_t_12,&__pyx_t_31,&__pyx_t_29,&__pyx_t_27};
       for (i=0; i < 4; i++) {
-        PyObject* item = PySequence_ITEM(sequence, i); if (unlikely(!item)) __PYX_ERR(0, 98, __pyx_L1_error)
+        PyObject* item = PySequence_ITEM(sequence, i); if (unlikely(!item)) __PYX_ERR(0, 99, __pyx_L1_error)
         __Pyx_GOTREF(item);
         *(temps[i]) = item;
       }
@@ -3811,7 +3813,7 @@ __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) _
   } else {
     Py_ssize_t index = -1;
     PyObject** temps[4] = {&__pyx_t_12,&__pyx_t_31,&__pyx_t_29,&__pyx_t_27};
-    __pyx_t_10 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 98, __pyx_L1_error)
+    __pyx_t_10 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 99, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_13 = Py_TYPE(__pyx_t_10)->tp_iternext;
@@ -3820,7 +3822,7 @@ __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) _
       __Pyx_GOTREF(item);
       *(temps[index]) = item;
     }
-    if (__Pyx_IternextUnpackEndCheck(__pyx_t_13(__pyx_t_10), 4) < 0) __PYX_ERR(0, 98, __pyx_L1_error)
+    if (__Pyx_IternextUnpackEndCheck(__pyx_t_13(__pyx_t_10), 4) < 0) __PYX_ERR(0, 99, __pyx_L1_error)
     __pyx_t_13 = NULL;
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
     goto __pyx_L11_unpacking_done;
@@ -3828,11 +3830,11 @@ __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) _
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
     __pyx_t_13 = NULL;
     if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-    __PYX_ERR(0, 98, __pyx_L1_error)
+    __PYX_ERR(0, 99, __pyx_L1_error)
     __pyx_L11_unpacking_done:;
   }
 
-  /* "BATS/FixedTrial.pyx":98
+  /* "BATS/FixedTrial.pyx":99
  *     GammaGenerate.RVGamma(seed, max_tps, gamma_nsim, gamma_vect)
  *     # Interim Analysis
  *     con_futile_mean, con_efficacy_mean, futile_mean, efficacy_mean = InterimAnalysis.InterimCheck(nsim, nArm,             # <<<<<<<<<<<<<<
@@ -3848,7 +3850,7 @@ __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) _
   __pyx_v_efficacy_mean = __pyx_t_27;
   __pyx_t_27 = 0;
 
-  /* "BATS/FixedTrial.pyx":103
+  /* "BATS/FixedTrial.pyx":104
  * 
  * 
  *     if predict != 1:             # <<<<<<<<<<<<<<
@@ -3858,7 +3860,7 @@ __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) _
   __pyx_t_19 = ((__pyx_v_predict != 1) != 0);
   if (__pyx_t_19) {
 
-    /* "BATS/FixedTrial.pyx":105
+    /* "BATS/FixedTrial.pyx":106
  *     if predict != 1:
  * 
  *         free(gamma_array)             # <<<<<<<<<<<<<<
@@ -3867,7 +3869,7 @@ __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) _
  */
     free(__pyx_v_gamma_array);
 
-    /* "BATS/FixedTrial.pyx":103
+    /* "BATS/FixedTrial.pyx":104
  * 
  * 
  *     if predict != 1:             # <<<<<<<<<<<<<<
@@ -3876,7 +3878,7 @@ __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) _
  */
   }
 
-  /* "BATS/FixedTrial.pyx":108
+  /* "BATS/FixedTrial.pyx":109
  * 
  *     # For predictive probability
  *     cdef double *cpower_array_pointer = <double *>malloc((nArm - 1) * nsim * sizeof(double))             # <<<<<<<<<<<<<<
@@ -3885,7 +3887,7 @@ __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) _
  */
   __pyx_v_cpower_array_pointer = ((double *)malloc((((__pyx_v_nArm - 1) * __pyx_v_nsim) * (sizeof(double)))));
 
-  /* "BATS/FixedTrial.pyx":109
+  /* "BATS/FixedTrial.pyx":110
  *     # For predictive probability
  *     cdef double *cpower_array_pointer = <double *>malloc((nArm - 1) * nsim * sizeof(double))
  *     cdef double [:, ::1] cpower_array = <double[:(nArm - 1), :nsim]> cpower_array_pointer             # <<<<<<<<<<<<<<
@@ -3894,65 +3896,65 @@ __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) _
  */
   if (!__pyx_v_cpower_array_pointer) {
     PyErr_SetString(PyExc_ValueError,"Cannot create cython.array from NULL pointer");
-    __PYX_ERR(0, 109, __pyx_L1_error)
+    __PYX_ERR(0, 110, __pyx_L1_error)
   }
   __pyx_t_27 = __pyx_format_from_typeinfo(&__Pyx_TypeInfo_double);
   __pyx_t_3 = Py_BuildValue((char*) "("  __PYX_BUILD_PY_SSIZE_T  __PYX_BUILD_PY_SSIZE_T  ")", ((Py_ssize_t)(__pyx_v_nArm - 1)), ((Py_ssize_t)__pyx_v_nsim));
-  if (unlikely(!__pyx_t_27 || !__pyx_t_3 || !PyBytes_AsString(__pyx_t_27))) __PYX_ERR(0, 109, __pyx_L1_error)
+  if (unlikely(!__pyx_t_27 || !__pyx_t_3 || !PyBytes_AsString(__pyx_t_27))) __PYX_ERR(0, 110, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_27);
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_22 = __pyx_array_new(__pyx_t_3, sizeof(double), PyBytes_AS_STRING(__pyx_t_27), (char *) "c", (char *) __pyx_v_cpower_array_pointer);
-  if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 109, __pyx_L1_error)
+  if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 110, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_22);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_27); __pyx_t_27 = 0;
   __pyx_t_32 = __Pyx_PyObject_to_MemoryviewSlice_d_dc_double(((PyObject *)__pyx_t_22));
-  if (unlikely(!__pyx_t_32.memview)) __PYX_ERR(0, 109, __pyx_L1_error)
+  if (unlikely(!__pyx_t_32.memview)) __PYX_ERR(0, 110, __pyx_L1_error)
   __Pyx_DECREF(((PyObject *)__pyx_t_22)); __pyx_t_22 = 0;
   __pyx_v_cpower_array = __pyx_t_32;
   __pyx_t_32.memview = NULL;
   __pyx_t_32.data = NULL;
 
-  /* "BATS/FixedTrial.pyx":110
+  /* "BATS/FixedTrial.pyx":111
  *     cdef double *cpower_array_pointer = <double *>malloc((nArm - 1) * nsim * sizeof(double))
  *     cdef double [:, ::1] cpower_array = <double[:(nArm - 1), :nsim]> cpower_array_pointer
  *     cdef np.ndarray[double, ndim = 1] con_power = np.empty((nArm - 1), dtype=np.float64)             # <<<<<<<<<<<<<<
  *     # cdef np.ndarray [dtype=float, ndim = 1] con_power = np.empty(n_arm-1)
  *     # Calculate posterior predictive probability
  */
-  __pyx_t_27 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 110, __pyx_L1_error)
+  __pyx_t_27 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 111, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_27);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_27, __pyx_n_s_empty); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 110, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_27, __pyx_n_s_empty); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 111, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_27); __pyx_t_27 = 0;
-  __pyx_t_27 = __Pyx_PyInt_From_long((__pyx_v_nArm - 1)); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 110, __pyx_L1_error)
+  __pyx_t_27 = __Pyx_PyInt_From_long((__pyx_v_nArm - 1)); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 111, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_27);
-  __pyx_t_29 = PyTuple_New(1); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 110, __pyx_L1_error)
+  __pyx_t_29 = PyTuple_New(1); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 111, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_29);
   __Pyx_GIVEREF(__pyx_t_27);
   PyTuple_SET_ITEM(__pyx_t_29, 0, __pyx_t_27);
   __pyx_t_27 = 0;
-  __pyx_t_27 = PyDict_New(); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 110, __pyx_L1_error)
+  __pyx_t_27 = PyDict_New(); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 111, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_27);
-  __pyx_t_31 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_31)) __PYX_ERR(0, 110, __pyx_L1_error)
+  __pyx_t_31 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_31)) __PYX_ERR(0, 111, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_31);
-  __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_t_31, __pyx_n_s_float64); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 110, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_t_31, __pyx_n_s_float64); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 111, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_DECREF(__pyx_t_31); __pyx_t_31 = 0;
-  if (PyDict_SetItem(__pyx_t_27, __pyx_n_s_dtype, __pyx_t_12) < 0) __PYX_ERR(0, 110, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_27, __pyx_n_s_dtype, __pyx_t_12) < 0) __PYX_ERR(0, 111, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-  __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_29, __pyx_t_27); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 110, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_29, __pyx_t_27); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 111, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_29); __pyx_t_29 = 0;
   __Pyx_DECREF(__pyx_t_27); __pyx_t_27 = 0;
-  if (!(likely(((__pyx_t_12) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_12, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 110, __pyx_L1_error)
+  if (!(likely(((__pyx_t_12) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_12, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 111, __pyx_L1_error)
   __pyx_t_33 = ((PyArrayObject *)__pyx_t_12);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
     if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_con_power.rcbuffer->pybuffer, (PyObject*)__pyx_t_33, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) {
       __pyx_v_con_power = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_con_power.rcbuffer->pybuffer.buf = NULL;
-      __PYX_ERR(0, 110, __pyx_L1_error)
+      __PYX_ERR(0, 111, __pyx_L1_error)
     } else {__pyx_pybuffernd_con_power.diminfo[0].strides = __pyx_pybuffernd_con_power.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_con_power.diminfo[0].shape = __pyx_pybuffernd_con_power.rcbuffer->pybuffer.shape[0];
     }
   }
@@ -3960,7 +3962,7 @@ __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) _
   __pyx_v_con_power = ((PyArrayObject *)__pyx_t_12);
   __pyx_t_12 = 0;
 
-  /* "BATS/FixedTrial.pyx":113
+  /* "BATS/FixedTrial.pyx":114
  *     # cdef np.ndarray [dtype=float, ndim = 1] con_power = np.empty(n_arm-1)
  *     # Calculate posterior predictive probability
  *     if predict == 1:             # <<<<<<<<<<<<<<
@@ -3970,77 +3972,77 @@ __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) _
   __pyx_t_19 = ((__pyx_v_predict == 1) != 0);
   if (__pyx_t_19) {
 
-    /* "BATS/FixedTrial.pyx":115
+    /* "BATS/FixedTrial.pyx":116
  *     if predict == 1:
  * 
  *         sys.stdout.write("Calculate posterior predictive probability...")             # <<<<<<<<<<<<<<
- *         predictflag = PredictiveProbability.PredictiveProbability(nsim, nArm, nStage, predSuccess, predClinSig,  searchMethod, loadCVL,
+ *         predictflag = PredictiveProbability.PredictiveCheck(nsim, nArm, nStage, predSuccess, predClinSig,  searchMethod, loadCVL,
  *                                 CVLfile, treatment_add, control_add, sim_dataset, tps_array, gamma_nsim, gamma_vect, cpower_array,
  */
-    __pyx_t_12 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 115, __pyx_L1_error)
+    __pyx_t_12 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 116, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
-    __pyx_t_27 = __Pyx_PyObject_GetAttrStr(__pyx_t_12, __pyx_n_s_stdout); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 115, __pyx_L1_error)
+    __pyx_t_27 = __Pyx_PyObject_GetAttrStr(__pyx_t_12, __pyx_n_s_stdout); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 116, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_27);
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-    __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_t_27, __pyx_n_s_write); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 115, __pyx_L1_error)
+    __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_t_27, __pyx_n_s_write); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 116, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
     __Pyx_DECREF(__pyx_t_27); __pyx_t_27 = 0;
-    __pyx_t_27 = __Pyx_PyObject_Call(__pyx_t_12, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 115, __pyx_L1_error)
+    __pyx_t_27 = __Pyx_PyObject_Call(__pyx_t_12, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 116, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_27);
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
     __Pyx_DECREF(__pyx_t_27); __pyx_t_27 = 0;
 
-    /* "BATS/FixedTrial.pyx":116
+    /* "BATS/FixedTrial.pyx":117
  * 
  *         sys.stdout.write("Calculate posterior predictive probability...")
- *         predictflag = PredictiveProbability.PredictiveProbability(nsim, nArm, nStage, predSuccess, predClinSig,  searchMethod, loadCVL,             # <<<<<<<<<<<<<<
+ *         predictflag = PredictiveProbability.PredictiveCheck(nsim, nArm, nStage, predSuccess, predClinSig,  searchMethod, loadCVL,             # <<<<<<<<<<<<<<
  *                                 CVLfile, treatment_add, control_add, sim_dataset, tps_array, gamma_nsim, gamma_vect, cpower_array,
  *                                 pathdir, effColHeader, patColHeader)
  */
-    __pyx_t_12 = __Pyx_GetModuleGlobalName(__pyx_n_s_PredictiveProbability); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 116, __pyx_L1_error)
+    __pyx_t_12 = __Pyx_GetModuleGlobalName(__pyx_n_s_PredictiveProbability); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 117, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
-    __pyx_t_29 = __Pyx_PyObject_GetAttrStr(__pyx_t_12, __pyx_n_s_PredictiveProbability); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 116, __pyx_L1_error)
+    __pyx_t_29 = __Pyx_PyObject_GetAttrStr(__pyx_t_12, __pyx_n_s_PredictiveCheck); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 117, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-    __pyx_t_12 = __Pyx_PyInt_From_int(__pyx_v_nsim); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 116, __pyx_L1_error)
+    __pyx_t_12 = __Pyx_PyInt_From_int(__pyx_v_nsim); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 117, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
-    __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_nArm); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 116, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_nArm); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 117, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_31 = __Pyx_PyInt_From_int(__pyx_v_nStage); if (unlikely(!__pyx_t_31)) __PYX_ERR(0, 116, __pyx_L1_error)
+    __pyx_t_31 = __Pyx_PyInt_From_int(__pyx_v_nStage); if (unlikely(!__pyx_t_31)) __PYX_ERR(0, 117, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_31);
-    __pyx_t_10 = PyFloat_FromDouble(__pyx_v_predSuccess); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 116, __pyx_L1_error)
+    __pyx_t_10 = PyFloat_FromDouble(__pyx_v_predSuccess); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 117, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
-    __pyx_t_4 = PyFloat_FromDouble(__pyx_v_predClinSig); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 116, __pyx_L1_error)
+    __pyx_t_4 = PyFloat_FromDouble(__pyx_v_predClinSig); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 117, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_searchMethod); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 116, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_searchMethod); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 117, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_loadCVL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 116, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_loadCVL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 117, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
 
-    /* "BATS/FixedTrial.pyx":117
+    /* "BATS/FixedTrial.pyx":118
  *         sys.stdout.write("Calculate posterior predictive probability...")
- *         predictflag = PredictiveProbability.PredictiveProbability(nsim, nArm, nStage, predSuccess, predClinSig,  searchMethod, loadCVL,
+ *         predictflag = PredictiveProbability.PredictiveCheck(nsim, nArm, nStage, predSuccess, predClinSig,  searchMethod, loadCVL,
  *                                 CVLfile, treatment_add, control_add, sim_dataset, tps_array, gamma_nsim, gamma_vect, cpower_array,             # <<<<<<<<<<<<<<
  *                                 pathdir, effColHeader, patColHeader)
  *         free(gamma_array)
  */
-    __pyx_t_26 = __Pyx_PyInt_From_int(__pyx_v_treatment_add); if (unlikely(!__pyx_t_26)) __PYX_ERR(0, 117, __pyx_L1_error)
+    __pyx_t_26 = __Pyx_PyInt_From_int(__pyx_v_treatment_add); if (unlikely(!__pyx_t_26)) __PYX_ERR(0, 118, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_26);
-    __pyx_t_25 = __Pyx_PyInt_From_int(__pyx_v_control_add); if (unlikely(!__pyx_t_25)) __PYX_ERR(0, 117, __pyx_L1_error)
+    __pyx_t_25 = __Pyx_PyInt_From_int(__pyx_v_control_add); if (unlikely(!__pyx_t_25)) __PYX_ERR(0, 118, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_25);
-    __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_v_sim_dataset, 3, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 117, __pyx_L1_error)
+    __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_v_sim_dataset, 3, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 118, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_28 = __pyx_memoryview_fromslice(__pyx_v_tps_array, 2, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_28)) __PYX_ERR(0, 117, __pyx_L1_error)
+    __pyx_t_28 = __pyx_memoryview_fromslice(__pyx_v_tps_array, 2, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_28)) __PYX_ERR(0, 118, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_28);
-    __pyx_t_30 = __Pyx_PyInt_From_int(__pyx_v_gamma_nsim); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 117, __pyx_L1_error)
+    __pyx_t_30 = __Pyx_PyInt_From_int(__pyx_v_gamma_nsim); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 118, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_30);
-    __pyx_t_34 = __pyx_memoryview_fromslice(__pyx_v_gamma_vect, 3, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 117, __pyx_L1_error)
+    __pyx_t_34 = __pyx_memoryview_fromslice(__pyx_v_gamma_vect, 3, (PyObject *(*)(char *)) __pyx_memview_get_float, (int (*)(char *, PyObject *)) __pyx_memview_set_float, 0);; if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 118, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
-    __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_v_cpower_array, 2, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 117, __pyx_L1_error)
+    __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_v_cpower_array, 2, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 118, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_35);
 
-    /* "BATS/FixedTrial.pyx":118
- *         predictflag = PredictiveProbability.PredictiveProbability(nsim, nArm, nStage, predSuccess, predClinSig,  searchMethod, loadCVL,
+    /* "BATS/FixedTrial.pyx":119
+ *         predictflag = PredictiveProbability.PredictiveCheck(nsim, nArm, nStage, predSuccess, predClinSig,  searchMethod, loadCVL,
  *                                 CVLfile, treatment_add, control_add, sim_dataset, tps_array, gamma_nsim, gamma_vect, cpower_array,
  *                                 pathdir, effColHeader, patColHeader)             # <<<<<<<<<<<<<<
  *         free(gamma_array)
@@ -4058,7 +4060,7 @@ __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) _
         __pyx_t_7 = 1;
       }
     }
-    __pyx_t_37 = PyTuple_New(18+__pyx_t_7); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 116, __pyx_L1_error)
+    __pyx_t_37 = PyTuple_New(18+__pyx_t_7); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 117, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_37);
     if (__pyx_t_36) {
       __Pyx_GIVEREF(__pyx_t_36); PyTuple_SET_ITEM(__pyx_t_37, 0, __pyx_t_36); __pyx_t_36 = NULL;
@@ -4117,14 +4119,14 @@ __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) _
     __pyx_t_30 = 0;
     __pyx_t_34 = 0;
     __pyx_t_35 = 0;
-    __pyx_t_27 = __Pyx_PyObject_Call(__pyx_t_29, __pyx_t_37, NULL); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 116, __pyx_L1_error)
+    __pyx_t_27 = __Pyx_PyObject_Call(__pyx_t_29, __pyx_t_37, NULL); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 117, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_27);
     __Pyx_DECREF(__pyx_t_37); __pyx_t_37 = 0;
     __Pyx_DECREF(__pyx_t_29); __pyx_t_29 = 0;
     __pyx_v_predictflag = __pyx_t_27;
     __pyx_t_27 = 0;
 
-    /* "BATS/FixedTrial.pyx":119
+    /* "BATS/FixedTrial.pyx":120
  *                                 CVLfile, treatment_add, control_add, sim_dataset, tps_array, gamma_nsim, gamma_vect, cpower_array,
  *                                 pathdir, effColHeader, patColHeader)
  *         free(gamma_array)             # <<<<<<<<<<<<<<
@@ -4133,19 +4135,19 @@ __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) _
  */
     free(__pyx_v_gamma_array);
 
-    /* "BATS/FixedTrial.pyx":120
+    /* "BATS/FixedTrial.pyx":121
  *                                 pathdir, effColHeader, patColHeader)
  *         free(gamma_array)
  *         if predictflag != 1:             # <<<<<<<<<<<<<<
  * 
  *             return 1
  */
-    __pyx_t_27 = PyObject_RichCompare(__pyx_v_predictflag, __pyx_int_1, Py_NE); __Pyx_XGOTREF(__pyx_t_27); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 120, __pyx_L1_error)
-    __pyx_t_19 = __Pyx_PyObject_IsTrue(__pyx_t_27); if (unlikely(__pyx_t_19 < 0)) __PYX_ERR(0, 120, __pyx_L1_error)
+    __pyx_t_27 = PyObject_RichCompare(__pyx_v_predictflag, __pyx_int_1, Py_NE); __Pyx_XGOTREF(__pyx_t_27); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 121, __pyx_L1_error)
+    __pyx_t_19 = __Pyx_PyObject_IsTrue(__pyx_t_27); if (unlikely(__pyx_t_19 < 0)) __PYX_ERR(0, 121, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_27); __pyx_t_27 = 0;
     if (__pyx_t_19) {
 
-      /* "BATS/FixedTrial.pyx":122
+      /* "BATS/FixedTrial.pyx":123
  *         if predictflag != 1:
  * 
  *             return 1             # <<<<<<<<<<<<<<
@@ -4157,7 +4159,7 @@ __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) _
       __pyx_r = __pyx_int_1;
       goto __pyx_L0;
 
-      /* "BATS/FixedTrial.pyx":120
+      /* "BATS/FixedTrial.pyx":121
  *                                 pathdir, effColHeader, patColHeader)
  *         free(gamma_array)
  *         if predictflag != 1:             # <<<<<<<<<<<<<<
@@ -4166,41 +4168,41 @@ __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) _
  */
     }
 
-    /* "BATS/FixedTrial.pyx":124
+    /* "BATS/FixedTrial.pyx":125
  *             return 1
  * 
  *         sys.stdout.write("Generate results...")             # <<<<<<<<<<<<<<
  *         con_sim_mean_copy = np.around(np.mean(sim_dataset[0:(nArm - 1), :, :], axis = 2).reshape((nArm - 1) * nStage, 1), 2)
  *         con_futile_mean_copy = con_futile_mean.reshape((nArm - 1) * nStage, 1)
  */
-    __pyx_t_27 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 124, __pyx_L1_error)
+    __pyx_t_27 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 125, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_27);
-    __pyx_t_29 = __Pyx_PyObject_GetAttrStr(__pyx_t_27, __pyx_n_s_stdout); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 124, __pyx_L1_error)
+    __pyx_t_29 = __Pyx_PyObject_GetAttrStr(__pyx_t_27, __pyx_n_s_stdout); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 125, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
     __Pyx_DECREF(__pyx_t_27); __pyx_t_27 = 0;
-    __pyx_t_27 = __Pyx_PyObject_GetAttrStr(__pyx_t_29, __pyx_n_s_write); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 124, __pyx_L1_error)
+    __pyx_t_27 = __Pyx_PyObject_GetAttrStr(__pyx_t_29, __pyx_n_s_write); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 125, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_27);
     __Pyx_DECREF(__pyx_t_29); __pyx_t_29 = 0;
-    __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_27, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 124, __pyx_L1_error)
+    __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_27, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 125, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
     __Pyx_DECREF(__pyx_t_27); __pyx_t_27 = 0;
     __Pyx_DECREF(__pyx_t_29); __pyx_t_29 = 0;
 
-    /* "BATS/FixedTrial.pyx":125
+    /* "BATS/FixedTrial.pyx":126
  * 
  *         sys.stdout.write("Generate results...")
  *         con_sim_mean_copy = np.around(np.mean(sim_dataset[0:(nArm - 1), :, :], axis = 2).reshape((nArm - 1) * nStage, 1), 2)             # <<<<<<<<<<<<<<
  *         con_futile_mean_copy = con_futile_mean.reshape((nArm - 1) * nStage, 1)
  *         con_efficacy_mean_copy = con_efficacy_mean.reshape((nArm - 1)* nStage, 1)
  */
-    __pyx_t_27 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 125, __pyx_L1_error)
+    __pyx_t_27 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_27);
-    __pyx_t_37 = __Pyx_PyObject_GetAttrStr(__pyx_t_27, __pyx_n_s_around); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 125, __pyx_L1_error)
+    __pyx_t_37 = __Pyx_PyObject_GetAttrStr(__pyx_t_27, __pyx_n_s_around); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_37);
     __Pyx_DECREF(__pyx_t_27); __pyx_t_27 = 0;
-    __pyx_t_35 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 125, __pyx_L1_error)
+    __pyx_t_35 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_35);
-    __pyx_t_34 = __Pyx_PyObject_GetAttrStr(__pyx_t_35, __pyx_n_s_mean); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 125, __pyx_L1_error)
+    __pyx_t_34 = __Pyx_PyObject_GetAttrStr(__pyx_t_35, __pyx_n_s_mean); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
     __Pyx_DECREF(__pyx_t_35); __pyx_t_35 = 0;
     __pyx_t_23.data = __pyx_v_sim_dataset.data;
@@ -4221,7 +4223,7 @@ __pyx_t_10 = __pyx_memoryview_fromslice(__pyx_t_21, 1, (PyObject *(*)(char *)) _
     0,
     1) < 0))
 {
-    __PYX_ERR(0, 125, __pyx_L1_error)
+    __PYX_ERR(0, 126, __pyx_L1_error)
 }
 
 __pyx_t_23.shape[1] = __pyx_v_sim_dataset.shape[1];
@@ -4232,26 +4234,26 @@ __pyx_t_23.shape[2] = __pyx_v_sim_dataset.shape[2];
 __pyx_t_23.strides[2] = __pyx_v_sim_dataset.strides[2];
     __pyx_t_23.suboffsets[2] = -1;
 
-__pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 125, __pyx_L1_error)
+__pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_35);
     __PYX_XDEC_MEMVIEW(&__pyx_t_23, 1);
-    __pyx_t_30 = PyTuple_New(1); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 125, __pyx_L1_error)
+    __pyx_t_30 = PyTuple_New(1); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_30);
     __Pyx_GIVEREF(__pyx_t_35);
     PyTuple_SET_ITEM(__pyx_t_30, 0, __pyx_t_35);
     __pyx_t_35 = 0;
-    __pyx_t_35 = PyDict_New(); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 125, __pyx_L1_error)
+    __pyx_t_35 = PyDict_New(); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_35);
-    if (PyDict_SetItem(__pyx_t_35, __pyx_n_s_axis, __pyx_int_2) < 0) __PYX_ERR(0, 125, __pyx_L1_error)
-    __pyx_t_28 = __Pyx_PyObject_Call(__pyx_t_34, __pyx_t_30, __pyx_t_35); if (unlikely(!__pyx_t_28)) __PYX_ERR(0, 125, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_35, __pyx_n_s_axis, __pyx_int_2) < 0) __PYX_ERR(0, 126, __pyx_L1_error)
+    __pyx_t_28 = __Pyx_PyObject_Call(__pyx_t_34, __pyx_t_30, __pyx_t_35); if (unlikely(!__pyx_t_28)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_28);
     __Pyx_DECREF(__pyx_t_34); __pyx_t_34 = 0;
     __Pyx_DECREF(__pyx_t_30); __pyx_t_30 = 0;
     __Pyx_DECREF(__pyx_t_35); __pyx_t_35 = 0;
-    __pyx_t_35 = __Pyx_PyObject_GetAttrStr(__pyx_t_28, __pyx_n_s_reshape); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 125, __pyx_L1_error)
+    __pyx_t_35 = __Pyx_PyObject_GetAttrStr(__pyx_t_28, __pyx_n_s_reshape); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_35);
     __Pyx_DECREF(__pyx_t_28); __pyx_t_28 = 0;
-    __pyx_t_28 = __Pyx_PyInt_From_long(((__pyx_v_nArm - 1) * __pyx_v_nStage)); if (unlikely(!__pyx_t_28)) __PYX_ERR(0, 125, __pyx_L1_error)
+    __pyx_t_28 = __Pyx_PyInt_From_long(((__pyx_v_nArm - 1) * __pyx_v_nStage)); if (unlikely(!__pyx_t_28)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_28);
     __pyx_t_30 = NULL;
     __pyx_t_7 = 0;
@@ -4265,7 +4267,7 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
         __pyx_t_7 = 1;
       }
     }
-    __pyx_t_34 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 125, __pyx_L1_error)
+    __pyx_t_34 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
     if (__pyx_t_30) {
       __Pyx_GIVEREF(__pyx_t_30); PyTuple_SET_ITEM(__pyx_t_34, 0, __pyx_t_30); __pyx_t_30 = NULL;
@@ -4276,7 +4278,7 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
     __Pyx_GIVEREF(__pyx_int_1);
     PyTuple_SET_ITEM(__pyx_t_34, 1+__pyx_t_7, __pyx_int_1);
     __pyx_t_28 = 0;
-    __pyx_t_27 = __Pyx_PyObject_Call(__pyx_t_35, __pyx_t_34, NULL); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 125, __pyx_L1_error)
+    __pyx_t_27 = __Pyx_PyObject_Call(__pyx_t_35, __pyx_t_34, NULL); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_27);
     __Pyx_DECREF(__pyx_t_34); __pyx_t_34 = 0;
     __Pyx_DECREF(__pyx_t_35); __pyx_t_35 = 0;
@@ -4292,7 +4294,7 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
         __pyx_t_7 = 1;
       }
     }
-    __pyx_t_34 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 125, __pyx_L1_error)
+    __pyx_t_34 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
     if (__pyx_t_35) {
       __Pyx_GIVEREF(__pyx_t_35); PyTuple_SET_ITEM(__pyx_t_34, 0, __pyx_t_35); __pyx_t_35 = NULL;
@@ -4303,23 +4305,23 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
     __Pyx_GIVEREF(__pyx_int_2);
     PyTuple_SET_ITEM(__pyx_t_34, 1+__pyx_t_7, __pyx_int_2);
     __pyx_t_27 = 0;
-    __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_37, __pyx_t_34, NULL); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 125, __pyx_L1_error)
+    __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_37, __pyx_t_34, NULL); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 126, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
     __Pyx_DECREF(__pyx_t_34); __pyx_t_34 = 0;
     __Pyx_DECREF(__pyx_t_37); __pyx_t_37 = 0;
     __pyx_v_con_sim_mean_copy = __pyx_t_29;
     __pyx_t_29 = 0;
 
-    /* "BATS/FixedTrial.pyx":126
+    /* "BATS/FixedTrial.pyx":127
  *         sys.stdout.write("Generate results...")
  *         con_sim_mean_copy = np.around(np.mean(sim_dataset[0:(nArm - 1), :, :], axis = 2).reshape((nArm - 1) * nStage, 1), 2)
  *         con_futile_mean_copy = con_futile_mean.reshape((nArm - 1) * nStage, 1)             # <<<<<<<<<<<<<<
  *         con_efficacy_mean_copy = con_efficacy_mean.reshape((nArm - 1)* nStage, 1)
  *         con_continuous_mean = 100 - con_futile_mean - con_efficacy_mean
  */
-    __pyx_t_37 = __Pyx_PyObject_GetAttrStr(__pyx_v_con_futile_mean, __pyx_n_s_reshape); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 126, __pyx_L1_error)
+    __pyx_t_37 = __Pyx_PyObject_GetAttrStr(__pyx_v_con_futile_mean, __pyx_n_s_reshape); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 127, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_37);
-    __pyx_t_34 = __Pyx_PyInt_From_long(((__pyx_v_nArm - 1) * __pyx_v_nStage)); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 126, __pyx_L1_error)
+    __pyx_t_34 = __Pyx_PyInt_From_long(((__pyx_v_nArm - 1) * __pyx_v_nStage)); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 127, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
     __pyx_t_27 = NULL;
     __pyx_t_7 = 0;
@@ -4333,7 +4335,7 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
         __pyx_t_7 = 1;
       }
     }
-    __pyx_t_35 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 126, __pyx_L1_error)
+    __pyx_t_35 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 127, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_35);
     if (__pyx_t_27) {
       __Pyx_GIVEREF(__pyx_t_27); PyTuple_SET_ITEM(__pyx_t_35, 0, __pyx_t_27); __pyx_t_27 = NULL;
@@ -4344,23 +4346,23 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
     __Pyx_GIVEREF(__pyx_int_1);
     PyTuple_SET_ITEM(__pyx_t_35, 1+__pyx_t_7, __pyx_int_1);
     __pyx_t_34 = 0;
-    __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_37, __pyx_t_35, NULL); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 126, __pyx_L1_error)
+    __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_37, __pyx_t_35, NULL); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 127, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
     __Pyx_DECREF(__pyx_t_35); __pyx_t_35 = 0;
     __Pyx_DECREF(__pyx_t_37); __pyx_t_37 = 0;
     __pyx_v_con_futile_mean_copy = __pyx_t_29;
     __pyx_t_29 = 0;
 
-    /* "BATS/FixedTrial.pyx":127
+    /* "BATS/FixedTrial.pyx":128
  *         con_sim_mean_copy = np.around(np.mean(sim_dataset[0:(nArm - 1), :, :], axis = 2).reshape((nArm - 1) * nStage, 1), 2)
  *         con_futile_mean_copy = con_futile_mean.reshape((nArm - 1) * nStage, 1)
  *         con_efficacy_mean_copy = con_efficacy_mean.reshape((nArm - 1)* nStage, 1)             # <<<<<<<<<<<<<<
  *         con_continuous_mean = 100 - con_futile_mean - con_efficacy_mean
  *         con_continuous_mean_copy = con_continuous_mean.reshape((nArm - 1)* nStage, 1)
  */
-    __pyx_t_37 = __Pyx_PyObject_GetAttrStr(__pyx_v_con_efficacy_mean, __pyx_n_s_reshape); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 127, __pyx_L1_error)
+    __pyx_t_37 = __Pyx_PyObject_GetAttrStr(__pyx_v_con_efficacy_mean, __pyx_n_s_reshape); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 128, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_37);
-    __pyx_t_35 = __Pyx_PyInt_From_long(((__pyx_v_nArm - 1) * __pyx_v_nStage)); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 127, __pyx_L1_error)
+    __pyx_t_35 = __Pyx_PyInt_From_long(((__pyx_v_nArm - 1) * __pyx_v_nStage)); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 128, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_35);
     __pyx_t_34 = NULL;
     __pyx_t_7 = 0;
@@ -4374,7 +4376,7 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
         __pyx_t_7 = 1;
       }
     }
-    __pyx_t_27 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 127, __pyx_L1_error)
+    __pyx_t_27 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 128, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_27);
     if (__pyx_t_34) {
       __Pyx_GIVEREF(__pyx_t_34); PyTuple_SET_ITEM(__pyx_t_27, 0, __pyx_t_34); __pyx_t_34 = NULL;
@@ -4385,38 +4387,38 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
     __Pyx_GIVEREF(__pyx_int_1);
     PyTuple_SET_ITEM(__pyx_t_27, 1+__pyx_t_7, __pyx_int_1);
     __pyx_t_35 = 0;
-    __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_37, __pyx_t_27, NULL); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 127, __pyx_L1_error)
+    __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_37, __pyx_t_27, NULL); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 128, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
     __Pyx_DECREF(__pyx_t_27); __pyx_t_27 = 0;
     __Pyx_DECREF(__pyx_t_37); __pyx_t_37 = 0;
     __pyx_v_con_efficacy_mean_copy = __pyx_t_29;
     __pyx_t_29 = 0;
 
-    /* "BATS/FixedTrial.pyx":128
+    /* "BATS/FixedTrial.pyx":129
  *         con_futile_mean_copy = con_futile_mean.reshape((nArm - 1) * nStage, 1)
  *         con_efficacy_mean_copy = con_efficacy_mean.reshape((nArm - 1)* nStage, 1)
  *         con_continuous_mean = 100 - con_futile_mean - con_efficacy_mean             # <<<<<<<<<<<<<<
  *         con_continuous_mean_copy = con_continuous_mean.reshape((nArm - 1)* nStage, 1)
  *         futile_mean_copy = futile_mean.reshape((nArm - 1) * nStage, 1)
  */
-    __pyx_t_29 = __Pyx_PyInt_SubtractCObj(__pyx_int_100, __pyx_v_con_futile_mean, 0x64, 0); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 128, __pyx_L1_error)
+    __pyx_t_29 = __Pyx_PyInt_SubtractCObj(__pyx_int_100, __pyx_v_con_futile_mean, 0x64, 0); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 129, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
-    __pyx_t_37 = PyNumber_Subtract(__pyx_t_29, __pyx_v_con_efficacy_mean); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 128, __pyx_L1_error)
+    __pyx_t_37 = PyNumber_Subtract(__pyx_t_29, __pyx_v_con_efficacy_mean); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 129, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_37);
     __Pyx_DECREF(__pyx_t_29); __pyx_t_29 = 0;
     __pyx_v_con_continuous_mean = __pyx_t_37;
     __pyx_t_37 = 0;
 
-    /* "BATS/FixedTrial.pyx":129
+    /* "BATS/FixedTrial.pyx":130
  *         con_efficacy_mean_copy = con_efficacy_mean.reshape((nArm - 1)* nStage, 1)
  *         con_continuous_mean = 100 - con_futile_mean - con_efficacy_mean
  *         con_continuous_mean_copy = con_continuous_mean.reshape((nArm - 1)* nStage, 1)             # <<<<<<<<<<<<<<
  *         futile_mean_copy = futile_mean.reshape((nArm - 1) * nStage, 1)
  *         efficacy_mean_copy = efficacy_mean.reshape((nArm - 1) * nStage, 1)
  */
-    __pyx_t_29 = __Pyx_PyObject_GetAttrStr(__pyx_v_con_continuous_mean, __pyx_n_s_reshape); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 129, __pyx_L1_error)
+    __pyx_t_29 = __Pyx_PyObject_GetAttrStr(__pyx_v_con_continuous_mean, __pyx_n_s_reshape); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 130, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
-    __pyx_t_27 = __Pyx_PyInt_From_long(((__pyx_v_nArm - 1) * __pyx_v_nStage)); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 129, __pyx_L1_error)
+    __pyx_t_27 = __Pyx_PyInt_From_long(((__pyx_v_nArm - 1) * __pyx_v_nStage)); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 130, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_27);
     __pyx_t_35 = NULL;
     __pyx_t_7 = 0;
@@ -4430,7 +4432,7 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
         __pyx_t_7 = 1;
       }
     }
-    __pyx_t_34 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 129, __pyx_L1_error)
+    __pyx_t_34 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 130, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
     if (__pyx_t_35) {
       __Pyx_GIVEREF(__pyx_t_35); PyTuple_SET_ITEM(__pyx_t_34, 0, __pyx_t_35); __pyx_t_35 = NULL;
@@ -4441,23 +4443,23 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
     __Pyx_GIVEREF(__pyx_int_1);
     PyTuple_SET_ITEM(__pyx_t_34, 1+__pyx_t_7, __pyx_int_1);
     __pyx_t_27 = 0;
-    __pyx_t_37 = __Pyx_PyObject_Call(__pyx_t_29, __pyx_t_34, NULL); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 129, __pyx_L1_error)
+    __pyx_t_37 = __Pyx_PyObject_Call(__pyx_t_29, __pyx_t_34, NULL); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 130, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_37);
     __Pyx_DECREF(__pyx_t_34); __pyx_t_34 = 0;
     __Pyx_DECREF(__pyx_t_29); __pyx_t_29 = 0;
     __pyx_v_con_continuous_mean_copy = __pyx_t_37;
     __pyx_t_37 = 0;
 
-    /* "BATS/FixedTrial.pyx":130
+    /* "BATS/FixedTrial.pyx":131
  *         con_continuous_mean = 100 - con_futile_mean - con_efficacy_mean
  *         con_continuous_mean_copy = con_continuous_mean.reshape((nArm - 1)* nStage, 1)
  *         futile_mean_copy = futile_mean.reshape((nArm - 1) * nStage, 1)             # <<<<<<<<<<<<<<
  *         efficacy_mean_copy = efficacy_mean.reshape((nArm - 1) * nStage, 1)
  *         continuous_mean = 100 - futile_mean - efficacy_mean
  */
-    __pyx_t_29 = __Pyx_PyObject_GetAttrStr(__pyx_v_futile_mean, __pyx_n_s_reshape); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 130, __pyx_L1_error)
+    __pyx_t_29 = __Pyx_PyObject_GetAttrStr(__pyx_v_futile_mean, __pyx_n_s_reshape); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 131, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
-    __pyx_t_34 = __Pyx_PyInt_From_long(((__pyx_v_nArm - 1) * __pyx_v_nStage)); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 130, __pyx_L1_error)
+    __pyx_t_34 = __Pyx_PyInt_From_long(((__pyx_v_nArm - 1) * __pyx_v_nStage)); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 131, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
     __pyx_t_27 = NULL;
     __pyx_t_7 = 0;
@@ -4471,7 +4473,7 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
         __pyx_t_7 = 1;
       }
     }
-    __pyx_t_35 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 130, __pyx_L1_error)
+    __pyx_t_35 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 131, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_35);
     if (__pyx_t_27) {
       __Pyx_GIVEREF(__pyx_t_27); PyTuple_SET_ITEM(__pyx_t_35, 0, __pyx_t_27); __pyx_t_27 = NULL;
@@ -4482,23 +4484,23 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
     __Pyx_GIVEREF(__pyx_int_1);
     PyTuple_SET_ITEM(__pyx_t_35, 1+__pyx_t_7, __pyx_int_1);
     __pyx_t_34 = 0;
-    __pyx_t_37 = __Pyx_PyObject_Call(__pyx_t_29, __pyx_t_35, NULL); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 130, __pyx_L1_error)
+    __pyx_t_37 = __Pyx_PyObject_Call(__pyx_t_29, __pyx_t_35, NULL); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 131, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_37);
     __Pyx_DECREF(__pyx_t_35); __pyx_t_35 = 0;
     __Pyx_DECREF(__pyx_t_29); __pyx_t_29 = 0;
     __pyx_v_futile_mean_copy = __pyx_t_37;
     __pyx_t_37 = 0;
 
-    /* "BATS/FixedTrial.pyx":131
+    /* "BATS/FixedTrial.pyx":132
  *         con_continuous_mean_copy = con_continuous_mean.reshape((nArm - 1)* nStage, 1)
  *         futile_mean_copy = futile_mean.reshape((nArm - 1) * nStage, 1)
  *         efficacy_mean_copy = efficacy_mean.reshape((nArm - 1) * nStage, 1)             # <<<<<<<<<<<<<<
  *         continuous_mean = 100 - futile_mean - efficacy_mean
  *         continuous_mean_copy = continuous_mean.reshape((nArm - 1) * nStage, 1)
  */
-    __pyx_t_29 = __Pyx_PyObject_GetAttrStr(__pyx_v_efficacy_mean, __pyx_n_s_reshape); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 131, __pyx_L1_error)
+    __pyx_t_29 = __Pyx_PyObject_GetAttrStr(__pyx_v_efficacy_mean, __pyx_n_s_reshape); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 132, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
-    __pyx_t_35 = __Pyx_PyInt_From_long(((__pyx_v_nArm - 1) * __pyx_v_nStage)); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 131, __pyx_L1_error)
+    __pyx_t_35 = __Pyx_PyInt_From_long(((__pyx_v_nArm - 1) * __pyx_v_nStage)); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 132, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_35);
     __pyx_t_34 = NULL;
     __pyx_t_7 = 0;
@@ -4512,7 +4514,7 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
         __pyx_t_7 = 1;
       }
     }
-    __pyx_t_27 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 131, __pyx_L1_error)
+    __pyx_t_27 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 132, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_27);
     if (__pyx_t_34) {
       __Pyx_GIVEREF(__pyx_t_34); PyTuple_SET_ITEM(__pyx_t_27, 0, __pyx_t_34); __pyx_t_34 = NULL;
@@ -4523,38 +4525,38 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
     __Pyx_GIVEREF(__pyx_int_1);
     PyTuple_SET_ITEM(__pyx_t_27, 1+__pyx_t_7, __pyx_int_1);
     __pyx_t_35 = 0;
-    __pyx_t_37 = __Pyx_PyObject_Call(__pyx_t_29, __pyx_t_27, NULL); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 131, __pyx_L1_error)
+    __pyx_t_37 = __Pyx_PyObject_Call(__pyx_t_29, __pyx_t_27, NULL); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 132, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_37);
     __Pyx_DECREF(__pyx_t_27); __pyx_t_27 = 0;
     __Pyx_DECREF(__pyx_t_29); __pyx_t_29 = 0;
     __pyx_v_efficacy_mean_copy = __pyx_t_37;
     __pyx_t_37 = 0;
 
-    /* "BATS/FixedTrial.pyx":132
+    /* "BATS/FixedTrial.pyx":133
  *         futile_mean_copy = futile_mean.reshape((nArm - 1) * nStage, 1)
  *         efficacy_mean_copy = efficacy_mean.reshape((nArm - 1) * nStage, 1)
  *         continuous_mean = 100 - futile_mean - efficacy_mean             # <<<<<<<<<<<<<<
  *         continuous_mean_copy = continuous_mean.reshape((nArm - 1) * nStage, 1)
  *         con_power_empty = np.empty(((nArm - 1), (nStage - 1)))
  */
-    __pyx_t_37 = __Pyx_PyInt_SubtractCObj(__pyx_int_100, __pyx_v_futile_mean, 0x64, 0); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 132, __pyx_L1_error)
+    __pyx_t_37 = __Pyx_PyInt_SubtractCObj(__pyx_int_100, __pyx_v_futile_mean, 0x64, 0); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 133, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_37);
-    __pyx_t_29 = PyNumber_Subtract(__pyx_t_37, __pyx_v_efficacy_mean); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 132, __pyx_L1_error)
+    __pyx_t_29 = PyNumber_Subtract(__pyx_t_37, __pyx_v_efficacy_mean); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 133, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
     __Pyx_DECREF(__pyx_t_37); __pyx_t_37 = 0;
     __pyx_v_continuous_mean = __pyx_t_29;
     __pyx_t_29 = 0;
 
-    /* "BATS/FixedTrial.pyx":133
+    /* "BATS/FixedTrial.pyx":134
  *         efficacy_mean_copy = efficacy_mean.reshape((nArm - 1) * nStage, 1)
  *         continuous_mean = 100 - futile_mean - efficacy_mean
  *         continuous_mean_copy = continuous_mean.reshape((nArm - 1) * nStage, 1)             # <<<<<<<<<<<<<<
  *         con_power_empty = np.empty(((nArm - 1), (nStage - 1)))
  *         con_power_empty[:] = np.NaN
  */
-    __pyx_t_37 = __Pyx_PyObject_GetAttrStr(__pyx_v_continuous_mean, __pyx_n_s_reshape); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 133, __pyx_L1_error)
+    __pyx_t_37 = __Pyx_PyObject_GetAttrStr(__pyx_v_continuous_mean, __pyx_n_s_reshape); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 134, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_37);
-    __pyx_t_27 = __Pyx_PyInt_From_long(((__pyx_v_nArm - 1) * __pyx_v_nStage)); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 133, __pyx_L1_error)
+    __pyx_t_27 = __Pyx_PyInt_From_long(((__pyx_v_nArm - 1) * __pyx_v_nStage)); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 134, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_27);
     __pyx_t_35 = NULL;
     __pyx_t_7 = 0;
@@ -4568,7 +4570,7 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
         __pyx_t_7 = 1;
       }
     }
-    __pyx_t_34 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 133, __pyx_L1_error)
+    __pyx_t_34 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 134, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
     if (__pyx_t_35) {
       __Pyx_GIVEREF(__pyx_t_35); PyTuple_SET_ITEM(__pyx_t_34, 0, __pyx_t_35); __pyx_t_35 = NULL;
@@ -4579,30 +4581,30 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
     __Pyx_GIVEREF(__pyx_int_1);
     PyTuple_SET_ITEM(__pyx_t_34, 1+__pyx_t_7, __pyx_int_1);
     __pyx_t_27 = 0;
-    __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_37, __pyx_t_34, NULL); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 133, __pyx_L1_error)
+    __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_37, __pyx_t_34, NULL); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 134, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
     __Pyx_DECREF(__pyx_t_34); __pyx_t_34 = 0;
     __Pyx_DECREF(__pyx_t_37); __pyx_t_37 = 0;
     __pyx_v_continuous_mean_copy = __pyx_t_29;
     __pyx_t_29 = 0;
 
-    /* "BATS/FixedTrial.pyx":134
+    /* "BATS/FixedTrial.pyx":135
  *         continuous_mean = 100 - futile_mean - efficacy_mean
  *         continuous_mean_copy = continuous_mean.reshape((nArm - 1) * nStage, 1)
  *         con_power_empty = np.empty(((nArm - 1), (nStage - 1)))             # <<<<<<<<<<<<<<
  *         con_power_empty[:] = np.NaN
  *         con_power = np.sum(cpower_array, axis = 1)/nsim * 100
  */
-    __pyx_t_37 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 134, __pyx_L1_error)
+    __pyx_t_37 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 135, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_37);
-    __pyx_t_34 = __Pyx_PyObject_GetAttrStr(__pyx_t_37, __pyx_n_s_empty); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 134, __pyx_L1_error)
+    __pyx_t_34 = __Pyx_PyObject_GetAttrStr(__pyx_t_37, __pyx_n_s_empty); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 135, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
     __Pyx_DECREF(__pyx_t_37); __pyx_t_37 = 0;
-    __pyx_t_37 = __Pyx_PyInt_From_long((__pyx_v_nArm - 1)); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 134, __pyx_L1_error)
+    __pyx_t_37 = __Pyx_PyInt_From_long((__pyx_v_nArm - 1)); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 135, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_37);
-    __pyx_t_27 = __Pyx_PyInt_From_long((__pyx_v_nStage - 1)); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 134, __pyx_L1_error)
+    __pyx_t_27 = __Pyx_PyInt_From_long((__pyx_v_nStage - 1)); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 135, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_27);
-    __pyx_t_35 = PyTuple_New(2); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 134, __pyx_L1_error)
+    __pyx_t_35 = PyTuple_New(2); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 135, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_35);
     __Pyx_GIVEREF(__pyx_t_37);
     PyTuple_SET_ITEM(__pyx_t_35, 0, __pyx_t_37);
@@ -4621,17 +4623,17 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
       }
     }
     if (!__pyx_t_27) {
-      __pyx_t_29 = __Pyx_PyObject_CallOneArg(__pyx_t_34, __pyx_t_35); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 134, __pyx_L1_error)
+      __pyx_t_29 = __Pyx_PyObject_CallOneArg(__pyx_t_34, __pyx_t_35); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 135, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_35); __pyx_t_35 = 0;
       __Pyx_GOTREF(__pyx_t_29);
     } else {
-      __pyx_t_37 = PyTuple_New(1+1); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 134, __pyx_L1_error)
+      __pyx_t_37 = PyTuple_New(1+1); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 135, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_37);
       __Pyx_GIVEREF(__pyx_t_27); PyTuple_SET_ITEM(__pyx_t_37, 0, __pyx_t_27); __pyx_t_27 = NULL;
       __Pyx_GIVEREF(__pyx_t_35);
       PyTuple_SET_ITEM(__pyx_t_37, 0+1, __pyx_t_35);
       __pyx_t_35 = 0;
-      __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_34, __pyx_t_37, NULL); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 134, __pyx_L1_error)
+      __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_34, __pyx_t_37, NULL); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 135, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_29);
       __Pyx_DECREF(__pyx_t_37); __pyx_t_37 = 0;
     }
@@ -4639,58 +4641,58 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
     __pyx_v_con_power_empty = __pyx_t_29;
     __pyx_t_29 = 0;
 
-    /* "BATS/FixedTrial.pyx":135
+    /* "BATS/FixedTrial.pyx":136
  *         continuous_mean_copy = continuous_mean.reshape((nArm - 1) * nStage, 1)
  *         con_power_empty = np.empty(((nArm - 1), (nStage - 1)))
  *         con_power_empty[:] = np.NaN             # <<<<<<<<<<<<<<
  *         con_power = np.sum(cpower_array, axis = 1)/nsim * 100
  *         con_power_copy = np.concatenate((con_power_empty, con_power.reshape((nArm - 1), 1)), axis = 1).reshape((nArm - 1) * nStage, 1)
  */
-    __pyx_t_29 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 135, __pyx_L1_error)
+    __pyx_t_29 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 136, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
-    __pyx_t_34 = __Pyx_PyObject_GetAttrStr(__pyx_t_29, __pyx_n_s_NaN); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 135, __pyx_L1_error)
+    __pyx_t_34 = __Pyx_PyObject_GetAttrStr(__pyx_t_29, __pyx_n_s_NaN); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 136, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
     __Pyx_DECREF(__pyx_t_29); __pyx_t_29 = 0;
-    if (__Pyx_PyObject_SetSlice(__pyx_v_con_power_empty, __pyx_t_34, 0, 0, NULL, NULL, &__pyx_slice__8, 0, 0, 0) < 0) __PYX_ERR(0, 135, __pyx_L1_error)
+    if (__Pyx_PyObject_SetSlice(__pyx_v_con_power_empty, __pyx_t_34, 0, 0, NULL, NULL, &__pyx_slice__8, 0, 0, 0) < 0) __PYX_ERR(0, 136, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_34); __pyx_t_34 = 0;
 
-    /* "BATS/FixedTrial.pyx":136
+    /* "BATS/FixedTrial.pyx":137
  *         con_power_empty = np.empty(((nArm - 1), (nStage - 1)))
  *         con_power_empty[:] = np.NaN
  *         con_power = np.sum(cpower_array, axis = 1)/nsim * 100             # <<<<<<<<<<<<<<
  *         con_power_copy = np.concatenate((con_power_empty, con_power.reshape((nArm - 1), 1)), axis = 1).reshape((nArm - 1) * nStage, 1)
  *         final_copy = np.concatenate((con_sim_mean_copy, con_futile_mean_copy, con_efficacy_mean_copy,
  */
-    __pyx_t_34 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 136, __pyx_L1_error)
+    __pyx_t_34 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 137, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
-    __pyx_t_29 = __Pyx_PyObject_GetAttrStr(__pyx_t_34, __pyx_n_s_sum); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 136, __pyx_L1_error)
+    __pyx_t_29 = __Pyx_PyObject_GetAttrStr(__pyx_t_34, __pyx_n_s_sum); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 137, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
     __Pyx_DECREF(__pyx_t_34); __pyx_t_34 = 0;
-    __pyx_t_34 = __pyx_memoryview_fromslice(__pyx_v_cpower_array, 2, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 136, __pyx_L1_error)
+    __pyx_t_34 = __pyx_memoryview_fromslice(__pyx_v_cpower_array, 2, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 137, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
-    __pyx_t_37 = PyTuple_New(1); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 136, __pyx_L1_error)
+    __pyx_t_37 = PyTuple_New(1); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 137, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_37);
     __Pyx_GIVEREF(__pyx_t_34);
     PyTuple_SET_ITEM(__pyx_t_37, 0, __pyx_t_34);
     __pyx_t_34 = 0;
-    __pyx_t_34 = PyDict_New(); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 136, __pyx_L1_error)
+    __pyx_t_34 = PyDict_New(); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 137, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
-    if (PyDict_SetItem(__pyx_t_34, __pyx_n_s_axis, __pyx_int_1) < 0) __PYX_ERR(0, 136, __pyx_L1_error)
-    __pyx_t_35 = __Pyx_PyObject_Call(__pyx_t_29, __pyx_t_37, __pyx_t_34); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 136, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_34, __pyx_n_s_axis, __pyx_int_1) < 0) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_35 = __Pyx_PyObject_Call(__pyx_t_29, __pyx_t_37, __pyx_t_34); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 137, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_35);
     __Pyx_DECREF(__pyx_t_29); __pyx_t_29 = 0;
     __Pyx_DECREF(__pyx_t_37); __pyx_t_37 = 0;
     __Pyx_DECREF(__pyx_t_34); __pyx_t_34 = 0;
-    __pyx_t_34 = __Pyx_PyInt_From_int(__pyx_v_nsim); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 136, __pyx_L1_error)
+    __pyx_t_34 = __Pyx_PyInt_From_int(__pyx_v_nsim); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 137, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
-    __pyx_t_37 = __Pyx_PyNumber_Divide(__pyx_t_35, __pyx_t_34); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 136, __pyx_L1_error)
+    __pyx_t_37 = __Pyx_PyNumber_Divide(__pyx_t_35, __pyx_t_34); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 137, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_37);
     __Pyx_DECREF(__pyx_t_35); __pyx_t_35 = 0;
     __Pyx_DECREF(__pyx_t_34); __pyx_t_34 = 0;
-    __pyx_t_34 = PyNumber_Multiply(__pyx_t_37, __pyx_int_100); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 136, __pyx_L1_error)
+    __pyx_t_34 = PyNumber_Multiply(__pyx_t_37, __pyx_int_100); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 137, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
     __Pyx_DECREF(__pyx_t_37); __pyx_t_37 = 0;
-    if (!(likely(((__pyx_t_34) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_34, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 136, __pyx_L1_error)
+    if (!(likely(((__pyx_t_34) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_34, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 137, __pyx_L1_error)
     __pyx_t_33 = ((PyArrayObject *)__pyx_t_34);
     {
       __Pyx_BufFmt_StackElem __pyx_stack[1];
@@ -4706,27 +4708,27 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
         }
       }
       __pyx_pybuffernd_con_power.diminfo[0].strides = __pyx_pybuffernd_con_power.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_con_power.diminfo[0].shape = __pyx_pybuffernd_con_power.rcbuffer->pybuffer.shape[0];
-      if (unlikely(__pyx_t_20 < 0)) __PYX_ERR(0, 136, __pyx_L1_error)
+      if (unlikely(__pyx_t_20 < 0)) __PYX_ERR(0, 137, __pyx_L1_error)
     }
     __pyx_t_33 = 0;
     __Pyx_DECREF_SET(__pyx_v_con_power, ((PyArrayObject *)__pyx_t_34));
     __pyx_t_34 = 0;
 
-    /* "BATS/FixedTrial.pyx":137
+    /* "BATS/FixedTrial.pyx":138
  *         con_power_empty[:] = np.NaN
  *         con_power = np.sum(cpower_array, axis = 1)/nsim * 100
  *         con_power_copy = np.concatenate((con_power_empty, con_power.reshape((nArm - 1), 1)), axis = 1).reshape((nArm - 1) * nStage, 1)             # <<<<<<<<<<<<<<
  *         final_copy = np.concatenate((con_sim_mean_copy, con_futile_mean_copy, con_efficacy_mean_copy,
  *                                      con_continuous_mean_copy, futile_mean_copy, efficacy_mean_copy,
  */
-    __pyx_t_37 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_37 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 138, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_37);
-    __pyx_t_35 = __Pyx_PyObject_GetAttrStr(__pyx_t_37, __pyx_n_s_concatenate); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_35 = __Pyx_PyObject_GetAttrStr(__pyx_t_37, __pyx_n_s_concatenate); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 138, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_35);
     __Pyx_DECREF(__pyx_t_37); __pyx_t_37 = 0;
-    __pyx_t_29 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_con_power), __pyx_n_s_reshape); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_29 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_con_power), __pyx_n_s_reshape); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 138, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
-    __pyx_t_27 = __Pyx_PyInt_From_long((__pyx_v_nArm - 1)); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_27 = __Pyx_PyInt_From_long((__pyx_v_nArm - 1)); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 138, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_27);
     __pyx_t_28 = NULL;
     __pyx_t_7 = 0;
@@ -4740,7 +4742,7 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
         __pyx_t_7 = 1;
       }
     }
-    __pyx_t_30 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_30 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 138, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_30);
     if (__pyx_t_28) {
       __Pyx_GIVEREF(__pyx_t_28); PyTuple_SET_ITEM(__pyx_t_30, 0, __pyx_t_28); __pyx_t_28 = NULL;
@@ -4751,11 +4753,11 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
     __Pyx_GIVEREF(__pyx_int_1);
     PyTuple_SET_ITEM(__pyx_t_30, 1+__pyx_t_7, __pyx_int_1);
     __pyx_t_27 = 0;
-    __pyx_t_37 = __Pyx_PyObject_Call(__pyx_t_29, __pyx_t_30, NULL); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_37 = __Pyx_PyObject_Call(__pyx_t_29, __pyx_t_30, NULL); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 138, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_37);
     __Pyx_DECREF(__pyx_t_30); __pyx_t_30 = 0;
     __Pyx_DECREF(__pyx_t_29); __pyx_t_29 = 0;
-    __pyx_t_29 = PyTuple_New(2); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_29 = PyTuple_New(2); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 138, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
     __Pyx_INCREF(__pyx_v_con_power_empty);
     __Pyx_GIVEREF(__pyx_v_con_power_empty);
@@ -4763,23 +4765,23 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
     __Pyx_GIVEREF(__pyx_t_37);
     PyTuple_SET_ITEM(__pyx_t_29, 1, __pyx_t_37);
     __pyx_t_37 = 0;
-    __pyx_t_37 = PyTuple_New(1); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_37 = PyTuple_New(1); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 138, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_37);
     __Pyx_GIVEREF(__pyx_t_29);
     PyTuple_SET_ITEM(__pyx_t_37, 0, __pyx_t_29);
     __pyx_t_29 = 0;
-    __pyx_t_29 = PyDict_New(); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_29 = PyDict_New(); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 138, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
-    if (PyDict_SetItem(__pyx_t_29, __pyx_n_s_axis, __pyx_int_1) < 0) __PYX_ERR(0, 137, __pyx_L1_error)
-    __pyx_t_30 = __Pyx_PyObject_Call(__pyx_t_35, __pyx_t_37, __pyx_t_29); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 137, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_29, __pyx_n_s_axis, __pyx_int_1) < 0) __PYX_ERR(0, 138, __pyx_L1_error)
+    __pyx_t_30 = __Pyx_PyObject_Call(__pyx_t_35, __pyx_t_37, __pyx_t_29); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 138, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_30);
     __Pyx_DECREF(__pyx_t_35); __pyx_t_35 = 0;
     __Pyx_DECREF(__pyx_t_37); __pyx_t_37 = 0;
     __Pyx_DECREF(__pyx_t_29); __pyx_t_29 = 0;
-    __pyx_t_29 = __Pyx_PyObject_GetAttrStr(__pyx_t_30, __pyx_n_s_reshape); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_29 = __Pyx_PyObject_GetAttrStr(__pyx_t_30, __pyx_n_s_reshape); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 138, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
     __Pyx_DECREF(__pyx_t_30); __pyx_t_30 = 0;
-    __pyx_t_30 = __Pyx_PyInt_From_long(((__pyx_v_nArm - 1) * __pyx_v_nStage)); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_30 = __Pyx_PyInt_From_long(((__pyx_v_nArm - 1) * __pyx_v_nStage)); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 138, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_30);
     __pyx_t_37 = NULL;
     __pyx_t_7 = 0;
@@ -4793,7 +4795,7 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
         __pyx_t_7 = 1;
       }
     }
-    __pyx_t_35 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_35 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 138, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_35);
     if (__pyx_t_37) {
       __Pyx_GIVEREF(__pyx_t_37); PyTuple_SET_ITEM(__pyx_t_35, 0, __pyx_t_37); __pyx_t_37 = NULL;
@@ -4804,34 +4806,34 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
     __Pyx_GIVEREF(__pyx_int_1);
     PyTuple_SET_ITEM(__pyx_t_35, 1+__pyx_t_7, __pyx_int_1);
     __pyx_t_30 = 0;
-    __pyx_t_34 = __Pyx_PyObject_Call(__pyx_t_29, __pyx_t_35, NULL); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_34 = __Pyx_PyObject_Call(__pyx_t_29, __pyx_t_35, NULL); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 138, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
     __Pyx_DECREF(__pyx_t_35); __pyx_t_35 = 0;
     __Pyx_DECREF(__pyx_t_29); __pyx_t_29 = 0;
     __pyx_v_con_power_copy = __pyx_t_34;
     __pyx_t_34 = 0;
 
-    /* "BATS/FixedTrial.pyx":138
+    /* "BATS/FixedTrial.pyx":139
  *         con_power = np.sum(cpower_array, axis = 1)/nsim * 100
  *         con_power_copy = np.concatenate((con_power_empty, con_power.reshape((nArm - 1), 1)), axis = 1).reshape((nArm - 1) * nStage, 1)
  *         final_copy = np.concatenate((con_sim_mean_copy, con_futile_mean_copy, con_efficacy_mean_copy,             # <<<<<<<<<<<<<<
  *                                      con_continuous_mean_copy, futile_mean_copy, efficacy_mean_copy,
  *                                      continuous_mean_copy, con_power_copy), axis = 1)
  */
-    __pyx_t_34 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 138, __pyx_L1_error)
+    __pyx_t_34 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 139, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
-    __pyx_t_29 = __Pyx_PyObject_GetAttrStr(__pyx_t_34, __pyx_n_s_concatenate); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 138, __pyx_L1_error)
+    __pyx_t_29 = __Pyx_PyObject_GetAttrStr(__pyx_t_34, __pyx_n_s_concatenate); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 139, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
     __Pyx_DECREF(__pyx_t_34); __pyx_t_34 = 0;
 
-    /* "BATS/FixedTrial.pyx":140
+    /* "BATS/FixedTrial.pyx":141
  *         final_copy = np.concatenate((con_sim_mean_copy, con_futile_mean_copy, con_efficacy_mean_copy,
  *                                      con_continuous_mean_copy, futile_mean_copy, efficacy_mean_copy,
  *                                      continuous_mean_copy, con_power_copy), axis = 1)             # <<<<<<<<<<<<<<
  *         final_copy = np.around(final_copy, decimals = 2)
  *         final_df_index = [range(1, nArm), range(1, nStage + 1)]
  */
-    __pyx_t_34 = PyTuple_New(8); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 138, __pyx_L1_error)
+    __pyx_t_34 = PyTuple_New(8); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 139, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
     __Pyx_INCREF(__pyx_v_con_sim_mean_copy);
     __Pyx_GIVEREF(__pyx_v_con_sim_mean_copy);
@@ -4858,38 +4860,38 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
     __Pyx_GIVEREF(__pyx_v_con_power_copy);
     PyTuple_SET_ITEM(__pyx_t_34, 7, __pyx_v_con_power_copy);
 
-    /* "BATS/FixedTrial.pyx":138
+    /* "BATS/FixedTrial.pyx":139
  *         con_power = np.sum(cpower_array, axis = 1)/nsim * 100
  *         con_power_copy = np.concatenate((con_power_empty, con_power.reshape((nArm - 1), 1)), axis = 1).reshape((nArm - 1) * nStage, 1)
  *         final_copy = np.concatenate((con_sim_mean_copy, con_futile_mean_copy, con_efficacy_mean_copy,             # <<<<<<<<<<<<<<
  *                                      con_continuous_mean_copy, futile_mean_copy, efficacy_mean_copy,
  *                                      continuous_mean_copy, con_power_copy), axis = 1)
  */
-    __pyx_t_35 = PyTuple_New(1); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 138, __pyx_L1_error)
+    __pyx_t_35 = PyTuple_New(1); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 139, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_35);
     __Pyx_GIVEREF(__pyx_t_34);
     PyTuple_SET_ITEM(__pyx_t_35, 0, __pyx_t_34);
     __pyx_t_34 = 0;
 
-    /* "BATS/FixedTrial.pyx":140
+    /* "BATS/FixedTrial.pyx":141
  *         final_copy = np.concatenate((con_sim_mean_copy, con_futile_mean_copy, con_efficacy_mean_copy,
  *                                      con_continuous_mean_copy, futile_mean_copy, efficacy_mean_copy,
  *                                      continuous_mean_copy, con_power_copy), axis = 1)             # <<<<<<<<<<<<<<
  *         final_copy = np.around(final_copy, decimals = 2)
  *         final_df_index = [range(1, nArm), range(1, nStage + 1)]
  */
-    __pyx_t_34 = PyDict_New(); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 140, __pyx_L1_error)
+    __pyx_t_34 = PyDict_New(); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 141, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
-    if (PyDict_SetItem(__pyx_t_34, __pyx_n_s_axis, __pyx_int_1) < 0) __PYX_ERR(0, 140, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_34, __pyx_n_s_axis, __pyx_int_1) < 0) __PYX_ERR(0, 141, __pyx_L1_error)
 
-    /* "BATS/FixedTrial.pyx":138
+    /* "BATS/FixedTrial.pyx":139
  *         con_power = np.sum(cpower_array, axis = 1)/nsim * 100
  *         con_power_copy = np.concatenate((con_power_empty, con_power.reshape((nArm - 1), 1)), axis = 1).reshape((nArm - 1) * nStage, 1)
  *         final_copy = np.concatenate((con_sim_mean_copy, con_futile_mean_copy, con_efficacy_mean_copy,             # <<<<<<<<<<<<<<
  *                                      con_continuous_mean_copy, futile_mean_copy, efficacy_mean_copy,
  *                                      continuous_mean_copy, con_power_copy), axis = 1)
  */
-    __pyx_t_30 = __Pyx_PyObject_Call(__pyx_t_29, __pyx_t_35, __pyx_t_34); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 138, __pyx_L1_error)
+    __pyx_t_30 = __Pyx_PyObject_Call(__pyx_t_29, __pyx_t_35, __pyx_t_34); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 139, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_30);
     __Pyx_DECREF(__pyx_t_29); __pyx_t_29 = 0;
     __Pyx_DECREF(__pyx_t_35); __pyx_t_35 = 0;
@@ -4897,27 +4899,27 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
     __pyx_v_final_copy = __pyx_t_30;
     __pyx_t_30 = 0;
 
-    /* "BATS/FixedTrial.pyx":141
+    /* "BATS/FixedTrial.pyx":142
  *                                      con_continuous_mean_copy, futile_mean_copy, efficacy_mean_copy,
  *                                      continuous_mean_copy, con_power_copy), axis = 1)
  *         final_copy = np.around(final_copy, decimals = 2)             # <<<<<<<<<<<<<<
  *         final_df_index = [range(1, nArm), range(1, nStage + 1)]
  *         resultHeader = ["Average Success", "Conditional Futility(%)", "Conditional Efficacy(%)", "Conditional Continuous(%)",
  */
-    __pyx_t_30 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 141, __pyx_L1_error)
+    __pyx_t_30 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 142, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_30);
-    __pyx_t_34 = __Pyx_PyObject_GetAttrStr(__pyx_t_30, __pyx_n_s_around); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 141, __pyx_L1_error)
+    __pyx_t_34 = __Pyx_PyObject_GetAttrStr(__pyx_t_30, __pyx_n_s_around); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 142, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
     __Pyx_DECREF(__pyx_t_30); __pyx_t_30 = 0;
-    __pyx_t_30 = PyTuple_New(1); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 141, __pyx_L1_error)
+    __pyx_t_30 = PyTuple_New(1); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 142, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_30);
     __Pyx_INCREF(__pyx_v_final_copy);
     __Pyx_GIVEREF(__pyx_v_final_copy);
     PyTuple_SET_ITEM(__pyx_t_30, 0, __pyx_v_final_copy);
-    __pyx_t_35 = PyDict_New(); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 141, __pyx_L1_error)
+    __pyx_t_35 = PyDict_New(); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 142, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_35);
-    if (PyDict_SetItem(__pyx_t_35, __pyx_n_s_decimals, __pyx_int_2) < 0) __PYX_ERR(0, 141, __pyx_L1_error)
-    __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_34, __pyx_t_30, __pyx_t_35); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 141, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_35, __pyx_n_s_decimals, __pyx_int_2) < 0) __PYX_ERR(0, 142, __pyx_L1_error)
+    __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_34, __pyx_t_30, __pyx_t_35); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 142, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
     __Pyx_DECREF(__pyx_t_34); __pyx_t_34 = 0;
     __Pyx_DECREF(__pyx_t_30); __pyx_t_30 = 0;
@@ -4925,16 +4927,16 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
     __Pyx_DECREF_SET(__pyx_v_final_copy, __pyx_t_29);
     __pyx_t_29 = 0;
 
-    /* "BATS/FixedTrial.pyx":142
+    /* "BATS/FixedTrial.pyx":143
  *                                      continuous_mean_copy, con_power_copy), axis = 1)
  *         final_copy = np.around(final_copy, decimals = 2)
  *         final_df_index = [range(1, nArm), range(1, nStage + 1)]             # <<<<<<<<<<<<<<
  *         resultHeader = ["Average Success", "Conditional Futility(%)", "Conditional Efficacy(%)", "Conditional Continuous(%)",
  *                         "Unconditional Futility(%)", "Unconditional Efficacy(%)", "Unconditional Continuous(%)",
  */
-    __pyx_t_29 = __Pyx_PyInt_From_int(__pyx_v_nArm); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 142, __pyx_L1_error)
+    __pyx_t_29 = __Pyx_PyInt_From_int(__pyx_v_nArm); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 143, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
-    __pyx_t_35 = PyTuple_New(2); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 142, __pyx_L1_error)
+    __pyx_t_35 = PyTuple_New(2); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 143, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_35);
     __Pyx_INCREF(__pyx_int_1);
     __Pyx_GIVEREF(__pyx_int_1);
@@ -4942,12 +4944,12 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
     __Pyx_GIVEREF(__pyx_t_29);
     PyTuple_SET_ITEM(__pyx_t_35, 1, __pyx_t_29);
     __pyx_t_29 = 0;
-    __pyx_t_29 = __Pyx_PyObject_Call(__pyx_builtin_range, __pyx_t_35, NULL); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 142, __pyx_L1_error)
+    __pyx_t_29 = __Pyx_PyObject_Call(__pyx_builtin_range, __pyx_t_35, NULL); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 143, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
     __Pyx_DECREF(__pyx_t_35); __pyx_t_35 = 0;
-    __pyx_t_35 = __Pyx_PyInt_From_long((__pyx_v_nStage + 1)); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 142, __pyx_L1_error)
+    __pyx_t_35 = __Pyx_PyInt_From_long((__pyx_v_nStage + 1)); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 143, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_35);
-    __pyx_t_30 = PyTuple_New(2); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 142, __pyx_L1_error)
+    __pyx_t_30 = PyTuple_New(2); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 143, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_30);
     __Pyx_INCREF(__pyx_int_1);
     __Pyx_GIVEREF(__pyx_int_1);
@@ -4955,10 +4957,10 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
     __Pyx_GIVEREF(__pyx_t_35);
     PyTuple_SET_ITEM(__pyx_t_30, 1, __pyx_t_35);
     __pyx_t_35 = 0;
-    __pyx_t_35 = __Pyx_PyObject_Call(__pyx_builtin_range, __pyx_t_30, NULL); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 142, __pyx_L1_error)
+    __pyx_t_35 = __Pyx_PyObject_Call(__pyx_builtin_range, __pyx_t_30, NULL); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 143, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_35);
     __Pyx_DECREF(__pyx_t_30); __pyx_t_30 = 0;
-    __pyx_t_30 = PyList_New(2); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 142, __pyx_L1_error)
+    __pyx_t_30 = PyList_New(2); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 143, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_30);
     __Pyx_GIVEREF(__pyx_t_29);
     PyList_SET_ITEM(__pyx_t_30, 0, __pyx_t_29);
@@ -4969,14 +4971,14 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
     __pyx_v_final_df_index = ((PyObject*)__pyx_t_30);
     __pyx_t_30 = 0;
 
-    /* "BATS/FixedTrial.pyx":143
+    /* "BATS/FixedTrial.pyx":144
  *         final_copy = np.around(final_copy, decimals = 2)
  *         final_df_index = [range(1, nArm), range(1, nStage + 1)]
  *         resultHeader = ["Average Success", "Conditional Futility(%)", "Conditional Efficacy(%)", "Conditional Continuous(%)",             # <<<<<<<<<<<<<<
  *                         "Unconditional Futility(%)", "Unconditional Efficacy(%)", "Unconditional Continuous(%)",
  *                         "Predictive Probability(%)"]
  */
-    __pyx_t_30 = PyList_New(8); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 143, __pyx_L1_error)
+    __pyx_t_30 = PyList_New(8); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 144, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_30);
     __Pyx_INCREF(__pyx_kp_s_Average_Success);
     __Pyx_GIVEREF(__pyx_kp_s_Average_Success);
@@ -5005,41 +5007,41 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
     __pyx_v_resultHeader = ((PyObject*)__pyx_t_30);
     __pyx_t_30 = 0;
 
-    /* "BATS/FixedTrial.pyx":146
+    /* "BATS/FixedTrial.pyx":147
  *                         "Unconditional Futility(%)", "Unconditional Efficacy(%)", "Unconditional Continuous(%)",
  *                         "Predictive Probability(%)"]
  *         final_df = pd.DataFrame(final_copy, index=pd.MultiIndex.from_product(final_df_index, names=["Treatment Arm", "Stage"]), columns=resultHeader).sort_index()             # <<<<<<<<<<<<<<
  *         final_df.to_csv(pathdir + "FinalResult.csv")
  * 
  */
-    __pyx_t_35 = __Pyx_GetModuleGlobalName(__pyx_n_s_pd); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 146, __pyx_L1_error)
+    __pyx_t_35 = __Pyx_GetModuleGlobalName(__pyx_n_s_pd); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 147, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_35);
-    __pyx_t_29 = __Pyx_PyObject_GetAttrStr(__pyx_t_35, __pyx_n_s_DataFrame); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 146, __pyx_L1_error)
+    __pyx_t_29 = __Pyx_PyObject_GetAttrStr(__pyx_t_35, __pyx_n_s_DataFrame); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 147, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
     __Pyx_DECREF(__pyx_t_35); __pyx_t_35 = 0;
-    __pyx_t_35 = PyTuple_New(1); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 146, __pyx_L1_error)
+    __pyx_t_35 = PyTuple_New(1); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 147, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_35);
     __Pyx_INCREF(__pyx_v_final_copy);
     __Pyx_GIVEREF(__pyx_v_final_copy);
     PyTuple_SET_ITEM(__pyx_t_35, 0, __pyx_v_final_copy);
-    __pyx_t_34 = PyDict_New(); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 146, __pyx_L1_error)
+    __pyx_t_34 = PyDict_New(); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 147, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
-    __pyx_t_37 = __Pyx_GetModuleGlobalName(__pyx_n_s_pd); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 146, __pyx_L1_error)
+    __pyx_t_37 = __Pyx_GetModuleGlobalName(__pyx_n_s_pd); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 147, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_37);
-    __pyx_t_27 = __Pyx_PyObject_GetAttrStr(__pyx_t_37, __pyx_n_s_MultiIndex); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 146, __pyx_L1_error)
+    __pyx_t_27 = __Pyx_PyObject_GetAttrStr(__pyx_t_37, __pyx_n_s_MultiIndex); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 147, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_27);
     __Pyx_DECREF(__pyx_t_37); __pyx_t_37 = 0;
-    __pyx_t_37 = __Pyx_PyObject_GetAttrStr(__pyx_t_27, __pyx_n_s_from_product); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 146, __pyx_L1_error)
+    __pyx_t_37 = __Pyx_PyObject_GetAttrStr(__pyx_t_27, __pyx_n_s_from_product); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 147, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_37);
     __Pyx_DECREF(__pyx_t_27); __pyx_t_27 = 0;
-    __pyx_t_27 = PyTuple_New(1); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 146, __pyx_L1_error)
+    __pyx_t_27 = PyTuple_New(1); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 147, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_27);
     __Pyx_INCREF(__pyx_v_final_df_index);
     __Pyx_GIVEREF(__pyx_v_final_df_index);
     PyTuple_SET_ITEM(__pyx_t_27, 0, __pyx_v_final_df_index);
-    __pyx_t_28 = PyDict_New(); if (unlikely(!__pyx_t_28)) __PYX_ERR(0, 146, __pyx_L1_error)
+    __pyx_t_28 = PyDict_New(); if (unlikely(!__pyx_t_28)) __PYX_ERR(0, 147, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_28);
-    __pyx_t_1 = PyList_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 146, __pyx_L1_error)
+    __pyx_t_1 = PyList_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 147, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_INCREF(__pyx_kp_s_Treatment_Arm);
     __Pyx_GIVEREF(__pyx_kp_s_Treatment_Arm);
@@ -5047,22 +5049,22 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
     __Pyx_INCREF(__pyx_n_s_Stage);
     __Pyx_GIVEREF(__pyx_n_s_Stage);
     PyList_SET_ITEM(__pyx_t_1, 1, __pyx_n_s_Stage);
-    if (PyDict_SetItem(__pyx_t_28, __pyx_n_s_names, __pyx_t_1) < 0) __PYX_ERR(0, 146, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_28, __pyx_n_s_names, __pyx_t_1) < 0) __PYX_ERR(0, 147, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_37, __pyx_t_27, __pyx_t_28); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 146, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_37, __pyx_t_27, __pyx_t_28); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 147, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_37); __pyx_t_37 = 0;
     __Pyx_DECREF(__pyx_t_27); __pyx_t_27 = 0;
     __Pyx_DECREF(__pyx_t_28); __pyx_t_28 = 0;
-    if (PyDict_SetItem(__pyx_t_34, __pyx_n_s_index, __pyx_t_1) < 0) __PYX_ERR(0, 146, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_34, __pyx_n_s_index, __pyx_t_1) < 0) __PYX_ERR(0, 147, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (PyDict_SetItem(__pyx_t_34, __pyx_n_s_columns, __pyx_v_resultHeader) < 0) __PYX_ERR(0, 146, __pyx_L1_error)
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_29, __pyx_t_35, __pyx_t_34); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 146, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_34, __pyx_n_s_columns, __pyx_v_resultHeader) < 0) __PYX_ERR(0, 147, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_29, __pyx_t_35, __pyx_t_34); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 147, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_29); __pyx_t_29 = 0;
     __Pyx_DECREF(__pyx_t_35); __pyx_t_35 = 0;
     __Pyx_DECREF(__pyx_t_34); __pyx_t_34 = 0;
-    __pyx_t_34 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_sort_index); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 146, __pyx_L1_error)
+    __pyx_t_34 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_sort_index); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 147, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_1 = NULL;
@@ -5076,26 +5078,26 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
       }
     }
     if (__pyx_t_1) {
-      __pyx_t_30 = __Pyx_PyObject_CallOneArg(__pyx_t_34, __pyx_t_1); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 146, __pyx_L1_error)
+      __pyx_t_30 = __Pyx_PyObject_CallOneArg(__pyx_t_34, __pyx_t_1); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 147, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     } else {
-      __pyx_t_30 = __Pyx_PyObject_CallNoArg(__pyx_t_34); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 146, __pyx_L1_error)
+      __pyx_t_30 = __Pyx_PyObject_CallNoArg(__pyx_t_34); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 147, __pyx_L1_error)
     }
     __Pyx_GOTREF(__pyx_t_30);
     __Pyx_DECREF(__pyx_t_34); __pyx_t_34 = 0;
     __pyx_v_final_df = __pyx_t_30;
     __pyx_t_30 = 0;
 
-    /* "BATS/FixedTrial.pyx":147
+    /* "BATS/FixedTrial.pyx":148
  *                         "Predictive Probability(%)"]
  *         final_df = pd.DataFrame(final_copy, index=pd.MultiIndex.from_product(final_df_index, names=["Treatment Arm", "Stage"]), columns=resultHeader).sort_index()
  *         final_df.to_csv(pathdir + "FinalResult.csv")             # <<<<<<<<<<<<<<
  * 
  *         del con_power_empty, con_power_copy
  */
-    __pyx_t_34 = __Pyx_PyObject_GetAttrStr(__pyx_v_final_df, __pyx_n_s_to_csv); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 147, __pyx_L1_error)
+    __pyx_t_34 = __Pyx_PyObject_GetAttrStr(__pyx_v_final_df, __pyx_n_s_to_csv); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 148, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
-    __pyx_t_1 = PyNumber_Add(__pyx_v_pathdir, __pyx_kp_s_FinalResult_csv); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 147, __pyx_L1_error)
+    __pyx_t_1 = PyNumber_Add(__pyx_v_pathdir, __pyx_kp_s_FinalResult_csv); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 148, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_35 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_34))) {
@@ -5108,24 +5110,24 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
       }
     }
     if (!__pyx_t_35) {
-      __pyx_t_30 = __Pyx_PyObject_CallOneArg(__pyx_t_34, __pyx_t_1); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 147, __pyx_L1_error)
+      __pyx_t_30 = __Pyx_PyObject_CallOneArg(__pyx_t_34, __pyx_t_1); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 148, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_GOTREF(__pyx_t_30);
     } else {
-      __pyx_t_29 = PyTuple_New(1+1); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 147, __pyx_L1_error)
+      __pyx_t_29 = PyTuple_New(1+1); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 148, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_29);
       __Pyx_GIVEREF(__pyx_t_35); PyTuple_SET_ITEM(__pyx_t_29, 0, __pyx_t_35); __pyx_t_35 = NULL;
       __Pyx_GIVEREF(__pyx_t_1);
       PyTuple_SET_ITEM(__pyx_t_29, 0+1, __pyx_t_1);
       __pyx_t_1 = 0;
-      __pyx_t_30 = __Pyx_PyObject_Call(__pyx_t_34, __pyx_t_29, NULL); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 147, __pyx_L1_error)
+      __pyx_t_30 = __Pyx_PyObject_Call(__pyx_t_34, __pyx_t_29, NULL); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 148, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_30);
       __Pyx_DECREF(__pyx_t_29); __pyx_t_29 = 0;
     }
     __Pyx_DECREF(__pyx_t_34); __pyx_t_34 = 0;
     __Pyx_DECREF(__pyx_t_30); __pyx_t_30 = 0;
 
-    /* "BATS/FixedTrial.pyx":149
+    /* "BATS/FixedTrial.pyx":150
  *         final_df.to_csv(pathdir + "FinalResult.csv")
  * 
  *         del con_power_empty, con_power_copy             # <<<<<<<<<<<<<<
@@ -5137,7 +5139,7 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
     __Pyx_DECREF(__pyx_v_con_power_copy);
     __pyx_v_con_power_copy = NULL;
 
-    /* "BATS/FixedTrial.pyx":113
+    /* "BATS/FixedTrial.pyx":114
  *     # cdef np.ndarray [dtype=float, ndim = 1] con_power = np.empty(n_arm-1)
  *     # Calculate posterior predictive probability
  *     if predict == 1:             # <<<<<<<<<<<<<<
@@ -5147,7 +5149,7 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
     goto __pyx_L13;
   }
 
-  /* "BATS/FixedTrial.pyx":153
+  /* "BATS/FixedTrial.pyx":154
  *     else:
  * 
  *         sys.stdout.write("Generate results...")             # <<<<<<<<<<<<<<
@@ -5155,34 +5157,34 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
  *         con_futile_mean_copy = con_futile_mean.reshape((nArm - 1) * nStage, 1)
  */
   /*else*/ {
-    __pyx_t_30 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 153, __pyx_L1_error)
+    __pyx_t_30 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 154, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_30);
-    __pyx_t_34 = __Pyx_PyObject_GetAttrStr(__pyx_t_30, __pyx_n_s_stdout); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 153, __pyx_L1_error)
+    __pyx_t_34 = __Pyx_PyObject_GetAttrStr(__pyx_t_30, __pyx_n_s_stdout); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 154, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
     __Pyx_DECREF(__pyx_t_30); __pyx_t_30 = 0;
-    __pyx_t_30 = __Pyx_PyObject_GetAttrStr(__pyx_t_34, __pyx_n_s_write); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 153, __pyx_L1_error)
+    __pyx_t_30 = __Pyx_PyObject_GetAttrStr(__pyx_t_34, __pyx_n_s_write); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 154, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_30);
     __Pyx_DECREF(__pyx_t_34); __pyx_t_34 = 0;
-    __pyx_t_34 = __Pyx_PyObject_Call(__pyx_t_30, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 153, __pyx_L1_error)
+    __pyx_t_34 = __Pyx_PyObject_Call(__pyx_t_30, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 154, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
     __Pyx_DECREF(__pyx_t_30); __pyx_t_30 = 0;
     __Pyx_DECREF(__pyx_t_34); __pyx_t_34 = 0;
 
-    /* "BATS/FixedTrial.pyx":154
+    /* "BATS/FixedTrial.pyx":155
  * 
  *         sys.stdout.write("Generate results...")
  *         con_sim_mean_copy = np.around(np.mean(sim_dataset[0:(nArm - 1), :, :], axis = 2).reshape((nArm - 1) * nStage, 1), 2)             # <<<<<<<<<<<<<<
  *         con_futile_mean_copy = con_futile_mean.reshape((nArm - 1) * nStage, 1)
  *         con_efficacy_mean_copy = con_efficacy_mean.reshape((nArm - 1) * nStage, 1)
  */
-    __pyx_t_30 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 154, __pyx_L1_error)
+    __pyx_t_30 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 155, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_30);
-    __pyx_t_29 = __Pyx_PyObject_GetAttrStr(__pyx_t_30, __pyx_n_s_around); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 154, __pyx_L1_error)
+    __pyx_t_29 = __Pyx_PyObject_GetAttrStr(__pyx_t_30, __pyx_n_s_around); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 155, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
     __Pyx_DECREF(__pyx_t_30); __pyx_t_30 = 0;
-    __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 154, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 155, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_35 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_mean); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 154, __pyx_L1_error)
+    __pyx_t_35 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_mean); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 155, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_35);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_23.data = __pyx_v_sim_dataset.data;
@@ -5203,7 +5205,7 @@ __pyx_t_35 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) _
     0,
     1) < 0))
 {
-    __PYX_ERR(0, 154, __pyx_L1_error)
+    __PYX_ERR(0, 155, __pyx_L1_error)
 }
 
 __pyx_t_23.shape[1] = __pyx_v_sim_dataset.shape[1];
@@ -5214,26 +5216,26 @@ __pyx_t_23.shape[2] = __pyx_v_sim_dataset.shape[2];
 __pyx_t_23.strides[2] = __pyx_v_sim_dataset.strides[2];
     __pyx_t_23.suboffsets[2] = -1;
 
-__pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 154, __pyx_L1_error)
+__pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 155, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __PYX_XDEC_MEMVIEW(&__pyx_t_23, 1);
-    __pyx_t_28 = PyTuple_New(1); if (unlikely(!__pyx_t_28)) __PYX_ERR(0, 154, __pyx_L1_error)
+    __pyx_t_28 = PyTuple_New(1); if (unlikely(!__pyx_t_28)) __PYX_ERR(0, 155, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_28);
     __Pyx_GIVEREF(__pyx_t_1);
     PyTuple_SET_ITEM(__pyx_t_28, 0, __pyx_t_1);
     __pyx_t_1 = 0;
-    __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 154, __pyx_L1_error)
+    __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 155, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_axis, __pyx_int_2) < 0) __PYX_ERR(0, 154, __pyx_L1_error)
-    __pyx_t_27 = __Pyx_PyObject_Call(__pyx_t_35, __pyx_t_28, __pyx_t_1); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 154, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_axis, __pyx_int_2) < 0) __PYX_ERR(0, 155, __pyx_L1_error)
+    __pyx_t_27 = __Pyx_PyObject_Call(__pyx_t_35, __pyx_t_28, __pyx_t_1); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 155, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_27);
     __Pyx_DECREF(__pyx_t_35); __pyx_t_35 = 0;
     __Pyx_DECREF(__pyx_t_28); __pyx_t_28 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_27, __pyx_n_s_reshape); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 154, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_27, __pyx_n_s_reshape); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 155, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_27); __pyx_t_27 = 0;
-    __pyx_t_27 = __Pyx_PyInt_From_long(((__pyx_v_nArm - 1) * __pyx_v_nStage)); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 154, __pyx_L1_error)
+    __pyx_t_27 = __Pyx_PyInt_From_long(((__pyx_v_nArm - 1) * __pyx_v_nStage)); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 155, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_27);
     __pyx_t_28 = NULL;
     __pyx_t_7 = 0;
@@ -5247,7 +5249,7 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __
         __pyx_t_7 = 1;
       }
     }
-    __pyx_t_35 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 154, __pyx_L1_error)
+    __pyx_t_35 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 155, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_35);
     if (__pyx_t_28) {
       __Pyx_GIVEREF(__pyx_t_28); PyTuple_SET_ITEM(__pyx_t_35, 0, __pyx_t_28); __pyx_t_28 = NULL;
@@ -5258,7 +5260,7 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __
     __Pyx_GIVEREF(__pyx_int_1);
     PyTuple_SET_ITEM(__pyx_t_35, 1+__pyx_t_7, __pyx_int_1);
     __pyx_t_27 = 0;
-    __pyx_t_30 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_35, NULL); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 154, __pyx_L1_error)
+    __pyx_t_30 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_35, NULL); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 155, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_30);
     __Pyx_DECREF(__pyx_t_35); __pyx_t_35 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -5274,7 +5276,7 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __
         __pyx_t_7 = 1;
       }
     }
-    __pyx_t_35 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 154, __pyx_L1_error)
+    __pyx_t_35 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 155, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_35);
     if (__pyx_t_1) {
       __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_35, 0, __pyx_t_1); __pyx_t_1 = NULL;
@@ -5285,23 +5287,23 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __
     __Pyx_GIVEREF(__pyx_int_2);
     PyTuple_SET_ITEM(__pyx_t_35, 1+__pyx_t_7, __pyx_int_2);
     __pyx_t_30 = 0;
-    __pyx_t_34 = __Pyx_PyObject_Call(__pyx_t_29, __pyx_t_35, NULL); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 154, __pyx_L1_error)
+    __pyx_t_34 = __Pyx_PyObject_Call(__pyx_t_29, __pyx_t_35, NULL); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 155, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
     __Pyx_DECREF(__pyx_t_35); __pyx_t_35 = 0;
     __Pyx_DECREF(__pyx_t_29); __pyx_t_29 = 0;
     __pyx_v_con_sim_mean_copy = __pyx_t_34;
     __pyx_t_34 = 0;
 
-    /* "BATS/FixedTrial.pyx":155
+    /* "BATS/FixedTrial.pyx":156
  *         sys.stdout.write("Generate results...")
  *         con_sim_mean_copy = np.around(np.mean(sim_dataset[0:(nArm - 1), :, :], axis = 2).reshape((nArm - 1) * nStage, 1), 2)
  *         con_futile_mean_copy = con_futile_mean.reshape((nArm - 1) * nStage, 1)             # <<<<<<<<<<<<<<
  *         con_efficacy_mean_copy = con_efficacy_mean.reshape((nArm - 1) * nStage, 1)
  *         con_continuous_mean = 100 - con_futile_mean - con_efficacy_mean
  */
-    __pyx_t_29 = __Pyx_PyObject_GetAttrStr(__pyx_v_con_futile_mean, __pyx_n_s_reshape); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 155, __pyx_L1_error)
+    __pyx_t_29 = __Pyx_PyObject_GetAttrStr(__pyx_v_con_futile_mean, __pyx_n_s_reshape); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 156, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
-    __pyx_t_35 = __Pyx_PyInt_From_long(((__pyx_v_nArm - 1) * __pyx_v_nStage)); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 155, __pyx_L1_error)
+    __pyx_t_35 = __Pyx_PyInt_From_long(((__pyx_v_nArm - 1) * __pyx_v_nStage)); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 156, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_35);
     __pyx_t_30 = NULL;
     __pyx_t_7 = 0;
@@ -5315,7 +5317,7 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __
         __pyx_t_7 = 1;
       }
     }
-    __pyx_t_1 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 155, __pyx_L1_error)
+    __pyx_t_1 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 156, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     if (__pyx_t_30) {
       __Pyx_GIVEREF(__pyx_t_30); PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_30); __pyx_t_30 = NULL;
@@ -5326,23 +5328,23 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __
     __Pyx_GIVEREF(__pyx_int_1);
     PyTuple_SET_ITEM(__pyx_t_1, 1+__pyx_t_7, __pyx_int_1);
     __pyx_t_35 = 0;
-    __pyx_t_34 = __Pyx_PyObject_Call(__pyx_t_29, __pyx_t_1, NULL); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 155, __pyx_L1_error)
+    __pyx_t_34 = __Pyx_PyObject_Call(__pyx_t_29, __pyx_t_1, NULL); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 156, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_29); __pyx_t_29 = 0;
     __pyx_v_con_futile_mean_copy = __pyx_t_34;
     __pyx_t_34 = 0;
 
-    /* "BATS/FixedTrial.pyx":156
+    /* "BATS/FixedTrial.pyx":157
  *         con_sim_mean_copy = np.around(np.mean(sim_dataset[0:(nArm - 1), :, :], axis = 2).reshape((nArm - 1) * nStage, 1), 2)
  *         con_futile_mean_copy = con_futile_mean.reshape((nArm - 1) * nStage, 1)
  *         con_efficacy_mean_copy = con_efficacy_mean.reshape((nArm - 1) * nStage, 1)             # <<<<<<<<<<<<<<
  *         con_continuous_mean = 100 - con_futile_mean - con_efficacy_mean
  *         con_continuous_mean_copy = con_continuous_mean.reshape((nArm - 1)* nStage, 1)
  */
-    __pyx_t_29 = __Pyx_PyObject_GetAttrStr(__pyx_v_con_efficacy_mean, __pyx_n_s_reshape); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 156, __pyx_L1_error)
+    __pyx_t_29 = __Pyx_PyObject_GetAttrStr(__pyx_v_con_efficacy_mean, __pyx_n_s_reshape); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 157, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
-    __pyx_t_1 = __Pyx_PyInt_From_long(((__pyx_v_nArm - 1) * __pyx_v_nStage)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 156, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyInt_From_long(((__pyx_v_nArm - 1) * __pyx_v_nStage)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 157, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_35 = NULL;
     __pyx_t_7 = 0;
@@ -5356,7 +5358,7 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __
         __pyx_t_7 = 1;
       }
     }
-    __pyx_t_30 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 156, __pyx_L1_error)
+    __pyx_t_30 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 157, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_30);
     if (__pyx_t_35) {
       __Pyx_GIVEREF(__pyx_t_35); PyTuple_SET_ITEM(__pyx_t_30, 0, __pyx_t_35); __pyx_t_35 = NULL;
@@ -5367,38 +5369,38 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __
     __Pyx_GIVEREF(__pyx_int_1);
     PyTuple_SET_ITEM(__pyx_t_30, 1+__pyx_t_7, __pyx_int_1);
     __pyx_t_1 = 0;
-    __pyx_t_34 = __Pyx_PyObject_Call(__pyx_t_29, __pyx_t_30, NULL); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 156, __pyx_L1_error)
+    __pyx_t_34 = __Pyx_PyObject_Call(__pyx_t_29, __pyx_t_30, NULL); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 157, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
     __Pyx_DECREF(__pyx_t_30); __pyx_t_30 = 0;
     __Pyx_DECREF(__pyx_t_29); __pyx_t_29 = 0;
     __pyx_v_con_efficacy_mean_copy = __pyx_t_34;
     __pyx_t_34 = 0;
 
-    /* "BATS/FixedTrial.pyx":157
+    /* "BATS/FixedTrial.pyx":158
  *         con_futile_mean_copy = con_futile_mean.reshape((nArm - 1) * nStage, 1)
  *         con_efficacy_mean_copy = con_efficacy_mean.reshape((nArm - 1) * nStage, 1)
  *         con_continuous_mean = 100 - con_futile_mean - con_efficacy_mean             # <<<<<<<<<<<<<<
  *         con_continuous_mean_copy = con_continuous_mean.reshape((nArm - 1)* nStage, 1)
  *         futile_mean_copy = futile_mean.reshape((nArm - 1) * nStage, 1)
  */
-    __pyx_t_34 = __Pyx_PyInt_SubtractCObj(__pyx_int_100, __pyx_v_con_futile_mean, 0x64, 0); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 157, __pyx_L1_error)
+    __pyx_t_34 = __Pyx_PyInt_SubtractCObj(__pyx_int_100, __pyx_v_con_futile_mean, 0x64, 0); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 158, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
-    __pyx_t_29 = PyNumber_Subtract(__pyx_t_34, __pyx_v_con_efficacy_mean); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 157, __pyx_L1_error)
+    __pyx_t_29 = PyNumber_Subtract(__pyx_t_34, __pyx_v_con_efficacy_mean); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 158, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
     __Pyx_DECREF(__pyx_t_34); __pyx_t_34 = 0;
     __pyx_v_con_continuous_mean = __pyx_t_29;
     __pyx_t_29 = 0;
 
-    /* "BATS/FixedTrial.pyx":158
+    /* "BATS/FixedTrial.pyx":159
  *         con_efficacy_mean_copy = con_efficacy_mean.reshape((nArm - 1) * nStage, 1)
  *         con_continuous_mean = 100 - con_futile_mean - con_efficacy_mean
  *         con_continuous_mean_copy = con_continuous_mean.reshape((nArm - 1)* nStage, 1)             # <<<<<<<<<<<<<<
  *         futile_mean_copy = futile_mean.reshape((nArm - 1) * nStage, 1)
  *         efficacy_mean_copy = efficacy_mean.reshape((nArm - 1) * nStage, 1)
  */
-    __pyx_t_34 = __Pyx_PyObject_GetAttrStr(__pyx_v_con_continuous_mean, __pyx_n_s_reshape); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 158, __pyx_L1_error)
+    __pyx_t_34 = __Pyx_PyObject_GetAttrStr(__pyx_v_con_continuous_mean, __pyx_n_s_reshape); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 159, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
-    __pyx_t_30 = __Pyx_PyInt_From_long(((__pyx_v_nArm - 1) * __pyx_v_nStage)); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 158, __pyx_L1_error)
+    __pyx_t_30 = __Pyx_PyInt_From_long(((__pyx_v_nArm - 1) * __pyx_v_nStage)); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 159, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_30);
     __pyx_t_1 = NULL;
     __pyx_t_7 = 0;
@@ -5412,7 +5414,7 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __
         __pyx_t_7 = 1;
       }
     }
-    __pyx_t_35 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 158, __pyx_L1_error)
+    __pyx_t_35 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 159, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_35);
     if (__pyx_t_1) {
       __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_35, 0, __pyx_t_1); __pyx_t_1 = NULL;
@@ -5423,23 +5425,23 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __
     __Pyx_GIVEREF(__pyx_int_1);
     PyTuple_SET_ITEM(__pyx_t_35, 1+__pyx_t_7, __pyx_int_1);
     __pyx_t_30 = 0;
-    __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_34, __pyx_t_35, NULL); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 158, __pyx_L1_error)
+    __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_34, __pyx_t_35, NULL); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 159, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
     __Pyx_DECREF(__pyx_t_35); __pyx_t_35 = 0;
     __Pyx_DECREF(__pyx_t_34); __pyx_t_34 = 0;
     __pyx_v_con_continuous_mean_copy = __pyx_t_29;
     __pyx_t_29 = 0;
 
-    /* "BATS/FixedTrial.pyx":159
+    /* "BATS/FixedTrial.pyx":160
  *         con_continuous_mean = 100 - con_futile_mean - con_efficacy_mean
  *         con_continuous_mean_copy = con_continuous_mean.reshape((nArm - 1)* nStage, 1)
  *         futile_mean_copy = futile_mean.reshape((nArm - 1) * nStage, 1)             # <<<<<<<<<<<<<<
  *         efficacy_mean_copy = efficacy_mean.reshape((nArm - 1) * nStage, 1)
  *         continuous_mean = 100 - futile_mean - efficacy_mean
  */
-    __pyx_t_34 = __Pyx_PyObject_GetAttrStr(__pyx_v_futile_mean, __pyx_n_s_reshape); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 159, __pyx_L1_error)
+    __pyx_t_34 = __Pyx_PyObject_GetAttrStr(__pyx_v_futile_mean, __pyx_n_s_reshape); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 160, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
-    __pyx_t_35 = __Pyx_PyInt_From_long(((__pyx_v_nArm - 1) * __pyx_v_nStage)); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 159, __pyx_L1_error)
+    __pyx_t_35 = __Pyx_PyInt_From_long(((__pyx_v_nArm - 1) * __pyx_v_nStage)); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 160, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_35);
     __pyx_t_30 = NULL;
     __pyx_t_7 = 0;
@@ -5453,7 +5455,7 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __
         __pyx_t_7 = 1;
       }
     }
-    __pyx_t_1 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 159, __pyx_L1_error)
+    __pyx_t_1 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 160, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     if (__pyx_t_30) {
       __Pyx_GIVEREF(__pyx_t_30); PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_30); __pyx_t_30 = NULL;
@@ -5464,23 +5466,23 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __
     __Pyx_GIVEREF(__pyx_int_1);
     PyTuple_SET_ITEM(__pyx_t_1, 1+__pyx_t_7, __pyx_int_1);
     __pyx_t_35 = 0;
-    __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_34, __pyx_t_1, NULL); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 159, __pyx_L1_error)
+    __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_34, __pyx_t_1, NULL); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 160, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_34); __pyx_t_34 = 0;
     __pyx_v_futile_mean_copy = __pyx_t_29;
     __pyx_t_29 = 0;
 
-    /* "BATS/FixedTrial.pyx":160
+    /* "BATS/FixedTrial.pyx":161
  *         con_continuous_mean_copy = con_continuous_mean.reshape((nArm - 1)* nStage, 1)
  *         futile_mean_copy = futile_mean.reshape((nArm - 1) * nStage, 1)
  *         efficacy_mean_copy = efficacy_mean.reshape((nArm - 1) * nStage, 1)             # <<<<<<<<<<<<<<
  *         continuous_mean = 100 - futile_mean - efficacy_mean
  *         continuous_mean_copy = continuous_mean.reshape((nArm - 1) * nStage, 1)
  */
-    __pyx_t_34 = __Pyx_PyObject_GetAttrStr(__pyx_v_efficacy_mean, __pyx_n_s_reshape); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 160, __pyx_L1_error)
+    __pyx_t_34 = __Pyx_PyObject_GetAttrStr(__pyx_v_efficacy_mean, __pyx_n_s_reshape); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 161, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
-    __pyx_t_1 = __Pyx_PyInt_From_long(((__pyx_v_nArm - 1) * __pyx_v_nStage)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 160, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyInt_From_long(((__pyx_v_nArm - 1) * __pyx_v_nStage)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 161, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_35 = NULL;
     __pyx_t_7 = 0;
@@ -5494,7 +5496,7 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __
         __pyx_t_7 = 1;
       }
     }
-    __pyx_t_30 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 160, __pyx_L1_error)
+    __pyx_t_30 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 161, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_30);
     if (__pyx_t_35) {
       __Pyx_GIVEREF(__pyx_t_35); PyTuple_SET_ITEM(__pyx_t_30, 0, __pyx_t_35); __pyx_t_35 = NULL;
@@ -5505,38 +5507,38 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __
     __Pyx_GIVEREF(__pyx_int_1);
     PyTuple_SET_ITEM(__pyx_t_30, 1+__pyx_t_7, __pyx_int_1);
     __pyx_t_1 = 0;
-    __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_34, __pyx_t_30, NULL); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 160, __pyx_L1_error)
+    __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_34, __pyx_t_30, NULL); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 161, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
     __Pyx_DECREF(__pyx_t_30); __pyx_t_30 = 0;
     __Pyx_DECREF(__pyx_t_34); __pyx_t_34 = 0;
     __pyx_v_efficacy_mean_copy = __pyx_t_29;
     __pyx_t_29 = 0;
 
-    /* "BATS/FixedTrial.pyx":161
+    /* "BATS/FixedTrial.pyx":162
  *         futile_mean_copy = futile_mean.reshape((nArm - 1) * nStage, 1)
  *         efficacy_mean_copy = efficacy_mean.reshape((nArm - 1) * nStage, 1)
  *         continuous_mean = 100 - futile_mean - efficacy_mean             # <<<<<<<<<<<<<<
  *         continuous_mean_copy = continuous_mean.reshape((nArm - 1) * nStage, 1)
  *         final_copy = np.concatenate((con_sim_mean_copy, con_futile_mean_copy, con_efficacy_mean_copy, con_continuous_mean_copy,
  */
-    __pyx_t_29 = __Pyx_PyInt_SubtractCObj(__pyx_int_100, __pyx_v_futile_mean, 0x64, 0); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 161, __pyx_L1_error)
+    __pyx_t_29 = __Pyx_PyInt_SubtractCObj(__pyx_int_100, __pyx_v_futile_mean, 0x64, 0); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 162, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
-    __pyx_t_34 = PyNumber_Subtract(__pyx_t_29, __pyx_v_efficacy_mean); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 161, __pyx_L1_error)
+    __pyx_t_34 = PyNumber_Subtract(__pyx_t_29, __pyx_v_efficacy_mean); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 162, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
     __Pyx_DECREF(__pyx_t_29); __pyx_t_29 = 0;
     __pyx_v_continuous_mean = __pyx_t_34;
     __pyx_t_34 = 0;
 
-    /* "BATS/FixedTrial.pyx":162
+    /* "BATS/FixedTrial.pyx":163
  *         efficacy_mean_copy = efficacy_mean.reshape((nArm - 1) * nStage, 1)
  *         continuous_mean = 100 - futile_mean - efficacy_mean
  *         continuous_mean_copy = continuous_mean.reshape((nArm - 1) * nStage, 1)             # <<<<<<<<<<<<<<
  *         final_copy = np.concatenate((con_sim_mean_copy, con_futile_mean_copy, con_efficacy_mean_copy, con_continuous_mean_copy,
  *                                      futile_mean_copy, efficacy_mean_copy, continuous_mean_copy), axis = 1)
  */
-    __pyx_t_29 = __Pyx_PyObject_GetAttrStr(__pyx_v_continuous_mean, __pyx_n_s_reshape); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 162, __pyx_L1_error)
+    __pyx_t_29 = __Pyx_PyObject_GetAttrStr(__pyx_v_continuous_mean, __pyx_n_s_reshape); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 163, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
-    __pyx_t_30 = __Pyx_PyInt_From_long(((__pyx_v_nArm - 1) * __pyx_v_nStage)); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 162, __pyx_L1_error)
+    __pyx_t_30 = __Pyx_PyInt_From_long(((__pyx_v_nArm - 1) * __pyx_v_nStage)); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 163, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_30);
     __pyx_t_1 = NULL;
     __pyx_t_7 = 0;
@@ -5550,7 +5552,7 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __
         __pyx_t_7 = 1;
       }
     }
-    __pyx_t_35 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 162, __pyx_L1_error)
+    __pyx_t_35 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 163, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_35);
     if (__pyx_t_1) {
       __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_35, 0, __pyx_t_1); __pyx_t_1 = NULL;
@@ -5561,34 +5563,34 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __
     __Pyx_GIVEREF(__pyx_int_1);
     PyTuple_SET_ITEM(__pyx_t_35, 1+__pyx_t_7, __pyx_int_1);
     __pyx_t_30 = 0;
-    __pyx_t_34 = __Pyx_PyObject_Call(__pyx_t_29, __pyx_t_35, NULL); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 162, __pyx_L1_error)
+    __pyx_t_34 = __Pyx_PyObject_Call(__pyx_t_29, __pyx_t_35, NULL); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 163, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
     __Pyx_DECREF(__pyx_t_35); __pyx_t_35 = 0;
     __Pyx_DECREF(__pyx_t_29); __pyx_t_29 = 0;
     __pyx_v_continuous_mean_copy = __pyx_t_34;
     __pyx_t_34 = 0;
 
-    /* "BATS/FixedTrial.pyx":163
+    /* "BATS/FixedTrial.pyx":164
  *         continuous_mean = 100 - futile_mean - efficacy_mean
  *         continuous_mean_copy = continuous_mean.reshape((nArm - 1) * nStage, 1)
  *         final_copy = np.concatenate((con_sim_mean_copy, con_futile_mean_copy, con_efficacy_mean_copy, con_continuous_mean_copy,             # <<<<<<<<<<<<<<
  *                                      futile_mean_copy, efficacy_mean_copy, continuous_mean_copy), axis = 1)
  *         final_copy = np.around(final_copy, decimals = 2)
  */
-    __pyx_t_34 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 163, __pyx_L1_error)
+    __pyx_t_34 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 164, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
-    __pyx_t_29 = __Pyx_PyObject_GetAttrStr(__pyx_t_34, __pyx_n_s_concatenate); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 163, __pyx_L1_error)
+    __pyx_t_29 = __Pyx_PyObject_GetAttrStr(__pyx_t_34, __pyx_n_s_concatenate); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 164, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
     __Pyx_DECREF(__pyx_t_34); __pyx_t_34 = 0;
 
-    /* "BATS/FixedTrial.pyx":164
+    /* "BATS/FixedTrial.pyx":165
  *         continuous_mean_copy = continuous_mean.reshape((nArm - 1) * nStage, 1)
  *         final_copy = np.concatenate((con_sim_mean_copy, con_futile_mean_copy, con_efficacy_mean_copy, con_continuous_mean_copy,
  *                                      futile_mean_copy, efficacy_mean_copy, continuous_mean_copy), axis = 1)             # <<<<<<<<<<<<<<
  *         final_copy = np.around(final_copy, decimals = 2)
  *         final_df_index = [range(1, nArm), range(1, nStage + 1)]
  */
-    __pyx_t_34 = PyTuple_New(7); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 163, __pyx_L1_error)
+    __pyx_t_34 = PyTuple_New(7); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 164, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
     __Pyx_INCREF(__pyx_v_con_sim_mean_copy);
     __Pyx_GIVEREF(__pyx_v_con_sim_mean_copy);
@@ -5612,38 +5614,38 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __
     __Pyx_GIVEREF(__pyx_v_continuous_mean_copy);
     PyTuple_SET_ITEM(__pyx_t_34, 6, __pyx_v_continuous_mean_copy);
 
-    /* "BATS/FixedTrial.pyx":163
+    /* "BATS/FixedTrial.pyx":164
  *         continuous_mean = 100 - futile_mean - efficacy_mean
  *         continuous_mean_copy = continuous_mean.reshape((nArm - 1) * nStage, 1)
  *         final_copy = np.concatenate((con_sim_mean_copy, con_futile_mean_copy, con_efficacy_mean_copy, con_continuous_mean_copy,             # <<<<<<<<<<<<<<
  *                                      futile_mean_copy, efficacy_mean_copy, continuous_mean_copy), axis = 1)
  *         final_copy = np.around(final_copy, decimals = 2)
  */
-    __pyx_t_35 = PyTuple_New(1); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 163, __pyx_L1_error)
+    __pyx_t_35 = PyTuple_New(1); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 164, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_35);
     __Pyx_GIVEREF(__pyx_t_34);
     PyTuple_SET_ITEM(__pyx_t_35, 0, __pyx_t_34);
     __pyx_t_34 = 0;
 
-    /* "BATS/FixedTrial.pyx":164
+    /* "BATS/FixedTrial.pyx":165
  *         continuous_mean_copy = continuous_mean.reshape((nArm - 1) * nStage, 1)
  *         final_copy = np.concatenate((con_sim_mean_copy, con_futile_mean_copy, con_efficacy_mean_copy, con_continuous_mean_copy,
  *                                      futile_mean_copy, efficacy_mean_copy, continuous_mean_copy), axis = 1)             # <<<<<<<<<<<<<<
  *         final_copy = np.around(final_copy, decimals = 2)
  *         final_df_index = [range(1, nArm), range(1, nStage + 1)]
  */
-    __pyx_t_34 = PyDict_New(); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 164, __pyx_L1_error)
+    __pyx_t_34 = PyDict_New(); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 165, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
-    if (PyDict_SetItem(__pyx_t_34, __pyx_n_s_axis, __pyx_int_1) < 0) __PYX_ERR(0, 164, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_34, __pyx_n_s_axis, __pyx_int_1) < 0) __PYX_ERR(0, 165, __pyx_L1_error)
 
-    /* "BATS/FixedTrial.pyx":163
+    /* "BATS/FixedTrial.pyx":164
  *         continuous_mean = 100 - futile_mean - efficacy_mean
  *         continuous_mean_copy = continuous_mean.reshape((nArm - 1) * nStage, 1)
  *         final_copy = np.concatenate((con_sim_mean_copy, con_futile_mean_copy, con_efficacy_mean_copy, con_continuous_mean_copy,             # <<<<<<<<<<<<<<
  *                                      futile_mean_copy, efficacy_mean_copy, continuous_mean_copy), axis = 1)
  *         final_copy = np.around(final_copy, decimals = 2)
  */
-    __pyx_t_30 = __Pyx_PyObject_Call(__pyx_t_29, __pyx_t_35, __pyx_t_34); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 163, __pyx_L1_error)
+    __pyx_t_30 = __Pyx_PyObject_Call(__pyx_t_29, __pyx_t_35, __pyx_t_34); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 164, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_30);
     __Pyx_DECREF(__pyx_t_29); __pyx_t_29 = 0;
     __Pyx_DECREF(__pyx_t_35); __pyx_t_35 = 0;
@@ -5651,27 +5653,27 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __
     __pyx_v_final_copy = __pyx_t_30;
     __pyx_t_30 = 0;
 
-    /* "BATS/FixedTrial.pyx":165
+    /* "BATS/FixedTrial.pyx":166
  *         final_copy = np.concatenate((con_sim_mean_copy, con_futile_mean_copy, con_efficacy_mean_copy, con_continuous_mean_copy,
  *                                      futile_mean_copy, efficacy_mean_copy, continuous_mean_copy), axis = 1)
  *         final_copy = np.around(final_copy, decimals = 2)             # <<<<<<<<<<<<<<
  *         final_df_index = [range(1, nArm), range(1, nStage + 1)]
  *         resultHeader = ["Average Success", "Conditional Futility(%)", "Conditional Efficacy(%)", "Conditional Continuous(%)",
  */
-    __pyx_t_30 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 165, __pyx_L1_error)
+    __pyx_t_30 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 166, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_30);
-    __pyx_t_34 = __Pyx_PyObject_GetAttrStr(__pyx_t_30, __pyx_n_s_around); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 165, __pyx_L1_error)
+    __pyx_t_34 = __Pyx_PyObject_GetAttrStr(__pyx_t_30, __pyx_n_s_around); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 166, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
     __Pyx_DECREF(__pyx_t_30); __pyx_t_30 = 0;
-    __pyx_t_30 = PyTuple_New(1); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 165, __pyx_L1_error)
+    __pyx_t_30 = PyTuple_New(1); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 166, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_30);
     __Pyx_INCREF(__pyx_v_final_copy);
     __Pyx_GIVEREF(__pyx_v_final_copy);
     PyTuple_SET_ITEM(__pyx_t_30, 0, __pyx_v_final_copy);
-    __pyx_t_35 = PyDict_New(); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 165, __pyx_L1_error)
+    __pyx_t_35 = PyDict_New(); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 166, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_35);
-    if (PyDict_SetItem(__pyx_t_35, __pyx_n_s_decimals, __pyx_int_2) < 0) __PYX_ERR(0, 165, __pyx_L1_error)
-    __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_34, __pyx_t_30, __pyx_t_35); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 165, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_35, __pyx_n_s_decimals, __pyx_int_2) < 0) __PYX_ERR(0, 166, __pyx_L1_error)
+    __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_34, __pyx_t_30, __pyx_t_35); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 166, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
     __Pyx_DECREF(__pyx_t_34); __pyx_t_34 = 0;
     __Pyx_DECREF(__pyx_t_30); __pyx_t_30 = 0;
@@ -5679,16 +5681,16 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __
     __Pyx_DECREF_SET(__pyx_v_final_copy, __pyx_t_29);
     __pyx_t_29 = 0;
 
-    /* "BATS/FixedTrial.pyx":166
+    /* "BATS/FixedTrial.pyx":167
  *                                      futile_mean_copy, efficacy_mean_copy, continuous_mean_copy), axis = 1)
  *         final_copy = np.around(final_copy, decimals = 2)
  *         final_df_index = [range(1, nArm), range(1, nStage + 1)]             # <<<<<<<<<<<<<<
  *         resultHeader = ["Average Success", "Conditional Futility(%)", "Conditional Efficacy(%)", "Conditional Continuous(%)",
  *                         "Unconditional Futility(%)", "Unconditional Efficacy(%)", "Unconditional Continuous(%)"]
  */
-    __pyx_t_29 = __Pyx_PyInt_From_int(__pyx_v_nArm); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 166, __pyx_L1_error)
+    __pyx_t_29 = __Pyx_PyInt_From_int(__pyx_v_nArm); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 167, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
-    __pyx_t_35 = PyTuple_New(2); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 166, __pyx_L1_error)
+    __pyx_t_35 = PyTuple_New(2); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 167, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_35);
     __Pyx_INCREF(__pyx_int_1);
     __Pyx_GIVEREF(__pyx_int_1);
@@ -5696,12 +5698,12 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __
     __Pyx_GIVEREF(__pyx_t_29);
     PyTuple_SET_ITEM(__pyx_t_35, 1, __pyx_t_29);
     __pyx_t_29 = 0;
-    __pyx_t_29 = __Pyx_PyObject_Call(__pyx_builtin_range, __pyx_t_35, NULL); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 166, __pyx_L1_error)
+    __pyx_t_29 = __Pyx_PyObject_Call(__pyx_builtin_range, __pyx_t_35, NULL); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 167, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
     __Pyx_DECREF(__pyx_t_35); __pyx_t_35 = 0;
-    __pyx_t_35 = __Pyx_PyInt_From_long((__pyx_v_nStage + 1)); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 166, __pyx_L1_error)
+    __pyx_t_35 = __Pyx_PyInt_From_long((__pyx_v_nStage + 1)); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 167, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_35);
-    __pyx_t_30 = PyTuple_New(2); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 166, __pyx_L1_error)
+    __pyx_t_30 = PyTuple_New(2); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 167, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_30);
     __Pyx_INCREF(__pyx_int_1);
     __Pyx_GIVEREF(__pyx_int_1);
@@ -5709,10 +5711,10 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __
     __Pyx_GIVEREF(__pyx_t_35);
     PyTuple_SET_ITEM(__pyx_t_30, 1, __pyx_t_35);
     __pyx_t_35 = 0;
-    __pyx_t_35 = __Pyx_PyObject_Call(__pyx_builtin_range, __pyx_t_30, NULL); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 166, __pyx_L1_error)
+    __pyx_t_35 = __Pyx_PyObject_Call(__pyx_builtin_range, __pyx_t_30, NULL); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 167, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_35);
     __Pyx_DECREF(__pyx_t_30); __pyx_t_30 = 0;
-    __pyx_t_30 = PyList_New(2); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 166, __pyx_L1_error)
+    __pyx_t_30 = PyList_New(2); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 167, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_30);
     __Pyx_GIVEREF(__pyx_t_29);
     PyList_SET_ITEM(__pyx_t_30, 0, __pyx_t_29);
@@ -5723,14 +5725,14 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __
     __pyx_v_final_df_index = ((PyObject*)__pyx_t_30);
     __pyx_t_30 = 0;
 
-    /* "BATS/FixedTrial.pyx":167
+    /* "BATS/FixedTrial.pyx":168
  *         final_copy = np.around(final_copy, decimals = 2)
  *         final_df_index = [range(1, nArm), range(1, nStage + 1)]
  *         resultHeader = ["Average Success", "Conditional Futility(%)", "Conditional Efficacy(%)", "Conditional Continuous(%)",             # <<<<<<<<<<<<<<
  *                         "Unconditional Futility(%)", "Unconditional Efficacy(%)", "Unconditional Continuous(%)"]
  *         final_df = pd.DataFrame(final_copy, index=pd.MultiIndex.from_product(final_df_index, names=["Treatment Arm", "Stage"]), columns=resultHeader).sort_index()
  */
-    __pyx_t_30 = PyList_New(7); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 167, __pyx_L1_error)
+    __pyx_t_30 = PyList_New(7); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 168, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_30);
     __Pyx_INCREF(__pyx_kp_s_Average_Success);
     __Pyx_GIVEREF(__pyx_kp_s_Average_Success);
@@ -5756,41 +5758,41 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __
     __pyx_v_resultHeader = ((PyObject*)__pyx_t_30);
     __pyx_t_30 = 0;
 
-    /* "BATS/FixedTrial.pyx":169
+    /* "BATS/FixedTrial.pyx":170
  *         resultHeader = ["Average Success", "Conditional Futility(%)", "Conditional Efficacy(%)", "Conditional Continuous(%)",
  *                         "Unconditional Futility(%)", "Unconditional Efficacy(%)", "Unconditional Continuous(%)"]
  *         final_df = pd.DataFrame(final_copy, index=pd.MultiIndex.from_product(final_df_index, names=["Treatment Arm", "Stage"]), columns=resultHeader).sort_index()             # <<<<<<<<<<<<<<
  *         final_df.to_csv(pathdir + "FinalResult.csv")
  * 
  */
-    __pyx_t_35 = __Pyx_GetModuleGlobalName(__pyx_n_s_pd); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 169, __pyx_L1_error)
+    __pyx_t_35 = __Pyx_GetModuleGlobalName(__pyx_n_s_pd); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 170, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_35);
-    __pyx_t_29 = __Pyx_PyObject_GetAttrStr(__pyx_t_35, __pyx_n_s_DataFrame); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 169, __pyx_L1_error)
+    __pyx_t_29 = __Pyx_PyObject_GetAttrStr(__pyx_t_35, __pyx_n_s_DataFrame); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 170, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_29);
     __Pyx_DECREF(__pyx_t_35); __pyx_t_35 = 0;
-    __pyx_t_35 = PyTuple_New(1); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 169, __pyx_L1_error)
+    __pyx_t_35 = PyTuple_New(1); if (unlikely(!__pyx_t_35)) __PYX_ERR(0, 170, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_35);
     __Pyx_INCREF(__pyx_v_final_copy);
     __Pyx_GIVEREF(__pyx_v_final_copy);
     PyTuple_SET_ITEM(__pyx_t_35, 0, __pyx_v_final_copy);
-    __pyx_t_34 = PyDict_New(); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 169, __pyx_L1_error)
+    __pyx_t_34 = PyDict_New(); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 170, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
-    __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_pd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 169, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_pd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 170, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_27 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_MultiIndex); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 169, __pyx_L1_error)
+    __pyx_t_27 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_MultiIndex); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 170, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_27);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_27, __pyx_n_s_from_product); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 169, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_27, __pyx_n_s_from_product); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 170, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_27); __pyx_t_27 = 0;
-    __pyx_t_27 = PyTuple_New(1); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 169, __pyx_L1_error)
+    __pyx_t_27 = PyTuple_New(1); if (unlikely(!__pyx_t_27)) __PYX_ERR(0, 170, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_27);
     __Pyx_INCREF(__pyx_v_final_df_index);
     __Pyx_GIVEREF(__pyx_v_final_df_index);
     PyTuple_SET_ITEM(__pyx_t_27, 0, __pyx_v_final_df_index);
-    __pyx_t_28 = PyDict_New(); if (unlikely(!__pyx_t_28)) __PYX_ERR(0, 169, __pyx_L1_error)
+    __pyx_t_28 = PyDict_New(); if (unlikely(!__pyx_t_28)) __PYX_ERR(0, 170, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_28);
-    __pyx_t_37 = PyList_New(2); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 169, __pyx_L1_error)
+    __pyx_t_37 = PyList_New(2); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 170, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_37);
     __Pyx_INCREF(__pyx_kp_s_Treatment_Arm);
     __Pyx_GIVEREF(__pyx_kp_s_Treatment_Arm);
@@ -5798,22 +5800,22 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __
     __Pyx_INCREF(__pyx_n_s_Stage);
     __Pyx_GIVEREF(__pyx_n_s_Stage);
     PyList_SET_ITEM(__pyx_t_37, 1, __pyx_n_s_Stage);
-    if (PyDict_SetItem(__pyx_t_28, __pyx_n_s_names, __pyx_t_37) < 0) __PYX_ERR(0, 169, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_28, __pyx_n_s_names, __pyx_t_37) < 0) __PYX_ERR(0, 170, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_37); __pyx_t_37 = 0;
-    __pyx_t_37 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_27, __pyx_t_28); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 169, __pyx_L1_error)
+    __pyx_t_37 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_27, __pyx_t_28); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 170, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_37);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_27); __pyx_t_27 = 0;
     __Pyx_DECREF(__pyx_t_28); __pyx_t_28 = 0;
-    if (PyDict_SetItem(__pyx_t_34, __pyx_n_s_index, __pyx_t_37) < 0) __PYX_ERR(0, 169, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_34, __pyx_n_s_index, __pyx_t_37) < 0) __PYX_ERR(0, 170, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_37); __pyx_t_37 = 0;
-    if (PyDict_SetItem(__pyx_t_34, __pyx_n_s_columns, __pyx_v_resultHeader) < 0) __PYX_ERR(0, 169, __pyx_L1_error)
-    __pyx_t_37 = __Pyx_PyObject_Call(__pyx_t_29, __pyx_t_35, __pyx_t_34); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 169, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_34, __pyx_n_s_columns, __pyx_v_resultHeader) < 0) __PYX_ERR(0, 170, __pyx_L1_error)
+    __pyx_t_37 = __Pyx_PyObject_Call(__pyx_t_29, __pyx_t_35, __pyx_t_34); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 170, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_37);
     __Pyx_DECREF(__pyx_t_29); __pyx_t_29 = 0;
     __Pyx_DECREF(__pyx_t_35); __pyx_t_35 = 0;
     __Pyx_DECREF(__pyx_t_34); __pyx_t_34 = 0;
-    __pyx_t_34 = __Pyx_PyObject_GetAttrStr(__pyx_t_37, __pyx_n_s_sort_index); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 169, __pyx_L1_error)
+    __pyx_t_34 = __Pyx_PyObject_GetAttrStr(__pyx_t_37, __pyx_n_s_sort_index); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 170, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
     __Pyx_DECREF(__pyx_t_37); __pyx_t_37 = 0;
     __pyx_t_37 = NULL;
@@ -5827,26 +5829,26 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __
       }
     }
     if (__pyx_t_37) {
-      __pyx_t_30 = __Pyx_PyObject_CallOneArg(__pyx_t_34, __pyx_t_37); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 169, __pyx_L1_error)
+      __pyx_t_30 = __Pyx_PyObject_CallOneArg(__pyx_t_34, __pyx_t_37); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 170, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_37); __pyx_t_37 = 0;
     } else {
-      __pyx_t_30 = __Pyx_PyObject_CallNoArg(__pyx_t_34); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 169, __pyx_L1_error)
+      __pyx_t_30 = __Pyx_PyObject_CallNoArg(__pyx_t_34); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 170, __pyx_L1_error)
     }
     __Pyx_GOTREF(__pyx_t_30);
     __Pyx_DECREF(__pyx_t_34); __pyx_t_34 = 0;
     __pyx_v_final_df = __pyx_t_30;
     __pyx_t_30 = 0;
 
-    /* "BATS/FixedTrial.pyx":170
+    /* "BATS/FixedTrial.pyx":171
  *                         "Unconditional Futility(%)", "Unconditional Efficacy(%)", "Unconditional Continuous(%)"]
  *         final_df = pd.DataFrame(final_copy, index=pd.MultiIndex.from_product(final_df_index, names=["Treatment Arm", "Stage"]), columns=resultHeader).sort_index()
  *         final_df.to_csv(pathdir + "FinalResult.csv")             # <<<<<<<<<<<<<<
  * 
  *     del sim_dataset, con_sim_mean_copy, con_futile_mean, con_futile_mean_copy, con_efficacy_mean, con_efficacy_mean_copy, con_continuous_mean, con_continuous_mean_copy, futile_mean, futile_mean_copy, efficacy_mean, efficacy_mean_copy, continuous_mean, continuous_mean_copy, final_copy, con_power
  */
-    __pyx_t_34 = __Pyx_PyObject_GetAttrStr(__pyx_v_final_df, __pyx_n_s_to_csv); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 170, __pyx_L1_error)
+    __pyx_t_34 = __Pyx_PyObject_GetAttrStr(__pyx_v_final_df, __pyx_n_s_to_csv); if (unlikely(!__pyx_t_34)) __PYX_ERR(0, 171, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_34);
-    __pyx_t_37 = PyNumber_Add(__pyx_v_pathdir, __pyx_kp_s_FinalResult_csv); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 170, __pyx_L1_error)
+    __pyx_t_37 = PyNumber_Add(__pyx_v_pathdir, __pyx_kp_s_FinalResult_csv); if (unlikely(!__pyx_t_37)) __PYX_ERR(0, 171, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_37);
     __pyx_t_35 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_34))) {
@@ -5859,17 +5861,17 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __
       }
     }
     if (!__pyx_t_35) {
-      __pyx_t_30 = __Pyx_PyObject_CallOneArg(__pyx_t_34, __pyx_t_37); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 170, __pyx_L1_error)
+      __pyx_t_30 = __Pyx_PyObject_CallOneArg(__pyx_t_34, __pyx_t_37); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 171, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_37); __pyx_t_37 = 0;
       __Pyx_GOTREF(__pyx_t_30);
     } else {
-      __pyx_t_29 = PyTuple_New(1+1); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 170, __pyx_L1_error)
+      __pyx_t_29 = PyTuple_New(1+1); if (unlikely(!__pyx_t_29)) __PYX_ERR(0, 171, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_29);
       __Pyx_GIVEREF(__pyx_t_35); PyTuple_SET_ITEM(__pyx_t_29, 0, __pyx_t_35); __pyx_t_35 = NULL;
       __Pyx_GIVEREF(__pyx_t_37);
       PyTuple_SET_ITEM(__pyx_t_29, 0+1, __pyx_t_37);
       __pyx_t_37 = 0;
-      __pyx_t_30 = __Pyx_PyObject_Call(__pyx_t_34, __pyx_t_29, NULL); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 170, __pyx_L1_error)
+      __pyx_t_30 = __Pyx_PyObject_Call(__pyx_t_34, __pyx_t_29, NULL); if (unlikely(!__pyx_t_30)) __PYX_ERR(0, 171, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_30);
       __Pyx_DECREF(__pyx_t_29); __pyx_t_29 = 0;
     }
@@ -5878,7 +5880,7 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __
   }
   __pyx_L13:;
 
-  /* "BATS/FixedTrial.pyx":172
+  /* "BATS/FixedTrial.pyx":173
  *         final_df.to_csv(pathdir + "FinalResult.csv")
  * 
  *     del sim_dataset, con_sim_mean_copy, con_futile_mean, con_futile_mean_copy, con_efficacy_mean, con_efficacy_mean_copy, con_continuous_mean, con_continuous_mean_copy, futile_mean, futile_mean_copy, efficacy_mean, efficacy_mean_copy, continuous_mean, continuous_mean_copy, final_copy, con_power             # <<<<<<<<<<<<<<
@@ -5917,7 +5919,7 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __
   __Pyx_DECREF(((PyObject *)__pyx_v_con_power));
   __pyx_v_con_power = NULL;
 
-  /* "BATS/FixedTrial.pyx":173
+  /* "BATS/FixedTrial.pyx":174
  * 
  *     del sim_dataset, con_sim_mean_copy, con_futile_mean, con_futile_mean_copy, con_efficacy_mean, con_efficacy_mean_copy, con_continuous_mean, con_continuous_mean_copy, futile_mean, futile_mean_copy, efficacy_mean, efficacy_mean_copy, continuous_mean, continuous_mean_copy, final_copy, con_power
  *     free(sim_dataset_pointer)             # <<<<<<<<<<<<<<
@@ -5926,7 +5928,7 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __
  */
   free(__pyx_v_sim_dataset_pointer);
 
-  /* "BATS/FixedTrial.pyx":174
+  /* "BATS/FixedTrial.pyx":175
  *     del sim_dataset, con_sim_mean_copy, con_futile_mean, con_futile_mean_copy, con_efficacy_mean, con_efficacy_mean_copy, con_continuous_mean, con_continuous_mean_copy, futile_mean, futile_mean_copy, efficacy_mean, efficacy_mean_copy, continuous_mean, continuous_mean_copy, final_copy, con_power
  *     free(sim_dataset_pointer)
  *     free(cpower_array_pointer)             # <<<<<<<<<<<<<<
@@ -5935,7 +5937,7 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __
  */
   free(__pyx_v_cpower_array_pointer);
 
-  /* "BATS/FixedTrial.pyx":176
+  /* "BATS/FixedTrial.pyx":177
  *     free(cpower_array_pointer)
  * 
  *     return 0             # <<<<<<<<<<<<<<
@@ -5947,7 +5949,7 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __
   __pyx_r = __pyx_int_0;
   goto __pyx_L0;
 
-  /* "BATS/FixedTrial.pyx":43
+  /* "BATS/FixedTrial.pyx":44
  * @cython.wraparound(False)
  * @cython.cdivision(True)
  * cdef TrialProgress(str pathdir, list effColHeader, list patColHeader, int nsim, int seed, int nArm, int nStage, double [::1] te_list,             # <<<<<<<<<<<<<<
@@ -6027,7 +6029,7 @@ __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_t_23, 3, (PyObject *(*)(char *)) __
   return __pyx_r;
 }
 
-/* "BATS/FixedTrial.pyx":187
+/* "BATS/FixedTrial.pyx":188
  * 
  * 
  * def TrialSimulation(pathdir, effColHeader, patColHeader, nsim, seed, nArm, nStage, te_list, ns_list, alloc, eff, fut, clinSig, predict, predNum, predSuccess, predClinSig, searchMethod, loadCVL, CVLfile):             # <<<<<<<<<<<<<<
@@ -6101,101 +6103,101 @@ static PyObject *__pyx_pw_4BATS_10FixedTrial_1TrialSimulation(PyObject *__pyx_se
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_effColHeader)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 1); __PYX_ERR(0, 187, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 1); __PYX_ERR(0, 188, __pyx_L3_error)
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_patColHeader)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 2); __PYX_ERR(0, 187, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 2); __PYX_ERR(0, 188, __pyx_L3_error)
         }
         case  3:
         if (likely((values[3] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_nsim)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 3); __PYX_ERR(0, 187, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 3); __PYX_ERR(0, 188, __pyx_L3_error)
         }
         case  4:
         if (likely((values[4] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_seed)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 4); __PYX_ERR(0, 187, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 4); __PYX_ERR(0, 188, __pyx_L3_error)
         }
         case  5:
         if (likely((values[5] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_nArm)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 5); __PYX_ERR(0, 187, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 5); __PYX_ERR(0, 188, __pyx_L3_error)
         }
         case  6:
         if (likely((values[6] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_nStage)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 6); __PYX_ERR(0, 187, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 6); __PYX_ERR(0, 188, __pyx_L3_error)
         }
         case  7:
         if (likely((values[7] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_te_list)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 7); __PYX_ERR(0, 187, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 7); __PYX_ERR(0, 188, __pyx_L3_error)
         }
         case  8:
         if (likely((values[8] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_ns_list)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 8); __PYX_ERR(0, 187, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 8); __PYX_ERR(0, 188, __pyx_L3_error)
         }
         case  9:
         if (likely((values[9] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_alloc)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 9); __PYX_ERR(0, 187, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 9); __PYX_ERR(0, 188, __pyx_L3_error)
         }
         case 10:
         if (likely((values[10] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_eff)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 10); __PYX_ERR(0, 187, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 10); __PYX_ERR(0, 188, __pyx_L3_error)
         }
         case 11:
         if (likely((values[11] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_fut)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 11); __PYX_ERR(0, 187, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 11); __PYX_ERR(0, 188, __pyx_L3_error)
         }
         case 12:
         if (likely((values[12] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_clinSig)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 12); __PYX_ERR(0, 187, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 12); __PYX_ERR(0, 188, __pyx_L3_error)
         }
         case 13:
         if (likely((values[13] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_predict)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 13); __PYX_ERR(0, 187, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 13); __PYX_ERR(0, 188, __pyx_L3_error)
         }
         case 14:
         if (likely((values[14] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_predNum)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 14); __PYX_ERR(0, 187, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 14); __PYX_ERR(0, 188, __pyx_L3_error)
         }
         case 15:
         if (likely((values[15] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_predSuccess)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 15); __PYX_ERR(0, 187, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 15); __PYX_ERR(0, 188, __pyx_L3_error)
         }
         case 16:
         if (likely((values[16] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_predClinSig)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 16); __PYX_ERR(0, 187, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 16); __PYX_ERR(0, 188, __pyx_L3_error)
         }
         case 17:
         if (likely((values[17] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_searchMethod)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 17); __PYX_ERR(0, 187, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 17); __PYX_ERR(0, 188, __pyx_L3_error)
         }
         case 18:
         if (likely((values[18] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_loadCVL)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 18); __PYX_ERR(0, 187, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 18); __PYX_ERR(0, 188, __pyx_L3_error)
         }
         case 19:
         if (likely((values[19] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_CVLfile)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 19); __PYX_ERR(0, 187, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, 19); __PYX_ERR(0, 188, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "TrialSimulation") < 0)) __PYX_ERR(0, 187, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "TrialSimulation") < 0)) __PYX_ERR(0, 188, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 20) {
       goto __pyx_L5_argtuple_error;
@@ -6244,7 +6246,7 @@ static PyObject *__pyx_pw_4BATS_10FixedTrial_1TrialSimulation(PyObject *__pyx_se
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 187, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("TrialSimulation", 1, 20, 20, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 188, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("BATS.FixedTrial.TrialSimulation", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -6299,7 +6301,7 @@ static PyObject *__pyx_pf_4BATS_10FixedTrial_TrialSimulation(CYTHON_UNUSED PyObj
   __Pyx_INCREF(__pyx_v_loadCVL);
   __Pyx_INCREF(__pyx_v_CVLfile);
 
-  /* "BATS/FixedTrial.pyx":190
+  /* "BATS/FixedTrial.pyx":191
  * 
  * 
  *     finish_flag = 0             # <<<<<<<<<<<<<<
@@ -6309,52 +6311,52 @@ static PyObject *__pyx_pf_4BATS_10FixedTrial_TrialSimulation(CYTHON_UNUSED PyObj
   __Pyx_INCREF(__pyx_int_0);
   __pyx_v_finish_flag = __pyx_int_0;
 
-  /* "BATS/FixedTrial.pyx":191
+  /* "BATS/FixedTrial.pyx":192
  * 
  *     finish_flag = 0
  *     if seed == 0:             # <<<<<<<<<<<<<<
  * 
  *         seed = np.random.randint(1, 12345, size=1, dtype = np.intc)
  */
-  __pyx_t_1 = __Pyx_PyInt_EqObjC(__pyx_v_seed, __pyx_int_0, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 191, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_EqObjC(__pyx_v_seed, __pyx_int_0, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 192, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 191, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 192, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_2) {
 
-    /* "BATS/FixedTrial.pyx":193
+    /* "BATS/FixedTrial.pyx":194
  *     if seed == 0:
  * 
  *         seed = np.random.randint(1, 12345, size=1, dtype = np.intc)             # <<<<<<<<<<<<<<
  * 
  *     if predict != 1:
  */
-    __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 193, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 194, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_random); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 193, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_random); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 194, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_randint); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 193, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_randint); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 194, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 193, __pyx_L1_error)
+    __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 194, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_size, __pyx_int_1) < 0) __PYX_ERR(0, 193, __pyx_L1_error)
-    __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 193, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_size, __pyx_int_1) < 0) __PYX_ERR(0, 194, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 194, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_intc); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 193, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_intc); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 194, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 193, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 194, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__10, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 193, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__10, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 194, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF_SET(__pyx_v_seed, __pyx_t_5);
     __pyx_t_5 = 0;
 
-    /* "BATS/FixedTrial.pyx":191
+    /* "BATS/FixedTrial.pyx":192
  * 
  *     finish_flag = 0
  *     if seed == 0:             # <<<<<<<<<<<<<<
@@ -6363,19 +6365,19 @@ static PyObject *__pyx_pf_4BATS_10FixedTrial_TrialSimulation(CYTHON_UNUSED PyObj
  */
   }
 
-  /* "BATS/FixedTrial.pyx":195
+  /* "BATS/FixedTrial.pyx":196
  *         seed = np.random.randint(1, 12345, size=1, dtype = np.intc)
  * 
  *     if predict != 1:             # <<<<<<<<<<<<<<
  * 
  *         predNum = 0
  */
-  __pyx_t_5 = PyObject_RichCompare(__pyx_v_predict, __pyx_int_1, Py_NE); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 195, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 195, __pyx_L1_error)
+  __pyx_t_5 = PyObject_RichCompare(__pyx_v_predict, __pyx_int_1, Py_NE); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 196, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 196, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   if (__pyx_t_2) {
 
-    /* "BATS/FixedTrial.pyx":197
+    /* "BATS/FixedTrial.pyx":198
  *     if predict != 1:
  * 
  *         predNum = 0             # <<<<<<<<<<<<<<
@@ -6385,7 +6387,7 @@ static PyObject *__pyx_pf_4BATS_10FixedTrial_TrialSimulation(CYTHON_UNUSED PyObj
     __Pyx_INCREF(__pyx_int_0);
     __Pyx_DECREF_SET(__pyx_v_predNum, __pyx_int_0);
 
-    /* "BATS/FixedTrial.pyx":198
+    /* "BATS/FixedTrial.pyx":199
  * 
  *         predNum = 0
  *         predSuccess = 0             # <<<<<<<<<<<<<<
@@ -6395,7 +6397,7 @@ static PyObject *__pyx_pf_4BATS_10FixedTrial_TrialSimulation(CYTHON_UNUSED PyObj
     __Pyx_INCREF(__pyx_int_0);
     __Pyx_DECREF_SET(__pyx_v_predSuccess, __pyx_int_0);
 
-    /* "BATS/FixedTrial.pyx":199
+    /* "BATS/FixedTrial.pyx":200
  *         predNum = 0
  *         predSuccess = 0
  *         predClinSig = 0             # <<<<<<<<<<<<<<
@@ -6405,7 +6407,7 @@ static PyObject *__pyx_pf_4BATS_10FixedTrial_TrialSimulation(CYTHON_UNUSED PyObj
     __Pyx_INCREF(__pyx_int_0);
     __Pyx_DECREF_SET(__pyx_v_predClinSig, __pyx_int_0);
 
-    /* "BATS/FixedTrial.pyx":200
+    /* "BATS/FixedTrial.pyx":201
  *         predSuccess = 0
  *         predClinSig = 0
  *         searchMethod = 0             # <<<<<<<<<<<<<<
@@ -6415,7 +6417,7 @@ static PyObject *__pyx_pf_4BATS_10FixedTrial_TrialSimulation(CYTHON_UNUSED PyObj
     __Pyx_INCREF(__pyx_int_0);
     __Pyx_DECREF_SET(__pyx_v_searchMethod, __pyx_int_0);
 
-    /* "BATS/FixedTrial.pyx":201
+    /* "BATS/FixedTrial.pyx":202
  *         predClinSig = 0
  *         searchMethod = 0
  *         loadCVL = 0             # <<<<<<<<<<<<<<
@@ -6425,7 +6427,7 @@ static PyObject *__pyx_pf_4BATS_10FixedTrial_TrialSimulation(CYTHON_UNUSED PyObj
     __Pyx_INCREF(__pyx_int_0);
     __Pyx_DECREF_SET(__pyx_v_loadCVL, __pyx_int_0);
 
-    /* "BATS/FixedTrial.pyx":202
+    /* "BATS/FixedTrial.pyx":203
  *         searchMethod = 0
  *         loadCVL = 0
  *         CVLfile = ""             # <<<<<<<<<<<<<<
@@ -6435,7 +6437,7 @@ static PyObject *__pyx_pf_4BATS_10FixedTrial_TrialSimulation(CYTHON_UNUSED PyObj
     __Pyx_INCREF(__pyx_kp_s_);
     __Pyx_DECREF_SET(__pyx_v_CVLfile, __pyx_kp_s_);
 
-    /* "BATS/FixedTrial.pyx":195
+    /* "BATS/FixedTrial.pyx":196
  *         seed = np.random.randint(1, 12345, size=1, dtype = np.intc)
  * 
  *     if predict != 1:             # <<<<<<<<<<<<<<
@@ -6444,16 +6446,16 @@ static PyObject *__pyx_pf_4BATS_10FixedTrial_TrialSimulation(CYTHON_UNUSED PyObj
  */
   }
 
-  /* "BATS/FixedTrial.pyx":204
+  /* "BATS/FixedTrial.pyx":205
  *         CVLfile = ""
  * 
  *     te_list = np.array(te_list)             # <<<<<<<<<<<<<<
  *     ns_list = np.array(ns_list, dtype = np.intc)
  * 
  */
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 204, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 205, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_array); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 204, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_array); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 205, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = NULL;
@@ -6467,16 +6469,16 @@ static PyObject *__pyx_pf_4BATS_10FixedTrial_TrialSimulation(CYTHON_UNUSED PyObj
     }
   }
   if (!__pyx_t_3) {
-    __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v_te_list); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 204, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v_te_list); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 205, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
   } else {
-    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 204, __pyx_L1_error)
+    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 205, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3); __pyx_t_3 = NULL;
     __Pyx_INCREF(__pyx_v_te_list);
     __Pyx_GIVEREF(__pyx_v_te_list);
     PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_te_list);
-    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_4, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 204, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_4, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 205, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
@@ -6484,33 +6486,33 @@ static PyObject *__pyx_pf_4BATS_10FixedTrial_TrialSimulation(CYTHON_UNUSED PyObj
   __Pyx_DECREF_SET(__pyx_v_te_list, __pyx_t_5);
   __pyx_t_5 = 0;
 
-  /* "BATS/FixedTrial.pyx":205
+  /* "BATS/FixedTrial.pyx":206
  * 
  *     te_list = np.array(te_list)
  *     ns_list = np.array(ns_list, dtype = np.intc)             # <<<<<<<<<<<<<<
  * 
  *     start_time = time.time()
  */
-  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 205, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 206, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_array); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 205, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_array); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 206, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 205, __pyx_L1_error)
+  __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 206, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_INCREF(__pyx_v_ns_list);
   __Pyx_GIVEREF(__pyx_v_ns_list);
   PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_v_ns_list);
-  __pyx_t_4 = PyDict_New(); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 205, __pyx_L1_error)
+  __pyx_t_4 = PyDict_New(); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 206, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 205, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 206, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_intc); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 205, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_intc); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 206, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_dtype, __pyx_t_6) < 0) __PYX_ERR(0, 205, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_dtype, __pyx_t_6) < 0) __PYX_ERR(0, 206, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_5, __pyx_t_4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 205, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_5, __pyx_t_4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 206, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -6518,16 +6520,16 @@ static PyObject *__pyx_pf_4BATS_10FixedTrial_TrialSimulation(CYTHON_UNUSED PyObj
   __Pyx_DECREF_SET(__pyx_v_ns_list, __pyx_t_6);
   __pyx_t_6 = 0;
 
-  /* "BATS/FixedTrial.pyx":207
+  /* "BATS/FixedTrial.pyx":208
  *     ns_list = np.array(ns_list, dtype = np.intc)
  * 
  *     start_time = time.time()             # <<<<<<<<<<<<<<
  *     # inpathdir = bytes(pathdir, "utf-8")
  *     # inCVLfile = bytes(CVLfile, "utf-8")
  */
-  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_time); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 207, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_time); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 208, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_time); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 207, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_time); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 208, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_t_4 = NULL;
@@ -6541,76 +6543,76 @@ static PyObject *__pyx_pf_4BATS_10FixedTrial_TrialSimulation(CYTHON_UNUSED PyObj
     }
   }
   if (__pyx_t_4) {
-    __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 207, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 208, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   } else {
-    __pyx_t_6 = __Pyx_PyObject_CallNoArg(__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 207, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_CallNoArg(__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 208, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_start_time = __pyx_t_6;
   __pyx_t_6 = 0;
 
-  /* "BATS/FixedTrial.pyx":211
+  /* "BATS/FixedTrial.pyx":212
  *     # inCVLfile = bytes(CVLfile, "utf-8")
  *     # Get futility, efficacy, stop for each arm and stop totally
  *     if predict == 1:             # <<<<<<<<<<<<<<
  * 
  *         finish_flag = TrialProgress(pathdir, effColHeader, patColHeader, nsim, seed, nArm, nStage, te_list, ns_list, alloc, eff, fut,
  */
-  __pyx_t_6 = __Pyx_PyInt_EqObjC(__pyx_v_predict, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 211, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyInt_EqObjC(__pyx_v_predict, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 212, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 211, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 212, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   if (__pyx_t_2) {
 
-    /* "BATS/FixedTrial.pyx":213
+    /* "BATS/FixedTrial.pyx":214
  *     if predict == 1:
  * 
  *         finish_flag = TrialProgress(pathdir, effColHeader, patColHeader, nsim, seed, nArm, nStage, te_list, ns_list, alloc, eff, fut,             # <<<<<<<<<<<<<<
  *                                                                clinSig, predict, predNum, predSuccess, predClinSig, searchMethod, loadCVL,
  *                                                                CVLfile)
  */
-    if (!(likely(PyString_CheckExact(__pyx_v_pathdir))||((__pyx_v_pathdir) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_pathdir)->tp_name), 0))) __PYX_ERR(0, 213, __pyx_L1_error)
-    if (!(likely(PyList_CheckExact(__pyx_v_effColHeader))||((__pyx_v_effColHeader) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_effColHeader)->tp_name), 0))) __PYX_ERR(0, 213, __pyx_L1_error)
-    if (!(likely(PyList_CheckExact(__pyx_v_patColHeader))||((__pyx_v_patColHeader) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_patColHeader)->tp_name), 0))) __PYX_ERR(0, 213, __pyx_L1_error)
-    __pyx_t_7 = __Pyx_PyInt_As_int(__pyx_v_nsim); if (unlikely((__pyx_t_7 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 213, __pyx_L1_error)
-    __pyx_t_8 = __Pyx_PyInt_As_int(__pyx_v_seed); if (unlikely((__pyx_t_8 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 213, __pyx_L1_error)
-    __pyx_t_9 = __Pyx_PyInt_As_int(__pyx_v_nArm); if (unlikely((__pyx_t_9 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 213, __pyx_L1_error)
-    __pyx_t_10 = __Pyx_PyInt_As_int(__pyx_v_nStage); if (unlikely((__pyx_t_10 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 213, __pyx_L1_error)
+    if (!(likely(PyString_CheckExact(__pyx_v_pathdir))||((__pyx_v_pathdir) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_pathdir)->tp_name), 0))) __PYX_ERR(0, 214, __pyx_L1_error)
+    if (!(likely(PyList_CheckExact(__pyx_v_effColHeader))||((__pyx_v_effColHeader) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_effColHeader)->tp_name), 0))) __PYX_ERR(0, 214, __pyx_L1_error)
+    if (!(likely(PyList_CheckExact(__pyx_v_patColHeader))||((__pyx_v_patColHeader) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_patColHeader)->tp_name), 0))) __PYX_ERR(0, 214, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyInt_As_int(__pyx_v_nsim); if (unlikely((__pyx_t_7 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 214, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyInt_As_int(__pyx_v_seed); if (unlikely((__pyx_t_8 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 214, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyInt_As_int(__pyx_v_nArm); if (unlikely((__pyx_t_9 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 214, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyInt_As_int(__pyx_v_nStage); if (unlikely((__pyx_t_10 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 214, __pyx_L1_error)
     __pyx_t_11 = __Pyx_PyObject_to_MemoryviewSlice_dc_double(__pyx_v_te_list);
-    if (unlikely(!__pyx_t_11.memview)) __PYX_ERR(0, 213, __pyx_L1_error)
+    if (unlikely(!__pyx_t_11.memview)) __PYX_ERR(0, 214, __pyx_L1_error)
     __pyx_t_12 = __Pyx_PyObject_to_MemoryviewSlice_dc_int(__pyx_v_ns_list);
-    if (unlikely(!__pyx_t_12.memview)) __PYX_ERR(0, 213, __pyx_L1_error)
-    __pyx_t_13 = __pyx_PyFloat_AsFloat(__pyx_v_alloc); if (unlikely((__pyx_t_13 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 213, __pyx_L1_error)
-    __pyx_t_14 = __pyx_PyFloat_AsFloat(__pyx_v_eff); if (unlikely((__pyx_t_14 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 213, __pyx_L1_error)
-    __pyx_t_15 = __pyx_PyFloat_AsFloat(__pyx_v_fut); if (unlikely((__pyx_t_15 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 213, __pyx_L1_error)
+    if (unlikely(!__pyx_t_12.memview)) __PYX_ERR(0, 214, __pyx_L1_error)
+    __pyx_t_13 = __pyx_PyFloat_AsFloat(__pyx_v_alloc); if (unlikely((__pyx_t_13 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 214, __pyx_L1_error)
+    __pyx_t_14 = __pyx_PyFloat_AsFloat(__pyx_v_eff); if (unlikely((__pyx_t_14 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 214, __pyx_L1_error)
+    __pyx_t_15 = __pyx_PyFloat_AsFloat(__pyx_v_fut); if (unlikely((__pyx_t_15 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 214, __pyx_L1_error)
 
-    /* "BATS/FixedTrial.pyx":214
+    /* "BATS/FixedTrial.pyx":215
  * 
  *         finish_flag = TrialProgress(pathdir, effColHeader, patColHeader, nsim, seed, nArm, nStage, te_list, ns_list, alloc, eff, fut,
  *                                                                clinSig, predict, predNum, predSuccess, predClinSig, searchMethod, loadCVL,             # <<<<<<<<<<<<<<
  *                                                                CVLfile)
  * 
  */
-    __pyx_t_16 = __pyx_PyFloat_AsFloat(__pyx_v_clinSig); if (unlikely((__pyx_t_16 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 214, __pyx_L1_error)
-    __pyx_t_17 = __Pyx_PyInt_As_int(__pyx_v_predict); if (unlikely((__pyx_t_17 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 214, __pyx_L1_error)
-    __pyx_t_18 = __Pyx_PyInt_As_int(__pyx_v_predNum); if (unlikely((__pyx_t_18 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 214, __pyx_L1_error)
-    __pyx_t_19 = __pyx_PyFloat_AsFloat(__pyx_v_predSuccess); if (unlikely((__pyx_t_19 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 214, __pyx_L1_error)
-    __pyx_t_20 = __pyx_PyFloat_AsFloat(__pyx_v_predClinSig); if (unlikely((__pyx_t_20 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 214, __pyx_L1_error)
-    __pyx_t_21 = __Pyx_PyInt_As_int(__pyx_v_searchMethod); if (unlikely((__pyx_t_21 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 214, __pyx_L1_error)
-    __pyx_t_22 = __Pyx_PyInt_As_int(__pyx_v_loadCVL); if (unlikely((__pyx_t_22 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 214, __pyx_L1_error)
+    __pyx_t_16 = __pyx_PyFloat_AsFloat(__pyx_v_clinSig); if (unlikely((__pyx_t_16 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 215, __pyx_L1_error)
+    __pyx_t_17 = __Pyx_PyInt_As_int(__pyx_v_predict); if (unlikely((__pyx_t_17 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 215, __pyx_L1_error)
+    __pyx_t_18 = __Pyx_PyInt_As_int(__pyx_v_predNum); if (unlikely((__pyx_t_18 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 215, __pyx_L1_error)
+    __pyx_t_19 = __pyx_PyFloat_AsFloat(__pyx_v_predSuccess); if (unlikely((__pyx_t_19 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 215, __pyx_L1_error)
+    __pyx_t_20 = __pyx_PyFloat_AsFloat(__pyx_v_predClinSig); if (unlikely((__pyx_t_20 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 215, __pyx_L1_error)
+    __pyx_t_21 = __Pyx_PyInt_As_int(__pyx_v_searchMethod); if (unlikely((__pyx_t_21 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 215, __pyx_L1_error)
+    __pyx_t_22 = __Pyx_PyInt_As_int(__pyx_v_loadCVL); if (unlikely((__pyx_t_22 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 215, __pyx_L1_error)
 
-    /* "BATS/FixedTrial.pyx":215
+    /* "BATS/FixedTrial.pyx":216
  *         finish_flag = TrialProgress(pathdir, effColHeader, patColHeader, nsim, seed, nArm, nStage, te_list, ns_list, alloc, eff, fut,
  *                                                                clinSig, predict, predNum, predSuccess, predClinSig, searchMethod, loadCVL,
  *                                                                CVLfile)             # <<<<<<<<<<<<<<
  * 
  * 
  */
-    if (!(likely(PyString_CheckExact(__pyx_v_CVLfile))||((__pyx_v_CVLfile) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_CVLfile)->tp_name), 0))) __PYX_ERR(0, 215, __pyx_L1_error)
+    if (!(likely(PyString_CheckExact(__pyx_v_CVLfile))||((__pyx_v_CVLfile) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_CVLfile)->tp_name), 0))) __PYX_ERR(0, 216, __pyx_L1_error)
 
-    /* "BATS/FixedTrial.pyx":213
+    /* "BATS/FixedTrial.pyx":214
  *     if predict == 1:
  * 
  *         finish_flag = TrialProgress(pathdir, effColHeader, patColHeader, nsim, seed, nArm, nStage, te_list, ns_list, alloc, eff, fut,             # <<<<<<<<<<<<<<
@@ -6625,14 +6627,14 @@ static PyObject *__pyx_pf_4BATS_10FixedTrial_TrialSimulation(CYTHON_UNUSED PyObj
     __pyx_t_23.searchMethod = __pyx_t_21;
     __pyx_t_23.loadCVL = __pyx_t_22;
     __pyx_t_23.CVLfile = ((PyObject*)__pyx_v_CVLfile);
-    __pyx_t_6 = __pyx_f_4BATS_10FixedTrial_TrialProgress(((PyObject*)__pyx_v_pathdir), ((PyObject*)__pyx_v_effColHeader), ((PyObject*)__pyx_v_patColHeader), __pyx_t_7, __pyx_t_8, __pyx_t_9, __pyx_t_10, __pyx_t_11, __pyx_t_12, __pyx_t_13, __pyx_t_14, __pyx_t_15, __pyx_t_16, &__pyx_t_23); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 213, __pyx_L1_error)
+    __pyx_t_6 = __pyx_f_4BATS_10FixedTrial_TrialProgress(((PyObject*)__pyx_v_pathdir), ((PyObject*)__pyx_v_effColHeader), ((PyObject*)__pyx_v_patColHeader), __pyx_t_7, __pyx_t_8, __pyx_t_9, __pyx_t_10, __pyx_t_11, __pyx_t_12, __pyx_t_13, __pyx_t_14, __pyx_t_15, __pyx_t_16, &__pyx_t_23); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 214, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __PYX_XDEC_MEMVIEW(&__pyx_t_11, 1);
     __PYX_XDEC_MEMVIEW(&__pyx_t_12, 1);
     __Pyx_DECREF_SET(__pyx_v_finish_flag, __pyx_t_6);
     __pyx_t_6 = 0;
 
-    /* "BATS/FixedTrial.pyx":211
+    /* "BATS/FixedTrial.pyx":212
  *     # inCVLfile = bytes(CVLfile, "utf-8")
  *     # Get futility, efficacy, stop for each arm and stop totally
  *     if predict == 1:             # <<<<<<<<<<<<<<
@@ -6642,7 +6644,7 @@ static PyObject *__pyx_pf_4BATS_10FixedTrial_TrialSimulation(CYTHON_UNUSED PyObj
     goto __pyx_L5;
   }
 
-  /* "BATS/FixedTrial.pyx":220
+  /* "BATS/FixedTrial.pyx":221
  *     else:
  * 
  *         finish_flag = TrialProgress(pathdir, effColHeader, patColHeader, nsim, seed, nArm, nStage, te_list, ns_list, alloc, eff, fut,             # <<<<<<<<<<<<<<
@@ -6650,46 +6652,46 @@ static PyObject *__pyx_pf_4BATS_10FixedTrial_TrialSimulation(CYTHON_UNUSED PyObj
  *                                                                CVLfile)
  */
   /*else*/ {
-    if (!(likely(PyString_CheckExact(__pyx_v_pathdir))||((__pyx_v_pathdir) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_pathdir)->tp_name), 0))) __PYX_ERR(0, 220, __pyx_L1_error)
-    if (!(likely(PyList_CheckExact(__pyx_v_effColHeader))||((__pyx_v_effColHeader) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_effColHeader)->tp_name), 0))) __PYX_ERR(0, 220, __pyx_L1_error)
-    if (!(likely(PyList_CheckExact(__pyx_v_patColHeader))||((__pyx_v_patColHeader) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_patColHeader)->tp_name), 0))) __PYX_ERR(0, 220, __pyx_L1_error)
-    __pyx_t_22 = __Pyx_PyInt_As_int(__pyx_v_nsim); if (unlikely((__pyx_t_22 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 220, __pyx_L1_error)
-    __pyx_t_21 = __Pyx_PyInt_As_int(__pyx_v_seed); if (unlikely((__pyx_t_21 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 220, __pyx_L1_error)
-    __pyx_t_18 = __Pyx_PyInt_As_int(__pyx_v_nArm); if (unlikely((__pyx_t_18 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 220, __pyx_L1_error)
-    __pyx_t_17 = __Pyx_PyInt_As_int(__pyx_v_nStage); if (unlikely((__pyx_t_17 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 220, __pyx_L1_error)
+    if (!(likely(PyString_CheckExact(__pyx_v_pathdir))||((__pyx_v_pathdir) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_pathdir)->tp_name), 0))) __PYX_ERR(0, 221, __pyx_L1_error)
+    if (!(likely(PyList_CheckExact(__pyx_v_effColHeader))||((__pyx_v_effColHeader) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_effColHeader)->tp_name), 0))) __PYX_ERR(0, 221, __pyx_L1_error)
+    if (!(likely(PyList_CheckExact(__pyx_v_patColHeader))||((__pyx_v_patColHeader) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_v_patColHeader)->tp_name), 0))) __PYX_ERR(0, 221, __pyx_L1_error)
+    __pyx_t_22 = __Pyx_PyInt_As_int(__pyx_v_nsim); if (unlikely((__pyx_t_22 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 221, __pyx_L1_error)
+    __pyx_t_21 = __Pyx_PyInt_As_int(__pyx_v_seed); if (unlikely((__pyx_t_21 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 221, __pyx_L1_error)
+    __pyx_t_18 = __Pyx_PyInt_As_int(__pyx_v_nArm); if (unlikely((__pyx_t_18 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 221, __pyx_L1_error)
+    __pyx_t_17 = __Pyx_PyInt_As_int(__pyx_v_nStage); if (unlikely((__pyx_t_17 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 221, __pyx_L1_error)
     __pyx_t_11 = __Pyx_PyObject_to_MemoryviewSlice_dc_double(__pyx_v_te_list);
-    if (unlikely(!__pyx_t_11.memview)) __PYX_ERR(0, 220, __pyx_L1_error)
+    if (unlikely(!__pyx_t_11.memview)) __PYX_ERR(0, 221, __pyx_L1_error)
     __pyx_t_12 = __Pyx_PyObject_to_MemoryviewSlice_dc_int(__pyx_v_ns_list);
-    if (unlikely(!__pyx_t_12.memview)) __PYX_ERR(0, 220, __pyx_L1_error)
-    __pyx_t_20 = __pyx_PyFloat_AsFloat(__pyx_v_alloc); if (unlikely((__pyx_t_20 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 220, __pyx_L1_error)
-    __pyx_t_19 = __pyx_PyFloat_AsFloat(__pyx_v_eff); if (unlikely((__pyx_t_19 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 220, __pyx_L1_error)
-    __pyx_t_16 = __pyx_PyFloat_AsFloat(__pyx_v_fut); if (unlikely((__pyx_t_16 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 220, __pyx_L1_error)
+    if (unlikely(!__pyx_t_12.memview)) __PYX_ERR(0, 221, __pyx_L1_error)
+    __pyx_t_20 = __pyx_PyFloat_AsFloat(__pyx_v_alloc); if (unlikely((__pyx_t_20 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 221, __pyx_L1_error)
+    __pyx_t_19 = __pyx_PyFloat_AsFloat(__pyx_v_eff); if (unlikely((__pyx_t_19 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 221, __pyx_L1_error)
+    __pyx_t_16 = __pyx_PyFloat_AsFloat(__pyx_v_fut); if (unlikely((__pyx_t_16 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 221, __pyx_L1_error)
 
-    /* "BATS/FixedTrial.pyx":221
+    /* "BATS/FixedTrial.pyx":222
  * 
  *         finish_flag = TrialProgress(pathdir, effColHeader, patColHeader, nsim, seed, nArm, nStage, te_list, ns_list, alloc, eff, fut,
  *                                                                clinSig, predict, predNum, predSuccess, predClinSig, searchMethod, loadCVL,             # <<<<<<<<<<<<<<
  *                                                                CVLfile)
  * 
  */
-    __pyx_t_15 = __pyx_PyFloat_AsFloat(__pyx_v_clinSig); if (unlikely((__pyx_t_15 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 221, __pyx_L1_error)
-    __pyx_t_10 = __Pyx_PyInt_As_int(__pyx_v_predict); if (unlikely((__pyx_t_10 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 221, __pyx_L1_error)
-    __pyx_t_9 = __Pyx_PyInt_As_int(__pyx_v_predNum); if (unlikely((__pyx_t_9 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 221, __pyx_L1_error)
-    __pyx_t_14 = __pyx_PyFloat_AsFloat(__pyx_v_predSuccess); if (unlikely((__pyx_t_14 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 221, __pyx_L1_error)
-    __pyx_t_13 = __pyx_PyFloat_AsFloat(__pyx_v_predClinSig); if (unlikely((__pyx_t_13 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 221, __pyx_L1_error)
-    __pyx_t_8 = __Pyx_PyInt_As_int(__pyx_v_searchMethod); if (unlikely((__pyx_t_8 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 221, __pyx_L1_error)
-    __pyx_t_7 = __Pyx_PyInt_As_int(__pyx_v_loadCVL); if (unlikely((__pyx_t_7 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 221, __pyx_L1_error)
+    __pyx_t_15 = __pyx_PyFloat_AsFloat(__pyx_v_clinSig); if (unlikely((__pyx_t_15 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 222, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyInt_As_int(__pyx_v_predict); if (unlikely((__pyx_t_10 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 222, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyInt_As_int(__pyx_v_predNum); if (unlikely((__pyx_t_9 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 222, __pyx_L1_error)
+    __pyx_t_14 = __pyx_PyFloat_AsFloat(__pyx_v_predSuccess); if (unlikely((__pyx_t_14 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 222, __pyx_L1_error)
+    __pyx_t_13 = __pyx_PyFloat_AsFloat(__pyx_v_predClinSig); if (unlikely((__pyx_t_13 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 222, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyInt_As_int(__pyx_v_searchMethod); if (unlikely((__pyx_t_8 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 222, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyInt_As_int(__pyx_v_loadCVL); if (unlikely((__pyx_t_7 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 222, __pyx_L1_error)
 
-    /* "BATS/FixedTrial.pyx":222
+    /* "BATS/FixedTrial.pyx":223
  *         finish_flag = TrialProgress(pathdir, effColHeader, patColHeader, nsim, seed, nArm, nStage, te_list, ns_list, alloc, eff, fut,
  *                                                                clinSig, predict, predNum, predSuccess, predClinSig, searchMethod, loadCVL,
  *                                                                CVLfile)             # <<<<<<<<<<<<<<
  * 
  *     import gc
  */
-    if (!(likely(PyString_CheckExact(__pyx_v_CVLfile))||((__pyx_v_CVLfile) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_CVLfile)->tp_name), 0))) __PYX_ERR(0, 222, __pyx_L1_error)
+    if (!(likely(PyString_CheckExact(__pyx_v_CVLfile))||((__pyx_v_CVLfile) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "str", Py_TYPE(__pyx_v_CVLfile)->tp_name), 0))) __PYX_ERR(0, 223, __pyx_L1_error)
 
-    /* "BATS/FixedTrial.pyx":220
+    /* "BATS/FixedTrial.pyx":221
  *     else:
  * 
  *         finish_flag = TrialProgress(pathdir, effColHeader, patColHeader, nsim, seed, nArm, nStage, te_list, ns_list, alloc, eff, fut,             # <<<<<<<<<<<<<<
@@ -6704,7 +6706,7 @@ static PyObject *__pyx_pf_4BATS_10FixedTrial_TrialSimulation(CYTHON_UNUSED PyObj
     __pyx_t_23.searchMethod = __pyx_t_8;
     __pyx_t_23.loadCVL = __pyx_t_7;
     __pyx_t_23.CVLfile = ((PyObject*)__pyx_v_CVLfile);
-    __pyx_t_6 = __pyx_f_4BATS_10FixedTrial_TrialProgress(((PyObject*)__pyx_v_pathdir), ((PyObject*)__pyx_v_effColHeader), ((PyObject*)__pyx_v_patColHeader), __pyx_t_22, __pyx_t_21, __pyx_t_18, __pyx_t_17, __pyx_t_11, __pyx_t_12, __pyx_t_20, __pyx_t_19, __pyx_t_16, __pyx_t_15, &__pyx_t_23); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 220, __pyx_L1_error)
+    __pyx_t_6 = __pyx_f_4BATS_10FixedTrial_TrialProgress(((PyObject*)__pyx_v_pathdir), ((PyObject*)__pyx_v_effColHeader), ((PyObject*)__pyx_v_patColHeader), __pyx_t_22, __pyx_t_21, __pyx_t_18, __pyx_t_17, __pyx_t_11, __pyx_t_12, __pyx_t_20, __pyx_t_19, __pyx_t_16, __pyx_t_15, &__pyx_t_23); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 221, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __PYX_XDEC_MEMVIEW(&__pyx_t_11, 1);
     __PYX_XDEC_MEMVIEW(&__pyx_t_12, 1);
@@ -6713,26 +6715,26 @@ static PyObject *__pyx_pf_4BATS_10FixedTrial_TrialSimulation(CYTHON_UNUSED PyObj
   }
   __pyx_L5:;
 
-  /* "BATS/FixedTrial.pyx":224
+  /* "BATS/FixedTrial.pyx":225
  *                                                                CVLfile)
  * 
  *     import gc             # <<<<<<<<<<<<<<
  *     gc.collect()
  * 
  */
-  __pyx_t_6 = __Pyx_Import(__pyx_n_s_gc, 0, -1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 224, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_Import(__pyx_n_s_gc, 0, -1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 225, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_v_gc = __pyx_t_6;
   __pyx_t_6 = 0;
 
-  /* "BATS/FixedTrial.pyx":225
+  /* "BATS/FixedTrial.pyx":226
  * 
  *     import gc
  *     gc.collect()             # <<<<<<<<<<<<<<
  * 
  *     finish_time = np.around(time.time() - start_time, 3)
  */
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_gc, __pyx_n_s_collect); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 225, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_gc, __pyx_n_s_collect); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 226, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_4 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_5))) {
@@ -6745,30 +6747,30 @@ static PyObject *__pyx_pf_4BATS_10FixedTrial_TrialSimulation(CYTHON_UNUSED PyObj
     }
   }
   if (__pyx_t_4) {
-    __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 225, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 226, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   } else {
-    __pyx_t_6 = __Pyx_PyObject_CallNoArg(__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 225, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_CallNoArg(__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 226, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "BATS/FixedTrial.pyx":227
+  /* "BATS/FixedTrial.pyx":228
  *     gc.collect()
  * 
  *     finish_time = np.around(time.time() - start_time, 3)             # <<<<<<<<<<<<<<
  *     sys.stdout.write("Time used: %s secs"%str(finish_time))
  * 
  */
-  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 227, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 228, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_around); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 227, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_around); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 228, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_time); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 227, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_time); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 228, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_time); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 227, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_time); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 228, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = NULL;
@@ -6782,14 +6784,14 @@ static PyObject *__pyx_pf_4BATS_10FixedTrial_TrialSimulation(CYTHON_UNUSED PyObj
     }
   }
   if (__pyx_t_1) {
-    __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 227, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 228, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   } else {
-    __pyx_t_5 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 227, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 228, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyNumber_Subtract(__pyx_t_5, __pyx_v_start_time); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 227, __pyx_L1_error)
+  __pyx_t_3 = PyNumber_Subtract(__pyx_t_5, __pyx_v_start_time); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 228, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_5 = NULL;
@@ -6804,7 +6806,7 @@ static PyObject *__pyx_pf_4BATS_10FixedTrial_TrialSimulation(CYTHON_UNUSED PyObj
       __pyx_t_24 = 1;
     }
   }
-  __pyx_t_1 = PyTuple_New(2+__pyx_t_24); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 227, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(2+__pyx_t_24); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 228, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (__pyx_t_5) {
     __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -6815,37 +6817,37 @@ static PyObject *__pyx_pf_4BATS_10FixedTrial_TrialSimulation(CYTHON_UNUSED PyObj
   __Pyx_GIVEREF(__pyx_int_3);
   PyTuple_SET_ITEM(__pyx_t_1, 1+__pyx_t_24, __pyx_int_3);
   __pyx_t_3 = 0;
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_1, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 227, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_1, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 228, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_finish_time = __pyx_t_6;
   __pyx_t_6 = 0;
 
-  /* "BATS/FixedTrial.pyx":228
+  /* "BATS/FixedTrial.pyx":229
  * 
  *     finish_time = np.around(time.time() - start_time, 3)
  *     sys.stdout.write("Time used: %s secs"%str(finish_time))             # <<<<<<<<<<<<<<
  * 
  *     return finish_flag
  */
-  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 228, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 229, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_stdout); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 228, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_stdout); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 229, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 228, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 229, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 228, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 229, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_v_finish_time);
   __Pyx_GIVEREF(__pyx_v_finish_time);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_finish_time);
-  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 228, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 229, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyString_Format(__pyx_kp_s_Time_used_s_secs, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 228, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyString_Format(__pyx_kp_s_Time_used_s_secs, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 229, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = NULL;
@@ -6859,24 +6861,24 @@ static PyObject *__pyx_pf_4BATS_10FixedTrial_TrialSimulation(CYTHON_UNUSED PyObj
     }
   }
   if (!__pyx_t_3) {
-    __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 228, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 229, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_GOTREF(__pyx_t_6);
   } else {
-    __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 228, __pyx_L1_error)
+    __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 229, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3); __pyx_t_3 = NULL;
     __Pyx_GIVEREF(__pyx_t_1);
     PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_t_1);
     __pyx_t_1 = 0;
-    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 228, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 229, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "BATS/FixedTrial.pyx":230
+  /* "BATS/FixedTrial.pyx":231
  *     sys.stdout.write("Time used: %s secs"%str(finish_time))
  * 
  *     return finish_flag             # <<<<<<<<<<<<<<
@@ -6887,7 +6889,7 @@ static PyObject *__pyx_pf_4BATS_10FixedTrial_TrialSimulation(CYTHON_UNUSED PyObj
   __pyx_r = __pyx_v_finish_flag;
   goto __pyx_L0;
 
-  /* "BATS/FixedTrial.pyx":187
+  /* "BATS/FixedTrial.pyx":188
  * 
  * 
  * def TrialSimulation(pathdir, effColHeader, patColHeader, nsim, seed, nArm, nStage, te_list, ns_list, alloc, eff, fut, clinSig, predict, predNum, predSuccess, predClinSig, searchMethod, loadCVL, CVLfile):             # <<<<<<<<<<<<<<
@@ -21698,6 +21700,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_b_O, __pyx_k_O, sizeof(__pyx_k_O), 0, 0, 0, 1},
   {&__pyx_kp_s_Out_of_bounds_on_buffer_access_a, __pyx_k_Out_of_bounds_on_buffer_access_a, sizeof(__pyx_k_Out_of_bounds_on_buffer_access_a), 0, 0, 1, 0},
   {&__pyx_kp_s_Patients_of_each_arm_at_each_st, __pyx_k_Patients_of_each_arm_at_each_st, sizeof(__pyx_k_Patients_of_each_arm_at_each_st), 0, 0, 1, 0},
+  {&__pyx_n_s_PredictiveCheck, __pyx_k_PredictiveCheck, sizeof(__pyx_k_PredictiveCheck), 0, 0, 1, 1},
   {&__pyx_n_s_PredictiveProbability, __pyx_k_PredictiveProbability, sizeof(__pyx_k_PredictiveProbability), 0, 0, 1, 1},
   {&__pyx_kp_s_Predictive_Probability, __pyx_k_Predictive_Probability, sizeof(__pyx_k_Predictive_Probability), 0, 0, 1, 0},
   {&__pyx_n_s_RVGamma, __pyx_k_RVGamma, sizeof(__pyx_k_RVGamma), 0, 0, 1, 1},
@@ -21828,8 +21831,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 57, __pyx_L1_error)
-  __pyx_builtin_max = __Pyx_GetBuiltinName(__pyx_n_s_max); if (!__pyx_builtin_max) __PYX_ERR(0, 78, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 58, __pyx_L1_error)
+  __pyx_builtin_max = __Pyx_GetBuiltinName(__pyx_n_s_max); if (!__pyx_builtin_max) __PYX_ERR(0, 79, __pyx_L1_error)
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(1, 218, __pyx_L1_error)
   __pyx_builtin_RuntimeError = __Pyx_GetBuiltinName(__pyx_n_s_RuntimeError); if (!__pyx_builtin_RuntimeError) __PYX_ERR(1, 799, __pyx_L1_error)
   __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(2, 146, __pyx_L1_error)
@@ -21847,91 +21850,91 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "BATS/FixedTrial.pyx":65
+  /* "BATS/FixedTrial.pyx":66
  *     cdef int [:, ::1] tps_array = np.cumsum(ps_array, axis=1, dtype = np.intc)
  *     # Patients at each stage at each arm
  *     sys.stdout.write("\nPatients of each arm at each stage:")             # <<<<<<<<<<<<<<
  *     df_ps_array = pd.DataFrame(np.transpose(ps_array), index= patColHeader, columns= effColHeader)
  *     sys.stdout.write(df_ps_array)
  */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_Patients_of_each_arm_at_each_st); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 65, __pyx_L1_error)
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_Patients_of_each_arm_at_each_st); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 66, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "BATS/FixedTrial.pyx":75
+  /* "BATS/FixedTrial.pyx":76
  *         treatment_add, control_add = AllocFinder.BestPatientAllocation(nArm, alloc, predNum)
  *         patnum_string = "Number of patient:\t" + str(treatment_add) + "\t" + str(control_add)
  *         sys.stdout.write("\nThe best added patients assignment: ")             # <<<<<<<<<<<<<<
  *         sys.stdout.write("\tTreatment:                       \tControl:")
  *         sys.stdout.write(patnum_string)
  */
-  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_s_The_best_added_patients_assignm); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 75, __pyx_L1_error)
+  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_s_The_best_added_patients_assignm); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
 
-  /* "BATS/FixedTrial.pyx":76
+  /* "BATS/FixedTrial.pyx":77
  *         patnum_string = "Number of patient:\t" + str(treatment_add) + "\t" + str(control_add)
  *         sys.stdout.write("\nThe best added patients assignment: ")
  *         sys.stdout.write("\tTreatment:                       \tControl:")             # <<<<<<<<<<<<<<
  *         sys.stdout.write(patnum_string)
  *         max_tps = max(treatment_add, control_add) + max(tps_array[:, nStage - 1]) +  1
  */
-  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_s_Treatment_Control); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 76, __pyx_L1_error)
+  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_s_Treatment_Control); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 77, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__5);
   __Pyx_GIVEREF(__pyx_tuple__5);
 
-  /* "BATS/FixedTrial.pyx":115
+  /* "BATS/FixedTrial.pyx":116
  *     if predict == 1:
  * 
  *         sys.stdout.write("Calculate posterior predictive probability...")             # <<<<<<<<<<<<<<
- *         predictflag = PredictiveProbability.PredictiveProbability(nsim, nArm, nStage, predSuccess, predClinSig,  searchMethod, loadCVL,
+ *         predictflag = PredictiveProbability.PredictiveCheck(nsim, nArm, nStage, predSuccess, predClinSig,  searchMethod, loadCVL,
  *                                 CVLfile, treatment_add, control_add, sim_dataset, tps_array, gamma_nsim, gamma_vect, cpower_array,
  */
-  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_s_Calculate_posterior_predictive_p); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 115, __pyx_L1_error)
+  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_s_Calculate_posterior_predictive_p); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 116, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
 
-  /* "BATS/FixedTrial.pyx":124
+  /* "BATS/FixedTrial.pyx":125
  *             return 1
  * 
  *         sys.stdout.write("Generate results...")             # <<<<<<<<<<<<<<
  *         con_sim_mean_copy = np.around(np.mean(sim_dataset[0:(nArm - 1), :, :], axis = 2).reshape((nArm - 1) * nStage, 1), 2)
  *         con_futile_mean_copy = con_futile_mean.reshape((nArm - 1) * nStage, 1)
  */
-  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_kp_s_Generate_results); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 124, __pyx_L1_error)
+  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_kp_s_Generate_results); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 125, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__7);
   __Pyx_GIVEREF(__pyx_tuple__7);
 
-  /* "BATS/FixedTrial.pyx":135
+  /* "BATS/FixedTrial.pyx":136
  *         continuous_mean_copy = continuous_mean.reshape((nArm - 1) * nStage, 1)
  *         con_power_empty = np.empty(((nArm - 1), (nStage - 1)))
  *         con_power_empty[:] = np.NaN             # <<<<<<<<<<<<<<
  *         con_power = np.sum(cpower_array, axis = 1)/nsim * 100
  *         con_power_copy = np.concatenate((con_power_empty, con_power.reshape((nArm - 1), 1)), axis = 1).reshape((nArm - 1) * nStage, 1)
  */
-  __pyx_slice__8 = PySlice_New(Py_None, Py_None, Py_None); if (unlikely(!__pyx_slice__8)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __pyx_slice__8 = PySlice_New(Py_None, Py_None, Py_None); if (unlikely(!__pyx_slice__8)) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_slice__8);
   __Pyx_GIVEREF(__pyx_slice__8);
 
-  /* "BATS/FixedTrial.pyx":153
+  /* "BATS/FixedTrial.pyx":154
  *     else:
  * 
  *         sys.stdout.write("Generate results...")             # <<<<<<<<<<<<<<
  *         con_sim_mean_copy = np.around(np.mean(sim_dataset[0:(nArm - 1), :, :], axis = 2).reshape((nArm - 1) * nStage, 1), 2)
  *         con_futile_mean_copy = con_futile_mean.reshape((nArm - 1) * nStage, 1)
  */
-  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_kp_s_Generate_results); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 153, __pyx_L1_error)
+  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_kp_s_Generate_results); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__9);
   __Pyx_GIVEREF(__pyx_tuple__9);
 
-  /* "BATS/FixedTrial.pyx":193
+  /* "BATS/FixedTrial.pyx":194
  *     if seed == 0:
  * 
  *         seed = np.random.randint(1, 12345, size=1, dtype = np.intc)             # <<<<<<<<<<<<<<
  * 
  *     if predict != 1:
  */
-  __pyx_tuple__10 = PyTuple_Pack(2, __pyx_int_1, __pyx_int_12345); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 193, __pyx_L1_error)
+  __pyx_tuple__10 = PyTuple_Pack(2, __pyx_int_1, __pyx_int_12345); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 194, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__10);
   __Pyx_GIVEREF(__pyx_tuple__10);
 
@@ -22147,17 +22150,17 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__29);
   __Pyx_GIVEREF(__pyx_tuple__29);
 
-  /* "BATS/FixedTrial.pyx":187
+  /* "BATS/FixedTrial.pyx":188
  * 
  * 
  * def TrialSimulation(pathdir, effColHeader, patColHeader, nsim, seed, nArm, nStage, te_list, ns_list, alloc, eff, fut, clinSig, predict, predNum, predSuccess, predClinSig, searchMethod, loadCVL, CVLfile):             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_tuple__34 = PyTuple_Pack(24, __pyx_n_s_pathdir, __pyx_n_s_effColHeader, __pyx_n_s_patColHeader, __pyx_n_s_nsim, __pyx_n_s_seed, __pyx_n_s_nArm, __pyx_n_s_nStage, __pyx_n_s_te_list, __pyx_n_s_ns_list, __pyx_n_s_alloc, __pyx_n_s_eff, __pyx_n_s_fut, __pyx_n_s_clinSig, __pyx_n_s_predict, __pyx_n_s_predNum, __pyx_n_s_predSuccess, __pyx_n_s_predClinSig, __pyx_n_s_searchMethod, __pyx_n_s_loadCVL, __pyx_n_s_CVLfile, __pyx_n_s_finish_flag, __pyx_n_s_start_time, __pyx_n_s_gc, __pyx_n_s_finish_time); if (unlikely(!__pyx_tuple__34)) __PYX_ERR(0, 187, __pyx_L1_error)
+  __pyx_tuple__34 = PyTuple_Pack(24, __pyx_n_s_pathdir, __pyx_n_s_effColHeader, __pyx_n_s_patColHeader, __pyx_n_s_nsim, __pyx_n_s_seed, __pyx_n_s_nArm, __pyx_n_s_nStage, __pyx_n_s_te_list, __pyx_n_s_ns_list, __pyx_n_s_alloc, __pyx_n_s_eff, __pyx_n_s_fut, __pyx_n_s_clinSig, __pyx_n_s_predict, __pyx_n_s_predNum, __pyx_n_s_predSuccess, __pyx_n_s_predClinSig, __pyx_n_s_searchMethod, __pyx_n_s_loadCVL, __pyx_n_s_CVLfile, __pyx_n_s_finish_flag, __pyx_n_s_start_time, __pyx_n_s_gc, __pyx_n_s_finish_time); if (unlikely(!__pyx_tuple__34)) __PYX_ERR(0, 188, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__34);
   __Pyx_GIVEREF(__pyx_tuple__34);
-  __pyx_codeobj__35 = (PyObject*)__Pyx_PyCode_New(20, 0, 24, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__34, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_F_Github_BATS_Python_Package_BAT, __pyx_n_s_TrialSimulation, 187, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__35)) __PYX_ERR(0, 187, __pyx_L1_error)
+  __pyx_codeobj__35 = (PyObject*)__Pyx_PyCode_New(20, 0, 24, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__34, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_F_Github_BATS_Python_Package_BAT, __pyx_n_s_TrialSimulation, 188, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__35)) __PYX_ERR(0, 188, __pyx_L1_error)
 
   /* "View.MemoryView":282
  *         return self.name
@@ -22384,134 +22387,134 @@ PyMODINIT_FUNC PyInit_FixedTrial(void)
  * # Import other packages
  * import numpy as np             # <<<<<<<<<<<<<<
  * cimport numpy as np
- * import sys
+ * 
  */
   __pyx_t_2 = __Pyx_Import(__pyx_n_s_numpy, 0, -1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 14, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_2) < 0) __PYX_ERR(0, 14, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "BATS/FixedTrial.pyx":16
- * import numpy as np
+  /* "BATS/FixedTrial.pyx":17
  * cimport numpy as np
+ * 
  * import sys             # <<<<<<<<<<<<<<
  * import time
  * import pandas as pd
  */
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_sys, 0, -1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 16, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_sys, 0, -1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 17, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_sys, __pyx_t_2) < 0) __PYX_ERR(0, 16, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_sys, __pyx_t_2) < 0) __PYX_ERR(0, 17, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "BATS/FixedTrial.pyx":17
- * cimport numpy as np
+  /* "BATS/FixedTrial.pyx":18
+ * 
  * import sys
  * import time             # <<<<<<<<<<<<<<
  * import pandas as pd
  * import FixedTrialData as TrialData
  */
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_time, 0, -1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_time, 0, -1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 18, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_time, __pyx_t_2) < 0) __PYX_ERR(0, 17, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_time, __pyx_t_2) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "BATS/FixedTrial.pyx":18
+  /* "BATS/FixedTrial.pyx":19
  * import sys
  * import time
  * import pandas as pd             # <<<<<<<<<<<<<<
  * import FixedTrialData as TrialData
  * import AllocFinder as AllocFinder
  */
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_pandas, 0, -1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 18, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_pandas, 0, -1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 19, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pd, __pyx_t_2) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pd, __pyx_t_2) < 0) __PYX_ERR(0, 19, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "BATS/FixedTrial.pyx":19
+  /* "BATS/FixedTrial.pyx":20
  * import time
  * import pandas as pd
  * import FixedTrialData as TrialData             # <<<<<<<<<<<<<<
  * import AllocFinder as AllocFinder
  * import GammaGenerate as GammaGenerate
  */
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_FixedTrialData, 0, -1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 19, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_FixedTrialData, 0, -1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 20, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_TrialData, __pyx_t_2) < 0) __PYX_ERR(0, 19, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_TrialData, __pyx_t_2) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "BATS/FixedTrial.pyx":20
+  /* "BATS/FixedTrial.pyx":21
  * import pandas as pd
  * import FixedTrialData as TrialData
  * import AllocFinder as AllocFinder             # <<<<<<<<<<<<<<
  * import GammaGenerate as GammaGenerate
  * import InterimAnalysis as InterimAnalysis
  */
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_AllocFinder, 0, -1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_AllocFinder, 0, -1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_AllocFinder, __pyx_t_2) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_AllocFinder, __pyx_t_2) < 0) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "BATS/FixedTrial.pyx":21
+  /* "BATS/FixedTrial.pyx":22
  * import FixedTrialData as TrialData
  * import AllocFinder as AllocFinder
  * import GammaGenerate as GammaGenerate             # <<<<<<<<<<<<<<
  * import InterimAnalysis as InterimAnalysis
  * import PredictiveProbability as PredictiveProbability
  */
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_GammaGenerate, 0, -1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 21, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_GammaGenerate, 0, -1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 22, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_GammaGenerate, __pyx_t_2) < 0) __PYX_ERR(0, 21, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_GammaGenerate, __pyx_t_2) < 0) __PYX_ERR(0, 22, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "BATS/FixedTrial.pyx":22
+  /* "BATS/FixedTrial.pyx":23
  * import AllocFinder as AllocFinder
  * import GammaGenerate as GammaGenerate
  * import InterimAnalysis as InterimAnalysis             # <<<<<<<<<<<<<<
  * import PredictiveProbability as PredictiveProbability
  * 
  */
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_InterimAnalysis, 0, -1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 22, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_InterimAnalysis, 0, -1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 23, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_InterimAnalysis, __pyx_t_2) < 0) __PYX_ERR(0, 22, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_InterimAnalysis, __pyx_t_2) < 0) __PYX_ERR(0, 23, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "BATS/FixedTrial.pyx":23
+  /* "BATS/FixedTrial.pyx":24
  * import GammaGenerate as GammaGenerate
  * import InterimAnalysis as InterimAnalysis
  * import PredictiveProbability as PredictiveProbability             # <<<<<<<<<<<<<<
  * 
  * DTYPE = np.float64
  */
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_PredictiveProbability, 0, -1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 23, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_PredictiveProbability, 0, -1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 24, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_PredictiveProbability, __pyx_t_2) < 0) __PYX_ERR(0, 23, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_PredictiveProbability, __pyx_t_2) < 0) __PYX_ERR(0, 24, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "BATS/FixedTrial.pyx":25
+  /* "BATS/FixedTrial.pyx":26
  * import PredictiveProbability as PredictiveProbability
  * 
  * DTYPE = np.float64             # <<<<<<<<<<<<<<
  * ctypedef np.float64_t DTYPE_t
  * 
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 26, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_float64); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_float64); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 26, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_DTYPE, __pyx_t_3) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_DTYPE, __pyx_t_3) < 0) __PYX_ERR(0, 26, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "BATS/FixedTrial.pyx":187
+  /* "BATS/FixedTrial.pyx":188
  * 
  * 
  * def TrialSimulation(pathdir, effColHeader, patColHeader, nsim, seed, nArm, nStage, te_list, ns_list, alloc, eff, fut, clinSig, predict, predNum, predSuccess, predClinSig, searchMethod, loadCVL, CVLfile):             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_3 = PyCFunction_NewEx(&__pyx_mdef_4BATS_10FixedTrial_1TrialSimulation, NULL, __pyx_n_s_BATS_FixedTrial); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 187, __pyx_L1_error)
+  __pyx_t_3 = PyCFunction_NewEx(&__pyx_mdef_4BATS_10FixedTrial_1TrialSimulation, NULL, __pyx_n_s_BATS_FixedTrial); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 188, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_TrialSimulation, __pyx_t_3) < 0) __PYX_ERR(0, 187, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_TrialSimulation, __pyx_t_3) < 0) __PYX_ERR(0, 188, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "BATS/FixedTrial.pyx":1

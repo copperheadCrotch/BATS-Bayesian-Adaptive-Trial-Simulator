@@ -6,7 +6,7 @@ cimport cython
 from libc.stdlib cimport malloc, free
 
 # Import C function
-from CriticalValueCal cimport CriticalValueCal
+from BATS.CriticalValueCal cimport CriticalValueCal
 
 # Import python modules
 import numpy as np

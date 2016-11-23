@@ -13,6 +13,7 @@ from BATS.CriticalValueCal cimport CriticalValueCal
 # Import other packages
 import numpy as np
 cimport numpy as np
+
 import sys
 import time
 import pandas as pd
@@ -113,7 +114,7 @@ cdef TrialProgress(str pathdir, list effColHeader, list patColHeader, int nsim, 
     if predict == 1:
         
         sys.stdout.write("Calculate posterior predictive probability...") 
-        predictflag = PredictiveProbability.PredictiveProbability(nsim, nArm, nStage, predSuccess, predClinSig,  searchMethod, loadCVL, 
+        predictflag = PredictiveProbability.PredictiveCheck(nsim, nArm, nStage, predSuccess, predClinSig,  searchMethod, loadCVL, 
                                 CVLfile, treatment_add, control_add, sim_dataset, tps_array, gamma_nsim, gamma_vect, cpower_array,
                                 pathdir, effColHeader, patColHeader)
         free(gamma_array)

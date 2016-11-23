@@ -2403,7 +2403,7 @@ class CriticalValue_Table(QtWidgets.QWidget, Ui_CriticalValueTableWindow):
             self.nControl_textCtl.clear()
             self.CVLfile = ""
             self.saveCVL_textCtl.clear()
-            self.runTable_btn.setEnabled(True) 
+            # self.runTable_btn.setEnabled(True) 
     
     
     def Stop(self):

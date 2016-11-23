@@ -5,7 +5,7 @@ from cython_gsl cimport *
 from libc.stdlib cimport malloc, free
 
 # Import C function
-from CriticalValueCal cimport CriticalValueCal
+from BATS.CriticalValueCal cimport CriticalValueCal
 
 import numpy as np
 cimport numpy as np
@@ -518,7 +518,7 @@ cdef CalAdaPredictiveProbability(int nsim, int nArm, int nStage, float predSucce
 
     
 
-def PredictiveProbability(nsim, nArm, nStage, predSuccess, predClinSig, searchMethod, loadCVL, 
+def PredictiveCheck(nsim, nArm, nStage, predSuccess, predClinSig, searchMethod, loadCVL, 
                                 CVLfile, treatment_add, control_add, sim_dataset, tps_array, gamma_nsim, gamma_vect, cpower_array,
                                 pathdir, effColHeader, patColHeader):
     

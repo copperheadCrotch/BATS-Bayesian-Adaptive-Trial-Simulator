@@ -2,7 +2,7 @@ import cython
 cimport cython
 
 # Import C function
-from CriticalValueCal cimport CriticalValueCal
+from BATS.CriticalValueCal cimport CriticalValueCal
 from libc.stdlib cimport malloc, free
 
 # Import python modules
