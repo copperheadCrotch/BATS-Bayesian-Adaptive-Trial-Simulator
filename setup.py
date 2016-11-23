@@ -47,7 +47,7 @@ setup(
     include_dirs=[numpy.get_include(), cython_gsl.get_include()],
     cmdclass = {'build_ext': build_ext},
     name='BATS',
-    version='1.0.0a1',
+    version='1.0.0a2',
     description='https://github.com/ContaTP/BATS-Bayesian-Adaptive-Trial-Simulator',
     long_description=long_description,
     url='https://github.com/pypa/sampleproject',
