@@ -1,4 +1,3 @@
-LICENSE.txt
 PKG-INFO
 README.rst
 setup.cfg
