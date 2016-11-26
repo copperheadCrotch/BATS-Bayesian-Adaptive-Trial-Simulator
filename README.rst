@@ -3,8 +3,8 @@ BATS - Bayesian Adaptive Trial Simulator
 
 .. image:: https://badge.fury.io/py/BATS.svg
     :target: https://badge.fury.io/py/BATS
-
-
+    
+-------------
 .. image:: https://raw.githubusercontent.com/ContaTP/BATS-Bayesian-Adaptive-Trial-Simulator/master/BATS/resources/Icon.ico  
    :align: left
    :alt:
