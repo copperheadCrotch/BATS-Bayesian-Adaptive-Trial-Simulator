@@ -4,6 +4,9 @@ BATS - Bayesian Adaptive Trial Simulator
 .. image:: https://raw.githubusercontent.com/ContaTP/BATS-Bayesian-Adaptive-Trial-Simulator/master/BATS/resources/Icon.ico  
    :align: left
    :alt:
+   
+.. image:: https://img.shields.io/badge/License-GPL%20v3-blue.svg
+    :target: http://www.gnu.org/licenses/gpl-3.0
 
 Introduction
 -----------
