@@ -14,9 +14,6 @@ Introduction
 .. image:: https://img.shields.io/pypi/l/bats.svg
     :target: http://www.gnu.org/licenses/gpl-3.0
     
-.. image:: https://img.shields.io/pypi/dm/bats.svg
-    :target: https://badge.fury.io/py/BATS
-
 .. image:: https://img.shields.io/pypi/status/bats.svg
     :target: https://badge.fury.io/py/BATS
     
