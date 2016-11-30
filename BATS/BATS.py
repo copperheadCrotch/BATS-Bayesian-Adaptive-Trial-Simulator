@@ -430,7 +430,7 @@ class SideOption(QtWidgets.QWidget):
         if sys.platform == "win32":
 
              winfullpathdir = os.getcwd().replace("/", "\\")  + "\\documentation\\Documentation.pdf"
-             subprocess.Popen(r'explorer -p, %s'%winfullpathdir)
+             subprocess.Popen(['explorer' , winfullpathdir])
 
         elif sys.platform == "linux":
 
