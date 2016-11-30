@@ -3,4 +3,3 @@ numpy
 matplotlib
 pandas
 cythonGSL
-PyQt5

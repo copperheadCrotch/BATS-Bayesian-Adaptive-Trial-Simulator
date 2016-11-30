@@ -426,9 +426,26 @@ class SideOption(QtWidgets.QWidget):
         docButton.clicked.connect(self.openDoc)
 
     def openDoc(self):
-        
-        winfullpathdir = os.getcwd().replace("/", "\\")  + "\\documentation\\Documentation.pdf"
-        subprocess.Popen(r'explorer -p, %s'%winfullpathdir)
+
+        if sys.platform == "win32":
+
+             winfullpathdir = os.getcwd().replace("/", "\\")  + "\\documentation\\Documentation.pdf"
+             subprocess.Popen(r'explorer -p, %s'%winfullpathdir)
+
+        elif sys.platform == "linux":
+
+            winfullpathdir = os.getcwd() + "/documentation/Documentation.pdf"
+            subprocess.Popen(['xdg-open', winfullpathdir])
+
+        elif sys.platform == "darwin":
+
+            winfullpathdir = os.getcwd() + "/documentation/Documentation.pdf"
+            subprocess.Popen(['open', winfullpathdir])
+     
+        else:
+
+            pass
+             
 
 # Mainwindow widget
 class MainFrame(QtWidgets.QFrame):
@@ -2403,7 +2420,6 @@ class CriticalValue_Table(QtWidgets.QWidget, Ui_CriticalValueTableWindow):
             self.nControl_textCtl.clear()
             self.CVLfile = ""
             self.saveCVL_textCtl.clear()
-            # self.runTable_btn.setEnabled(True) 
     
     
     def Stop(self):
@@ -2834,11 +2850,13 @@ class WheelFilter(QtCore.QObject):
     
         return False
 
+
+
 # Init
 def __init__():
 
     # Set id
-    appid = u'bats.1.0' # arbitrary string
+    appid = u'bats.1.0.0' # arbitrary string
     if sys.platform == 'win32':
 
        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(appid)
@@ -2846,6 +2864,10 @@ def __init__():
     elif sys.platform == 'linux2':
 
        pass
+
+    elif sys.platform == 'darwin':
+
+        pass
     
     else:
       
@@ -2878,4 +2900,3 @@ def __init__():
     # Maximize the application window
     # window.showMaximized()
     app.exec_()
-
