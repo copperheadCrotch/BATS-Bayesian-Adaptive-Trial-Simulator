@@ -47,10 +47,10 @@ setup(
     include_dirs=[numpy.get_include(), cython_gsl.get_include()],
     cmdclass = {'build_ext': build_ext},
     name='BATS',
-    version='1.0.0a2',
+    version='1.0.0a6',
     description='https://github.com/ContaTP/BATS-Bayesian-Adaptive-Trial-Simulator',
     long_description=long_description,
-    url='https://github.com/pypa/sampleproject',
+    url='https://github.com/ContaTP/BATS-Bayesian-Adaptive-Trial-Simulator',
     author='Zhenning Yu',
     author_email='yuzhenning.bio@gmail.com',
     zip_safe = False,
@@ -62,7 +62,6 @@ setup(
         'Topic :: Scientific/Engineering',
         'Topic :: Scientific/Engineering :: Medical Science Apps.',
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
@@ -82,6 +81,7 @@ setup(
         'matplotlib',
         'pandas',
         'cythonGSL',
+        'PyQt5'
     ],
     ext_modules = extensions,
 )
