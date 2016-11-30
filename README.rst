@@ -30,7 +30,7 @@ Installation
 +=====================+=======================================================================================================+
 | Windows Installer   | `BATS-1.0.0-win32.msi <https://sourceforge.net/projects/bats/files/BATS-1.0.0-win32.msi/download>`_   | 
 +---------------------+-------------------------------------------------------------------------------------------------------+
-| Source Code         | `BATS-1.0.0.tar.gz <https://sourceforge.net/projects/bats/files/BATS-1.0.0b7.tar.gz/download>`_       | 
+| Source Code         | `BATS-1.0.0.tar.gz <https://sourceforge.net/projects/bats/files/BATS-1.0.0b10.tar.gz/download>`_       | 
 +---------------------+-------------------------------------------------------------------------------------------------------+
 ``* The Windows users are encouraged to use the Windows Installer because the installation is easy.``
 
