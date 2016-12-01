@@ -1,6 +1,6 @@
 Metadata-Version: 1.1
 Name: BATS-1.0.0
-Version: 1.0.0b8
+Version: 1.0.0b10
 Summary: Bayesian Adaptive Trial Simulator (BATS) is a software used to perform simulation for Bayeisan Multi-arm Multi-stage design.
 Home-page: https://github.com/ContaTP/BATS-Bayesian-Adaptive-Trial-Simulator
 Author: Zhenning Yu

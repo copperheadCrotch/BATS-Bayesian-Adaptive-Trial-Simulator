@@ -1,6 +1,4 @@
-*.rst
+/*.rst
 /dist/*
 /build/*
 *.pyc
-*.rst
-README.rst
