@@ -1,7 +1,7 @@
 BATS - Bayesian Adaptive Trial Simulator
 =========================
 
-`BATS Website<http://usebats.org/>`_
+`BATS Website <http://usebats.org/>`_
 
 .. image:: https://raw.githubusercontent.com/ContaTP/BATS-Bayesian-Adaptive-Trial-Simulator/master/BATS/resources/Icon.ico  
    :align: left
