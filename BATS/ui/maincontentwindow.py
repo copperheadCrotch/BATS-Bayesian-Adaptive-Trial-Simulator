@@ -54,7 +54,11 @@ class Ui_MainContentWindow(object):
 "}\n"
 "\n"
 "QLineEdit:placeholder:disabled{\n"
-"    color: #8497a5     ;\n"
+"    color: #8497a5;\n"
+"}\n"
+"\n"
+"QLineEdit:focus{\n"
+"    border: 1px solid #d8000c;\n"
 "}\n"
 "\n"
 "QCheckBox{\n"
@@ -97,6 +101,10 @@ class Ui_MainContentWindow(object):
 "     border: 2px solid #2a4d69;\n"
 "     border-radius: 5px;\n"
 "     height: 30ps;\n"
+"}\n"
+"\n"
+"QComboBox:focus{\n"
+"    border: 1px solid #d8000c;\n"
 "}\n"
 "\n"
 "QComboBox:disabled{\n"
@@ -223,6 +231,10 @@ class Ui_MainContentWindow(object):
 "      border:1px solid #373366;\n"
 "}\n"
 "\n"
+"QPushButton:focus{\n"
+"     border: 1px solid #d8000c;\n"
+"}\n"
+"\n"
 "\n"
 "QTableWidget{\n"
 "    border:  none;\n"
@@ -258,8 +270,9 @@ class Ui_MainContentWindow(object):
 "}")
         self.mainStackWidget.setObjectName("mainStackWidget")
         self.setting = QtWidgets.QWidget()
+        self.setting.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.setting.setObjectName("setting")
-        self.mainSettingLayout = QtWidgets.QVBoxLayout(self.setting)
+        self.mainSettingLayout = QtWidgets.QHBoxLayout(self.setting)
         self.mainSettingLayout.setContentsMargins(0, 0, 0, 0)
         self.mainSettingLayout.setObjectName("mainSettingLayout")
         self.mainStackWidget.addWidget(self.setting)
@@ -268,27 +281,17 @@ class Ui_MainContentWindow(object):
         self.gridLayout_2 = QtWidgets.QGridLayout(self.log)
         self.gridLayout_2.setObjectName("gridLayout_2")
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout_2.addItem(spacerItem, 3, 1, 1, 1)
+        self.gridLayout_2.addItem(spacerItem, 3, 0, 1, 1)
         spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout_2.addItem(spacerItem1, 3, 0, 1, 1)
-        self.logConsole = QtWidgets.QTextBrowser(self.log)
-        font = QtGui.QFont()
-        font.setFamily("Segue UI Emoji")
-        font.setPointSize(10)
-        self.logConsole.setFont(font)
-        self.logConsole.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.OpenHandCursor))
-        self.logConsole.setAutoFillBackground(False)
-        self.logConsole.setStyleSheet("")
-        self.logConsole.setObjectName("logConsole")
-        self.gridLayout_2.addWidget(self.logConsole, 3, 2, 1, 4)
+        self.gridLayout_2.addItem(spacerItem1, 3, 1, 1, 1)
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout_2.addItem(spacerItem2, 5, 2, 1, 4)
         spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout_2.addItem(spacerItem3, 4, 2, 1, 4)
         spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.gridLayout_2.addItem(spacerItem4, 0, 5, 1, 1)
+        self.gridLayout_2.addItem(spacerItem4, 1, 2, 1, 1)
         spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.gridLayout_2.addItem(spacerItem5, 1, 2, 1, 1)
+        self.gridLayout_2.addItem(spacerItem5, 0, 5, 1, 1)
         spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout_2.addItem(spacerItem6, 1, 4, 1, 1)
         spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -312,6 +315,67 @@ class Ui_MainContentWindow(object):
 "}")
         self.logClear_btn.setObjectName("logClear_btn")
         self.gridLayout_2.addWidget(self.logClear_btn, 1, 5, 1, 1)
+        self.log_tabWidget = QtWidgets.QTabWidget(self.log)
+        font = QtGui.QFont()
+        font.setFamily("Segue UI Emoji")
+        font.setPointSize(10)
+        self.log_tabWidget.setFont(font)
+        self.log_tabWidget.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.log_tabWidget.setStyleSheet("QTabWidget{\n"
+"     font-family:\'Segue UI Emoji\';\n"
+"     font-size: 10pt;\n"
+"     border: none;\n"
+"}\n"
+"\n"
+"QTabBar:tab{\n"
+"    border-top: none;\n"
+"    border-left: none;\n"
+"    border-right: none;\n"
+"    border-bottom: 5px solid #b2bbbf;\n"
+"    margin: 5px 5px 5px 25px;\n"
+"    padding: 0 50px 15px 50px;\n"
+"}\n"
+"\n"
+"QTabBar:tab:!selected{\n"
+"    color: #b2bbbf;\n"
+"}\n"
+"\n"
+"QTabBar:tab:hover{\n"
+"    border-color: #399ee5;\n"
+"    color: #399ee5;\n"
+"}\n"
+"\n"
+"\n"
+"\n"
+"QTabWidget:pane{\n"
+"     border: none;\n"
+"     padding: 0;\n"
+"}")
+        self.log_tabWidget.setObjectName("log_tabWidget")
+        self.logTab = QtWidgets.QWidget()
+        self.logTab.setObjectName("logTab")
+        self.gridLayout = QtWidgets.QGridLayout(self.logTab)
+        self.gridLayout.setObjectName("gridLayout")
+        self.logConsole = QtWidgets.QTextBrowser(self.logTab)
+        font = QtGui.QFont()
+        font.setFamily("Segue UI Emoji")
+        font.setPointSize(10)
+        self.logConsole.setFont(font)
+        self.logConsole.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.OpenHandCursor))
+        self.logConsole.setAutoFillBackground(False)
+        self.logConsole.setStyleSheet("")
+        self.logConsole.setObjectName("logConsole")
+        self.gridLayout.addWidget(self.logConsole, 0, 0, 1, 1)
+        self.log_tabWidget.addTab(self.logTab, "")
+        self.configTab = QtWidgets.QWidget()
+        self.configTab.setObjectName("configTab")
+        self.gridLayout_8 = QtWidgets.QGridLayout(self.configTab)
+        self.gridLayout_8.setObjectName("gridLayout_8")
+        self.configConsole = QtWidgets.QTextBrowser(self.configTab)
+        self.configConsole.setObjectName("configConsole")
+        self.gridLayout_8.addWidget(self.configConsole, 0, 0, 1, 1)
+        self.log_tabWidget.addTab(self.configTab, "")
+        self.gridLayout_2.addWidget(self.log_tabWidget, 2, 2, 2, 4)
         self.mainStackWidget.addWidget(self.log)
         self.table = QtWidgets.QWidget()
         self.table.setObjectName("table")
@@ -464,12 +528,15 @@ class Ui_MainContentWindow(object):
 
         self.retranslateUi(MainContentWindow)
         self.mainStackWidget.setCurrentIndex(0)
+        self.log_tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainContentWindow)
 
     def retranslateUi(self, MainContentWindow):
         _translate = QtCore.QCoreApplication.translate
         MainContentWindow.setWindowTitle(_translate("MainContentWindow", "Form"))
         self.logClear_btn.setText(_translate("MainContentWindow", "Clear"))
+        self.log_tabWidget.setTabText(self.log_tabWidget.indexOf(self.logTab), _translate("MainContentWindow", "View Log"))
+        self.log_tabWidget.setTabText(self.log_tabWidget.indexOf(self.configTab), _translate("MainContentWindow", "Simulation Config"))
         self.label_3.setText(_translate("MainContentWindow", "Results"))
         self.tableExport_btn.setText(_translate("MainContentWindow", "Export"))
         self.plotExport_btn.setText(_translate("MainContentWindow", "Export"))

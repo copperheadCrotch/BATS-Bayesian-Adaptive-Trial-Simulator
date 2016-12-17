@@ -1616,7 +1616,6 @@ class MAMS_Design(QtWidgets.QWidget, Ui_MAMSWindow):
             # If unchanged, load the settings last time
             if self.nStage == len(self.ns_list):
                
-                self.alloc_textCtl.setText("%.3f"%(self.alloc)) 
                 for j in range(self.nStage):
                 
                     self.patNum_tableWidget.setItem(0, j, QtWidgets.QTableWidgetItem(str(int(self.ns_list[j]))))
