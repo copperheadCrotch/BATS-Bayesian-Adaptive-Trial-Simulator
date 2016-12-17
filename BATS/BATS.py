@@ -1,16 +1,39 @@
 # -*- coding: utf-8 -*-
 # This is the main GUI for the program
-from PyQt5 import QtGui, QtCore, QtWidgets
-import BATS.qrc.resources_qr
+from PyQt5 import QtGui, QtCore, QtWidgets, Qt
+import qrc.resources_qr
 # Import Qt GUI
-from BATS.ui.maincontentwindow import Ui_MainContentWindow 
+from ui.maincontentwindow import Ui_MainContentWindow 
 # Functions
-from BATS.ui.mamswindow import Ui_MAMSWindow
-from BATS.ui.criticalvaluewindow import Ui_CriticalValueTableWindow
+from ui.mamswindow import Ui_MAMSWindow
+from ui.posteriorprobabilitywindow import Ui_PosteriorProbabilityWindow
+# The look-up table method is banned in the newest version
+# from ui.criticalvaluewindow import Ui_CriticalValueTableWindow
+
+
+# Import class 
+# Import validator
+from BATS_validator import StrictDoubleValidator
+from BATS_validator import TableDoubleValidator
+from BATS_validator import ContinuousValidator
+from BATS_validator import StrictIntValidator
+from BATS_validator import TableIntValidator
+from BATS_validator import TablePriorIntValidator
+from BATS_validator import TablePredIntValidator
+# Import event filter
+from BATS_eventfilter import WheelFilter
+from BATS_eventfilter import FocusOutFilter
+from BATS_eventfilter import HoverLeaveDocFilter
+from BATS_eventfilter import TableFocusOutFilter
+# Import message box
+from BATS_messagebox import MessageBox
+from BATS_messagebox import SubTitleBar
+# Import design
+from BATS_MAMS import MAMS_Design
+from BATS_PosteriorProbability import PosteriorProbability_Calculation
 
 
 # Import module
-import ctypes
 import sys
 import numpy as np
 import pandas as pd
@@ -19,6 +42,7 @@ import os
 import uuid
 import shutil
 import subprocess
+from numpy.random.mtrand import seed
 import warnings
 warnings.filterwarnings("ignore")
 import matplotlib
@@ -29,16 +53,15 @@ import matplotlib.image as mpimg
 
 
 # Import simulation module
-import BATS.FixedTrial as FixedTrial
-import BATS.CreateCriticalValueTable as CreateCriticalValueTable
-import BATS.PredictiveProbability as PredictiveProbability
-import BATS.InterimAnalysis as InterimAnalysis
-import BATS.GammaGenerate as GammaGenerate
-import BATS.FixedTrialData as FixedTrialData
-import BATS.CriticalValueCal as CriticalValueCal
-import BATS.Bisection as Bisection
-import BATS.AllocFinder as AllocFinder
-
+import FixedTrial as FixedTrial
+# import CreateCriticalValueTable as CreateCriticalValueTable
+import PredictiveProbability as PredictiveProbability
+import InterimAnalysis as InterimAnalysis
+import GammaGenerate as GammaGenerate
+import FixedTrialData as FixedTrialData
+import CriticalValueCal as CriticalValueCal
+import AllocFinder as AllocFinder
+import CalPosteriorProbability as CalPosteriorProbability
 
 
 # Macro/Global variables. Needed only be changed here
@@ -103,7 +126,7 @@ class BATSWindow(QtWidgets.QFrame):
         # Set position of the frame
         self.screen = QtWidgets.QDesktopWidget().screenGeometry()
         # Set geometry
-        self.setGeometry(self.screen.width()/5, 50, 1400, 900)
+        self.setGeometry(self.screen.width()/8, 50, 1600, 900)
         self.setMinimumSize(0, 0)
         # Set Widgets
         self.sideWindow = SideFrame(self)
@@ -121,7 +144,8 @@ class BATSWindow(QtWidgets.QFrame):
 
     # Close the application
     def closeEvent(self, event):
-
+        
+        # Create a messagebox
         msgBox = MessageBox(None, 2)
         msgBox.setText("Are you sure you want to exit?")
         msgBox.setWindowTitle("Quit the Simulator")
@@ -131,14 +155,17 @@ class BATSWindow(QtWidgets.QFrame):
 
             # Delete all the temporary files
             try:
-            
+                
+                # Remove the temporary folder if it exists
                 shutil.rmtree("./tmp")
 
             except:
                 
                 pass
             
-            # Close all the windows
+            # The objects will be deleted when event started
+            self.deleteLater() 
+            # Accept the event
             event.accept()
         
             
@@ -187,6 +214,7 @@ class SideTitle(QtWidgets.QWidget):
         QtWidgets.QWidget.__init__(self, parent)
         # Add new font
         self.titleFont = QtGui.QFont('Caviar Dreams', 20)
+        self.titleFont.setLetterSpacing(QtGui.QFont.AbsoluteSpacing, 2.0)
         # Parent widget, application window
         self.parent = parent
         # Mouse
@@ -210,23 +238,7 @@ class SideTitle(QtWidgets.QWidget):
         self.titleLayout.setSpacing(30)
         self.titleLayout.setAlignment(QtCore.Qt.AlignCenter)
         self.setLayout(self.titleLayout)
-        
-    """
-    # Rewrite mouse press event    
-    def mousePressEvent(self, event):
-        
-        if event.button() == QtCore.Qt.LeftButton:
 
-            self.startPos = event.globalPos()
-            self.clickPos = self.mapToParent(self.pos())
-    
-    
-    # Rewrite mouse move event, move the frame    
-    def mouseMoveEvent(self, event):
-        
-        # Move the main application
-        self.parent.move(event.globalPos() - self.clickPos)
-    """
 
 
 # Side Menu
@@ -239,9 +251,10 @@ class SideMenu(QtWidgets.QListWidget):
         # Get parent
         self.parent = parent
         # List font
-        self.listFont = QtGui.QFont('Segoe UI')
+        self.listFont = QtGui.QFont("Caviar Dreams")
         self.listFont.setPointSize(14)
         self.listFont.setBold(False)
+        self.listFont.setLetterSpacing(QtGui.QFont.AbsoluteSpacing, 1.0)
         # Customize the widgets
         self.setFocusPolicy(QtCore.Qt.NoFocus)
         self.setFont(self.listFont)
@@ -252,24 +265,24 @@ class SideMenu(QtWidgets.QListWidget):
         self.designIcon = QtGui.QIcon()
         self.designIcon.addPixmap(QtGui.QPixmap(":/resources/design.png"), QtGui.QIcon.Normal)
         self.designIcon.addPixmap(QtGui.QPixmap(":/resources/design_selected.png"), QtGui.QIcon.Selected)
+        """
         # Table　icon
         self.tableIcon = QtGui.QIcon()
         self.tableIcon.addPixmap(QtGui.QPixmap(":/resources/table.png"), QtGui.QIcon.Normal)
         self.tableIcon.addPixmap(QtGui.QPixmap(":/resources/table_selected.png"), QtGui.QIcon.Selected)
+        """
         # Other icon
         self.otherIcon = QtGui.QIcon()
         self.otherIcon.addPixmap(QtGui.QPixmap(":/resources/other.png"), QtGui.QIcon.Normal)
         self.otherIcon.addPixmap(QtGui.QPixmap(":/resources/other_selected.png"), QtGui.QIcon.Selected)
         # Add design items
         self.designItem = QtWidgets.QListWidgetItem(self.designIcon, "Design")
-        self.tableItem = QtWidgets.QListWidgetItem(self.tableIcon, "Table")
-        self.otherItem = QtWidgets.QListWidgetItem(self.otherIcon, "Other")
+        # self.tableItem = QtWidgets.QListWidgetItem(self.tableIcon, "Table")
+        self.otherItem = QtWidgets.QListWidgetItem(self.otherIcon, "Analyze")
         # Add items to the list widget
         self.addItem(self.designItem)
-        self.addItem(self.tableItem)
-        # Enable this in the next version
-        # Other function include 'sample size calculation, predictive probability calculation...'
-        # self.addItem(self.otherItem)
+        # self.addItem(self.tableItem)
+        self.addItem(self.otherItem)
         # Stylesheet
         self.setStyleSheet("QListWidget{min-width: 100px; border:none; border-top:2px solid #4da8e8; color:#ffffff; margin: 0 0 0 0; padding: 0 0 0 0; text-align:center;} QListWidget::item{border-bottom: 2px solid #4da8e8; padding:15px 25px 15px 25px; margin: 0 0 0 0; text-align: center; background:#399ee5; color:#ffffff;} QListWidget::item:hover{border:none; background:#45c8dc; font-weight:bold;} QListWidget::item:selected{border:none; border-left: 6px solid #fa7064; background:#ffffff; color:#fa7064; font-weight:bold;} QListWidget::icon{margin: 0 0 0 0; padding: 0 20px 0 0;} QLabel{background:transparent; border: none; font-size: 15pt; color:#ffffff; font-family:'Segoe UI';}")
         # Action
@@ -306,9 +319,10 @@ class SideMenu(QtWidgets.QListWidget):
         self.mainTitle.setVisible(True)
         self.mainTitle.showButton()
         self.mainTitle.taskLabel.setText(self.mainTask.title)
+        self.mainTitle.showStatus(0)
         # Setting, log, table, plot
         self.panel_start = self.mainPanel.count()
-        if self.mainTask.finishflag == 1:
+        if self.mainTask.finish_flag == 1:
             
             self.childrenPanelStart = self.mainTask.panel_start
             self.childrenPanelFinish = self.mainTask.panel_finish
@@ -391,14 +405,11 @@ class SideOption(QtWidgets.QWidget):
         # Layout 
         optionLayout = QtWidgets.QHBoxLayout()
         # Option font
-        optionFont = QtGui.QFont("Segoe UI")
+        optionFont = QtGui.QFont("Caviar Dreams")
         optionFont.setPointSize(12)
         optionFont.setBold(False)
+        optionFont.setLetterSpacing(QtGui.QFont.AbsoluteSpacing, 1.0)
         # Set widgets
-        # Quit button
-        # quitButton = QtWidgets.QPushButton()
-        # quitButton.setIcon(QtGui.QIcon(":/resources/quit.png"))
-        # quitButton.setIconSize(QtCore.QSize(50, 50))
         # Separator
         optionSep = QtWidgets.QWidget()
         optionSep.setStyleSheet("QWidget{background:#4da8e8;}")
@@ -409,9 +420,8 @@ class SideOption(QtWidgets.QWidget):
         docButton.setIconSize(QtCore.QSize(40, 40))
         docButton.setText("Documentation")
         docButton.setFont(optionFont)
+        docButton.setCursor(QtCore.Qt.PointingHandCursor)
         # Layout
-        # optionLayout.addWidget(quitButton, 2)
-        # optionLayout.addWidget(optionSep, 2)
         optionLayout.addWidget(docButton, 10)
         # self.optionLayout.setAlignment(QtCore.Qt.AlignCenter)
         optionLayout.setContentsMargins(0, 0, 0, 0)
@@ -421,8 +431,7 @@ class SideOption(QtWidgets.QWidget):
         # Stylesheet
         self.setStyleSheet("QWidget {margin: 0 0 0 0; padding: 0 0 0 0;} QPushButton{background:transparent; border:none; border-top: 2px solid #4da8e8; padding: 0 10px 0 10px; color: #ffffff; outline: none;} QPushButton:hover{background:#45c8dc;}")
         
-        # Action
-        # quitButton.clicked.connect(parent.close)
+        # Actiond
         docButton.clicked.connect(self.openDoc)
 
     def openDoc(self):
@@ -430,7 +439,7 @@ class SideOption(QtWidgets.QWidget):
         if sys.platform == "win32":
 
              winfullpathdir = os.getcwd().replace("/", "\\")  + "\\documentation\\Documentation.pdf"
-             subprocess.Popen(['explorer' , winfullpathdir])
+             subprocess.Popen(['explorer', winfullpathdir])
 
         elif sys.platform == "linux":
 
@@ -485,10 +494,20 @@ class MainTitle(QtWidgets.QWidget):
         QtWidgets.QWidget.__init__(self, parent)
         # Parent
         self.parent = parent
+        # Reciever 
+        self.receiver = None
+        # Sendin
+        self.sendin = None
+        # Create a list of error inputs
+        self.errorWidgets_list = []
+        self.pendingWidgets_list = []
+        # Status
+        self.status = 0
         # Click pos
         self.clickPos = QtCore.QPoint(50, 50)
         # Title font
         self.taskFont = QtGui.QFont('Segoe UI', 13)
+        self.statusFont = QtGui.QFont('PT Sans', 10)
         # Button font
         self.buttonFont = QtGui.QFont("Segoe UI")
         self.buttonFont.setPointSize(11)
@@ -496,46 +515,45 @@ class MainTitle(QtWidgets.QWidget):
         # Layout
         self.titleLayout = QtWidgets.QHBoxLayout()
         # Widgets
+        # Title of the task
         self.taskLabel = QtWidgets.QLabel("")
-        self.taskLabel.setMargin(5)
+        self.taskLabel.setStyleSheet("QLabel{padding: 0 25px 0 50px;}")
+        self.taskLabel.setGeometry(0, 0, 200, 50)
         self.taskLabel.setFont(self.taskFont)
+        # Status button
+        # Set status images
+        self.statusButton = QtWidgets.QPushButton()
+        self.inputIcon = QtGui.QIcon(":/resources/input.png")
+        self.errorIcon = QtGui.QIcon(":/resources/error.png")
+        self.warningIcon = QtGui.QIcon(":/resources/warning.png")
+        self.successIcon = QtGui.QIcon(":/resources/success.png")
+        self.statusButton.setIconSize(QtCore.QSize(25, 25))
+        self.statusButton.setStyleSheet("QPushButton{background: transparent; border: none; text-align:left; padding: 15px 0 5px 5px; color: #6b767c;} QPushButton:hover{color:#fa7064; border-radius:0;}")
+        self.statusButton.setCursor(QtCore.Qt.PointingHandCursor)
+        self.statusButton.setGeometry(0, 0, 200, 50)
+        self.statusButton.setFont(self.statusFont)
+        self.statusButton.setToolTip("Jump to the location")
+        self.showStatus(0)
+
         self.runButton = QtWidgets.QPushButton("Run")
         self.runButton.setFont(self.buttonFont)
+        self.runButton.setCursor(QtCore.Qt.PointingHandCursor)
         self.resetButton = QtWidgets.QPushButton("Reset")
         self.resetButton.setFont(self.buttonFont)
+        self.resetButton.setCursor(QtCore.Qt.PointingHandCursor)
         self.stopButton = QtWidgets.QPushButton("Stop")
         self.stopButton.setFont(self.buttonFont)
+        self.stopButton.setCursor(QtCore.Qt.PointingHandCursor)
         self.stopButton.setStyleSheet("QPushButton{background: #fa7064;border: 1px solid #f43f2f; outline: none;}QPushButton:hover{background: #f84e41;border: 1px solid #f73728;}QPushButton:disabled{background:#acb6ba; border:1px solid #5e7688; color:#fafbfc;}")
-        # self.runButton.setDisabled(True)
-        """
-        self.resetButton.setEnabled(True)
-        self.stopButton.setDisabled(True)
-        """
-        self.runButton.setVisible(False)
-        self.resetButton.setVisible(False)
-        self.stopButton.setVisible(False)
-        self.minAppButton = QtWidgets.QToolButton()
-        self.minAppButton.setIcon(QtGui.QIcon(":/resources/minimize.png"))
-        self.minAppButton.setIconSize(QtCore.QSize(30, 30))
-        self.maxAppButton = QtWidgets.QToolButton()
-        self.maxAppButton.setIcon(QtGui.QIcon(":/resources/maximize.png"))
-        self.maxAppButton.setIconSize(QtCore.QSize(30, 30))
-        self.closeAppButton = QtWidgets.QToolButton()
-        self.closeAppButton.setIcon(QtGui.QIcon(":/resources/close.png"))
-        self.closeAppButton.setIconSize(QtCore.QSize(30, 30))
 
         # Add widgets
-        self.titleLayout.insertStretch(0, 1)
-        self.titleLayout.addWidget(self.taskLabel, 8)
-        self.titleLayout.addWidget(self.runButton, 0.5)
-        self.titleLayout.addWidget(self.resetButton, 0.5)
-        self.titleLayout.addWidget(self.stopButton, 0.5)
+        self.titleLayout.addWidget(self.taskLabel, 4)
+        self.titleLayout.addWidget(self.statusButton, 4)
+        self.titleLayout.addWidget(self.runButton, 1)
+        self.titleLayout.addWidget(self.resetButton, 1)
+        self.titleLayout.addWidget(self.stopButton, 1)
         self.titleLayout.insertStretch(5, 1)
-        """
-        self.titleLayout.addWidget(self.minAppButton, 0.2)
-        self.titleLayout.addWidget(self.maxAppButton, 0.2)
-        self.titleLayout.addWidget(self.closeAppButton, 0.2)
-        """
+
         # Set layout
         self.titleLayout.setSpacing(0)
         self.titleLayout.setContentsMargins(0, 0, 5, 0)
@@ -550,48 +568,91 @@ class MainTitle(QtWidgets.QWidget):
         # self.menucount = parent.sideWindow.sideMenu.count()
         
         # Action
-        self.normal_flag = True
+        self.statusButton.clicked.connect(self.jumpStatus)
         self.runButton.clicked.connect(self.Run)
         self.resetButton.clicked.connect(self.Reset)
         self.stopButton.clicked.connect(self.Stop)
-        self.closeAppButton.clicked.connect(parent.close)
-        self.minAppButton.clicked.connect(parent.showMinimized)
-        self.maxAppButton.clicked.connect(self.switchMaximized)
+
+
+    # Show status
+    def showStatus(self, status, widget = None):
+         
+        self.statusButton.setVisible(True)
+        # If not finish the input, set the focus to the next input
+        if status == 0:
+            
+            try:
                 
-    # From maximized to minimized
-    def switchMaximized(self):
+                self.sendin = widget
+            
+            except:
+                
+                pass
+            
+            self.statusButton.setIcon(self.inputIcon)
+            self.statusButton.setText("Go to the next input")
+            
+        # If status = 1, on progress, show the next step to do
+        elif status == 1:
+            
+            # Get the current widget
+            self.sendin = widget
+            self.statusButton.setIcon(self.warningIcon)
+            self.statusButton.setText("The input is maybe incomplete")
+            
+        elif status == 2:
+            
+            self.sendin = widget
+            self.statusButton.setIcon(self.errorIcon)
+            self.statusButton.setText("There is invalid input")
+            
+        elif status == 3:
+            
+            self.statusButton.setIcon(self.successIcon)            
+            self.statusButton.setText("All inputs are valid")
         
-        if self.normal_flag:
-        
-            self.parent.showMaximized()
-            self.maxAppButton.setIcon(QtGui.QIcon(":/resources/restore.png"))
-        
+        elif status == 4:
+            
+            self.statusButton.setVisible(False)
+                   
         else:
             
-            self.parent.showNormal()
-            self.maxAppButton.setIcon(QtGui.QIcon(":/resources/maximize.png"))
+            self.showStatus(0)
         
-        self.normal_flag = not self.normal_flag
-        
-    """    
-    def mousePressEvent(self, event):
-        
-        if event.button() == QtCore.Qt.LeftButton:
-
-            self.startPos = event.globalPos()
-            self.clickPos = self.mapToParent(self.pos())
+        # Put the current status
+        self.status = status
     
     
-    # Move the frame    
-    def mouseMoveEvent(self, event):
+    # Jump to the current status
+    def jumpStatus(self):
         
-        if not self.normal_flag:
+        self.currentWidget = self.parentWidget().mainContent
+        self.currentTask = self.currentWidget.taskWidget.currentWidget().currentWidget()
+        # When clicked, set focused
+        if self.status == 0:
             
-            return
-
-        self.parent.move(event.globalPos() - self.clickPos)
-    """    
+            self.sendin = self.currentTask.quickCheckInput()
+            self.sendin.setFocus()
+            
+        if self.status == 3:
+            
+            self.runButton.setFocus()
+            
+        elif self.status == 2:
+            
+            self.sendin.setFocus()
+            
+        else:
+            
+            try:
+            
+                self.sendin.setFocus()
         
+            except:
+            
+                pass
+    
+    
     # Show button
     def showButton(self):
         
@@ -615,7 +676,7 @@ class MainTitle(QtWidgets.QWidget):
         # Get the current task running
         self.currentTask = self.currentWidget.taskWidget.currentWidget().currentWidget()
         # Check if all the settings are correct
-        run_signal = self.currentTask.checkRun()
+        run_signal = self.currentTask.checkRun(self.status)
         # Check unsaved results
         # If old settings was run again, escape the check for results, since the results will be the same
         if run_signal == 2:
@@ -631,9 +692,7 @@ class MainTitle(QtWidgets.QWidget):
             
             # Once run, clean all the widget
             self.currentContent.clearWidget()
-            self.currentContent.setLogColor("#fa7064")
-            self.currentTask.printRun()
-            self.currentContent.setLogNormalColor()
+            # self.currentTask.printRun()
             self.childrenPanelStart = self.currentTask.panel_start
             for i in self.childrenPanelStart:
                 
@@ -644,10 +703,12 @@ class MainTitle(QtWidgets.QWidget):
             self.currentContent.mainStackWidget.widget(0).setEnabled(False)
             # Change the widget to the log and to the bottom
             self.currentPanel.setCurrentRow(1)
+            self.currentContent.log_tabWidget.setCurrentIndex(0)
             # Disable left panel
             self.parent.sideWindow.sideMenu.setVisible(False)    
             self.parent.sideWindow.sideRunMenu.setVisible(True)
-            # Call the widget's run function
+            # Call the widget's run functions
+            self.showStatus(4)
             self.runButton.setEnabled(False)
             self.resetButton.setVisible(False)
             self.stopButton.setVisible(True)   
@@ -666,6 +727,7 @@ class MainTitle(QtWidgets.QWidget):
         if result:
         
             self.currentTask = self.parentWidget().mainContent.taskWidget.currentWidget().currentWidget()
+            self.showStatus(0)
             self.currentTask.Reset()
             sys.stdout.write("Reset all the settings")
 
@@ -680,7 +742,7 @@ class MainTitle(QtWidgets.QWidget):
         # If OK, stop the running
         if result: 
             
-            self.currentContent.setLogColor("#fa7064")
+            self.currentContent.setLogColor("#d8000c")
             sys.stdout.write("Stopping the task...")
             self.currentTask.Stop()
             self.Finish(0)
@@ -693,7 +755,10 @@ class MainTitle(QtWidgets.QWidget):
         
         # Enable setting
         self.currentContent.mainStackWidget.widget(0).setEnabled(True)
-            
+        """
+        # Change the log viewer to config viewer
+        self.currentContent.log_tabWidget.setCurrentIndex(1)
+        """
         # 1 success
         # 0 fail
         if finish_signal == 1:
@@ -751,16 +816,57 @@ class MainContent(QtWidgets.QWidget):
         # Widgets
         self.mainContentWidget = MainContentWindow(self)
         self.taskWidget = QtWidgets.QStackedWidget()
-        self.mainContentWidget.mainSettingLayout.addWidget(self.taskWidget)
+        self.taskMannualWidget = QtWidgets.QDockWidget("Manual")
+        # self.taskMannualWidget.setFeatures(QtWidgets.QDockWidget.DockWidgetFloatable | QtWidgets.QDockWidget.DockWidgetMovable)
+        self.taskMannualWidget.setFeatures(QtWidgets.QDockWidget.NoDockWidgetFeatures)
+        self.taskMannualWidget.setAllowedAreas(QtCore.Qt.RightDockWidgetArea|QtCore.Qt.LeftDockWidgetArea)
+        self.taskMannualWidget.setStyleSheet("QDockWidget{border: 2px solid #00529b; margin: 0; font-size: 12pt; color:#399ee5; font-family: 'PT Sans' ;} QDockWidget::title{padding-left: 10px; background: #d8dde6;}")
+        self.taskMannual = QtWidgets.QTextBrowser()
+        self.taskMannual.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.taskMannual.setStyleSheet("QTextBrowser{margin: 0; border: 2px solid #d8dde6; border-top:none; border-radius:0;}")
+        self.taskMannualWidget.setWidget(self.taskMannual)
+        self.taskMannualWidget.setMinimumWidth(350)
+        
+        
+        # Set icon
+        self.taskShowToggleOn = QtGui.QIcon(":/resources/toggle_on.png")
+        self.taskShowToggleOff = QtGui.QIcon(":/resources/toggle_off.png")        
+        # Set button
+        self.taskShowButton = QtWidgets.QPushButton()
+        self.taskShowButton.setIconSize(QtCore.QSize(20, 20))
+        self.taskShowButton.setIcon(self.taskShowToggleOff)
+        self.taskShowButton.setMaximumWidth(25)
+        self.taskShowButton.setSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Preferred)
+        self.taskShowButton.setCursor(QtCore.Qt.PointingHandCursor)
+        self.taskShowButton.setToolTip("Open Manual")
+        self.taskShowButton.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.taskShowButton.setStyleSheet("QPushButton{border-radius: 0; margin: 0; background:#d8dde6; border:none;} QPushButton:hover{background:#d8dde6;}")
+        # self.mainContentWidget.mainSettingLayout.addWidget(self.taskMannualWidget)
+        # Add window widget
+        self.subTaskWindow = MainContentSetting()
+        self.subTaskWidget = QtWidgets.QWidget()
+        self.subTaskLayout = QtWidgets.QHBoxLayout()
+        self.subTaskLayout.setContentsMargins(0, 0, 0, 0)
+        self.subTaskLayout.setSpacing(0)
+        self.subTaskLayout.setSizeConstraint(QtWidgets.QLayout.SetMinimumSize)
+        self.subTaskLayout.addWidget(self.taskWidget)
+        self.subTaskLayout.addWidget(self.taskShowButton)
+        self.subTaskWindow.addDockWidget(QtCore.Qt.RightDockWidgetArea, self.taskMannualWidget)
+        self.subTaskWidget.setLayout(self.subTaskLayout)
+        self.subTaskWindow.setCentralWidget(self.subTaskWidget)
+        
+        self.mainContentWidget.mainSettingLayout.addWidget(self.subTaskWindow)
         # Nested widget
         # Design
         self.designcontentWidget = DesignContent(parent)
         self.designcontentWidget.setCurrentIndex(0)
+        """
         # Table
         self.tablecontentWidget = TableContent(parent)
         self.tablecontentWidget.setCurrentIndex(0)
-        # Other
-        self.othercontentWidget = OtherContent()
+        """
+        # Other functions
+        self.othercontentWidget = OtherContent(parent)
         self.othercontentWidget.setCurrentIndex(0)
         # Control panel
         self.contentPanel = MainContentPanel(self)
@@ -768,7 +874,7 @@ class MainContent(QtWidgets.QWidget):
         # Add widgets
         # Add an empty widget as initial
         self.taskWidget.addWidget(self.designcontentWidget)
-        self.taskWidget.addWidget(self.tablecontentWidget)
+        # self.taskWidget.addWidget(self.tablecontentWidget)
         self.taskWidget.addWidget(self.othercontentWidget)
         # Area
         # Add widget
@@ -785,15 +891,55 @@ class MainContent(QtWidgets.QWidget):
         # Stylesheet
         self.setStyleSheet("border: none; font-family:'Segoe UI';")
         
+        # Action
+        self.taskShowButton.clicked.connect(self.showMannual)
+        
+    
+    def clearDoc(self):
+        
+        self.taskMannual.clear()
     
     def showTask(self):
         
         self.mainContentWidget.setVisible(True) 
         
+    # Set documentation
+    def setDoc(self, url):
         
-   
+        try:
+        
+            self.taskMannual.setSource(QtCore.QUrl(url))
+        
+        except:
+            
+            pass
+            
+        
+    """       
+    def resizeDock(self, flag):
+        
+        # The dockwidget is floating now
+        if flag == True:
+            
+            screen = QtWidgets.QDesktopWidget().screenGeometry()
+            self.taskMannualWidget.setGeometry(screen.width()/8, 50, 800, 600)
+    """
+        
+        
+    def showMannual(self):
+        
+        if self.taskMannualWidget.isVisible() == True:
+            
+            self.taskMannualWidget.setVisible(False)
+            self.taskShowButton.setIcon(self.taskShowToggleOn)
+        
+        else:
+            
+            self.taskMannualWidget.setVisible(True)
+            self.taskShowButton.setIcon(self.taskShowToggleOff)        
+        
 
-# Panel
+# Main Content Panel
 class MainContentPanel(QtWidgets.QListWidget):
     
     
@@ -854,8 +1000,15 @@ class MainContentWindow(QtWidgets.QWidget, Ui_MainContentWindow):
         self.plot_file = {}
         self.exportTable_flag = self.exportPlot_flag = 0
         # Set font size amd color for log console
+        self.log_tabWidget.setCurrentIndex(0)
+        self.log_tabWidget.setTabIcon(0, QtGui.QIcon(":/resources/tab_log.png"))
+        self.log_tabWidget.setTabIcon(1, QtGui.QIcon(":/resources/tab_info_disabled.png"))
+        self.log_tabWidget.tabBar().setTabTextColor(0, QtGui.QColor("#4f8a10"))  
+        self.log_tabWidget.tabBar().setStyleSheet("QTabBar:tab:selected{ border-color: #4f8a10;}")
         font = QtGui.QFont("Segoe UI", 10)
         self.logConsole.setFont(font)
+        self.configConsole.setFont(font)
+        self.configConsole.setTextColor(QtGui.QColor("#00529B"))
         self.verticalHeaderFont = font
         self.logConsole.setTextColor(NORMAL_LOG_COLOR)
         # Link the stdout to log textedit
@@ -868,12 +1021,31 @@ class MainContentWindow(QtWidgets.QWidget, Ui_MainContentWindow):
 
         
         # Action
+        self.log_tabWidget.currentChanged.connect(self.changeTab)
         sys.stdout.textWritten.connect(self.writeLog)
         self.logClear_btn.clicked.connect(self.clearLog)
         # self.graph_comboBox.currentIndexChanged.connect(self.changeGraph)
         self.tableExport_btn.clicked.connect(self.exportTable)
         self.plotExport_btn.clicked.connect(self.exportPlot)
-
+    
+    
+    # Function for the log tab
+    def changeTab(self, index):
+        
+        if index == 0:
+            
+            self.log_tabWidget.setTabIcon(0, QtGui.QIcon(":/resources/tab_log.png"))
+            self.log_tabWidget.setTabIcon(1, QtGui.QIcon(":/resources/tab_info_disabled.png"))
+            self.log_tabWidget.tabBar().setTabTextColor(0, QtGui.QColor("#4f8a10"))     
+            self.log_tabWidget.tabBar().setStyleSheet("QTabBar:tab:selected{ border-color: #4f8a10;} QTabBar:tab:selected:hover{color:#4f8a10;}") 
+                  
+        else:
+            
+            self.log_tabWidget.setTabIcon(0, QtGui.QIcon(":/resources/tab_log_disabled.png"))
+            self.log_tabWidget.setTabIcon(1, QtGui.QIcon(":/resources/tab_info.png"))
+            self.log_tabWidget.tabBar().setTabTextColor(1, QtGui.QColor("#00529b"))
+            self.log_tabWidget.tabBar().setStyleSheet("QTabBar:tab:selected{ border-color: #00529b;} QTabBar:tab:selected:hover{color:#00529b;}")
+        
 
     # Write log
     def writeLog(self, text):
@@ -881,14 +1053,20 @@ class MainContentWindow(QtWidgets.QWidget, Ui_MainContentWindow):
         self.logConsole.verticalScrollBar().setValue(self.logConsole.verticalScrollBar().maximum())        
         if "Error" in text or "Oops" in text:
             
-            self.logConsole.setTextColor(QtGui.QColor("#66cc6e"))
+            self.logConsole.setTextColor(QtGui.QColor("#d8000c"))
             self.logConsole.append(text)
             self.logConsole.setTextColor(NORMAL_LOG_COLOR)
             
         else: 
            
             self.logConsole.append(text)
-            
+          
+    
+    def writeConfig(self, text):
+
+        self.configConsole.verticalScrollBar().setValue(self.configConsole.verticalScrollBar().maximum())        
+        self.configConsole.append(text)
+        
     
     # Set log color
     def setLogColor(self, color):
@@ -905,8 +1083,15 @@ class MainContentWindow(QtWidgets.QWidget, Ui_MainContentWindow):
     # Clear log
     def clearLog(self):
 
-        self.logConsole.verticalScrollBar().setValue(0)        
-        self.logConsole.clear()
+        if self.log_tabWidget.currentIndex() == 0:
+            
+            self.logConsole.verticalScrollBar().setValue(0)        
+            self.logConsole.clear()
+        
+        else:
+            
+            self.configConsole.verticalScrollBar().setValue(0)
+            self.configConsole.clear()
 
     
     # Call back the result
@@ -924,6 +1109,8 @@ class MainContentWindow(QtWidgets.QWidget, Ui_MainContentWindow):
         index_count = len(header_index)
         # Index name
         index_name = {}
+        # Index name list
+        index_name_list = []
         # Get the column names
         column_names = df.columns.values
         # Get number of columns
@@ -938,8 +1125,19 @@ class MainContentWindow(QtWidgets.QWidget, Ui_MainContentWindow):
         elif index_count == 2:
             
             for i in header_index:
-                
-                index_name[i] = [column_names[i] + " " + str(cname) for cname in list(set(df.ix[:, i]))]
+            
+                index_name_list = []
+                for j in df.ix[:, i]:
+                    
+                    if j in index_name_list:
+                        
+                        continue
+                    
+                    else:
+                        
+                        index_name_list.append(j)
+                        
+                index_name[i] = index_name_list
                
             n_index0 = len(index_name[0])
             n_index1 = len(index_name[1]) 
@@ -949,14 +1147,19 @@ class MainContentWindow(QtWidgets.QWidget, Ui_MainContentWindow):
                 
                 name = column_names[j]
                 single_result = QtWidgets.QFrame()
-                single_result.setMinimumHeight((n_index0 + 1) * 120 )
-                single_result.setStyleSheet("QFrame{background:#f9fafc;font-family:'Segoe UI';border: 1px solid #f9fafc;border-radius: 5px; max-height:1000px;}")
+                single_result.setMinimumHeight((n_index0 + 1) * 120  + 100)
+                single_result.setStyleSheet("QFrame{background:#f9fafc;font-family:'Segoe UI';border: 1px solid #f9fafc;border-radius: 5px;max-height: 1600px;}")
                 # Layout
                 single_result_layout = QtWidgets.QVBoxLayout()
                 # Title
                 single_main_title = QtWidgets.QLabel()
                 single_main_title.setText(name)
                 single_main_title.setStyleSheet("QLabel{color:#7e888c; font-family:'Segoe UI'; font-size:11pt;}")
+                # Text Browser
+                single_main_browser = QtWidgets.QTextBrowser()
+                url = "qrc:///doc/result/" + name + ".html"
+                single_main_browser.setSource(QtCore.QUrl(url))
+                single_main_browser.setStyleSheet("QTextBrowser{background:transparent;max-height:100px; margin-top: 10px; margin-bottom:20px;}")
                 # Table
                 single_main_table = QtWidgets.QTableWidget()
                 # Table style
@@ -985,13 +1188,13 @@ class MainContentWindow(QtWidgets.QWidget, Ui_MainContentWindow):
                     for m in range(n_index1):
                         
                         # Align at center
-                        if pd.isnull(new_df.ix[k + 1, m + 1]):
+                        if pd.isnull(new_df.ix[k, m]):
                             
                             item = QtWidgets.QTableWidgetItem("-")
                             
                         else:
                             
-                            item = QtWidgets.QTableWidgetItem(str(np.around(new_df.ix[k + 1, m + 1], 3)))
+                            item = QtWidgets.QTableWidgetItem(str(np.around(new_df.ix[k, m], 3)))
                         
                         # Disable edit
                         item.setFlags(QtCore.Qt.ItemIsEnabled)
@@ -1002,10 +1205,11 @@ class MainContentWindow(QtWidgets.QWidget, Ui_MainContentWindow):
                 # single_main_table.resizeRowsToContents()
                 # Add widget
                 single_result_layout.addWidget(single_main_title)
+                single_result_layout.addWidget(single_main_browser, 1)
                 single_result_layout.addWidget(single_main_table)
                 # Set layout
                 single_result_layout.setContentsMargins(15, 30, 15, 30)
-                single_result_layout.setSpacing(30)
+                single_result_layout.setSpacing(0)
                 single_result.setLayout(single_result_layout)
                 # self.tableLayout.addWidget(single_result)        
                 result_layout.addWidget(single_result)
@@ -1229,6 +1433,18 @@ class MainContentWindow(QtWidgets.QWidget, Ui_MainContentWindow):
         sys.stdout = self.originalsys
 
 
+
+# MainContent Setting
+class MainContentSetting(QtWidgets.QMainWindow):
+    
+    def __init__(self, parent = None):
+        
+        QtWidgets.QMainWindow.__init__(self, parent)
+        self.setWindowFlags(QtCore.Qt.Widget)  
+        
+        
+        
+
 class DesignContent(QtWidgets.QStackedWidget):
     
     
@@ -1240,7 +1456,7 @@ class DesignContent(QtWidgets.QStackedWidget):
         self.addWidget(self.mamsWidget)
 
 
-
+"""
 class TableContent(QtWidgets.QStackedWidget):
     
     
@@ -1252,1230 +1468,15 @@ class TableContent(QtWidgets.QStackedWidget):
         self.addWidget(self.criticalvalueWidget)    
          
          
-         
+"""         
 class OtherContent(QtWidgets.QStackedWidget):
     
     
     def __init__(self, parent=None):
         
         QtWidgets.QStackedWidget.__init__(self, parent)
-  
-        
-            
-# Content
-class MAMS_Design(QtWidgets.QWidget, Ui_MAMSWindow):
- 
-    
-    def __init__(self, parent=None):
-        
-        QtWidgets.QWidget.__init__(self, parent)
-        # Setup ui
-        self.setupUi(self)
-        # Parent
-        self.parent = parent
-        # Initial variable
-        # Title
-        self.title = "Multi-Arm Multi-Stage Design"
-        # Panel
-        self.panel_start = [2, 3]
-        self.panel_finish = [2, 3]
-        # Flag for whether finish the task
-        # 1 finished
-        # 2 not finished
-        self.finishflag = 0
-        self.function_run = True
-        # MAMS itself
-        # Number of simulations
-        self.nsim = 0
-        # Seed
-        self.seed = 0
-        # Efficacy, futility
-        self.eff = self.fut = 0
-        # Clinically interesting difference
-        self.clinSig = 0
-        # Number of arms, number of stages, initial as 0
-        self.nArm = self.nStage = 0
-        # List for treatment effects, number of stages
-        self.te_list = self.ns_list = []
-        # Allocation ratio
-        self.alloc = 0
-        # Checkbox for adding patients to other treatment arms
-        self.addPat = 0
-        # Set predictive probability
-        self.predict = 0
-        self.predNum = 0
-        self.predSuccess = 0
-        self.preClinSig_flag = 0
-        self.predClinSig = 0
-        self.searchMethod = 0
-        self.loadCVL = 0 
-        self.CVLfile = ""
-        # Old settings
-        self.old_setting = ()
-        # Flag for treatment effect and patient assignment
-        self.trtEff_flag = self.patNum_flag = True
-
-        # Set validator
-        # Number of simulations
-        self.sim_objValidator = QtGui.QIntValidator(self)
-        self.sim_objValidator.setRange(1000, 100000)
-        self.sim_textCtl.setValidator(self.sim_objValidator)
-        # Seed
-        self.seed_objValidator = QtGui.QIntValidator(self)
-        self.seed_objValidator.setRange(1,99999)
-        self.seed_textCtl.setValidator(self.seed_objValidator)
-        # Futility
-        self.fut_objValidator = StrictDoubleValidator()
-        self.fut_objValidator.setRange(0.0, 0.999, 3)
-        self.fut_textCtl.setValidator(self.fut_objValidator)
-        # Efficacy
-        self.eff_objValidator = StrictDoubleValidator()
-        self.eff_objValidator.setRange(0.0, 0.999, 3)
-        self.eff_textCtl.setValidator(self.eff_objValidator)
-        # Clinical significant difference
-        self.clinSig_objValidator = StrictDoubleValidator()
-        self.clinSig_objValidator.setRange(0.0, 0.999, 3)
-        self.clinSig_textCtl.setValidator(self.clinSig_objValidator)
-        # Added patients
-        self.predNum_objValidator = QtGui.QIntValidator(self)
-        self.predNum_objValidator.setRange(1, 3000)
-        self.predNum_textCtl.setValidator(self.predNum_objValidator)
-        # Success boundary
-        self.predSuccess_objValidator = StrictDoubleValidator(self)
-        self.predSuccess_objValidator.setRange(0.0, 0.999, 3)
-        self.predSuccess_textCtl.setValidator(self.predSuccess_objValidator)
-        # Clinical significant difference for predictive probability calculation
-        self.predClinSig_textCtl.setValidator(self.clinSig_objValidator)
-        # Filter for combobox
-        self.wheelfilter = WheelFilter()
-        self.nArm_comboBox.installEventFilter(self.wheelfilter)
-        self.nStage_comboBox.installEventFilter(self.wheelfilter)
-        self.search_comboBox.installEventFilter(self.wheelfilter)
-        # Font
-        # header font
-        self.headerFont = QtGui.QFont("Segoe UI")
-        self.headerFont.setPointSize(10)
-        self.headerFont.setBold(False)
-        # Treatment effect
-        # Create headers
-        self.effSize_tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
-        self.effSize_tableWidget.horizontalHeader().setMinimumSectionSize(120)        
-        self.effSize_tableWidget.verticalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
-        self.effSize_tableWidget.setItemDelegate(TableDoubleValidator())
-        self.effSize_tableWidget.horizontalHeader().setSectionsClickable(False)
-        self.effSize_tableWidget.verticalHeader().setVisible(False)
-        self.effSize_tableWidget.verticalScrollBar().setVisible(False)
-        # Single click to edit
-        self.effSize_tableWidget.setEditTriggers(QtWidgets.QAbstractItemView.AllEditTriggers)
-        self.trtEff_Frame.setVisible(False)            
-        # Validator for allocation ratio
-        self.ar_objValidator = TableARValidator(self)
-        self.ar_objValidator.setRange(1.0, 4.0, 3)
-        self.alloc_textCtl.setValidator(self.ar_objValidator)
-        # Patient assignment 
-        self.patNum_tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
-        self.patNum_tableWidget.horizontalHeader().setMinimumSectionSize(120)     
-        self.patNum_tableWidget.verticalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
-        self.patNum_tableWidget.setItemDelegate(TableIntValidator())
-        self.patNum_tableWidget.horizontalHeader().setSectionsClickable(False)
-        self.patNum_tableWidget.verticalHeader().setVisible(False)
-        self.patNum_tableWidget.verticalScrollBar().setVisible(False)
-        self.patNum_tableWidget.horizontalScrollBar().setVisible(False)
-        # Single click to edit
-        self.patNum_tableWidget.setEditTriggers(QtWidgets.QAbstractItemView.AllEditTriggers)
-        self.patNum_Frame.setVisible(False)
-
-        
-        # Action
-        # Binding functions
-        self.seed_checkBox.toggled.connect(self.seed_textCtl.setEnabled)
-        self.nArm_comboBox.currentIndexChanged.connect(self.setArm)
-        self.nStage_comboBox.currentIndexChanged.connect(self.setStage)
-        self.nArm_comboBox.currentIndexChanged.connect(self.resetEffSize)
-        self.nStage_comboBox.currentIndexChanged.connect(self.resetPatNum)
-        self.predict_checkBox.toggled.connect(self.setPredict)
-        self.predict_checkBox.toggled.connect(self.predNum_textCtl.setEnabled)
-        self.predict_checkBox.toggled.connect(self.predSuccess_textCtl.setEnabled)
-        self.predict_checkBox.toggled.connect(self.checkClinical)
-        self.predict_checkBox.toggled.connect(self.checkSelected)
-        self.predClinSig_checkBox.toggled.connect(self.predClinSig_textCtl.setDisabled)
-        self.search_comboBox.currentIndexChanged.connect(self.checkTable)
-        self.loadCVL_checkBox.toggled.connect(self.loadCVL_textCtl.setEnabled)
-        self.loadCVL_checkBox.toggled.connect(self.loadCVL_btn.setEnabled)
-        self.predict_checkBox.toggled.connect(self.search_comboBox.setEnabled)
-        
-        self.loadCVL_btn.clicked.connect(self.loadCVLFile)
-        self.trtEffSize_btn.clicked.connect(self.switchEffSize)
-        self.assignPatient_btn.clicked.connect(self.switchPatNum)
-        self.saveEff_btn.clicked.connect(self.saveEffSize)
-        self.resetEff_btn.clicked.connect(self.resetEffSize)
-        self.cancelEff_btn.clicked.connect(self.switchEffSize)
-        self.savePat_btn.clicked.connect(self.savePatNum)
-        self.resetPat_btn.clicked.connect(self.resetPatNum)
-        self.cancelPat_btn.clicked.connect(self.switchPatNum)
-        
-
-    # Set number of arms
-    def setArm(self):
-          
-        index = self.nArm_comboBox.currentIndex()
-        if index != -1:
-            
-            value = int(str(self.nArm_comboBox.currentText()))
-            if self.nStage_comboBox.currentIndex() != -1:
-                
-                self.assignPatient_btn.setEnabled(True)
-            
-            self.trtEffSize_btn.setEnabled(True)
-            if self.nArm and value != self.nArm:
-            
-                sys.stdout.write("Selected number of  treatment arms changed from %d to %d"%(self.nArm, value))
-                self.nArm = value
-                # Treatment effective size set to empty: Need to reset the treatment effective size
-                
-                if self.te_list: 
-                
-                    self.te_list = []
-                    sys.stdout.write("Reset treatment effective size")
-            
-            elif not self.nArm:
-            
-                self.nArm = value
-                sys.stdout.write("Selected number of treatment arms: %d" %value)
-
-
-    # Set number of stages
-    def setStage(self):
-
-        index = self.nStage_comboBox.currentIndex()
-        if index != -1:
-            value = int(str(self.nStage_comboBox.currentText()))
-            if self.nArm_comboBox.currentIndex() != -1:
-            
-                self.assignPatient_btn.setEnabled(True)
-            
-            if self.nStage and value != self.nStage:
-                      
-                sys.stdout.write("Selected number of stages changed from %d to %d"%(self.nStage, value))
-                self.nStage = value
-                
-                if self.ns_list:
-                
-                    self.ns_list = []
-                    sys.stdout.write("Reset number of patients at each stage")
-            
-            elif not self.nStage:
-            
-                self.nStage = value
-                sys.stdout.write("Selected number of stages: %d" %value)
-    
-    
-    # Set checkbox for posterior predictive probability
-    def setPredict(self):
-
-        if self.predict_checkBox.isChecked():
-               
-            self.predict = 1
-            sys.stdout.write("Set the calculation of the posterior predictive probability")
-        
-        else:
-                
-            self.predict = 0
-            sys.stdout.write("Unset the calculation of the posterior predictive probability")
-
-
-    # Load CVL for posterior predictive probability 
-    def loadCVLFile(self):
-        
-        self.CVLfile, file_ilter = QtWidgets.QFileDialog.getOpenFileName(self, "Load CVL Table", "", self.tr("CSV(*.csv)"))
-        sys.stdout.write("Load critical value lookup table:")
-        sys.stdout.write("File location: %s" %self.CVLfile)
-        self.loadCVL_textCtl.setText(self.CVLfile)
-
-
-    # Check selected
-    def checkSelected(self):
-
-        if self.predict_checkBox.isChecked():
-            
-            self.predNum_textCtl.setEnabled(True)
-            self.predSuccess_textCtl.setEnabled(True)
-            self.predClinSig_textCtl.setEnabled(True)
-            self.predClinSig_checkBox.setEnabled(True)
-            if self.predClinSig_checkBox.isChecked():
-                
-                self.predClinSig_textCtl.setEnabled(False)
-            
-            if self.search_comboBox.currentIndex() != 0:
-            
-                self.loadCVL_checkBox.setEnabled(True)
-                if self.loadCVL_checkBox.isChecked():
-                       
-                    self.loadCVL_textCtl.setEnabled(True)
-                    self.loadCVL_btn.setEnabled(True)
-
-        else:
-            
-            self.predNum_textCtl.setEnabled(False)
-            self.predSuccess_textCtl.setEnabled(False)
-            self.predClinSig_textCtl.setEnabled(False)
-            self.predClinSig_checkBox.setEnabled(False)
-            self.loadCVL_checkBox.setEnabled(False)
-            self.loadCVL_textCtl.setEnabled(False)
-            self.loadCVL_btn.setEnabled(False)
-    
-    
-    # Check clinical
-    def checkClinical(self):
-        
-        if self.predClinSig_checkBox.isChecked():
-                
-            self.predClinSig_textCtl.setEnabled(False)
-        
-        else:
-            
-            self.predClinSig_textCtl.setEnabled(True)
-             
-
-    # Check widgets for loadcvl
-    def checkTable(self, index):
-
-        if index == 1:
-                
-            self.loadCVL_checkBox.setEnabled(True)
-            if self.loadCVL_checkBox.isChecked():
-            
-                self.loadCVL_textCtl.setEnabled(True)
-                self.loadCVL_btn.setEnabled(True)
-
-        else:
-
-            self.loadCVL_checkBox.setChecked(False)
-            self.loadCVL_checkBox.setEnabled(False)
-            self.loadCVL_textCtl.setEnabled(False)
-            self.loadCVL_btn.setEnabled(False)
-
-
-    # Switch treatment effective size frame 
-    def switchEffSize(self):
-
-        if self.nArm * 80 > self.effSize_tableWidget.width():
-            
-            self.effSize_tableWidget.horizontalScrollBar().setVisible(True)
-        
-        else:
-            
-            self.effSize_tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
-
-        # Switch function
-        if self.trtEff_flag:
-            
-            self.effColHeaders = []
-            for i in range(self.nArm - 1):
-        
-                self.effColHeaders.append("Treatment " + str(i + 1))
-            
-            self.effColHeaders.append("Control")
-            self.effSize_tableWidget.setRowCount(1)
-            self.effSize_tableWidget.setColumnCount(self.nArm)
-            self.effSize_tableWidget.setCurrentCell(-1, -1)
-            self.effSize_tableWidget.setHorizontalHeaderLabels(self.effColHeaders)
-            # If unchanged, load the settings last time          
-            if self.nArm == len(self.te_list):
-            
-                for j in range(self.nArm):
-                
-                    self.effSize_tableWidget.setItem(0, j, QtWidgets.QTableWidgetItem(str(self.te_list[j])))
-            
-            self.nArm_comboBox.setEnabled(False)
-        
-        else:
-            
-            self.nArm_comboBox.setEnabled(True)
-            
-
-        self.trtEff_Frame.setVisible(self.trtEff_flag)
-        self.trtEff_flag = not self.trtEff_flag
-
-
-    # Switch patient frame
-    def switchPatNum(self):
-        
-        if self.patNum_flag:
-            
-            self.patColHeaders = []
-            for i in range(self.nStage):
-                
-                self.patColHeaders.append("Stage "+str(i+1))
-                
-            self.patNum_tableWidget.setRowCount(1)
-            self.patNum_tableWidget.setColumnCount(self.nStage)
-            self.patNum_tableWidget.setCurrentCell(-1, -1)
-            self.patNum_tableWidget.setHorizontalHeaderLabels(self.patColHeaders)
-
-            # If unchanged, load the settings last time
-            if self.nStage == len(self.ns_list):
-               
-                for j in range(self.nStage):
-                
-                    self.patNum_tableWidget.setItem(0, j, QtWidgets.QTableWidgetItem(str(int(self.ns_list[j]))))
-            
-            self.nStage_comboBox.setEnabled(False)
-            self.nArm_comboBox.setEnabled(False)
-        
-        else:
-            
-            self.nStage_comboBox.setEnabled(True)
-            self.nArm_comboBox.setEnabled(True)
-            
-        
-        self.patNum_Frame.setVisible(self.patNum_flag)
-        self.patNum_flag = not self.patNum_flag
-        
-
-    # Save effective size
-    def saveEffSize(self):
-            
-        self.te_list = []
-        for i in range(self.nArm):
-                 
-            # Check if cell is empty
-            # If empty, jump to the first cell that is empty
-            if self.effSize_tableWidget.item(0, i) is None or str(self.effSize_tableWidget.item(0, i).text()) == "":
-                
-                msgBox = MessageBox()
-                msgBox.setText("Effective size assignment not finished!")
-                msgBox.setWindowTitle("Missing Input")
-                msgBox.exec_()
-                self.effSize_tableWidget.setCurrentCell(-1, -1)
-                self.effSize_tableWidget.setCurrentCell(0, i)
-                self.te_list = []
-                return
-            
-            else:
-        
-                self.te_list.append(float(str(self.effSize_tableWidget.item(0, i).text())))
-        
-        header_string =  "Treatment arm:             \t" +  " ".join(self.effColHeaders)
-        effsize_string = "Treatment effective size:\t" + "\t".join(str(te) for te in self.te_list)
-        sys.stdout.write("\nSave treatment effective size\n%s"%header_string)
-        sys.stdout.write(effsize_string)
-        self.trtEff_flag = True
-        self.trtEff_Frame.setVisible(False)
-        self.nArm_comboBox.setEnabled(True)
-
-      
-    # Reset effective size
-    def resetEffSize(self):
-
-        for i in range(self.nArm):
-            
-            self.effSize_tableWidget.setItem(0, i, None)
-          
-        self.effSize_tableWidget.setCurrentCell(-1, -1)
-        self.te_list = []
-        sys.stdout.write("Reset treatment effective size")
-        # self.trtEff_flag = True
-        # self.trtEff_Frame.setVisible(False)
-
-
-    # Save effective size
-    def savePatNum(self):
-            
-        self.ns_list = []
-        for i in range(self.nStage):
-            
-            # Check if cell is empty
-            if self.patNum_tableWidget.item(0, i) is None or str(self.patNum_tableWidget.item(0, i).text()) == "":
-                
-                msgBox = MessageBox()
-                msgBox.setText("Patients assignment not finished!")
-                msgBox.setWindowTitle("Missing Input")
-                msgBox.exec_()
-                self.patNum_tableWidget.setCurrentCell(-1, -1)
-                self.patNum_tableWidget.setCurrentCell(0, i)
-                self.ns_list = []
-                return
-            
-            else:
-                
-                self.ns_list.append(float(str(self.patNum_tableWidget.item(0, i).text())))
-        
-        header_string =  "Stage:                       \t" +  " ".join(self.patColHeaders)
-        patnum_string = "Number of patient:\t" + "\t".join(str(int(ns)) for ns in self.ns_list)
-        sys.stdout.write("Save number of patients at each stage\n%s"%header_string)
-        sys.stdout.write(patnum_string)
-        self.patNum_flag = True
-        self.patNum_Frame.setVisible(False)
-        self.nArm_comboBox.setEnabled(True)
-        self.nStage_comboBox.setEnabled(True)
-
-    
-    # Reset effective size
-    def resetPatNum(self):
-
-        sys.stdout.write("Reset allocation ratio")
-        sys.stdout.write("Unset adding patients to other treatment arms when dropped")
-        for i in range(self.nStage):
-        
-                self.patNum_tableWidget.setItem(0, i, None)
-        
-        self.patNum_tableWidget.setCurrentCell(-1, -1)
-        self.ns_list = []
-        sys.stdout.write("Reset number of patients at each stage")
-        # self.patNum_flag = True
-        # self.patNum_Frame.setVisible(False)
-
-
-    # Run the trial
-    def checkRun(self):
-
-        try:
-            
-            self.nsim = int(self.sim_textCtl.text())
-            if self.nsim > 100000 or self.nsim < 1000:
-                
-                msgBox = MessageBox()
-                msgBox.setText("The number of simulations should between 1000 and 100000")
-                msgBox.setWindowTitle("Missing Input")
-                msgBox.exec_()
-                self.sim_textCtl.setFocus()
-                return
-                
-        except:
-            
-            msgBox = MessageBox()
-            msgBox.setText("The number of simulations has not been set!")
-            msgBox.setWindowTitle("Missing Input")
-            msgBox.exec_()
-            self.sim_textCtl.setFocus()
-            return
-                
-        if self.seed_checkBox.isChecked():
-            
-            try:
-            
-                self.seed = int(self.seed_textCtl.text())
-            
-            except:
-            
-                msgBox = MessageBox()
-                msgBox.setText("The seed has not been set!")
-                msgBox.setWindowTitle("Missing Input")
-                msgBox.exec_()
-                self.seed_textCtl.setFocus()
-                return
-        
-        else: 
-            
-            self.seed = 0
-
-        if self.nArm_comboBox.currentIndex() == -1:
-            
-            msgBox = MessageBox()
-            msgBox.setText("The number of arms has not been set!")
-            msgBox.setWindowTitle("Missing Input")
-            msgBox.exec_()
-            self.nArm_comboBox.setFocus()
-            return
-        
-        self.nArm = int(str(self.nArm_comboBox.currentText()))
-
-        if self.nStage_comboBox.currentIndex() == -1:
-            
-            msgBox = MessageBox()
-            msgBox.setText("The number of stage has not been set!")
-            msgBox.setWindowTitle("Missing Input")
-            msgBox.exec_()
-            self.nStage_comboBox.setFocus()
-            return
-        
-        self.nStage = int(str(self.nStage_comboBox.currentText()))
-
-        # If not self.te_list:
-        if not self.te_list:
-            
-            msgBox = MessageBox()
-            msgBox.setText("The treatment effect assignment has not been finished!")
-            msgBox.setWindowTitle("Missing Input")
-            msgBox.exec_()
-            self.trtEff_flag = True
-            self.switchEffSize()
-            self.effSize_tableWidget.setFocus()
-            return
-            
-        # If not self.ns_list
-        if not self.ns_list:
-            
-            msgBox = MessageBox()
-            msgBox.setText("The patients assignment has not been finished!")
-            msgBox.setWindowTitle("Missing Input")
-            msgBox.exec_()
-            self.patNum_flag = True
-            self.switchPatNum()
-            self.patNum_tableWidget.setFocus()
-            return
-        
-        if np.sum(self.ns_list) + self.predNum > 10000 :
-            
-            msgBox = MessageBox()
-            msgBox.setText("Currently the total patients could not exceed 10000!")
-            msgBox.setWindowTitle("Missing Input")
-            msgBox.exec_()
-            self.patNum_flag = True
-            self.switchPatNum()
-            self.patNum_tableWidget.setFocus()
-            return
-        
-        try:
-                
-            # Allocation ratio
-            self.alloc = float(self.alloc_textCtl.text())
-                            
-        except:
-                         
-            msgBox = MessageBox()
-            msgBox.setText("Allocation ratio not specified!")
-            msgBox.setWindowTitle("Missing Input")
-            msgBox.exec_()
-            # If missing, set focus to the lineEdit for allocation ratio
-            self.alloc_textCtl.setFocus()
-            return
-        
-        # Futility, efficacy, clinical significant difference
-        try:
-            
-            self.fut = float(self.fut_textCtl.text())
-        
-        except:
-            
-            msgBox = MessageBox()
-            msgBox.setText("The futility boundary has not been set!")
-            msgBox.setWindowTitle("Missing Input")
-            msgBox.exec_()
-            self.fut_textCtl.setFocus()
-            return
-
-        try:
-            
-            self.eff = float(self.eff_textCtl.text())
-            if self.eff <= self.fut:
-            
-                msgBox = MessageBox()
-                msgBox.setText("Efficacy boundary should be larger than futility boundary!")
-                msgBox.setWindowTitle("Missing Input")
-                msgBox.exec_()
-                self.eff_textCtl.setFocus()
-                return
-            
-        except:
-            
-            msgBox = MessageBox()
-            msgBox.setText("The efficacy boundary has not been set!")
-            msgBox.setWindowTitle("Missing Input")
-            msgBox.exec_()
-            self.eff_textCtl.setFocus()
-            return
-        
-        try:
-            
-            self.clinSig = float(self.clinSig_textCtl.text())
-        
-        except:
-        
-            msgBox = MessageBox()
-            msgBox.setText("The clinically significant difference has not been set!")
-            msgBox.setWindowTitle("Missing Input")
-            msgBox.exec_()
-            self.clinSig_textCtl.setFocus()
-            return
-
-        if self.predict_checkBox.isChecked():
-            
-            self.predict = 1
-            
-            try:
-            
-                self.predNum = int(self.predNum_textCtl.text())
-            
-            except:
-            
-                msgBox = MessageBox()
-                msgBox.setText("The patients added has not been set!")
-                msgBox.setWindowTitle("Missing Input")
-                msgBox.exec_()
-                self.predNum_textCtl.setFocus()
-                return
-
-            try:
-                
-                self.predSuccess = float(self.predSuccess_textCtl.text())
-            
-            except:
-            
-                msgBox = MessageBox()
-                msgBox.setText("The success boundary has not been set!")
-                msgBox.setWindowTitle("Missing Input")
-                msgBox.exec_()
-                self.predSuccess_textCtl.setFocus()
-                return
-            
-            
-            if self.predClinSig_checkBox.isChecked():
-                
-                self.predClinSig = self.clinSig
-            
-            else:
-                
-                
-                try:
-            
-                    self.predClinSig = float(self.predClinSig_textCtl.text())
-        
-                except:
-        
-                    msgBox = MessageBox()
-                    msgBox.setText("The clinically significant difference has not been set!")
-                    msgBox.setWindowTitle("Missing Input")
-                    msgBox.exec_()
-                    self.predClinSig_textCtl.setFocus()
-                    return
-            
-            
-            self.searchMethod = int(self.search_comboBox.currentIndex() + 1)
-            if self.searchMethod == 0:
-                    
-                self.searchMethod = 1
-                sys.stdout.write("Use the default method (Bisection) to calculate the critical value")
-            
-            if self.searchMethod == 2 and self.loadCVL_checkBox.isChecked():
-                
-                self.loadCVL = 1
-                if self.CVLfile == "":
-                         
-                    msgBox = MessageBox()
-                    msgBox.setText("The critical value lookup table has not been impoted!")
-                    msgBox.setWindowTitle("Missing Input")
-                    msgBox.exec_()
-                    self.loadCVL_btn.setFocus()
-                    return         
-            
-            elif self.searchMethod == 2:
-                
-                self.loadCVL = 0
-                self.CVLfile = ""      
-                
-        else:
-            
-            self.predict = 0
-            self.predNum = 0
-            self.predSuccess = 0
-            self.predClinSig = 0
-            self.searchMethod = 0          
-            self.loadCVL = 0
-            self.CVLfile = ""
-        
-        if self.old_setting == (self.nsim, self.seed, self.nArm, self.nStage, self.te_list, self.ns_list, 
-                                self.alloc, self.eff, self.fut,  self.clinSig, 
-                                self.predNum, self.predSuccess, self.predClinSig, self.searchMethod, self.CVLfile):
-            
-            msgBox = MessageBox(None, 2)
-            msgBox.setText("All the settings are the same as last run. Do you want to run it again?")
-            msgBox.setWindowTitle("Run the same scenario")
-            result = msgBox.exec_()
-            if result:
-                
-                return 2 
-            
-            else:
-                
-                return
-        
-        return 1
-    
-        
-    # Print the settings of the run
-    def printRun(self):
-        
-        # Number of simulations, seed
-        sys.stdout.write("\nSimulation settings:")
-        sys.stdout.write("# of simulations: %d"%(self.nsim))
-        if self.seed_checkBox.isChecked():
-            
-            sys.stdout.write("The seed is set: %d"%(self.seed))
-        
-        else:
-        
-            sys.stdout.write("The seed is not set, a random seed is used")
-        
-        # Treatment effective size
-        sys.stdout.write("\nTreatment effective size:")
-        df_te_list = pd.DataFrame(np.array(self.te_list).reshape(1, self.nArm), index = ["Effective Size"], columns = self.effColHeaders)
-        sys.stdout.write(df_te_list)
-        
-        # Patient at each stage
-        sys.stdout.write("\nPatients at each stage:")   
-        df_ns_list = pd.DataFrame(np.array(self.ns_list).reshape(1, self.nStage), index = ["# of Patients"],  columns = self.patColHeaders)      
-        sys.stdout.write(df_ns_list)
-        
-        # Allocation ratio
-        sys.stdout.write("\nAllocation ratio: %.3f"%self.alloc)
-        
-        # Futility, efficacy, clinical significant difference
-        sys.stdout.write("\nFutility boundary:%.3f"%(self.fut))
-        sys.stdout.write("Efficacy boundary:%.3f"%(self.eff))
-        sys.stdout.write("Clinically significant difference:%.3f"%(self.clinSig))
-        
-        # If predictive probability is calculated
-        if self.predict_checkBox.isChecked():
-            
-            sys.stdout.write("\nCalculate posterior predictive probability: Yes")
-            sys.stdout.write("New # of patients added:%d"%self.predNum)
-            sys.stdout.write("Success boundary:%.3f\n"%(self.predSuccess))
-            sys.stdout.write("Clinical significant difference:%.3f\n"%(self.predClinSig))
-            if self.searchMethod == 1:
-                
-                sys.stdout.write("Use bisection algorithm to create a critical value lookup table")
-                
-            else:
-                
-                sys.stdout.write("Create a whole critical value lookup table")
-                 
-            if self.loadCVL == 1:
-                
-                sys.stdout.write("Import critical lookup table from: %s"%(self.CVLfile))
-            
-            if self.searchMethod == 2 and self.loadCVL == 0:
-                
-                sys.stdout.write("Create a new critical lookup table")
-        
-        
-    # Run 
-    def Run(self):
-        
-        self.finishflag = 0        
-        # Start thread
-        try:
-            
-            # Create thread
-            self.newfoldername = uuid.uuid4()
-            self.pathdir = "./tmp/%s/" %self.newfoldername
-            self.fullpathdir = str(os.getcwd()).replace("\\", "/") + self.pathdir[1:]
-            # Main folder
-            sys.stdout.write("Create folder for the simulation results")
-            os.makedirs(self.pathdir)         
-            # Append to the file
-            trial_setting_file = open("%s/SimulationSetting.txt"%(self.pathdir), "a")
-            # Write settings to the output file
-            trial_setting_file.write("Simulation settings:\n")
-            trial_setting_file.write("\n# of simulations: %d\n"%(self.nsim))
-            if self.seed_checkBox.isChecked():
-            
-                trial_setting_file.write("The seed is set: %d\n"%(self.seed))
-        
-            else:
-        
-                trial_setting_file.write("The seed is not set, a random seed is used\n")
-                
-            trial_setting_file.write("\nTreatment effective size:\n")
-            trial_setting_file.write("\t".join(self.effColHeaders) + "\n")
-            trial_setting_file.write("\t".join(map(str, self.te_list)) + "\n")
-            trial_setting_file.write("\nPatients at each stage:\n")  
-            trial_setting_file.write("\t".join(self.patColHeaders) + "\n") 
-            trial_setting_file.write("\t".join(map(str, self.ns_list)) + "\n")
-            trial_setting_file.write("\nAllocation ratio: %.3f\n"%self.alloc)
-            trial_setting_file.write("\nFutility boundary:%.3f\n"%(self.fut))
-            trial_setting_file.write("Efficacy boundary:%.3f\n"%(self.eff))
-            trial_setting_file.write("Clinically significant difference:%.3f\n"%(self.clinSig))
-            if self.predict_checkBox.isChecked():
-              
-                trial_setting_file.write("\nCalculate posterior predictive probability: Yes\n")
-                trial_setting_file.write("New # of patients added:%d\n"%self.predNum)
-                trial_setting_file.write("Success boundary:%.3f\n"%(self.predSuccess))
-                trial_setting_file.write("Clinically significant difference:%.3f\n"%(self.predClinSig))
-            
-            if self.searchMethod == 1:
-                
-                trial_setting_file.write("Use bisection algorithm to create a critical value lookup table\n")
-                
-            else:
-                
-                trial_setting_file.write("Create a whole critical value lookup table\n")
-                 
-            if self.loadCVL == 1:
-                
-                trial_setting_file.write("Import critical lookup table from: %s\n"%(self.CVLfile))
-            
-            if self.searchMethod == 2 and self.loadCVL == 0:
-                
-                trial_setting_file.write("Create a new critical lookup table\n")
-            
-            trial_setting_file.close()
-                        
-            self.function_run = True
-            while self.function_run:
-                
-                self.finishflag = FixedTrial.TrialSimulation(self.pathdir, self.effColHeaders, 
-                                    self.patColHeaders, self.nsim, self.seed, self.nArm, self.nStage, self.te_list, 
-                                    self.ns_list, self.alloc, self.eff, self.fut,  self.clinSig, self.predict, 
-                                    self.predNum, self.predSuccess, self.predClinSig, self.searchMethod, self.loadCVL, self.CVLfile)
-                
-                self.function_run = False                
-       
-            if self.finishflag == 0:  
-               
-                sys.stdout.write("Simulation finished...")
-                self.parent.mainTitle.Finish(1)
-                        
-            else:
-                
-                sys.stdout.write("Oops, simulation failed...")
-                self.finishflag = 0
-                self.parent.mainTitle.Finish(0)
-                shutil.rmtree(self.fullpathdir)
-                
-        except:
-            
-            exctype,excvalue = sys.exc_info()[:2]
-            sys.stdout.write("Error: %s %s" %(str(exctype), str(excvalue)))
-            shutil.rmtree(self.fullpathdir)
-            self.parent.mainTitle.Finish(0)
-        
-        self.old_setting = (self.nsim, self.seed, self.nArm, self.nStage, self.te_list, self.ns_list, 
-                            self.alloc, self.eff, self.fut,  self.clinSig, 
-                            self.predNum, self.predSuccess, self.predClinSig, self.searchMethod, self.CVLfile)
-        
-        self.finishflag = 1
-     
-    # Reset the whole trial simulator
-    def Reset(self):
-
-        # Reset all the trial settings
-        self.nsim = self.seed = self.nArm = self.nStage = self.eff = self.fut = self.clinSig = 0
-        self.sim_textCtl.clear()
-        self.seed_checkBox.setChecked(False)
-        self.seed_textCtl.clear()
-        self.nArm_comboBox.setCurrentIndex(-1)
-        self.nStage_comboBox.setCurrentIndex(-1)
-        self.eff_textCtl.clear()
-        self.fut_textCtl.clear()
-        self.alloc_textCtl.clear()
-        self.clinSig_textCtl.clear()
-        # Reset all the predictive probabilities
-        self.predict = self.predNum = self.predSuccess = self.predClinSig = self.searchMethod = self.loadCVL = 0
-        self.CVLfile = ""
-        self.predict_checkBox.setChecked(False)
-        self.predNum_textCtl.clear()
-        self.predSuccess_textCtl.clear()
-        self.predClinSig_checkBox.setChecked(False)
-        self.search_comboBox.setCurrentIndex(-1)
-        self.loadCVL_checkBox.setChecked(False)
-        self.loadCVL_textCtl.clear()
-        # Reset treatment effective sizes and number of patients
-        if self.te_list:
-            
-            self.resetEffSize()
-            
-        if self.ns_list:
-                       
-            self.resetPatNum()
-        
-   
-    # Stop
-    def Stop(self):
-        
-        self.function_run = False
-        self.finishflag = 0
-    
-    # Write result to table
-    def setResult(self):
-        
-        self.finalresultfile = self.fullpathdir + "/FinalResult.csv"
-        self.fileindex = [0, 1]
-        self.currentContent = self.parent.mainContent.mainContentWidget
-        self.currentContent.setCallbackResult(self.finalresultfile, self.fileindex)
-        
-    # Write the plot
-    def setPlot(self):
-        
-        self.currentContent.setCallbackPlot(self.fullpathdir)
-      
-        
-    
-# Critical value table
-class CriticalValue_Table(QtWidgets.QWidget, Ui_CriticalValueTableWindow):
-
-    def __init__(self, parent=None):
-        
-        QtWidgets.QWidget.__init__(self, parent)
-        # Title
-        self.title = "Critical Value Look-up Table"
-        # Parent
-        self.parent = parent
-        # Panel
-        self.panel_start = [2, 3]
-        self.panel_finish = []
-        # Finish flag
-        self.finishflag = 0
-        self.function_run = True
-        # Setup ui
-        self.setupUi(self)
-        # Seed
-        self.seed = 0
-        # Clinically significant difference
-        self.clinSig = 0
-        # Number of patients
-        self.n1 = self.n2 = 0
-        # Output directory
-        self.CVLfile = ""
-        # Tuple to store old settings
-        self.old_setting = ()
-        # Set validator
-        # Seed
-        self.seed_objValidator = QtGui.QIntValidator(self)
-        self.seed_objValidator.setRange(1,999999)
-        self.seed_textCtl.setValidator(self.seed_objValidator)
-        # Clinical significant difference
-        self.clinSig_objValidator = StrictDoubleValidator()
-        self.clinSig_objValidator.setRange(0.0, 0.999, 3)
-        self.clinSig_textCtl.setValidator(self.clinSig_objValidator)
-        # Added patients
-        self.nPatient_objValidator = QtGui.QIntValidator(self)
-        self.nPatient_objValidator.setRange(1, 2500)
-        self.nTreatment_textCtl.setValidator(self.nPatient_objValidator)
-        self.nControl_textCtl.setValidator(self.nPatient_objValidator)
-        
-        # Binding functions
-        self.seed_checkBox.toggled.connect(self.seed_textCtl.setEnabled)
-        self.saveCVL_btn.clicked.connect(self.saveCVLFile)
-        
-        
-    def saveCVLFile(self):
-               
-        self.CVLfile, filetype = QtWidgets.QFileDialog.getSaveFileName(self, "Save CVL to...", "", self.tr("CSV(*.csv)"))
-        self.saveCVL_textCtl.setText(self.CVLfile)
-        
-        
-    def checkRun(self):
-    
-        if self.seed_checkBox.isChecked():
-            
-            try:
-            
-                self.seed = int(self.seed_textCtl.text())
-            
-            except:
-            
-                msgBox = MessageBox()
-                msgBox.setText("The seed has not been set!")
-                msgBox.setWindowTitle("Missing Input")
-                msgBox.exec_()
-                self.seed_textCtl.setFocus()
-                return
-        
-        else: 
-            
-            self.seed = 0
-
-        try:
-            
-            self.clinSig = float(self.clinSig_textCtl.text())
-                
-        except:
-            
-            msgBox = MessageBox()
-            msgBox.setText("The clinically significant difference has not been set!")
-            msgBox.setWindowTitle("Missing Input")
-            msgBox.exec_()
-            self.clinSig_textCtl.setFocus()
-            return
-        
-        
-        try:
-            
-            self.n1 = int(self.nTreatment_textCtl.text())
-                
-        except:
-            
-            msgBox = MessageBox()
-            msgBox.setText("The number of patients in treatment has not been set!")
-            msgBox.setWindowTitle("Missing Input")
-            msgBox.exec_()
-            self.nTreatment_textCtl.setFocus()
-            return
-        
-        
-        try:
-            
-            self.n2 = int(self.nControl_textCtl.text())
-                
-        except:
-            
-            msgBox = MessageBox()
-            msgBox.setText("The number of patients in control has not been set!")
-            msgBox.setWindowTitle("Missing Input")
-            msgBox.exec_()
-            self.nControl_textCtl.setFocus()
-            return
-        
-        
-        if self.CVLfile == "":
-            
-            msgBox = MessageBox()
-            msgBox.setText("Output directory has bot been set!")
-            msgBox.setWindowTitle("Missing Input")
-            msgBox.exec_()
-            self.saveCVL_btn.setFocus()
-            return
-        
-        
-        if self.old_setting == (self.seed, self.clinSig, self.n1, self.n2):
-            
-            msgBox = MessageBox(None, 2)
-            msgBox.setText("All the settings are the same as last run. Do you want to run it again?")
-            msgBox.setWindowTitle("Run the same scenario")
-            result = msgBox.exec_()
-            if result:
-                
-                return 2
-            
-            else:
-                
-                return
-            
-        return 1
-    
-    
-    # Print the setting of the run
-    def printRun(self):
-        
-        sys.stdout.write("\nCritical look-up table settings:")
-        if self.seed_checkBox.isChecked():
-            
-            sys.stdout.write("The seed is set: %d"%(self.seed))
-        
-        else:
-        
-            sys.stdout.write("The seed is not set, a random seed is used")
-        
-        # Number of patient in treatment arm
-        sys.stdout.write("\n#Patients in Treatment:%d"%(self.n1))
-        sys.stdout.write("#Patients in Control:%d"%(self.n2))
-        sys.stdout.write("Clinically significant difference:%.3f"%(self.clinSig))
-        sys.stdout.write("Output critical lookup table to: %s"%(self.CVLfile))
-    
-    
-    def Run(self):
-        
-        self.finishflag = 0
-        sys.stdout.write("\nStart creating table...")
-        try:
-        
-            self.function_run = True
-            while self.function_run:
-            
-                self.finishflag = CreateCriticalValueTable.NewCriticalValueTable(self.seed,
-                                self.n1, self.n2, self.clinSig, self.CVLfile)
-        
-                self.function_run = False
-                
-            if self.finishflag == 0:
-                
-                sys.stdout.write("Table creation finished...")
-                self.parent.mainTitle.Finish(1)
-                
-            else:
-                
-                sys.stdout.write("Oops, table creation failed")
-                self.finishflag = 0
-                self.parent.mainTitle.Finish(0)
-                
-        except:
-            
-            exctype,excvalue = sys.exc_info()[:2]
-            sys.stdout.write("Error: %s %s" %(str(exctype), str(excvalue)))
-            self.parent.mainTitle.Finish(0)
-            
-            
-        self.old_setting = (self.seed, self.clinSig, self.n1, self.n2)  
-        self.finishflag = 1
-    
-    
-    def Reset(self):
-        
-        msgBox = MessageBox(None, 2)
-        msgBox.setText("Are you sure you want to reset all the settings?")
-        msgBox.setWindowTitle("Reset the critical value generating settings")
-        result = msgBox.exec_()
-        if result:
-        
-            sys.stdout.write("Reset all the settings")
-            # Reset all the trial settings
-            self.seed = self.clinSig = self.n1 = self.n2 =  0
-            self.seed_checkBox.setChecked(False)
-            self.seed_textCtl.clear()
-            self.clinSig_textCtl.clear()
-            self.nTreatment_textCtl.clear()
-            self.nControl_textCtl.clear()
-            self.CVLfile = ""
-            self.saveCVL_textCtl.clear()
-    
-    
-    def Stop(self):
-        
-        self.function_run = False
-        self.finishflag = 0
-        
-    
-    
-# Titlebar for all the sub windows
-class SubTitleBar(QtWidgets.QWidget):
-    
-    def __init__(self, parent=None):
-        
-        QtWidgets.QWidget.__init__(self, parent)
-        # Click pos
-        self.clickPos = QtCore.QPoint(50, 50)
-        # App Icon
-        self.icon_Label = QtWidgets.QLabel()
-        self.icon_Label.setPixmap(QtGui.QPixmap(":/resources/bcts.png").scaled(QtCore.QSize(40, 40)))
-        self.icon_Label.setFixedWidth(40)
-        # Title font
-        self.title_font = QtGui.QFont("Segoe UI")
-        self.title_font.setPointSize(11)
-        self.title_font.setBold(True)
-        # Title        
-        self.title_Label = QtWidgets.QLabel("")
-        self.title_Label.setFont(self.title_font)
-        self.title_Label.setAlignment(QtCore.Qt.AlignCenter)
-        #　Button
-        self.closeApp_btn = QtWidgets.QToolButton()
-        self.closeApp_btn.setIcon(QtGui.QIcon(":/resources/close.png"))
-        self.closeApp_btn.setObjectName("closeButton")
-        self.titlelayout = QtWidgets.QHBoxLayout()
-        self.titlelayout.addWidget(self.icon_Label)
-        self.titlelayout.addWidget(self.title_Label)
-        self.titlelayout.addWidget(self.closeApp_btn)
-        self.titlelayout.setSpacing(0) 
-        self.titlelayout.setContentsMargins(5, 5, 5, 5)
-        # Stylesheet
-        self.setStyleSheet("QLabel{background:#ffffff; color:#859ba6; font-family:'Segoe UI'; font-size:12pt;} QToolButton{border:none;} QPushButton:hover{background:#6e66cc;border:1px solid #373366;} QToolButton:hover{background:#fa7064;}")
-        self.setLayout(self.titlelayout)
-        # Slots & signals
-        self.closeApp_btn.clicked.connect(parent.close)
-
-    def mousePressEvent(self, event):
-        
-        if event.button() == QtCore.Qt.LeftButton:
-
-            self.startPos = event.globalPos()
-            self.clickPos = self.mapToParent(self.pos())
-    
-    # Move the frame    
-    def mouseMoveEvent(self, event):
-
-        self.parentWidget().move(event.globalPos() - self.clickPos)
-       
+        self.posteriorprobWidget = PosteriorProbability_Calculation(parent)
+        self.addWidget(self.posteriorprobWidget)
         
 
 # Window for plots
@@ -2591,135 +1592,7 @@ class GraphLabel(QtWidgets.QLabel):
         self.clicked.emit()
 
 
-
-
-# Validator for futile, effifcacy and clinical significant difference
-class StrictDoubleValidator(QtGui.QDoubleValidator):
-
-    def __init__(self, parent = None):
-
-        QtGui.QDoubleValidator.__init__(self, parent)
-        self.setNotation(QtGui.QDoubleValidator.StandardNotation)
-
-
-    def validate(self, input, pos):
-
-        state, input, pos = QtGui.QDoubleValidator.validate(self, input, pos)
-        if state == QtGui.QValidator.Invalid:
-            
-            return (QtGui.QValidator.Invalid, input, pos)
-        
-        if pos == 1:
-        
-            try: 
-                
-                if float(str(input)) >= 1:
-                    
-                    return (QtGui.QValidator.Invalid, input, pos)
-            
-            except:
-                
-                return (QtGui.QValidator.Invalid, input, pos)
-        
-        elif pos == 2:
-            
-            if not str(input)[pos-1] == ".":
-                
-                return (QtGui.QValidator.Invalid, input, pos)
-        
-        elif pos > 2:
-        
-            try:
-                
-                if  float(str(input)) >= 1:
-                    
-                    return (QtGui.QValidator.Invalid, input, pos)
-            
-            except:
-                
-                return (QtGui.QValidator.Invalid, input, pos)
-        
-        return (QtGui.QValidator.Acceptable, input, pos)
-
-
-
-# Validator for table entry, rewrite the table
-class TableDoubleValidator(QtWidgets.QStyledItemDelegate):
-
-    def createEditor(self, widget, option, index):
-
-        self.cellEditor = QtWidgets.QLineEdit(widget)
-        self.cell_validator = StrictDoubleValidator()
-        self.cell_validator.setRange(0.0, 0.999, 3)
-        self.cellEditor.setValidator(self.cell_validator)
-
-        return self.cellEditor
-
-
-
-# Validator for allocation ratio
-class TableARValidator(QtGui.QDoubleValidator):
-
-    def __init__(self, parent = None):
-
-        QtGui.QDoubleValidator.__init__(self, parent)
-        self.setNotation(QtGui.QDoubleValidator.StandardNotation)
-
-    def validate(self, input, pos):
-
-        state, input, pos = QtGui.QDoubleValidator.validate(self, input, pos)
-        if state == QtGui.QValidator.Invalid:
-        
-            return (QtGui.QValidator.Invalid, input, pos)
-        
-        if pos == 1:
-        
-            try: 
-                
-                if float(str(input)) > 4:
-                    
-                    return (QtGui.QValidator.Invalid, input, pos)
-            
-            except:
-                
-                return (QtGui.QValidator.Invalid, input, pos)
-        
-        elif pos == 2:
-        
-            if not str(input)[pos-1] == ".":
-                
-                return (QtGui.QValidator.Invalid, input, pos)
-        
-        elif pos > 2:
-            
-            try:
-                
-                if  float(str(input)) >= 4:
-                    
-                    return (QtGui.QValidator.Invalid, input, pos)
-            
-            except:
-                
-                return (QtGui.QValidator.Invalid, input, pos)
-        
-        return (QtGui.QValidator.Acceptable, input, pos)
-
-
-# Validator for patients assignments
-# Will be used in version 1 and version 2
-class TableIntValidator(QtWidgets.QStyledItemDelegate):
-
-    def createEditor(self, widget, option, index):
-
-        self.cellEditor = QtWidgets.QLineEdit(widget)
-        self.cell_validator = QtGui.QIntValidator(self)
-        self.cell_validator.setRange(10, 2000)
-        self.cellEditor.setValidator(self.cell_validator)
-        
-        return self.cellEditor
-        
-        
-
+    
 # Std write out
 class StdOutStream(QtCore.QObject):
 
@@ -2733,75 +1606,6 @@ class StdOutStream(QtCore.QObject):
     def flush(self):
     
         pass
-
-
-
-# Message box
-class MessageBox(QtWidgets.QDialog):
-
-    def __init__(self, parent=None, type = 1):
-
-        QtWidgets.QDialog.__init__(self, parent)
-        # Type 1: OK default
-        # Type 2: Yes|No
-        self.setWindowFlags(QtCore.Qt.CustomizeWindowHint)
-        self.resize(400, 250)
-        # self.title = self.windowTitle()
-        self.msgLayout = QtWidgets.QVBoxLayout()
-        self.msgLabelLayout = QtWidgets.QHBoxLayout()
-        self.msgButtonLayout = QtWidgets.QHBoxLayout()
-        self.msgButtonLayout.setAlignment(QtCore.Qt.AlignRight)
-        self.subtitlebar = SubTitleBar(self)
-        self.msg_Label = QtWidgets.QLabel("")
-        self.msg_Label.setObjectName("MessageLabel")
-        self.msg_Label.setMargin(5)
-        self.msg_Label.setAlignment(QtCore.Qt.AlignCenter)
-        self.msgLabelLayout.setContentsMargins(0, 0, 0, 0)
-        self.msgLabelLayout.setAlignment(QtCore.Qt.AlignCenter)
-        # Add layout
-        self.msgLabelLayout.addWidget(self.msg_Label)
-        self.hline = QtWidgets.QWidget()
-        self.hline.setObjectName("MessageLine")
-        self.hline.setWindowOpacity(0.5)
-        self.msgYes_btn = QtWidgets.QPushButton("Yes")
-        self.msgNo_btn = QtWidgets.QPushButton("No")
-        self.msgOK_btn = QtWidgets.QPushButton("OK")
-
-        if type == 1:
-
-            self.msgButtonLayout.addWidget(self.msgOK_btn, 3)
-
-        else:
-
-            self.msgButtonLayout.addWidget(self.msgYes_btn, 3)
-            self.msgButtonLayout.addWidget(self.msgNo_btn, 3)
-
-        self.msgLayout.addWidget(self.subtitlebar, 2)
-        self.msgLayout.addWidget(self.hline, 1)
-        self.msgLayout.addLayout(self.msgLabelLayout, 7)
-        self.msgButtonLayout.setSpacing(5)
-        self.msgButtonLayout.setContentsMargins(5, 0, 5, 15)
-        self.msgLayout.addLayout(self.msgButtonLayout)
-        self.msgLayout.setSpacing(0)
-        self.msgLayout.setContentsMargins(2, 2, 2, 2)
-        self.setLayout(self.msgLayout)
-        self.setStyleSheet("QDialog {background: #ffffff; border: none; font-family:'Segoe UI'; font-size:12pt;} QWidget#MessageLine{max-height:2px; width:100%; background:#399ee5;} QLabel#MessageLabel{font-family:'Segoe UI'; font-size:12pt; color:#3d5159;} QPushButton{background: #66cc6e; color: #ffffff; font-family:'Segoe UI'; font-size:12pt; border-radius: 5px; border: 1px solid #4bae54; padding:5px 15px 5px 15px; margin:5px 5px 10px 5px; max-width: 100px;} QPushButton:hover{background: #6e66cc;border:1px solid #373366;} ")
-        # Connect functions
-        self.msgOK_btn.clicked.connect(self.close)
-        self.msgYes_btn.clicked.connect(self.accept)
-        self.msgNo_btn.clicked.connect(self.reject)
-
-        # Beep sound
-        QtWidgets.QApplication.beep()
-
-    # Rewrite the functions
-    def setWindowTitle(self, text):
-
-        self.subtitlebar.title_Label.setText(text)
-
-    def setText(self, text):
-
-        self.msg_Label.setText(text)
 
 
 
@@ -2836,31 +1640,18 @@ class MovieSplashScreen(QtWidgets.QSplashScreen):
         return self.movie.scaledSize()
 
 
-
-# Event filter
-# Disable scroll on comboBox
-class WheelFilter(QtCore.QObject):
+# The main function if started from Python
+def main():
     
-    def eventFilter(self, source, event):
-        
-        if event.type() == QtCore.QEvent.Wheel:
-             
-            return True
-    
-        return False
-
-
-
-# Init
-def __init__():
-
-    # Set id
-    appid = u'bats.1.0.0' # arbitrary string
+    # Set a unique id to BATS
+    import ctypes
+    appid = u'bats.1.1.0'
+    # Check the platform. If windows, set an ID so it will be in the task bar.
     if sys.platform == 'win32':
 
        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(appid)
     
-    elif sys.platform == 'linux2':
+    elif sys.platform == 'linux':
 
        pass
 
@@ -2872,8 +1663,10 @@ def __init__():
       
       sys.stdout.write("The application is not supported in this system")
       pass
-
+    
+    # Create the application
     app = QtWidgets.QApplication(['Bayesian Adaptive Trial Simulator'])
+    # Add icon for the application
     app_icon = QtGui.QIcon()
     app_icon.addFile(":/resources/bcts.png", QtCore.QSize(16,16))
     app_icon.addFile(":/resources/bcts.png", QtCore.QSize(24,24))
@@ -2881,21 +1674,19 @@ def __init__():
     app_icon.addFile(":/resources/bcts.png", QtCore.QSize(48,48))
     app_icon.addFile(":/resources/bcts.png", QtCore.QSize(256,256))
     app.setWindowIcon(app_icon)
-    # Splashscreen of the application
-    # movie = QtGui.QMovie(":/resources/splashfade.gif")
-    # splash = MovieSplashScreen(movie)
-    # splash.show()
-    # app.processEvents()
-    # Display the animation
-    # start = time.time()
-    # while movie.state() == QtGui.QMovie.Running and time.time() < start + 5:
-    #     app.processEvents()
-    # Load font
+    # Add font to the font database
     QtGui.QFontDatabase().addApplicationFont(":/resources/font/Caviar_Dreams_Bold.ttf")
     QtGui.QFontDatabase().addApplicationFont(":/resources/font/PTsans.ttf")
+    # Initialize the GUI
     window = BATSWindow()
     window.show()
-    # splash.finish(window)
-    # Maximize the application window
-    # window.showMaximized()
-    app.exec_()
+    # Run the app
+    sys.exit(app.exec_())
+
+    
+    
+# Initialize of the app
+if __name__ == '__main__':
+    
+    # The main function
+    main()

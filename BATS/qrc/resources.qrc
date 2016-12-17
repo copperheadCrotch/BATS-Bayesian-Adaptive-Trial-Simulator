@@ -1,0 +1,78 @@
+<RCC>
+  <qresource prefix="/" >
+    <file>../resources/bcts.png</file>
+    <file>../resources/close.png</file>
+    <file>../resources/maximize.png</file>
+    <file>../resources/minimize.png</file>
+    <file>../resources/restore.png</file>
+    <file>../resources/restore_btn.png</file>
+    <file>../resources/design.png</file>
+    <file>../resources/design_selected.png</file>
+    <file>../resources/table.png</file>
+    <file>../resources/table_selected.png</file>
+    <file>../resources/other.png</file>
+    <file>../resources/other_selected.png</file>
+    <file>../resources/doc.png</file>
+    <file>../resources/dropdown_arrow.png</file>
+    <file>../resources/dropdown_arrow_disabled.png</file>
+    <file>../resources/quit.png</file>
+    <file>../resources/result_setting.png</file>
+    <file>../resources/result_table.png</file>
+    <file>../resources/result_log.png</file>
+    <file>../resources/result_plot.png</file>
+    <file>../resources/tab_log.png</file>
+    <file>../resources/tab_info.png</file>
+    <file>../resources/tab_log_disabled.png</file>
+    <file>../resources/tab_info_disabled.png</file>
+    <file>../resources/success.png</file>
+    <file>../resources/warning.png</file>
+    <file>../resources/error.png</file>
+    <file>../resources/input.png</file>
+    <file>../resources/toggle_on.png</file>
+    <file>../resources/toggle_off.png</file>
+    /* <file>../resources/splashfade.gif</file> */
+    <file>../resources/font/Caviar_Dreams_Bold.ttf</file>
+  	<file>../resources/font/PTsans.ttf</file>
+  	<file>../resources/font/Bitter-Regular.otf</file>
+    <file>../doc/img/boundary.png</file>
+    <file>../doc/img/clinicalsig.png</file>
+    <file>../doc/img/trteff.png</file>
+    <file>../doc/img/prior.png</file>
+    <file>../doc/img/patnum.png</file>
+    <file>../doc/img/predictclinicalsig.png</file>
+    <file>../doc/img/predictnum.png</file>
+    <file>../doc/img/predictsuccess.png</file>
+    <file>../doc/img/posterior.png</file>
+    <file>../doc/img/predictiveprobability.png</file>
+    <file>../doc/img/posteriorprobability.png</file>
+    <file>../doc/mams/nsim.html</file>
+    <file>../doc/mams/seed.html</file>
+    <file>../doc/mams/narm.html</file>
+    <file>../doc/mams/trteff.html</file>
+    <file>../doc/mams/prior.html</file>
+    <file>../doc/mams/nstage.html</file>
+    <file>../doc/mams/patnum.html</file>
+    <file>../doc/mams/boundary.html</file>
+    <file>../doc/mams/alloc.html</file>
+    <file>../doc/mams/clinicalsig.html</file>
+    <file>../doc/mams/predictprob.html</file>
+    <file>../doc/mams/predictnum.html</file>
+    <file>../doc/mams/predictsuccess.html</file>
+    <file>../doc/mams/predictclinicalsig.html</file>
+    <file>../doc/posteriorprob/prior.html</file>
+    <file>../doc/posteriorprob/posterior.html</file>
+    <file>../doc/posteriorprob/clinicalsig.html</file>
+    <file>../doc/posteriorprob/seed.html</file>
+    <file>../doc/result/Average Success.html</file>
+    <file>../doc/result/Patient Assignment.html</file>
+    <file>../doc/result/New Patients Added.html</file>    
+    <file>../doc/result/Posterior Probability.html</file>
+    <file>../doc/result/Predictive Probability.html</file>
+    <file>../doc/result/Conditional Efficacy.html</file>
+    <file>../doc/result/Conditional Futility.html</file>
+    <file>../doc/result/Conditional Continuous.html</file>
+    <file>../doc/result/Unconditional Efficacy.html</file>
+    <file>../doc/result/Unconditional Futility.html</file>
+    <file>../doc/result/Unconditional Continuous.html</file>
+	</qresource>
+</RCC>
