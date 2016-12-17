@@ -32,7 +32,7 @@ cdef TrialData(int nsim, int seed, int nArm, int nStage, double [::1] te_list, i
     gsl_rng_set(binomial_r, seed)
     
     # Generate the trial outcomes
-    sys.stdout.write("Generate the trial dataset...")
+    sys.stdout.write("Simulate the trial dataset...")
     # Simulate the data
     for i in range(0, nArm):
         
@@ -78,7 +78,7 @@ cdef TrialData(int nsim, int seed, int nArm, int nStage, double [::1] te_list, i
         sim_df.to_csv(pathdir + "Number of Success/Simulated Data.csv")
         # Cumulative success by stage each arm
         cum_sim_df = pd.DataFrame(np.transpose(np.array(sim_dataset), (2, 1, 0)).reshape((nsim * nStage), nArm), index=pd.MultiIndex.from_product(sim_df_index, names=["# Simulation", "Stage"]), columns=effColHeader).sort_index()
-        cum_sim_df.to_csv(pathdir + "Number of Success/Cumulative Simulated data.csv")
+        cum_sim_df.to_csv(pathdir + "Number of Cumulative Success/Cumulative Simulated data.csv")
         
         # Plot
         color_map = [(31, 119, 180), (174, 199, 232), (255, 127, 14), (255, 187, 120),    
@@ -93,12 +93,19 @@ cdef TrialData(int nsim, int seed, int nArm, int nStage, double [::1] te_list, i
             r, g, b = color_list[color_i]
             color_list[color_i] = (r/255., g/255., b/255.)
             
-        sys.stdout.write("Output histogram plots for simulated data...")
-        
+        # Number of success at each arm at each stage
         for i in range(0, nArm):
             
             for j in range(0, nStage):
                 
+                if i == nArm - 1:
+                    
+                    sys.stdout.write("Output histogram for simulated number of success of control at stage %d"%(j + 1))
+                
+                else:
+                    
+                    sys.stdout.write("Output histograms for simulated number of success of treatment %d at stage %d"%(i + 1, j + 1))                    
+                    
                 fig = plt.figure(figsize = (5.0, 5.0))
                 ax = fig.add_subplot(111)
                 ax.hist(stage_dataset[i, j, :], normed = False, color = color_list[i], label = effColHeader[i])
@@ -107,74 +114,43 @@ cdef TrialData(int nsim, int seed, int nArm, int nStage, double [::1] te_list, i
                 ax.tick_params(axis='both', which='major', labelsize=15)
                 ax.tick_params(axis='both', which='minor', labelsize=15)
                 filename = ""
-                if i != nArm - 1:
-               
-                    plt.title("Treatment Arm %d at Stage %d"%(i + 1, j + 1), fontsize = 15)
-                    filename = "Treatment Arm " + str(i + 1) + " at Stage " + str(j + 1)
-
-                
-                elif i == nArm -1:
+                if i == nArm - 1:
                     
                     plt.title("Control Arm at Stage %d"%(j + 1), fontsize = 15)
                     filename = "Control Arm at Stage " + str(j + 1)
+            
+                else:
+                    
+                    plt.title("Treatment Arm %d at Stage %d"%(i + 1, j + 1), fontsize = 15)
+                    filename = "Treatment Arm " + str(i + 1) + " at Stage " + str(j + 1)
 
-                
                 plt.xlabel("Number of Success", fontsize = 15)
                 plt.ylabel("Frequency", fontsize = 15)
                 fig.set_tight_layout(True)
-                plt.savefig(pathdir + "Number of Success/" + filename + ".png")
-                
+                plt.savefig(pathdir + "Number of Success/" + filename + ".png")             
                 plt.close()
 
         fig = plt.figure(figsize = (3.0, 3.0))
         ax = fig.add_subplot(111)
         ax.hist(stage_dataset[0, 0, :], normed = False, color = random.choice(color_list))     
         fig.set_tight_layout(True)
-        plt.savefig(pathdir + "Number of Success/ui.png")
-        
+        plt.savefig(pathdir + "Number of Success/ui.png")   
         plt.close()
-        """
-        # Plot
-        plt.figure(figsize = (5.0 * nStage, 5.0 * nArm))
-        for i in range(0, nArm):
-            
-            for j in range(0, nStage):
-                
-                ax = plt.subplot(nArm, nStage, i * nStage + j +  1)
-                ax.hist(stage_dataset[i, j, :], normed = True, color = color_list[i])
-                mean_success = np.mean(stage_dataset[i, j, :])
-                prob_success = mean_success/ps_array[i, j]
-                textstr = "Mean=%.2f\nP(Success)=%.2f"%(mean_success, prob_success)
-                ax.text(0.05, 0.95, textstr, verticalalignment = "top", horizontalalignment = "left", transform=ax.transAxes,  fontsize = 12)
-                ax.tick_params(axis='both', which='major', labelsize=15)
-                ax.tick_params(axis='both', which='minor', labelsize=15)
-                
-                if i != nArm - 1:
-               
-                    plt.title("Treatment Arm %d at Stage %d"%(i + 1, j + 1), fontsize = 15)
-                
-                else:
-                    
-                    plt.title("Control Arm at Stage %d"%(j + 1), fontsize = 15)
-                
-                plt.xlabel("Number of Success", fontsize = 15)
-                plt.ylabel("Frequency", fontsize = 15)
-                
-                
-        plt.suptitle("Distribution of Simulated Data", fontsize = 20)
-        # plt.tight_layout(pad=1.0, w_pad=1.0, h_pad=1.0)
-        plt.tight_layout()
-        plt.subplots_adjust(top = 0.9, hspace = 0.3, wspace = 0.3)
-        plt.savefig(pathdir + "Simulated Dataset/Histogram of Simulated Data.png")
-        plt.close()
-        sys.stdout.write("Output histogram plots for cumulative simulated data...")
-        """
-        # Cumulative plot
+
+        # Number of cumulative success at each arm at each stage
         tps_array = np.cumsum(np.array(ps_array), axis = 1)
         for i in range(0, nArm):
             
             for j in range(0, nStage):
                 
+                if i == nArm - 1:
+                    
+                    sys.stdout.write("Output histogram for simulated cumulative number of success of control at stage %d"%(j + 1))
+                
+                else:
+                    
+                    sys.stdout.write("Output histograms for simulated cumulative number of success of treatment %d at stage %d"%(i + 1, j + 1))                    
+                                
                 fig = plt.figure(figsize = (5.0, 5.0))
                 ax = fig.add_subplot(111)
                 ax.hist(sim_dataset[i, j, :], normed = False, color = color_list[i], label = effColHeader[i])
@@ -182,23 +158,21 @@ cdef TrialData(int nsim, int seed, int nArm, int nStage, double [::1] te_list, i
                 cum_prob_success = cum_mean_success/tps_array[i, j]
                 ax.tick_params(axis='both', which='major', labelsize=15)
                 ax.tick_params(axis='both', which='minor', labelsize=15)
-                if i != nArm - 1:
-               
+                if i == nArm - 1:
+                    
+                    plt.title("Control Arm at Stage %d"%(j + 1), fontsize = 15)
+                    filename = "Control Arm at Stage " + str(j + 1)
+            
+                else:
+                    
                     plt.title("Treatment Arm %d at Stage %d"%(i + 1, j + 1), fontsize = 15)
                     filename = "Treatment Arm " + str(i + 1) + " at Stage " + str(j + 1)
 
                 
-                elif i == nArm -1:
-                    
-                    plt.title("Control Arm at Stage %d"%(j + 1), fontsize = 15)
-                    filename = "Control Arm at Stage " + str(j + 1)
-
-                
-                plt.xlabel("Number of Success", fontsize = 15)
+                plt.xlabel("Number of Cumulative Success", fontsize = 15)
                 plt.ylabel("Frequency", fontsize = 15)
                 fig.set_tight_layout(True)
                 plt.savefig(pathdir + "Number of Cumulative Success/" + filename + ".png")
-                
                 plt.close()
 
         fig = plt.figure(figsize = (3.0, 3.0))
@@ -206,7 +180,6 @@ cdef TrialData(int nsim, int seed, int nArm, int nStage, double [::1] te_list, i
         ax.hist(sim_dataset[nArm - 1, nStage - 1, :], normed = False, color = random.choice(color_list))     
         fig.set_tight_layout(True)
         plt.savefig(pathdir + "Number of Cumulative Success/ui.png")
-        
         plt.close()
         
         # Use cumulative dataset for further study
@@ -216,7 +189,7 @@ cdef TrialData(int nsim, int seed, int nArm, int nStage, double [::1] te_list, i
         
     except:
         
-        sys.stdout.write("Oops! Fail to output the simulated data")
+        sys.stdout.write("Oops! Fail to output plots for simulated data")
         sim_dataset = np.cumsum(np.array(sim_dataset), axis = 1)
         return
     
@@ -224,5 +197,10 @@ cdef TrialData(int nsim, int seed, int nArm, int nStage, double [::1] te_list, i
 # Fixed trial data generating function
 def FixedTrialData(nsim, seed, nArm, nStage, te_list, ps_array, sim_dataset, pathdir, effColHeader):
     
-    TrialData(nsim, seed, nArm, nStage, te_list, ps_array, sim_dataset, pathdir, effColHeader)
+    try:
+        
+        TrialData(nsim, seed, nArm, nStage, te_list, ps_array, sim_dataset, pathdir, effColHeader)
     
+    except:
+        
+        sys.stdout.write("Oops! Fail to simulate the trial dataset!")
