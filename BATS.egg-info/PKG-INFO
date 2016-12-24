@@ -1,6 +1,6 @@
 Metadata-Version: 1.1
 Name: BATS
-Version: 1.0.0b10
+Version: 1.1.0a4
 Summary: https://github.com/ContaTP/BATS-Bayesian-Adaptive-Trial-Simulator
 Home-page: https://github.com/ContaTP/BATS-Bayesian-Adaptive-Trial-Simulator
 Author: Zhenning Yu
@@ -23,14 +23,14 @@ Description: BATS
         * Pandas
         * Matplotlib
         * Cython
-        * `cythonGSL <https://github.com/twiecki/CythonGSL>`
+        * `cythonGSL <https://github.com/twiecki/CythonGSL>`_
         * PyQt5
         
         Other dependencies:
         
-        The module requires GSL, `<https://www.gnu.org/software/gsl/>` to be installed on user's operating system, because it use the GSL module to draw random variables and calculate choose functions.
+        The module requires GSL, `<https://www.gnu.org/software/gsl/>`_ to be installed on user's operating system, because it use the GSL module to draw random variables and calculate choose functions.
         
-        * `GSL For Windows Port: <https://code.google.com/archive/p/oscats/downloads>`
+        * `GSL For Windows Port: <https://code.google.com/archive/p/oscats/downloads>`_
         
         Usage
         -----
@@ -42,7 +42,6 @@ Description: BATS
         
         
         Authors of the code: Zhenning Yu
-        
         Contact: yuzhenning.bio@gmail.com
         
         License

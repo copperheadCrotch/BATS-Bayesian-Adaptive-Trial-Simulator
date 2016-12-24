@@ -2,7 +2,7 @@ import cython
 cimport cython
 
 # Import C function
-from CriticalValueCal cimport CriticalValueCal
+from BATS.CriticalValueCal cimport CriticalValueCal
 from libc.stdlib cimport malloc, free
 
 # Import python modules
@@ -12,7 +12,7 @@ import sys
 import os
 import random
 import pandas as pd
-import PredictiveProbability as PredictiveProbability
+import BATS.PredictiveProbability as PredictiveProbability
 import matplotlib.pyplot as plt
 
 DTYPE = np.float64

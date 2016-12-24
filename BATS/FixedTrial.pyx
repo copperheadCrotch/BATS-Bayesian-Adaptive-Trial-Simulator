@@ -8,7 +8,7 @@ from cython_gsl cimport *
 from libc.stdlib cimport malloc, free
 
 # Import C functions
-from CriticalValueCal cimport CriticalValueCal
+from BATS.CriticalValueCal cimport CriticalValueCal
 
 # Import other packages
 import numpy as np
@@ -18,11 +18,11 @@ import time
 import pandas as pd
 import matplotlib
 matplotlib.use('Qt5Agg') 
-import FixedTrialData as TrialData
-import AllocFinder as AllocFinder
-import GammaGenerate as GammaGenerate
-import InterimAnalysis as InterimAnalysis
-import PredictiveProbability as PredictiveProbability
+import BATS.FixedTrialData as TrialData
+import BATS.AllocFinder as AllocFinder
+import BATS.GammaGenerate as GammaGenerate
+import BATS.InterimAnalysis as InterimAnalysis
+import BATS.PredictiveProbability as PredictiveProbability
 
 DTYPE = np.float64
 ctypedef np.float64_t DTYPE_t

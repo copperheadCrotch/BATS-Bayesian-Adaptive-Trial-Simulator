@@ -19,7 +19,7 @@ extensions = [
     Extension(
         "BATS.{}".format(filename),
         ["BATS/{}{}".format(filename, ext_c)] , libraries=cython_gsl.get_libraries(), library_dirs=[cython_gsl.get_library_dir()],
-        include_dirs=[cython_gsl.get_cython_include_dir(), numpy.get_include()]) for filename in "AllocFinder Bisection CreateCriticalValueTable CriticalValueCal FixedTrial FixedTrialData GammaGenerate InterimAnalysis PredictiveProbability".split()
+        include_dirs=[cython_gsl.get_cython_include_dir(), numpy.get_include()]) for filename in "AllocFinder CalPosteriorProbability CriticalValueCal FixedTrial FixedTrialData GammaGenerate InterimAnalysis PredictiveProbability".split()
 ]
 
 
@@ -47,7 +47,7 @@ setup(
     include_dirs=[numpy.get_include(), cython_gsl.get_include()],
     cmdclass = {'build_ext': build_ext},
     name='BATS',
-    version='1.0.0b10',
+    version='1.1.0a4',
     description='https://github.com/ContaTP/BATS-Bayesian-Adaptive-Trial-Simulator',
     long_description=long_description,
     url='https://github.com/ContaTP/BATS-Bayesian-Adaptive-Trial-Simulator',
@@ -74,7 +74,7 @@ setup(
     ],
     keywords='Bayesian, clinical trial, adaptive trial',
     packages=find_packages(),
-    package_data={'BATS': ['*.pyd', '*.pxd',  '*.c', './documentation/*.pdf',  './resources/font/*', './resources/*.png', './resources/*.ico',  './resources/runmenu.gif' , '../README.rst']},
+    package_data={'BATS': ['*.pyx', '*.pxd',  '*.c', './documentation/*.pdf',  './resources/font/*', './resources/*.png', './resources/*.ico',  './resources/runmenu.gif' , '../README.rst']},
     install_requires=[
         'cython >= 0.24',
         'numpy',

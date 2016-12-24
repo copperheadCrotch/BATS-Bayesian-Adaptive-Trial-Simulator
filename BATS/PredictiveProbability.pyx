@@ -5,7 +5,7 @@ from cython_gsl cimport *
 from libc.stdlib cimport malloc, free
 
 # Import C function
-from CriticalValueCal cimport CriticalValueCal
+from BATS.CriticalValueCal cimport CriticalValueCal
 
 import numpy as np
 cimport numpy as np
@@ -14,7 +14,7 @@ import sys
 import os
 import random
 import matplotlib.pyplot as plt
-# import CreateCriticalValueTable as CreateCriticalValueTable
+# import BATS.CreateCriticalValueTable as CreateCriticalValueTable
 
 
 DTYPE = np.float64

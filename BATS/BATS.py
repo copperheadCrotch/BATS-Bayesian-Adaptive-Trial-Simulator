@@ -1,36 +1,36 @@
 # -*- coding: utf-8 -*-
 # This is the main GUI for the program
 from PyQt5 import QtGui, QtCore, QtWidgets, Qt
-import qrc.resources_qr
+import BATS.qrc.resources_qr
 # Import Qt GUI
-from ui.maincontentwindow import Ui_MainContentWindow 
+from BATS.ui.maincontentwindow import Ui_MainContentWindow 
 # Functions
-from ui.mamswindow import Ui_MAMSWindow
-from ui.posteriorprobabilitywindow import Ui_PosteriorProbabilityWindow
+from BATS.ui.mamswindow import Ui_MAMSWindow
+from BATS.ui.posteriorprobabilitywindow import Ui_PosteriorProbabilityWindow
 # The look-up table method is banned in the newest version
 # from ui.criticalvaluewindow import Ui_CriticalValueTableWindow
 
 
 # Import class 
 # Import validator
-from BATS_validator import StrictDoubleValidator
-from BATS_validator import TableDoubleValidator
-from BATS_validator import ContinuousValidator
-from BATS_validator import StrictIntValidator
-from BATS_validator import TableIntValidator
-from BATS_validator import TablePriorIntValidator
-from BATS_validator import TablePredIntValidator
+from BATS.BATS_validator import StrictDoubleValidator
+from BATS.BATS_validator import TableDoubleValidator
+from BATS.BATS_validator import ContinuousValidator
+from BATS.BATS_validator import StrictIntValidator
+from BATS.BATS_validator import TableIntValidator
+from BATS.BATS_validator import TablePriorIntValidator
+from BATS.BATS_validator import TablePredIntValidator
 # Import event filter
-from BATS_eventfilter import WheelFilter
-from BATS_eventfilter import FocusOutFilter
-from BATS_eventfilter import HoverLeaveDocFilter
-from BATS_eventfilter import TableFocusOutFilter
+from BATS.BATS_eventfilter import WheelFilter
+from BATS.BATS_eventfilter import FocusOutFilter
+from BATS.BATS_eventfilter import HoverLeaveDocFilter
+from BATS.BATS_eventfilter import TableFocusOutFilter
 # Import message box
-from BATS_messagebox import MessageBox
-from BATS_messagebox import SubTitleBar
+from BATS.BATS_messagebox import MessageBox
+from BATS.BATS_messagebox import SubTitleBar
 # Import design
-from BATS_MAMS import MAMS_Design
-from BATS_PosteriorProbability import PosteriorProbability_Calculation
+from BATS.BATS_MAMS import MAMS_Design
+from BATS.BATS_PosteriorProbability import PosteriorProbability_Calculation
 
 
 # Import module
@@ -53,15 +53,15 @@ import matplotlib.image as mpimg
 
 
 # Import simulation module
-import FixedTrial as FixedTrial
+import BATS.FixedTrial as FixedTrial
 # import CreateCriticalValueTable as CreateCriticalValueTable
-import PredictiveProbability as PredictiveProbability
-import InterimAnalysis as InterimAnalysis
-import GammaGenerate as GammaGenerate
-import FixedTrialData as FixedTrialData
-import CriticalValueCal as CriticalValueCal
-import AllocFinder as AllocFinder
-import CalPosteriorProbability as CalPosteriorProbability
+import BATS.PredictiveProbability as PredictiveProbability
+import BATS.InterimAnalysis as InterimAnalysis
+import BATS.GammaGenerate as GammaGenerate
+import BATS.FixedTrialData as FixedTrialData
+import BATS.CriticalValueCal as CriticalValueCal
+import BATS.AllocFinder as AllocFinder
+import BATS.CalPosteriorProbability as CalPosteriorProbability
 
 
 # Macro/Global variables. Needed only be changed here

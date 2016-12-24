@@ -1,0 +1,961 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainContentWindow</class>
+ <widget class="QMainWindow" name="MainContentWindow">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1000</width>
+    <height>760</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="documentMode">
+   <bool>false</bool>
+  </property>
+  <property name="dockNestingEnabled">
+   <bool>true</bool>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QStackedWidget" name="mainStackWidget">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Emoji</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QWidget{
+     background:#ffffff;
+}
+
+QLabel{
+    color:#399ee5;
+    background: transparent;
+}
+
+QLineEdit{
+     font-family:'Segue UI Emoji';
+     font-size: 10pt;
+     border: 1px solid #c5d2d9; 
+     border-radius:5px;
+     background:#ffffff;
+     padding: 5px 10px 5px 10px; 
+     color: #66767c;
+     min-width: 180px;
+     max-width: 180px;
+}
+
+QLineEdit:disabled{
+    background: #b2bbbf;
+    border: 1px solid #acb6ba;
+    color: #b2bbbf;
+}
+
+QLineEdit:placeholder:disabled{
+    color: #8497a5     ;
+}
+
+QCheckBox{
+     color:#399ee5;
+     min-height: 5px;
+}
+
+QCheckBox::indicator{
+     border: 1px solid #399ee5;
+}
+
+QCheckBox::indicator:checked{
+     padding: 1px 1px 1px 1px;
+}
+
+QCheckBox::indicator:checked{
+     background:#399ee5;
+     background-origin: content;
+     background-clip: content;
+}
+
+
+QCheckBox::indicator:disabled{
+     background: #b2bbbf;
+    border: 1px solid #acb6ba;
+}
+
+QComboBox{
+     font-family:'Segue UI Emoji';
+     font-size: 10pt;
+     border: 1px solid #c5d2d9; 
+     border-radius:5px;
+     padding: 5px 10px 5px 10px; 
+     color: #66767c;
+     min-width: 180px;
+     max-width: 180px;
+}
+
+QComboBox:hover{
+     border: 2px solid #2a4d69;
+     border-radius: 5px;
+     height: 30ps;
+}
+
+QComboBox:disabled{
+    background: #b2bbbf;
+    border: 1px solid #acb6ba;
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 40px;
+    border-left-width: 2px;
+    border-left-color: #c5d2d9;
+    border-left-style: solid; /* just a single line */
+    border-top-right-radius: 5px; /* same radius as the QComboBox */
+    border-bottom-right-radius: 5px;
+    padding: 1px 1px 1px 1px;
+    image: url(:/resources/dropdown_arrow.png);
+}
+
+QComboBox:drop-down:disabled{
+    border-left-color: #5e7688;
+    padding: 1px 1px 1px 1px;
+    image: url(:/resources/dropdown_arrow_disabled.png);
+}
+
+
+QComboBox QAbstractItemView {
+     border: 1px solid #c5d2d9;
+     border-bottom-left-radius: 5px;
+     border-bottom-right-radius: 5px;
+     selection-background-color: 	#4b86b4;
+     outline: solid #2a4d69;
+     font-family: 'Segue UI Emoji';
+     font-size: 10pt;
+     color: #66767c;
+}
+
+QToolButton{
+    border: 1px solid #c5d2d9;
+    border-radius: 5px;
+    background: 	#ffffff;
+}
+
+QToolButton:disabled{
+    background: #acb6ba;
+    border: 1px solid #526c7f;
+    color: #fafbfc;
+}
+
+QScrollArea{
+    border: none;
+}
+
+QScrollBar:vertical{
+    width: 20px;
+    border: none;
+    border-left: 2px solid #e9f0f5;
+    background: #ffffff;
+}
+
+QScrollBar::handle:vertical{
+     background: #baddef;
+     min-height: 0;
+     border:none;
+     border-top, border-bottom: 2px solid #7cbee1;
+}
+
+QScrollBar::add-line:vertical{
+     height: 0px;
+}
+
+QScrollBar::sub-line:vertical{
+     height: 0px;
+}
+
+
+QScrollBar:horizontal{
+    height: 20px;
+    border: none;
+    border-top: 2px solid #e9f0f5;
+    background: #ffffff;
+}
+
+QScrollBar::handle:horizontal{
+     background: #baddef;
+     min-width: 0;
+     border:none;
+     border-left, border-right: 2px solid #7cbee1;
+}
+
+QScrollBar::add-line:horizontal{
+     width: 0px;
+}
+
+QScrollBar::sub-line:horizontal{
+     width: 0px;
+}
+
+QTextBrowser{
+     font-family:'Segue UI Emoji';
+     font-size: 10pt;
+     border: 2px solid #e9f0f5;
+     border-radius: 5px;
+     background: #fafbfc;
+}
+
+QPushButton{
+     border:1px solid #4bae54; 
+     border-radius:5px; 
+     background:#66cc6e; 
+     color: #ffffff; 
+     padding: 5px 15px 5px 15px; 
+     margin: 5px 5px 10px 5px;
+} 
+
+QPushButton:disabled{
+     background:#acb6ba; 
+     border:1px solid #5e7688;
+     color: #fafbfc;
+} 
+QPushButton:hover{
+      background:#6e66cc; 
+      border:1px solid #373366;
+}
+
+
+QTableWidget{
+    border:  none;
+    border-radius: 5px;
+    background: #ffffff;
+    outline: none;
+    min-height: 100px;
+    max-height: 120px;
+}
+
+QHeaderView::section{
+    background: #ffffff;
+    border:none;
+    border-bottom: 1px solid #399ee5;
+    font-family:'Segue UI Emoji';
+    font-size: 10pt;
+    font-weight： normal;
+    color: #399ee5;
+    padding: 5px 5px 5px 5px;
+}
+
+
+QTableWidget::item{
+    border-left, border-bottom: 1px solid #c6d1d6;
+    min-width: 80px;
+    padding: 0 5px 0 0;
+    font-family: 'Segue UI Emoji';
+    color: #3d5159;
+    font-size: 10pt;
+    min-height: 50px;
+    max-height: 60px;
+    padding: 0 0 0 0;
+}</string>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="setting">
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <layout class="QHBoxLayout" name="mainSettingLayout">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="log">
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="3" column="0">
+         <spacer name="verticalSpacer_6">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="3" column="1">
+         <spacer name="verticalSpacer_4">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="5" column="2" colspan="4">
+         <spacer name="horizontalSpacer_32">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="4" column="2" colspan="4">
+         <spacer name="horizontalSpacer_31">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="1" column="2">
+         <spacer name="horizontalSpacer_29">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="5">
+         <spacer name="horizontalSpacer_28">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="1" column="4">
+         <spacer name="horizontalSpacer_25">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="1" column="3">
+         <spacer name="horizontalSpacer_30">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="1" column="5">
+         <widget class="QPushButton" name="logClear_btn">
+          <property name="minimumSize">
+           <size>
+            <width>202</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>202</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Segoe UI Emoji</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="layoutDirection">
+           <enum>Qt::RightToLeft</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton{
+    background: #fa7064;
+    border: 1px solid #f43f2f;
+}
+
+QPushButton:hover{
+    background: #f84e41;
+    border: 1px solid #f73728;
+}</string>
+          </property>
+          <property name="text">
+           <string>Clear</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2" rowspan="2" colspan="4">
+         <widget class="QTabWidget" name="log_tabWidget">
+          <property name="font">
+           <font>
+            <family>Segue UI Emoji</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QTabWidget{
+     font-family:'Segue UI Emoji';
+     font-size: 10pt;
+     border: none;
+}
+
+QTabBar:tab{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 5px solid #b2bbbf;
+    margin: 5px 5px 5px 25px;
+    padding: 0 50px 15px 50px;
+}
+
+QTabBar:tab:!selected{
+    color: #b2bbbf;
+}
+
+QTabBar:tab:hover{
+    border-color: #399ee5;
+    color: #399ee5;
+}
+
+
+
+QTabWidget:pane{
+     border: none;
+     padding: 0;
+}</string>
+          </property>
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <widget class="QWidget" name="logTab">
+           <attribute name="title">
+            <string>View Log</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_3">
+            <item row="0" column="0">
+             <widget class="QTextBrowser" name="logConsole">
+              <property name="font">
+               <font>
+                <family>Segue UI Emoji</family>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+              <property name="cursor" stdset="0">
+               <cursorShape>OpenHandCursor</cursorShape>
+              </property>
+              <property name="autoFillBackground">
+               <bool>false</bool>
+              </property>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="configTab">
+           <attribute name="title">
+            <string>Simulation Config</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_8">
+            <item row="0" column="0">
+             <widget class="QTextBrowser" name="configConsole"/>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="table">
+       <layout class="QGridLayout" name="gridLayout_5">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <item row="1" column="2">
+         <widget class="QLabel" name="label_3">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Segoe UI Emoji</family>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Results</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="2" colspan="2">
+         <spacer name="horizontalSpacer_34">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>833</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="4" column="2" colspan="2">
+         <widget class="QScrollArea" name="tableArea">
+          <property name="font">
+           <font>
+            <family>Segoe UI Emoji</family>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QTextBrowser{
+     background: #f9fafc;
+     font-family: 'Segue UI Emoji';
+     border: 1px solid #f9fafc;
+     border-radius: 5px;
+     padding: 15px 15px 15px 15px;
+}</string>
+          </property>
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="tableContent">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>98</width>
+             <height>56</height>
+            </rect>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_4">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <item row="2" column="1">
+             <layout class="QVBoxLayout" name="tableLayout">
+              <property name="spacing">
+               <number>20</number>
+              </property>
+              <property name="leftMargin">
+               <number>5</number>
+              </property>
+              <property name="topMargin">
+               <number>15</number>
+              </property>
+              <property name="rightMargin">
+               <number>5</number>
+              </property>
+              <property name="bottomMargin">
+               <number>15</number>
+              </property>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+        <item row="2" column="2" colspan="2">
+         <widget class="Line" name="line_3">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+            <horstretch>4</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>2</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>9</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QWidget{
+     background-color:#399ee5;
+}</string>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Plain</enum>
+          </property>
+          <property name="lineWidth">
+           <number>-3</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="3">
+         <widget class="QPushButton" name="tableExport_btn">
+          <property name="minimumSize">
+           <size>
+            <width>202</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>202</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Segoe UI Emoji</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Export</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="2" colspan="2">
+         <spacer name="horizontalSpacer_36">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>833</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="4" column="1">
+         <spacer name="verticalSpacer_8">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="4" column="0">
+         <spacer name="verticalSpacer_11">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="1">
+         <spacer name="verticalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>60</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="plot">
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_7">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <item row="4" column="2">
+         <spacer name="horizontalSpacer_39">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="3">
+         <widget class="QPushButton" name="plotExport_btn">
+          <property name="minimumSize">
+           <size>
+            <width>202</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>202</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Segoe UI Emoji</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="text">
+           <string>Export</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="2" colspan="2">
+         <widget class="QScrollArea" name="plotArea">
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="plotContent">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>98</width>
+             <height>56</height>
+            </rect>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_6">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <item row="0" column="0">
+             <layout class="QGridLayout" name="plotViewer">
+              <property name="leftMargin">
+               <number>15</number>
+              </property>
+              <property name="topMargin">
+               <number>15</number>
+              </property>
+              <property name="rightMargin">
+               <number>15</number>
+              </property>
+              <property name="bottomMargin">
+               <number>15</number>
+              </property>
+              <property name="horizontalSpacing">
+               <number>20</number>
+              </property>
+              <property name="verticalSpacing">
+               <number>15</number>
+              </property>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <spacer name="verticalSpacer_14">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="2" column="2" colspan="2">
+         <widget class="Line" name="line_4">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+            <horstretch>4</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>2</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>9</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QWidget{
+     background-color:#399ee5;
+}</string>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Plain</enum>
+          </property>
+          <property name="lineWidth">
+           <number>-3</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <spacer name="verticalSpacer_13">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="5" column="2">
+         <spacer name="horizontalSpacer_40">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="1">
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>60</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="1" column="2">
+         <widget class="QLabel" name="label_4">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Segoe UI Emoji</family>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Plots</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
