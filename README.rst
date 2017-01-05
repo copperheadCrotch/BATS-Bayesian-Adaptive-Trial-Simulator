@@ -84,7 +84,7 @@ Usage
 .. code-block:: python
 
    import BATS
-   BATS.__init__()
+   BATS.main()
 
 
 See `documentation <https://github.com/ContaTP/BATS-Bayesian-Adaptive-Trial-Simulator/blob/master/BATS/documentation/Documentation.pdf>`_ for detailed settings
