@@ -25,6 +25,7 @@ Bayesian Adaptive Trial Simulator (BATS) is a Qt-based software used to perform 
 Website
 ------------
 
+Users can view details on the website
 `http://usebats.org/ <http://usebats.org/>`_
 
 Installation
