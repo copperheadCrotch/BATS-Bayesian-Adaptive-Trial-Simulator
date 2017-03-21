@@ -771,8 +771,10 @@ class PosteriorProbability_Calculation_Thread(QtCore.QThread):
     # Thread run function
     def run(self):
         
-        self.finish_flag = CalPosteriorProbability.CalPosteriorProbability(self.nsTrt, self.nfTrt, self.nsControl, 
-                                   self.nfControl, self.prioraTrt, self.priorbTrt, self.prioraControl,
-                                   self.priorbControl, self.clinSig, self.seed)
+        self.finish_flag = CalPosteriorProbability.CalPosteriorProbability(nTrt = [self.nsTrt, self.nfTrt], 
+                                                                           nControl = [self.nsControl, self.nfControl], 
+                                                                           priorTrt = [self.prioraTrt, self.priorbTrt], 
+                                                                           priorControl = [self.prioraControl, self.priorbControl], 
+                                                                           clinSig = self.clinSig, seed = self.seed)
         
         self.finishSignal.emit(self.finish_flag)       

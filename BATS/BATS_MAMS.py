@@ -1756,10 +1756,13 @@ class MAMS_Design_Thread(QtCore.QThread):
     # Thread run function
     def run(self):
 
-        self.finish_flag = FixedTrial.TrialSimulation(self.pathdir, self.effColHeaders, self.patColHeaders,
-                                   self.nsim, self.seed, self.nArm, self.nStage, self.te_list,
-                                   self.prior_list, self.ns_list, self.alloc, self.eff_list,
-                                   self.fut_list,  self.clinSig, self.predict, self.predns_list,
-                                   self.predSuccess, self.predClinSig)
+        self.finish_flag = FixedTrial.TrialSimulation(pathdir = self.pathdir, effColHeaders = self.effColHeaders, 
+                                                      patColHeaders = self.patColHeaders, nsim = self.nsim, 
+                                                      seed = self.seed, nArm = self.nArm, nStage = self.nStage, 
+                                                      te_list = self.te_list, prior_list = self.prior_list, 
+                                                      ns_list = self.ns_list, alloc = self.alloc, eff_list = self.eff_list, 
+                                                      fut_list = self.fut_list, clinSig = self.clinSig, predict = self.predict, 
+                                                      predns_list = self.predns_list, predSuccess = self.predSuccess, 
+                                                      predClinSig = self.predClinSig)
 
         self.finishSignal.emit(self.finish_flag)

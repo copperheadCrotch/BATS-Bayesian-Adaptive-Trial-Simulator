@@ -1,3 +1,4 @@
+# Import cython
 import cython
 cimport cython
 
@@ -7,7 +8,6 @@ from cython_gsl cimport *
 from libc.stdlib cimport malloc, free
 
 import sys
-import time
 import numpy as np
 cimport numpy as np
 
@@ -55,22 +55,31 @@ cdef PosteriorProbability(int nsTrt, int nfTrt, int nsControl, int nfControl, in
     return 0
 
 
-def CalPosteriorProbability(nsTrt, nfTrt, nsControl, nfControl, prioraTrt, priorbTrt, prioraControl, 
-                            priorbControl, clinSig, seed):
-    
+# For GUI
+def CalPosteriorProbability(nTrt = [0, 0], nControl = [0, 0], priorTrt = [0, 0], 
+                            priorControl = [0, 0], clinSig = 0, seed = 12345):
 
+    # Set values
+    nsTrt = nTrt[0]
+    nfTrt = nTrt[1]
+    nsControl = nControl[0]
+    nfControl = nControl[1]
+    prioraTrt = priorTrt[0]
+    priorbTrt = priorTrt[1]     
+    prioraControl = priorControl[0]
+    priorbControl = priorControl[1]       
+    # Run the calculation of posterior probability in BATS
     finish_flag = 0       
-    start_time = time.time()  
-
     finish_flag = PosteriorProbability(nsTrt, nfTrt, nsControl, nfControl, prioraTrt, 
                                           priorbTrt, prioraControl, priorbControl, clinSig,
                                           seed)
-
+    
+    # Import gc to collect garbage
     import gc
     gc.collect()
     
-    finish_time = np.around(time.time() - start_time, 3)
-    sys.stdout.write("Time used: %s secs"%str(finish_time))
-        
+    # Return the flag to GUI
     return finish_flag
-
+    
+    
+    

@@ -14,7 +14,6 @@ from BATS.CriticalValueCal cimport CriticalValueCal
 import numpy as np
 cimport numpy as np
 import sys
-import time
 import pandas as pd
 import matplotlib
 matplotlib.use('Qt5Agg') 
@@ -201,10 +200,13 @@ cdef TrialProgress(str pathdir, list effColHeader, list patColHeader, int nsim, 
 # Include trial data generation, trial progress simulation and predictive probability calculation
 
 
-def TrialSimulation(pathdir, effColHeader, patColHeader, nsim, seed, nArm, nStage, te_list, prior_list, ns_list, alloc, eff_list, fut_list, clinSig, predict, predns_list, predSuccess, predClinSig):
+def TrialSimulation(pathdir = "./", effColHeader = [], patColHeader = [], nsim = 10000, seed = 12345, 
+                    nArm = 0, nStage = 0, te_list = [], prior_list = [], ns_list = [], alloc = 1, 
+                    eff_list = [], fut_list = [], clinSig = 0, predict = 0, predns_list = [], 
+                    predSuccess = 0.975, predClinSig = 0.05):
     
     finish_flag = 0 
-
+    
     if predict != 1:
         
         predns_list = []
@@ -217,9 +219,6 @@ def TrialSimulation(pathdir, effColHeader, patColHeader, nsim, seed, nArm, nStag
     eff_list = np.array(eff_list)
     fut_list = np.array(fut_list)
     predns_list = np.array(predns_list, dtype = np.intc)
-    
-        
-    start_time = time.time()  
     # Get futility, efficacy, stop for each arm and stop totally
 
     finish_flag = TrialProgress(pathdir, effColHeader, patColHeader, nsim, seed, nArm, nStage, te_list, prior_list, ns_list, alloc, 
@@ -228,7 +227,7 @@ def TrialSimulation(pathdir, effColHeader, patColHeader, nsim, seed, nArm, nStag
     import gc
     gc.collect()
     
-    finish_time = np.around(time.time() - start_time, 3)
-    sys.stdout.write("Time used: %s secs"%str(finish_time))
-    
     return finish_flag
+
+
+    
