@@ -2,7 +2,7 @@
 from PyQt5 import QtGui, QtCore, QtWidgets, Qt
 
 # Import UI
-from .BATS.ui.posteriorprobabilitywindow import Ui_PosteriorProbabilityWindow
+from BATS.ui.posteriorprobabilitywindow import Ui_PosteriorProbabilityWindow
 # Import other modules
 import sys
 import os
@@ -11,22 +11,22 @@ import shutil
 import uuid
 import numpy as np
 # Cython module
-from . import BATS.CalPosteriorProbability as CalPosteriorProbability
+import BATS.CalPosteriorProbability as CalPosteriorProbability
 # Import class
 # Import validator
-from .BATS.BATS_validator import StrictDoubleValidator
-from .BATS.BATS_validator import TableDoubleValidator
-from .BATS.BATS_validator import ContinuousValidator
-from .BATS.BATS_validator import StrictIntValidator
-from .BATS.BATS_validator import TableIntValidator
-from .BATS.BATS_validator import TablePriorIntValidator
-from .BATS.BATS_validator import TablePredIntValidator
+from BATS.BATS_validator import StrictDoubleValidator
+from BATS.BATS_validator import TableDoubleValidator
+from BATS.BATS_validator import ContinuousValidator
+from BATS.BATS_validator import StrictIntValidator
+from BATS.BATS_validator import TableIntValidator
+from BATS.BATS_validator import TablePriorIntValidator
+from BATS.BATS_validator import TablePredIntValidator
 # Import event filter
-from .BATS.BATS_eventfilter import WheelFilter
-from .BATS.BATS_eventfilter import FocusOutFilter
-from .BATS.BATS_eventfilter import HoverLeaveDocFilter
+from BATS.BATS_eventfilter import WheelFilter
+from BATS.BATS_eventfilter import FocusOutFilter
+from BATS.BATS_eventfilter import HoverLeaveDocFilter
 # Import messageBox
-from .BATS.BATS_messagebox import MessageBox
+from BATS.BATS_messagebox import MessageBox
 
 
 # MAMS Design Window

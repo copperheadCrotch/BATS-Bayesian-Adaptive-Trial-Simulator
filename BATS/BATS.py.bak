@@ -1,36 +1,36 @@
 # -*- coding: utf-8 -*-
 # This is the main GUI for the program
 from PyQt5 import QtGui, QtCore, QtWidgets, Qt
-from . import BATS.qrc.resources_qr
+import BATS.qrc.resources_qr
 # Import Qt GUI
-from .BATS.ui.maincontentwindow import Ui_MainContentWindow 
+from BATS.ui.maincontentwindow import Ui_MainContentWindow 
 # Functions
-from .BATS.ui.mamswindow import Ui_MAMSWindow
-from .BATS.ui.posteriorprobabilitywindow import Ui_PosteriorProbabilityWindow
+from BATS.ui.mamswindow import Ui_MAMSWindow
+from BATS.ui.posteriorprobabilitywindow import Ui_PosteriorProbabilityWindow
 # The look-up table method is banned in the newest version
 # from ui.criticalvaluewindow import Ui_CriticalValueTableWindow
 
 
 # Import class 
 # Import validator
-from .BATS.BATS_validator import StrictDoubleValidator
-from .BATS.BATS_validator import TableDoubleValidator
-from .BATS.BATS_validator import ContinuousValidator
-from .BATS.BATS_validator import StrictIntValidator
-from .BATS.BATS_validator import TableIntValidator
-from .BATS.BATS_validator import TablePriorIntValidator
-from .BATS.BATS_validator import TablePredIntValidator
+from BATS.BATS_validator import StrictDoubleValidator
+from BATS.BATS_validator import TableDoubleValidator
+from BATS.BATS_validator import ContinuousValidator
+from BATS.BATS_validator import StrictIntValidator
+from BATS.BATS_validator import TableIntValidator
+from BATS.BATS_validator import TablePriorIntValidator
+from BATS.BATS_validator import TablePredIntValidator
 # Import event filter
-from .BATS.BATS_eventfilter import WheelFilter
-from .BATS.BATS_eventfilter import FocusOutFilter
-from .BATS.BATS_eventfilter import HoverLeaveDocFilter
-from .BATS.BATS_eventfilter import TableFocusOutFilter
+from BATS.BATS_eventfilter import WheelFilter
+from BATS.BATS_eventfilter import FocusOutFilter
+from BATS.BATS_eventfilter import HoverLeaveDocFilter
+from BATS.BATS_eventfilter import TableFocusOutFilter
 # Import message box
-from .BATS.BATS_messagebox import MessageBox
-from .BATS.BATS_messagebox import SubTitleBar
+from BATS.BATS_messagebox import MessageBox
+from BATS.BATS_messagebox import SubTitleBar
 # Import design
-from .BATS.BATS_MAMS import MAMS_Design
-from .BATS.BATS_PosteriorProbability import PosteriorProbability_Calculation
+from BATS.BATS_MAMS import MAMS_Design
+from BATS.BATS_PosteriorProbability import PosteriorProbability_Calculation
 
 
 # Import module
@@ -44,7 +44,6 @@ import shutil
 import subprocess
 from numpy.random.mtrand import seed
 import warnings
-import collections
 warnings.filterwarnings("ignore")
 import matplotlib
 matplotlib.use('Qt5Agg') 
@@ -54,15 +53,15 @@ import matplotlib.image as mpimg
 
 
 # Import simulation module
-from . import BATS.FixedTrial as FixedTrial
+import BATS.FixedTrial as FixedTrial
 # import CreateCriticalValueTable as CreateCriticalValueTable
-from . import BATS.PredictiveProbability as PredictiveProbability
-from . import BATS.InterimAnalysis as InterimAnalysis
-from . import BATS.GammaGenerate as GammaGenerate
-from . import BATS.FixedTrialData as FixedTrialData
-from . import BATS.CriticalValueCal as CriticalValueCal
-from . import BATS.AllocFinder as AllocFinder
-from . import BATS.CalPosteriorProbability as CalPosteriorProbability
+import BATS.PredictiveProbability as PredictiveProbability
+import BATS.InterimAnalysis as InterimAnalysis
+import BATS.GammaGenerate as GammaGenerate
+import BATS.FixedTrialData as FixedTrialData
+import BATS.CriticalValueCal as CriticalValueCal
+import BATS.AllocFinder as AllocFinder
+import BATS.CalPosteriorProbability as CalPosteriorProbability
 
 
 # Macro/Global variables. Needed only be changed here
@@ -782,13 +781,13 @@ class MainTitle(QtWidgets.QWidget):
                    
             # Check if the there is result and plot view function
             self.callableresult = getattr(self.currentTask, "setResult", None)
-            if isinstance(self.callableresult, collections.Callable):
+            if callable(self.callableresult):
             
                 self.currentTask.setResult()
         
             # If plot function exist, run
             self.callableplot = getattr(self.currentTask, "setPlot", None)
-            if isinstance(self.callableplot, collections.Callable):
+            if callable(self.callableplot):
             
                 self.currentTask.setPlot()
         
@@ -1117,7 +1116,7 @@ class MainContentWindow(QtWidgets.QWidget, Ui_MainContentWindow):
         # Get number of columns
         column_count = df.shape[1]
         # Create a range, not include the index
-        column_valid = list(range(index_count, column_count))
+        column_valid = range(index_count, column_count)
         # If two index:
         if index_count == 1:
             
@@ -1249,7 +1248,7 @@ class MainContentWindow(QtWidgets.QWidget, Ui_MainContentWindow):
         
         row_pos = col_pos = 0
         
-        for root_index in range(0, len(list(self.plot_file.keys()))):
+        for root_index in range(0, len(self.plot_file.keys())):
                 
             row_pos = int(root_index/2)
             col_pos = root_index % 2
@@ -1300,7 +1299,7 @@ class MainContentWindow(QtWidgets.QWidget, Ui_MainContentWindow):
         if filetype == "PDF(*.pdf)":
       
             pdf = matplotlib.backends.backend_pdf.PdfPages(self.plot_output_file)
-            for key in list(self.plot_file.keys()):
+            for key in self.plot_file.keys():
                 
                 for i in range(1, len(self.plot_file[key])):
                
@@ -1396,7 +1395,7 @@ class MainContentWindow(QtWidgets.QWidget, Ui_MainContentWindow):
         layout_exist = layout.count()
         if layout_exist > 0:
             
-            for i in reversed(list(range(layout_exist))):
+            for i in reversed(range(layout_exist)):
                 
                 item = layout.itemAt(i)
                 widget = item.widget()
@@ -1415,7 +1414,7 @@ class MainContentWindow(QtWidgets.QWidget, Ui_MainContentWindow):
         layout_exist = layout.count()
         if layout_exist > 0:
             
-            for i in reversed(list(range(layout_exist))):
+            for i in reversed(range(layout_exist)):
                 
                 item = layout.itemAt(i)
                 widget = item.widget()
@@ -1646,7 +1645,7 @@ def main():
     
     # Set a unique id to BATS
     import ctypes
-    appid = 'bats.1.1.0'
+    appid = u'bats.1.1.0'
     # Check the platform. If windows, set an ID so it will be in the task bar.
     if sys.platform == 'win32':
 
