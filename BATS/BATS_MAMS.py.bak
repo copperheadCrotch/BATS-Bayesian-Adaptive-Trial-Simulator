@@ -2,7 +2,7 @@
 from PyQt5 import QtGui, QtCore, QtWidgets, Qt
 
 # Import UI
-from .BATS.ui.mamswindow import Ui_MAMSWindow
+from BATS.ui.mamswindow import Ui_MAMSWindow
 # Import other modules
 import sys
 import os
@@ -11,23 +11,23 @@ import shutil
 import uuid
 import numpy as np
 # Cython module
-from . import BATS.FixedTrial as FixedTrial
+import BATS.FixedTrial as FixedTrial
 # Import class
 # Import validator
-from .BATS.BATS_validator import StrictDoubleValidator
-from .BATS.BATS_validator import TableDoubleValidator
-from .BATS.BATS_validator import ContinuousValidator
-from .BATS.BATS_validator import StrictIntValidator
-from .BATS.BATS_validator import TableIntValidator
-from .BATS.BATS_validator import TablePriorIntValidator
-from .BATS.BATS_validator import TablePredIntValidator
+from BATS.BATS_validator import StrictDoubleValidator
+from BATS.BATS_validator import TableDoubleValidator
+from BATS.BATS_validator import ContinuousValidator
+from BATS.BATS_validator import StrictIntValidator
+from BATS.BATS_validator import TableIntValidator
+from BATS.BATS_validator import TablePriorIntValidator
+from BATS.BATS_validator import TablePredIntValidator
 # Import event filter
-from .BATS.BATS_eventfilter import WheelFilter
-from .BATS.BATS_eventfilter import FocusOutFilter
-from .BATS.BATS_eventfilter import TableFocusOutFilter
-from .BATS.BATS_eventfilter import HoverLeaveDocFilter
+from BATS.BATS_eventfilter import WheelFilter
+from BATS.BATS_eventfilter import FocusOutFilter
+from BATS.BATS_eventfilter import TableFocusOutFilter
+from BATS.BATS_eventfilter import HoverLeaveDocFilter
 # Import messageBox
-from .BATS.BATS_messagebox import MessageBox
+from BATS.BATS_messagebox import MessageBox
 
 
 
@@ -1565,12 +1565,12 @@ class MAMS_Design(QtWidgets.QWidget, Ui_MAMSWindow):
             # Write prior information
             trial_setting_file.write("\nPrior information:\n")
             trial_setting_file.write("\t" + "\t".join(self.effColHeaders) + "\n")
-            trial_setting_file.write("Prior A:\t" + "\t".join(map(str, list(map(int, self.prior_list[::2])))) + "\n")
-            trial_setting_file.write("Prior B:\t" + "\t".join(map(str, list(map(int, self.prior_list[1::2])))) + "\n")
+            trial_setting_file.write("Prior A:\t" + "\t".join(map(str, map(int, self.prior_list[::2]))) + "\n")
+            trial_setting_file.write("Prior B:\t" + "\t".join(map(str, map(int, self.prior_list[1::2]))) + "\n")
             # Write patient assignment
             trial_setting_file.write("\nPatients at each stage:\n")
             trial_setting_file.write("\t".join(self.patColHeaders) + "\n")
-            trial_setting_file.write("\t".join(map(str, list(map(int, self.ns_list)))) + "\n")
+            trial_setting_file.write("\t".join(map(str, map(int, self.ns_list))) + "\n")
             # Allocation ratio
             trial_setting_file.write("\nAllocation ratio: %.3f\n"%self.alloc)
             # Stopping boundary
@@ -1588,7 +1588,7 @@ class MAMS_Design(QtWidgets.QWidget, Ui_MAMSWindow):
                 # Write new patient assignment
                 trial_setting_file.write("\nAdded patients at each stage:\n")
                 trial_setting_file.write("\t".join(self.patColHeaders) + "\n")
-                trial_setting_file.write("\t".join(map(str, list(map(int, self.predns_list)))) + "\n")
+                trial_setting_file.write("\t".join(map(str, map(int, self.predns_list))) + "\n")
                 trial_setting_file.write("Success boundary:%.3f\n"%(self.predSuccess))
                 trial_setting_file.write("Clinically significant difference:%.3f\n"%(self.predClinSig))
 
