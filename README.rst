@@ -1,7 +1,7 @@
 BATS - Bayesian Adaptive Trial Simulator
 =========================
 
-.. image:: http://zhy777.net/images/bcts_100.png
+.. image:: http://usebats.org/images/bcts_100.png
    :align: left
    :alt:
    
@@ -26,7 +26,7 @@ Website
 ------------
 
 Users can view details on the website
-`http://usebats.org/ <http://usebats.org/>`_
+`http://usebats.org/ <http://usebats.org/bats>`_
 
 Installation
 ------------
