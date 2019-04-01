@@ -26,7 +26,7 @@ Website
 ------------
 
 Users can view details on the website
-`http://usebats.org/ <http://usebats.org/bats>`_
+`http://usebats.org/bats <http://usebats.org/bats>`_
 
 Installation
 ------------
